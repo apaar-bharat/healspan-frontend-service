@@ -30,9 +30,20 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.css",
+              "src/assets/css/bootstrap.min.css",
+              "src/assets/css/healspan.css"
+              
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/jquery/dist/jquery.js",
+              "node_modules/jquery/dist/jquery.min.js",
+              
+              "src/assets/js/bootstrap.bundle.min.js",
+              "src/assets/js/script.js",
+              "src/assets/js/scriptupload.js"
+              
+            ]
           },
           "configurations": {
             "production": {
@@ -99,7 +110,10 @@
             "styles": [
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [
+              "src/assets/js/script.js",
+              "../node_modules/jquery/dist/jquery.min.js"
+            ]
           }
         }
       }
