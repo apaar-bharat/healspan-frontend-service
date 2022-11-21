@@ -1,5 +1,6 @@
 
   label {font-weight:bold;}
+
   .sidenav {
   height: 100%;
   width: 0;
@@ -45,7 +46,7 @@ body{font-family:Nunito-Regular !important;}
 
 @font-face {
   font-family: Nunito-Regular;
-  src: url(../font/Nunito-Regular.woff) format('woff');
+  src: url('../font/Nunito-Regular.woff') format('woff');
 }
 
 
@@ -54,7 +55,7 @@ body{font-family:Nunito-Regular !important;}
   font-family: Nunito-Bold;
   src: url(../font/Nunito-Bold.woff) format('woff');
 }
-}
+
 .hlcolor {color:#4C9EAA !important;}
 .shadoww {box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;}
 
