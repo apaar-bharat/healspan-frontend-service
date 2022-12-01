@@ -108,8 +108,8 @@ body{font-family:Nunito-Regular !important;}
 .bxtt {color: #343A40;}
   
 
-.healspantab {padding:20px 0px; border:none !important; width:147px; font-size:24px !important; color:#757575 !important;}
-.healspantab.active{ background-image: url("../img/Rectangle-194.png") !important; background-repeat: no-repeat !important; background-position: bottom !important; color:#000000 !important;}
+.healspantab {padding:20px 0px; border:none !important; width:147px; margin-right: 35px !important; font-size:24px !important; color:#757575 !important;}
+.healspantab.active{ background-image: url("../img/Rectangle-194.png") !important; background-repeat: no-repeat !important; background-position: bottom !important; color:#000000 !important}
 .healspantab {padding:20px 30px; border:none !important;}
 
 .vtabborder {border:1px solid #cccccc; border-radius: 12px 0px 0px 12px;} 

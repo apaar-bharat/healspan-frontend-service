@@ -1,0 +1,307 @@
+{
+    "statusdatalist" :[
+        {
+        "Name": "Initial Authorization",
+        "Count": "22",
+        "Status": "Pending"
+        },
+        {
+            "Name": "Enhancement",
+            "Count": "14",
+            "Status": "Pending"
+        },
+        {
+            "Name": "Discharge",
+            "Count": "12",
+            "Status": "Pending"
+        },
+        {
+            "Name": "Final Claim",
+            "Count": "22",
+            "Status": "Pending"
+        }
+
+    ],
+    "pendingdatalist": [
+      {
+        "ClaimID": 123456,
+        "Name": "Vijay",
+        "Ailment": "Heart Surgery",
+        "Stage": "Enhancement",
+        "Status": "PendingApproval",
+        "AdmissionDate": "22/12/2022",
+        "DischargeDate": "26/12/2022",
+        "Ageing": "4 DAYS",
+        "ApprovedAmount": "Rs.11,23,000"
+      },
+      {
+        "ClaimID": 123457,
+        "Name": "Vijay",
+        "Ailment": "Heart Surgery",
+        "Stage": "Enhancement",
+        "Status": "PendingApproval",
+        "AdmissionDate": "22/12/2023",
+        "DischargeDate": "26/12/2023",
+        "Ageing": "5 DAYS",
+        "ApprovedAmount": "Rs.11,23,001"
+      },
+      {
+        "ClaimID": 123458,
+        "Name": "Vijay",
+        "Ailment": "Heart Surgery",
+        "Stage": "Enhancement",
+        "Status": "PendingApproval",
+        "AdmissionDate": "22/12/2024",
+        "DischargeDate": "26/12/2024",
+        "Ageing": "6 DAYS",
+        "ApprovedAmount": "Rs.11,23,002"
+      },
+      {
+        "ClaimID": 123459,
+        "Name": "Vijay",
+        "Ailment": "Heart Surgery",
+        "Stage": "Enhancement",
+        "Status": "PendingApproval",
+        "AdmissionDate": "22/12/2025",
+        "DischargeDate": "26/12/2025",
+        "Ageing": "7 DAYS",
+        "ApprovedAmount": "Rs.11,23,003"
+      },
+      {
+        "ClaimID": 123460,
+        "Name": "Vijay",
+        "Ailment": "Heart Surgery",
+        "Stage": "Enhancement",
+        "Status": "PendingApproval",
+        "AdmissionDate": "22/12/2026",
+        "DischargeDate": "26/12/2026",
+        "Ageing": "8 DAYS",
+        "ApprovedAmount": "Rs.11,23,004"
+      },
+      {
+        "ClaimID": 123461,
+        "Name": "Vijay",
+        "Ailment": "Heart Surgery",
+        "Stage": "Enhancement",
+        "Status": "PendingApproval",
+        "AdmissionDate": "22/12/2027",
+        "DischargeDate": "26/12/2027",
+        "Ageing": "9 DAYS",
+        "ApprovedAmount": "Rs.11,23,005"
+      },
+      {
+        "ClaimID": 123462,
+        "Name": "Vijay",
+        "Ailment": "Heart Surgery",
+        "Stage": "Enhancement",
+        "Status": "PendingApproval",
+        "AdmissionDate": "22/12/2028",
+        "DischargeDate": "26/12/2028",
+        "Ageing": "10 DAYS",
+        "ApprovedAmount": "Rs.11,23,006"
+      },
+      {
+        "ClaimID": 123463,
+        "Name": "Vijay",
+        "Ailment": "Heart Surgery",
+        "Stage": "Enhancement",
+        "Status": "PendingApproval",
+        "AdmissionDate": "22/12/2029",
+        "DischargeDate": "26/12/2029",
+        "Ageing": "11 DAYS",
+        "ApprovedAmount": "Rs.11,23,007"
+      },
+      {
+        "ClaimID": 123464,
+        "Name": "Vijay",
+        "Ailment": "Heart Surgery",
+        "Stage": "Enhancement",
+        "Status": "PendingApproval",
+        "AdmissionDate": "22/12/2030",
+        "DischargeDate": "26/12/2030",
+        "Ageing": "12 DAYS",
+        "ApprovedAmount": "Rs.11,23,008"
+      },
+      {
+        "ClaimID": 123465,
+        "Name": "Vijay",
+        "Ailment": "Heart Surgery",
+        "Stage": "Enhancement",
+        "Status": "PendingApproval",
+        "AdmissionDate": "22/12/2031",
+        "DischargeDate": "26/12/2031",
+        "Ageing": "13 DAYS",
+        "ApprovedAmount": "Rs.11,23,009"
+      },
+      {
+        "ClaimID": 123466,
+        "Name": "Vijay",
+        "Ailment": "Heart Surgery",
+        "Stage": "Enhancement",
+        "Status": "PendingApproval",
+        "AdmissionDate": "22/12/2032",
+        "DischargeDate": "26/12/2032",
+        "Ageing": "14 DAYS",
+        "ApprovedAmount": "Rs.11,23,010"
+      },
+      {
+        "ClaimID": 123467,
+        "Name": "Vijay",
+        "Ailment": "Heart Surgery",
+        "Stage": "Enhancement",
+        "Status": "PendingApproval",
+        "AdmissionDate": "22/12/2033",
+        "DischargeDate": "26/12/2033",
+        "Ageing": "15 DAYS",
+        "ApprovedAmount": "Rs.11,23,011"
+      },
+      {
+        "ClaimID": 123468,
+        "Name": "Vijay",
+        "Ailment": "Heart Surgery",
+        "Stage": "Enhancement",
+        "Status": "PendingApproval",
+        "AdmissionDate": "22/12/2034",
+        "DischargeDate": "26/12/2034",
+        "Ageing": "16 DAYS",
+        "ApprovedAmount": "Rs.11,23,012"
+      },
+      {
+        "ClaimID": 123469,
+        "Name": "Vijay",
+        "Ailment": "Heart Surgery",
+        "Stage": "Enhancement",
+        "Status": "PendingApproval",
+        "AdmissionDate": "22/12/2035",
+        "DischargeDate": "26/12/2035",
+        "Ageing": "17 DAYS",
+        "ApprovedAmount": "Rs.11,23,013"
+      },
+      {
+        "ClaimID": 123470,
+        "Name": "Vijay",
+        "Ailment": "Heart Surgery",
+        "Stage": "Enhancement",
+        "Status": "PendingApproval",
+        "AdmissionDate": "22/12/2036",
+        "DischargeDate": "26/12/2036",
+        "Ageing": "18 DAYS",
+        "ApprovedAmount": "Rs.11,23,014"
+      },
+      {
+        "ClaimID": 123471,
+        "Name": "Vijay",
+        "Ailment": "Heart Surgery",
+        "Stage": "Enhancement",
+        "Status": "PendingApproval",
+        "AdmissionDate": "22/12/2037",
+        "DischargeDate": "26/12/2037",
+        "Ageing": "19 DAYS",
+        "ApprovedAmount": "Rs.11,23,015"
+      }
+    ],
+    "approvaldatalist": [
+        {
+          "ClaimID": 123456,
+          "Name": "Vijay",
+          "Ailment": "Heart Surgery",
+          "Stage": "Enhancement",
+          "Status": "Paid",
+          "AdmissionDate": "22/12/2022",
+          "DischargeDate": "26/12/2022",
+          "Ageing": "4 DAYS",
+          "ApprovedAmount": "Rs.11,23,000"
+        },
+        {
+          "ClaimID": 123457,
+          "Name": "Vijay",
+          "Ailment": "Heart Surgery",
+          "Stage": "Enhancement",
+          "Status": "PendingApproval",
+          "AdmissionDate": "22/12/2023",
+          "DischargeDate": "26/12/2023",
+          "Ageing": "5 DAYS",
+          "ApprovedAmount": "Rs.11,23,001"
+        },
+        {
+          "ClaimID": 123458,
+          "Name": "Vijay",
+          "Ailment": "Heart Surgery",
+          "Stage": "Enhancement",
+          "Status": "PendingApproval",
+          "AdmissionDate": "22/12/2024",
+          "DischargeDate": "26/12/2024",
+          "Ageing": "6 DAYS",
+          "ApprovedAmount": "Rs.11,23,002"
+        },
+        {
+          "ClaimID": 123459,
+          "Name": "Vijay",
+          "Ailment": "Heart Surgery",
+          "Stage": "Enhancement",
+          "Status": "PendingApproval",
+          "AdmissionDate": "22/12/2025",
+          "DischargeDate": "26/12/2025",
+          "Ageing": "7 DAYS",
+          "ApprovedAmount": "Rs.11,23,003"
+        },
+        {
+          "ClaimID": 123460,
+          "Name": "Vijay",
+          "Ailment": "Heart Surgery",
+          "Stage": "Enhancement",
+          "Status": "approved",
+          "AdmissionDate": "22/12/2026",
+          "DischargeDate": "26/12/2026",
+          "Ageing": "8 DAYS",
+          "ApprovedAmount": "Rs.11,23,004"
+        },
+        {
+          "ClaimID": 123461,
+          "Name": "Vijay",
+          "Ailment": "Heart Surgery",
+          "Stage": "paid",
+          "Status": "PendingApproval",
+          "AdmissionDate": "22/12/2027",
+          "DischargeDate": "26/12/2027",
+          "Ageing": "9 DAYS",
+          "ApprovedAmount": "Rs.11,23,005"
+        },
+       
+        {
+          "ClaimID": 123466,
+          "Name": "Vijay",
+          "Ailment": "Heart Surgery",
+          "Stage": "Enhancement",
+          "Status": "paid",
+          "AdmissionDate": "22/12/2032",
+          "DischargeDate": "26/12/2032",
+          "Ageing": "14 DAYS",
+          "ApprovedAmount": "Rs.11,23,010"
+        },
+        {
+          "ClaimID": 123467,
+          "Name": "Vijay",
+          "Ailment": "Heart Surgery",
+          "Stage": "Enhancement",
+          "Status": "PendingApproval",
+          "AdmissionDate": "22/12/2033",
+          "DischargeDate": "26/12/2033",
+          "Ageing": "15 DAYS",
+          "ApprovedAmount": "Rs.11,23,011"
+        },
+        {
+          "ClaimID": 123468,
+          "Name": "Vijay",
+          "Ailment": "Heart Surgery",
+          "Stage": "Enhancement",
+          "Status": "PendingApproval",
+          "AdmissionDate": "22/12/2034",
+          "DischargeDate": "26/12/2034",
+          "Ageing": "16 DAYS",
+          "ApprovedAmount": "Rs.11,23,012"
+        }
+      
+      ]
+
+}

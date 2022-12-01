@@ -1,693 +1,613 @@
-
-	<div class="container">
+<div class="container">
 	<div class="row mt-5 pt-3 pb-3">
-	<div class="col-md-6">
-	<h3>Claim ID: <strong>12345678</strong></h3>
-	<span>Apollo Multi Speciality Hospital, Anna Nagar</span>
+		<div class="col-md-6">
+			<h3>Claim ID: <strong>{{claimdetailData.ClaimID}}</strong></h3>
+			<span>Apollo Multi Speciality Hospital, Anna Nagar</span>
+		</div>
+		<div class="col-md-6">
+			<a href="#" class="btn btn-primary btn-lg float-end mx-3">Final Claim</a>
+		</div>
+		<div></div>
 	</div>
-	<div class="col-md-6">
-	<a href="#" class="btn btn-primary btn-lg float-end mx-3">Final Claim</a>
-	</div>
-	<div></div>
-	</div>
-	
+
 	<div class="row mt-1 pt-3 mb-2">
-	<div class="col-md-4 mb-3 bg-body rounded">
-	<div class="healshadow p-2">
-	<div class="float-start p-3 m-2">
-	<img src="/assets/img/user.png" >
+		<div class="col-md-4 mb-3 bg-body rounded">
+			<div class="healshadow p-2">
+				<div class="float-start p-3 m-2">
+					<img src="/assets/img/user.png">
+				</div>
+				<div class="p-1 mt-1"><span>Name: </span>
+					<h5 class="mt-3"><strong>{{claimdetailData.Name}}</strong></h5>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-md-4 mb-3 bg-body rounded">
+			<div class="healshadow p-2">
+				<div class="float-start p-3 m-2">
+					<img src="/assets/img/calendar.png">
+				</div>
+				<div class="p-1 mt-1"><span>Admission Date: </span>
+					<h5 class="mt-3"><strong>{{claimdetailData.AdmissionDate}}</strong></h5>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-md-4 mb-3 bg-body rounded">
+			<div class="healshadow p-2">
+				<div class="float-start p-3 m-2">
+					<img src="/assets/img/window_check.png">
+				</div>
+				<div class="p-1 mt-1"><span>Status: </span>
+					<h5 class="mt-3"><strong>{{claimdetailData.Status}}</strong></h5>
+				</div>
+			</div>
+		</div>
+
+
 	</div>
-	<div class="p-1 mt-1"><span>Name: </span>
-	<h5 class="mt-3"><strong>Senthil Saravannan</strong></h5>
-	</div>
-	</div>
-	</div>
-	
-	<div class="col-md-4 mb-3 bg-body rounded">
-	<div class="healshadow p-2">
-	<div class="float-start p-3 m-2">
-	<img src="/assets/img/calendar.png" >
-	</div>
-	<div class="p-1 mt-1"><span>Admission Date: </span>
-	<h5 class="mt-3"><strong>21 May 2022</strong></h5>
-	</div>
-	</div>
-	</div>
-	
-	<div class="col-md-4 mb-3 bg-body rounded">
-	<div class="healshadow p-2">
-	<div class="float-start p-3 m-2">
-	<img src="/assets/img/window_check.png" >
-	</div>
-	<div class="p-1 mt-1"><span>Status: </span>
-	<h5 class="mt-3"><strong>Approved</strong></h5>
-	</div>
-	</div>
-	</div>
-	
-	
-	</div>
-	
+
 	<div class="row pb-3">
-	<div class="col-md-4 mb-5 bg-body rounded">
-	<div class="healshadow p-2">
-	<div class="float-start p-3 m-2">
-	<img src="/assets/img/Group.png" >
-	</div>
-	<div class="p-1 mt-1"><span>Ailment: </span>
-	<h5 class="mt-3"><strong>Road Accident</strong></h5>
-	</div>
-	</div>
-	</div>
-	
-	<div class="col-md-4 mb-5 bg-body rounded">
-	<div class="healshadow p-2">
-	<div class="float-start p-3 m-2">
-	<img src="/assets/img/calendar_x.png" >
-	</div>
-	<div class="p-1 mt-1"><span>Discharge Date: </span>
-	<h5 class="mt-3"><strong>31 May 2022</strong></h5>
-	</div>
-	</div>
-	</div>
-	
-	<div class="col-md-4 mb-5 bg-body rounded">
-	<div class="healshadow p-2">
-	<div class="float-start p-3 m-2">
-	<img src="/assets/img/doughnut_chart.png" >
-	</div>
-	<div class="p-1 mt-1"><span>Stage: </span>
-	<h5 class="mt-3"><strong>Discharge</strong></h5>
-	</div>
-	</div>
-	</div>
-	
-	
-	</div>
+		<div class="col-md-4 mb-5 bg-body rounded">
+			<div class="healshadow p-2">
+				<div class="float-start p-3 m-2">
+					<img src="/assets/img/Group.png">
+				</div>
+				<div class="p-1 mt-1"><span>Ailment: </span>
+					<h5 class="mt-3"><strong>{{claimdetailData.Ailment}}</strong></h5>
+				</div>
+			</div>
+		</div>
 
-<div class="row p-3">
+		<div class="col-md-4 mb-5 bg-body rounded">
+			<div class="healshadow p-2">
+				<div class="float-start p-3 m-2">
+					<img src="/assets/img/calendar_x.png">
+				</div>
+				<div class="p-1 mt-1"><span>Discharge Date: </span>
+					<h5 class="mt-3"><strong>{{claimdetailData.DischargeDate}}</strong></h5>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-md-4 mb-5 bg-body rounded">
+			<div class="healshadow p-2">
+				<div class="float-start p-3 m-2">
+					<img src="/assets/img/doughnut_chart.png">
+				</div>
+				<div class="p-1 mt-1"><span>Stage: </span>
+					<h5 class="mt-3"><strong>{{claimdetailData.Stage}}</strong></h5>
+				</div>
+			</div>
+		</div>
 
 
-<div class="d-flex align-items-start vtabborder p-0">
-  <div class="nav flex-column me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical" style="border-right: 1px solid #E2E5E5;">
-     <li class="nav-item" role="presentation">
-    <button class="nav-link healspantabv vb1 active" id="home-tab" data-bs-toggle="tab" data-bs-target="#Patient-Information" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">Patient Information</button>
-  </li>
-  <li class="nav-item" role="presentation">
-    <button class="nav-link healspantabv" id="profile-tab" data-bs-toggle="tab" data-bs-target="#Medical-Information" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">Medical Information</button>
-  </li>
-  <li class="nav-item " role="presentation">
-    <button class="nav-link healspantabv" id="contact-tab" data-bs-toggle="tab" data-bs-target="#Insurance-Information" type="button" role="tab" aria-controls="contact-tab-pane" aria-selected="false">Insurance Information</button>
-  </li>
-  <li class="nav-item" role="presentation">
-    <button class="nav-link healspantabv" id="profile-tab" data-bs-toggle="tab" data-bs-target="#Initial-Authorization" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">Initial Authorization</button>
-  </li>
-  <li class="nav-item " role="presentation">
-    <button class="nav-link healspantabv" id="contact-tab" data-bs-toggle="tab" data-bs-target="#Enhancement" type="button" role="tab" aria-controls="contact-tab-pane" aria-selected="false">Enhancement</button>
-  </li>
-  <li class="nav-item" role="presentation">
-    <button class="nav-link healspantabv" id="profile-tab" data-bs-toggle="tab" data-bs-target="#Discharge" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">Discharge</button>
-  </li>
-  <li class="nav-item " role="presentation">
-    <button class="nav-link healspantabv vb2" id="contact-tab" data-bs-toggle="tab" data-bs-target="#Final-Claim" type="button" role="tab" aria-controls="contact-tab-pane" aria-selected="false">Final Claim</button>
-  </li>
-  
-  <a href="" class="healtbv text-center mx-3 pt-3 pb-3" >Download</a>
-  </div>
-  <div class="tab-content w-100 pe-5 ms-3" id="v-pills-tabContent">
-    <div class="tab-pane fade show active" id="Patient-Information" role="tabpanel" aria-labelledby="v-pills-home-tab">
-	
-	<div class="row mt-1 pt-3">
-	<div class="col-md-3 mb-3 bg-body rounded">
-	<div class="p-2">
-	
-	<div class="p-1 mt-1"><span class="cl01">Name: </span>
-	<h5 class="mt-3 f16"><strong>Senthil Saravannan</strong></h5>
-	</div>
-	</div>
-	</div>
-	
-	<div class="col-md-3 mb-3 bg-body rounded">
-	<div class="p-2">
-	
-	<div class="p-1 mt-1"><span class="cl01">Age: </span>
-	<h5 class="mt-3 f16"><strong>23 Years</strong></h5>
-	</div>
-	</div>
-	</div>
-	
-	
-	
-	<div class="col-md-3 mb-3 bg-body rounded">
-	<div class="p-2">
-	
-	<div class="p-1 mt-1"><span class="cl01">Gender: </span>
-	<h5 class="mt-3 f16"><strong>Male</strong></h5>
-	</div>
-	</div>
-	</div>
-	
-	
-	<div class="col-md-3 mb-3 bg-body rounded">
-	<div class="p-2">
-	
-	<div class="p-1 mt-1">
-	<h5 class="mt-3 f16 float-end"><strong style="color: #00B272;">Complete</strong></h5>
-	</div>
-	</div>
 	</div>
 
-	
-	
-	</div>
-	
-	<div class="row mb-2">
-	<div class="col-md-3 mb-3 bg-body rounded">
-	<div class="p-2">
-	
-	<div class="p-1 mt-1"><span class="cl01">Date of Birth: </span>
-	<h5 class="mt-3 f16"><strong>17 Jan 1995</strong></h5>
-	</div>
-	</div>
-	</div>
-	
-	<div class="col-md-3 mb-3 bg-body rounded">
-	<div class="p-2">
-	
-	<div class="p-1 mt-1"><span class="cl01"> </span>
-	<h5 class="mt-3 f16"><strong></strong></h5>
-	</div>
-	</div>
-	</div>
-	
-	
-	
-	<div class="col-md-3 mb-3 bg-body rounded">
-	<div class="p-2">
-	
-	<div class="p-1 mt-1"><span class="cl01"> </span>
-	<h5 class="mt-3 f16"><strong></strong></h5>
-	</div>
-	</div>
-	</div>
-	
-	
-	<div class="col-md-3 mb-3 bg-body rounded">
-	<div class="p-2">
-	
-	<div class="p-1 mt-1">
-	<h5 class="mt-3 f16 float-end"><strong style="color: #00B272;"></strong></h5>
-	</div>
-	</div>
-	</div>
+	<div class="row p-3">
 
-	
-	
-	</div>
-	
-	</div>
-    <div class="tab-pane fade" id="Medical-Information" role="tabpanel" aria-labelledby="v-pills-profile-tab">
-	
-		<div class="row mt-1 pt-3">
-	<div class="col-md-3 mb-3 bg-body rounded">
-	<div class="p-2">
-	
-	<div class="p-1 mt-1"><span class="cl01">Type Of Accident: </span>
-	<h5 class="mt-3 f16"><strong>Vehicle Slide / Head On Collision</strong></h5>
-	</div>
-	</div>
-	</div>
-	
-	<div class="col-md-3 mb-3 bg-body rounded">
-	<div class="p-2">
-	
-	<div class="p-1 mt-1"><span class="cl01">Treatment Type: </span>
-	<h5 class="mt-3 f16"><strong>Surgical Management</strong></h5>
-	</div>
-	</div>
-	</div>
-	
-	
-	
-	<div class="col-md-3 mb-3 bg-body rounded">
-	<div class="p-2">
-	
-	<div class="p-1 mt-1"><span class="cl01">Driver / Passenger:</span>
-	<h5 class="mt-3 f16"><strong>Driver</strong></h5>
-	</div>
-	</div>
-	</div>
-	
-	
-	<div class="col-md-3 mb-3 bg-body rounded">
-	<div class="p-2">
-	
-	<div class="p-1 mt-1">
-	<h5 class="mt-3 f16 float-end"><strong style="color: #00B272;">Complete</strong></h5>
-	</div>
-	</div>
-	</div>
 
-	
-	
-	</div>
-	
-	<div class="row mt-1 pt-3">
-	<div class="col-md-3 mb-3 bg-body rounded">
-	<div class="p-2">
-	
-	<div class="p-1 mt-1"><span class="cl01">Type Of Vehicle: </span>
-	<h5 class="mt-3 f16"><strong>Speed Limited Electric Scooter</strong></h5>
-	</div>
-	</div>
-	</div>
-	
-	<div class="col-md-3 mb-3 bg-body rounded">
-	<div class="p-2">
-	
-	<div class="p-1 mt-1"><span class="cl01"> </span>
-	<h5 class="mt-3 f16"><strong></strong></h5>
-	</div>
-	</div>
-	</div>
-	
-	
-	
-	<div class="col-md-3 mb-3 bg-body rounded">
-	<div class="p-2">
-	
-	<div class="p-1 mt-1"><span class="cl01"></span>
-	<h5 class="mt-3 f16"><strong></strong></h5>
-	</div>
-	</div>
-	</div>
-	
-	
-	<div class="col-md-3 mb-3 bg-body rounded">
-	<div class="p-2">
-	
-	<div class="p-1 mt-1">
-	<h5 class="mt-3 f16 float-end"><strong style="color: #00B272;"></strong></h5>
-	</div>
-	</div>
-	</div>
+		<div class="d-flex align-items-start vtabborder p-0">
+			<div class="nav flex-column me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical"
+				style="border-right: 1px solid #E2E5E5;">
+				<li class="nav-item" role="presentation">
+					<button class="nav-link healspantabv vb1 active" id="home-tab" data-bs-toggle="tab"
+						data-bs-target="#Patient-Information" type="button" role="tab" aria-controls="home-tab-pane"
+						aria-selected="true">Patient Information</button>
+				</li>
+				<li class="nav-item" role="presentation">
+					<button class="nav-link healspantabv" id="profile-tab" data-bs-toggle="tab"
+						data-bs-target="#Medical-Information" type="button" role="tab" aria-controls="profile-tab-pane"
+						aria-selected="false">Medical Information</button>
+				</li>
+				<li class="nav-item " role="presentation">
+					<button class="nav-link healspantabv" id="contact-tab" data-bs-toggle="tab"
+						data-bs-target="#Insurance-Information" type="button" role="tab"
+						aria-controls="contact-tab-pane" aria-selected="false">Insurance Information</button>
+				</li>
+				<li class="nav-item" role="presentation">
+					<button class="nav-link healspantabv" id="profile-tab" data-bs-toggle="tab"
+						data-bs-target="#Initial-Authorization" type="button" role="tab"
+						aria-controls="profile-tab-pane" aria-selected="false">Initial Authorization</button>
+				</li>
+				<li class="nav-item " role="presentation">
+					<button class="nav-link healspantabv" id="contact-tab" data-bs-toggle="tab"
+						data-bs-target="#Enhancement" type="button" role="tab" aria-controls="contact-tab-pane"
+						aria-selected="false">Enhancement</button>
+				</li>
+				<li class="nav-item" role="presentation">
+					<button class="nav-link healspantabv" id="profile-tab" data-bs-toggle="tab"
+						data-bs-target="#Discharge" type="button" role="tab" aria-controls="profile-tab-pane"
+						aria-selected="false">Discharge</button>
+				</li>
+				<li class="nav-item " role="presentation">
+					<button class="nav-link healspantabv vb2" id="contact-tab" data-bs-toggle="tab"
+						data-bs-target="#Final-Claim" type="button" role="tab" aria-controls="contact-tab-pane"
+						aria-selected="false">Final Claim</button>
+				</li>
 
-	
-	
-	</div>
-	
-	</div>
-    <div class="tab-pane fade" id="Insurance-Information" role="tabpanel" aria-labelledby="v-pills-messages-tab">
-	
-			<div class="row mt-1 pt-3">
-	<div class="col-md-3 mb-3 bg-body rounded">
-	<div class="p-2">
-	
-	<div class="p-1 mt-1"><span class="cl01">Insurance Company: </span>
-	<h5 class="mt-3 f16"><strong>ABCD Company</strong></h5>
-	</div>
-	</div>
-	</div>
-	
-	<div class="col-md-3 mb-3 bg-body rounded">
-	<div class="p-2">
-	
-	<div class="p-1 mt-1"><span class="cl01">TPA: </span>
-	<h5 class="mt-3 f16"><strong>Medi Assist</strong></h5>
-	</div>
-	</div>
-	</div>
-	
-	
-	
-	<div class="col-md-3 mb-3 bg-body rounded">
-	<div class="p-2">
-	
-	<div class="p-1 mt-1"><span class="cl01">TPA ID:</span>
-	<h5 class="mt-3 f16"><strong>12345678</strong></h5>
-	</div>
-	</div>
-	</div>
-	
-	
-	<div class="col-md-3 mb-3 bg-body rounded">
-	<div class="p-2">
-	
-	<div class="p-1 mt-1">
-	<h5 class="mt-3 f16 float-end"><strong style="color: #00B272;">Complete</strong></h5>
-	</div>
-	</div>
-	</div>
+				<a href="" class="healtbv text-center mx-3 pt-3 pb-3">Download</a>
+			</div>
+			<div class="tab-content w-100 pe-5 ms-3" id="v-pills-tabContent">
+				<div class="tab-pane fade show active" id="Patient-Information" role="tabpanel"
+					aria-labelledby="v-pills-home-tab">
 
-	
-	
-	</div>
-	
-	
-		<div class="row mt-1 pt-3">
-	<div class="col-md-3 mb-3 bg-body rounded">
-	<div class="p-2">
-	
-	<div class="p-1 mt-1"><span class="cl01">Company / Corporate / Group : </span>
-	<h5 class="mt-3 f16"><strong>ABCD Company</strong></h5>
-	</div>
-	</div>
-	</div>
-	
-	<div class="col-md-3 mb-3 bg-body rounded">
-	<div class="p-2">
-	
-	<div class="p-1 mt-1"><span class="cl01">Relation: </span>
-	<h5 class="mt-3 f16"><strong>Self</strong></h5>
-	</div>
-	</div>
-	</div>
-	
-	
-	
-	<div class="col-md-3 mb-3 bg-body rounded">
-	<div class="p-2">
-	
-	<div class="p-1 mt-1"><span class="cl01">Policy Holder:</span>
-	<h5 class="mt-3 f16"><strong>Saravanna Selvan</strong></h5>
-	</div>
-	</div>
-	</div>
-	
-	
-	<div class="col-md-3 mb-3 bg-body rounded">
-	<div class="p-2">
-	
-	<div class="p-1 mt-1">
-	<h5 class="mt-3 f16 float-end"><strong style="color: #00B272;"></strong></h5>
-	</div>
-	</div>
-	</div>
+					<div class="row mt-1 pt-3">
+						<div class="col-md-3 mb-3 bg-body rounded">
+							<div class="p-2">
 
-	
-	
-	</div>
-	
-	
-	</div>
-	<div class="tab-pane fade" id="Initial-Authorization" role="tabpanel" aria-labelledby="v-pills-home-tab">
-	<div class="row mt-1 pt-3">
-	<div class="col-md-3 mb-3 bg-body rounded">
-	<div class="px-2">
-	
-	<div class="p-1 mt-1"><span class="cl01"><strong>Created on 21/12/2021</strong> </span>
-	<h5 class="mt-3 f16"><strong></strong></h5>
-	</div>
-	</div>
-	</div>
-	
-	<div class="col-md-3 mb-3 bg-body rounded">
-	<div class="px-2">
-	
-	<div class="p-1 mt-1"><span class="cl01"></span>
-	<h5 class="mt-3 f16"><strong></strong></h5>
-	</div>
-	</div>
-	</div>
-	
-	
-	
-	<div class="col-md-3 mb-3 bg-body rounded">
-	<div class="px-2">
-	
-	<div class="p-1 mt-1"><span class="cl01"></span>
-	<h5 class="mt-3 f16"><strong></strong></h5>
-	</div>
-	</div>
-	</div>
-	
-	
-	<div class="col-md-3  bg-body rounded">
-	<div class="p-2">
-	
-	<div class="p-1 mt-1">
-	<h5 class="mt-3 f16 float-end"><strong style="color: #00B272;">Complete</strong></h5>
-	</div>
-	</div>
-	</div>
+								<div class="p-1 mt-1"><span class="cl01">Name: </span>
+									<h5 class="mt-3 f16"><strong>{{patientinfo.Name}}</strong></h5>
+								</div>
+							</div>
+						</div>
 
-	
-	
+						<div class="col-md-3 mb-3 bg-body rounded">
+							<div class="p-2">
+
+								<div class="p-1 mt-1"><span class="cl01">Age: </span>
+									<h5 class="mt-3 f16"><strong>{{patientinfo.Age}}</strong></h5>
+								</div>
+							</div>
+						</div>
+
+
+
+						<div class="col-md-3 mb-3 bg-body rounded">
+							<div class="p-2">
+
+								<div class="p-1 mt-1"><span class="cl01">Gender: </span>
+									<h5 class="mt-3 f16"><strong>{{patientinfo.Gender}}</strong></h5>
+								</div>
+							</div>
+						</div>
+
+
+						<div class="col-md-3 mb-3 bg-body rounded">
+							<div class="p-2">
+
+								<div class="p-1 mt-1">
+									<h5 class="mt-3 f16 float-end"><strong
+											style="color: #00B272;">{{patientinfo.Status}}</strong>
+									</h5>
+								</div>
+							</div>
+						</div>
+
+
+
+					</div>
+
+					<div class="row mb-2">
+						<div class="col-md-3 mb-3 bg-body rounded">
+							<div class="p-2">
+
+								<div class="p-1 mt-1"><span class="cl01">Date of Birth: </span>
+									<h5 class="mt-3 f16"><strong>{{patientinfo.DOB}}</strong></h5>
+								</div>
+							</div>
+						</div>
+
+						<div class="col-md-3 mb-3 bg-body rounded">
+							<div class="p-2">
+
+								<div class="p-1 mt-1"><span class="cl01"> </span>
+									<h5 class="mt-3 f16"><strong></strong></h5>
+								</div>
+							</div>
+						</div>
+
+
+
+						<div class="col-md-3 mb-3 bg-body rounded">
+							<div class="p-2">
+
+								<div class="p-1 mt-1"><span class="cl01"> </span>
+									<h5 class="mt-3 f16"><strong></strong></h5>
+								</div>
+							</div>
+						</div>
+
+
+						<div class="col-md-3 mb-3 bg-body rounded">
+							<div class="p-2">
+
+								<div class="p-1 mt-1">
+									<h5 class="mt-3 f16 float-end"><strong style="color: #00B272;"></strong></h5>
+								</div>
+							</div>
+						</div>
+
+
+
+					</div>
+
+				</div>
+				<div class="tab-pane fade" id="Medical-Information" role="tabpanel"
+					aria-labelledby="v-pills-profile-tab">
+
+					<div class="row mt-1 pt-3">
+						<div class="col-md-3 mb-3 bg-body rounded">
+							<div class="p-2">
+
+								<div class="p-1 mt-1"><span class="cl01">Type Of Accident: </span>
+									<h5 class="mt-3 f16"><strong>{{medicalData.Typeofaccident}}</strong></h5>
+								</div>
+							</div>
+						</div>
+
+						<div class="col-md-3 mb-3 bg-body rounded">
+							<div class="p-2">
+
+								<div class="p-1 mt-1"><span class="cl01">Treatment Type: </span>
+									<h5 class="mt-3 f16"><strong>{{medicalData.Treatmenttype}}</strong></h5>
+								</div>
+							</div>
+						</div>
+
+
+
+						<div class="col-md-3 mb-3 bg-body rounded">
+							<div class="p-2">
+
+								<div class="p-1 mt-1"><span class="cl01">Driver / Passenger:</span>
+									<h5 class="mt-3 f16"><strong>{{medicalData.DriverPassenger}}</strong></h5>
+								</div>
+							</div>
+						</div>
+
+
+						<div class="col-md-3 mb-3 bg-body rounded">
+							<div class="p-2">
+
+								<div class="p-1 mt-1">
+									<h5 class="mt-3 f16 float-end"><strong
+											style="color: #00B272;">{{medicalData.Status}}</strong>
+									</h5>
+								</div>
+							</div>
+						</div>
+
+
+
+					</div>
+
+					<div class="row mt-1 pt-3">
+						<div class="col-md-3 mb-3 bg-body rounded">
+							<div class="p-2">
+
+								<div class="p-1 mt-1"><span class="cl01">Type Of Vehicle: </span>
+									<h5 class="mt-3 f16"><strong>{{medicalData.Typeofvehicle}}</strong></h5>
+								</div>
+							</div>
+						</div>
+
+						<div class="col-md-3 mb-3 bg-body rounded">
+							<div class="p-2">
+
+								<div class="p-1 mt-1"><span class="cl01"> </span>
+									<h5 class="mt-3 f16"><strong></strong></h5>
+								</div>
+							</div>
+						</div>
+
+
+
+						<div class="col-md-3 mb-3 bg-body rounded">
+							<div class="p-2">
+
+								<div class="p-1 mt-1"><span class="cl01"></span>
+									<h5 class="mt-3 f16"><strong></strong></h5>
+								</div>
+							</div>
+						</div>
+
+
+						<div class="col-md-3 mb-3 bg-body rounded">
+							<div class="p-2">
+
+								<div class="p-1 mt-1">
+									<h5 class="mt-3 f16 float-end"><strong style="color: #00B272;"></strong></h5>
+								</div>
+							</div>
+						</div>
+
+
+
+					</div>
+
+				</div>
+				<div class="tab-pane fade" id="Insurance-Information" role="tabpanel"
+					aria-labelledby="v-pills-messages-tab">
+
+					<div class="row mt-1 pt-3">
+						<div class="col-md-3 mb-3 bg-body rounded">
+							<div class="p-2">
+
+								<div class="p-1 mt-1"><span class="cl01">Insurance Company: </span>
+									<h5 class="mt-3 f16"><strong>{{InsuaranceData.Insurancecompany}}</strong></h5>
+								</div>
+							</div>
+						</div>
+
+						<div class="col-md-3 mb-3 bg-body rounded">
+							<div class="p-2">
+
+								<div class="p-1 mt-1"><span class="cl01">TPA: </span>
+									<h5 class="mt-3 f16"><strong>{{InsuaranceData.Tpa}}</strong></h5>
+								</div>
+							</div>
+						</div>
+
+
+
+						<div class="col-md-3 mb-3 bg-body rounded">
+							<div class="p-2">
+
+								<div class="p-1 mt-1"><span class="cl01">TPA ID:</span>
+									<h5 class="mt-3 f16"><strong>{{InsuaranceData.Tpaid}}</strong></h5>
+								</div>
+							</div>
+						</div>
+
+
+						<div class="col-md-3 mb-3 bg-body rounded">
+							<div class="p-2">
+
+								<div class="p-1 mt-1">
+									<h5 class="mt-3 f16 float-end"><strong
+											style="color: #00B272;">{{InsuaranceData.Status}}</strong>
+									</h5>
+								</div>
+							</div>
+						</div>
+
+
+
+					</div>
+
+
+					<div class="row mt-1 pt-3">
+						<div class="col-md-3 mb-3 bg-body rounded">
+							<div class="p-2">
+
+								<div class="p-1 mt-1"><span class="cl01">Company / Corporate / Group : </span>
+									<h5 class="mt-3 f16"><strong>{{InsuaranceData.Company}}</strong></h5>
+								</div>
+							</div>
+						</div>
+
+						<div class="col-md-3 mb-3 bg-body rounded">
+							<div class="p-2">
+
+								<div class="p-1 mt-1"><span class="cl01">Relation: </span>
+									<h5 class="mt-3 f16"><strong>{{InsuaranceData.Relation}}</strong></h5>
+								</div>
+							</div>
+						</div>
+
+
+
+						<div class="col-md-3 mb-3 bg-body rounded">
+							<div class="p-2">
+
+								<div class="p-1 mt-1"><span class="cl01">Policy Holder:</span>
+									<h5 class="mt-3 f16"><strong>{{InsuaranceData.Policyholder}}</strong></h5>
+								</div>
+							</div>
+						</div>
+
+
+						<div class="col-md-3 mb-3 bg-body rounded">
+							<div class="p-2">
+
+								<div class="p-1 mt-1">
+									<h5 class="mt-3 f16 float-end"><strong style="color: #00B272;"></strong></h5>
+								</div>
+							</div>
+						</div>
+
+
+
+					</div>
+
+
+				</div>
+				<div class="tab-pane fade" id="Initial-Authorization" role="tabpanel"
+					aria-labelledby="v-pills-home-tab">
+					<div class="row mt-1 pt-3">
+						<div class="col-md-3 mb-3 bg-body rounded">
+							<div class="px-2">
+
+								<div class="p-1 mt-1">Created Date: <span class="cl01"><strong>{{InitialData.CreatedOn}}</strong>
+									</span>
+									<h5 class="mt-3 f16"><strong></strong></h5>
+								</div>
+							</div>
+						</div>
+
+						<div class="col-md-3 mb-3 bg-body rounded">
+							<div class="px-2">
+
+								<div class="p-1 mt-1"><span class="cl01"></span>
+									<h5 class="mt-3 f16"><strong></strong></h5>
+								</div>
+							</div>
+						</div>
+
+
+
+						<div class="col-md-3 mb-3 bg-body rounded">
+							<div class="px-2">
+
+								<div class="p-1 mt-1"><span class="cl01"></span>
+									<h5 class="mt-3 f16"><strong></strong></h5>
+								</div>
+							</div>
+						</div>
+
+
+						<div class="col-md-3  bg-body rounded">
+							<div class="p-2">
+
+								<div class="p-1 mt-1">
+									<h5 class="mt-3 f16 float-end"><strong
+											style="color: #00B272;">{{InitialData.Status}}</strong>
+									</h5>
+								</div>
+							</div>
+						</div>
+
+
+
+					</div>
+
+					<div class="row mt-1" *ngFor="let h of InitialData['doclist']">
+						<div class="col-md-5 mb-3 bg-body rounded">
+
+
+							<div class="px-3">
+								<h5 class="mt-3 f16"><strong>Document 1:</strong></h5>
+								<h5 class="mt-3 f16">{{h.DocName}}</h5>
+
+
+							</div>
+
+
+
+
+						</div>
+						<div class="col-md-3 mb-3 bg-body rounded p-3">
+							<a href="" class="btn btn-outline btn-sm px-3 mt-3 healshadow"> Upload <img
+									src="/assets/img/Arrow-54.png"></a>
+						</div>
+					</div>
+					<div class="col-md-4 mb-3 bg-body rounded">
+						<div class="p-2">
+
+							<div class="p-1 mt-1"><span class="cl01">Estimated Cost: </span>
+								<h5 class="mt-3 f16"><strong>{{InitialData.EstimatedCost}}</strong></h5>
+							</div>
+						</div>
+						<div class="p-2">
+
+							<div class="p-1 mt-1"><span class="cl01">Approved Cost: </span>
+								<h5 class="mt-3 f16"><strong>{{InitialData.ApprovedCost}}</strong></h5>
+							</div>
+						</div>
+
+					</div>
+
+
+				</div>
+				<div class="tab-pane fade" id="Enhancement" role="tabpanel" aria-labelledby="v-pills-profile-tab">
+					<div class="row mt-1" *ngFor="let a of EnhancmentData['doclist']">
+						<div class="col-md-5 mb-3 bg-body rounded">
+
+
+							<div class="px-3">
+								<h5 class="mt-3 f16"><strong>Document 1:</strong></h5>
+								<h5 class="mt-3 f16">{{a.DocName}}</h5>
+
+
+							</div>
+						</div>
+						<div class="col-md-3 mb-3 bg-body rounded p-3">
+							<a href="" class="btn btn-outline btn-sm px-3 mt-3 healshadow"> Upload <img
+									src="/assets/img/Arrow-54.png"></a>
+						</div>
+					</div>
+					<div class="col-md-4 mb-3 bg-body rounded">
+						<div class="p-2">
+
+							<div class="p-1 mt-1"><span class="cl01">Estimated Cost: </span>
+								<h5 class="mt-3 f16"><strong>{{EnhancmentData.EstimatedCost}}</strong></h5>
+							</div>
+						</div>
+						<div class="p-2">
+
+							<div class="p-1 mt-1"><span class="cl01">Approved Cost: </span>
+								<h5 class="mt-3 f16"><strong>{{EnhancmentData.ApprovedCost}}</strong></h5>
+							</div>
+						</div>
+					</div>
+
+
+
+				</div>
+				<div class="tab-pane fade" id="Discharge" role="tabpanel" aria-labelledby="v-pills-messages-tab">
+
+					<div class="row mt-1" *ngFor="let c of DischargeData['doclist']">
+						<div class="col-md-5 mb-3 bg-body rounded">
+
+
+							<div class="px-3">
+								<h5 class="mt-3 f16"><strong>Document 1:</strong></h5>
+								<h5 class="mt-3 f16">{{c.DocName}}</h5>
+
+
+							</div>
+						</div>
+						<div class="col-md-3 mb-3 bg-body rounded p-3">
+							<a href="" class="btn btn-outline btn-sm px-3 mt-3 healshadow"> Upload <img
+									src="/assets/img/Arrow-54.png"></a>
+						</div>
+					</div>
+					<div class="col-md-4 mb-3 bg-body rounded">
+						<div class="p-2">
+
+							<div class="p-1 mt-1"><span class="cl01">Total Bill Amount: </span>
+								<h5 class="mt-3 f16"><strong>{{DischargeData.TotalBillAmount}}</strong></h5>
+							</div>
+						</div>
+						<div class="p-2">
+
+							<div class="p-1 mt-1"><span class="cl01">Claim Amount: </span>
+								<h5 class="mt-3 f16"><strong>{{DischargeData.ClaimAmount}}</strong></h5>
+							</div>
+						</div>
+					</div>
+				</div>
+
+
+				<div class="tab-pane fade" id="Final-Claim" role="tabpanel" aria-labelledby="v-pills-messages-tab">
+
+					<div class="row mt-1" *ngFor="let f of finalClaim['doclist']">
+						<div class="col-md-5 mb-3 bg-body rounded">
+
+
+							<div class="px-3">
+								<h5 class="mt-3 f16"><strong>Document 1:</strong></h5>
+								<h5 class="mt-3 f16">{{f.DocName}}</h5>
+
+
+							</div>
+						</div>
+						<div class="col-md-3 mb-3 bg-body rounded p-3">
+							<a href="" class="btn btn-outline btn-sm px-3 mt-3 healshadow"> Upload <img
+									src="/assets/img/Arrow-54.png"></a>
+						</div>
+						</div>
+						<div class="col-md-4 mb-3 bg-body rounded">
+							<div class="p-2">
+
+								<div class="p-1 mt-1"><span class="cl01">Total Bill Amount</span>
+									<h5 class="mt-3 f16"><strong>{{finalClaim.TotalBillAmount}}</strong></h5>
+								</div>
+								<div class="p-1 mt-1"><span class="cl01">Claim Amount</span>
+									<h5 class="mt-3 f16"><strong>{{finalClaim.ClaimAmount}}</strong></h5>
+								</div>
+							</div>
+						</div>
+					
+					<div class="row mt-1">
+						<span class="px-3"><strong>Review Notes:</strong> It is a long established fact that a reader
+							will be distracted by the readable content of a page when looking at its layout. The point
+							of using Lorem Ipsum is that it has a more-or-less normal distribution of letters.</span>
+					</div>
+				</div>
+
+			</div>
+		</div>
 	</div>
-	
-		<div class="row mt-1">
-	<div class="col-md-5 bg-body rounded">
-	
-	
-	<div class="px-3">
-	<h5 class="mt-3 f16"><strong>Document 1:</strong></h5>
-	<h5 class="mt-3 f16">PAN_patient_12345678_bill.pdf</h5>
-	
-	
-	</div>
-	</div>
-	<div class="col-md-3 bg-body rounded px-3">
-	<a href="" class="btn btn-primary btn-sm px-3 mt-3 healshadow"> Upload <img src="/assets/img/Arrow-54w.png"> </a>
-	</div>
-	<div class="col-md-4 mb-3 bg-body rounded">
-	<div class="px-2">
-	
-	<div class="p-1 mt-1"><span class="cl01">Estimated Cost: </span>
-	<h5 class="mt-3 f16"><strong>INR 40,000</strong></h5>
-	</div>
-	</div>
-	</div>
-	
-	
-	
-	</div>
-	
-		<div class="row mt-1">
-	<div class="col-md-5 mb-3 bg-body rounded">
-	
-	
-	<div class="px-3">
-	<h5 class="mt-3 f16"><strong>Document 1:</strong></h5>
-	<h5 class="mt-3 f16">PAN_patient_12345678_bill.pdf</h5>
-	
-	
-	</div>
-	</div>
-	<div class="col-md-3 mb-3 bg-body rounded p-3">
-	<a href="" class="btn btn-outline btn-sm px-3 mt-3 healshadow"> Upload <img src="/assets/img/Arrow-54.png"></a>
-	</div>
-	<div class="col-md-4 mb-3 bg-body rounded">
-	<div class="p-2">
-	
-	<div class="p-1 mt-1"><span class="cl01">Estimated Cost: </span>
-	<h5 class="mt-3 f16"><strong>INR 40,000</strong></h5>
-	</div>
-	</div>
-	</div>
-	
-	
-	</div>
-	</div>
-    <div class="tab-pane fade" id="Enhancement" role="tabpanel" aria-labelledby="v-pills-profile-tab">
-	<div class="row mt-1">
-	<div class="col-md-5 mb-3 bg-body rounded">
-	
-	
-	<div class="px-3">
-	<h5 class="mt-3 f16"><strong>Document 1:</strong></h5>
-	<h5 class="mt-3 f16">PAN_patient_12345678_bill.pdf</h5>
-	
-	
-	</div>
-	</div>
-	<div class="col-md-3 mb-3 bg-body rounded p-3">
-	<a href="" class="btn btn-outline btn-sm px-3 mt-3 healshadow"> Upload <img src="/assets/img/Arrow-54.png"></a>
-	</div>
-	<div class="col-md-4 mb-3 bg-body rounded">
-	<div class="p-2">
-	
-	<div class="p-1 mt-1"><span class="cl01">Estimated Cost: </span>
-	<h5 class="mt-3 f16"><strong>INR 40,000</strong></h5>
-	</div>
-	</div>
-	</div>
-	
-	
-	</div>
-	
-	<div class="row mt-1">
-	<div class="col-md-5 mb-3 bg-body rounded">
-	
-	
-	<div class="px-3">
-	<h5 class="mt-3 f16"><strong>Document 1:</strong></h5>
-	<h5 class="mt-3 f16">PAN_patient_12345678_bill.pdf</h5>
-	
-	
-	</div>
-	</div>
-	<div class="col-md-3 mb-3 bg-body rounded p-3">
-	<a href="" class="btn btn-outline btn-sm px-3 mt-3 healshadow"> Upload <img src="/assets/img/Arrow-54.png"></a>
-	</div>
-	<div class="col-md-4 mb-3 bg-body rounded">
-	<div class="p-2">
-	
-	<div class="p-1 mt-1"><span class="cl01">Estimated Cost: </span>
-	<h5 class="mt-3 f16"><strong>INR 40,000</strong></h5>
-	</div>
-	</div>
-	</div>
-	
-	
-	</div>
-	
-	</div>
-    <div class="tab-pane fade" id="Discharge" role="tabpanel" aria-labelledby="v-pills-messages-tab">
-	
-	<div class="row mt-1">
-	<div class="col-md-5 mb-3 bg-body rounded">
-	
-	
-	<div class="px-3">
-	<h5 class="mt-3 f16"><strong>Document 1:</strong></h5>
-	<h5 class="mt-3 f16">PAN_patient_12345678_bill.pdf</h5>
-	
-	
-	</div>
-	</div>
-	<div class="col-md-3 mb-3 bg-body rounded p-3">
-	<a href="" class="btn btn-outline btn-sm px-3 mt-3 healshadow"> Upload <img src="/assets/img/Arrow-54.png"></a>
-	</div>
-	<div class="col-md-4 mb-3 bg-body rounded">
-	<div class="p-2">
-	
-	<div class="p-1 mt-1"><span class="cl01">Estimated Cost: </span>
-	<h5 class="mt-3 f16"><strong>INR 40,000</strong></h5>
-	</div>
-	</div>
-	</div>
-	
-	
-	</div>
-	
-	<div class="row mt-1">
-	<div class="col-md-5 mb-3 bg-body rounded">
-	
-	
-	<div class="px-3">
-	<h5 class="mt-3 f16"><strong>Document 1:</strong></h5>
-	<h5 class="mt-3 f16">PAN_patient_12345678_bill.pdf</h5>
-	
-	
-	</div>
-	</div>
-	<div class="col-md-3 mb-3 bg-body rounded p-3">
-	<a href="" class="btn btn-outline btn-sm px-3 mt-3 healshadow"> Upload <img src="/assets/img/Arrow-54.png"></a>
-	</div>
-	<div class="col-md-4 mb-3 bg-body rounded">
-	<div class="p-2">
-	
-	<div class="p-1 mt-1"><span class="cl01">Estimated Cost: </span>
-	<h5 class="mt-3 f16"><strong>INR 40,000</strong></h5>
-	</div>
-	</div>
-	</div>
-	
-	
-	</div>
-	
-	<div class="row mt-1">
-	<div class="col-md-5 mb-3 bg-body rounded">
-	
-	
-	<div class="px-3">
-	<h5 class="mt-3 f16"><strong>Document 1:</strong></h5>
-	<h5 class="mt-3 f16">PAN_patient_12345678_bill.pdf</h5>
-	
-	
-	</div>
-	</div>
-	<div class="col-md-3 mb-3 bg-body rounded p-3">
-	<a href="" class="btn btn-outline btn-sm px-3 mt-3 healshadow"> Upload <img src="/assets/img/Arrow-54.png"></a>
-	</div>
-	<div class="col-md-4 mb-3 bg-body rounded">
-	<div class="p-2">
-	
-	<div class="p-1 mt-1"><span class="cl01">Estimated Cost: </span>
-	<h5 class="mt-3 f16"><strong>INR 40,000</strong></h5>
-	</div>
-	</div>
-	</div>
-	
-	
-	</div>
-	
-	
-	</div>
-	<div class="tab-pane fade" id="Final-Claim" role="tabpanel" aria-labelledby="v-pills-messages-tab">
-	
-	<div class="row mt-1">
-	<div class="col-md-5 mb-3 bg-body rounded">
-	
-	
-	<div class="px-3">
-	<h5 class="mt-3 f16"><strong>Document 1:</strong></h5>
-	<h5 class="mt-3 f16">PAN_patient_12345678_bill.pdf</h5>
-	
-	
-	</div>
-	</div>
-	<div class="col-md-3 mb-3 bg-body rounded p-3">
-	<a href="" class="btn btn-outline btn-sm px-3 mt-3 healshadow"> Upload <img src="/assets/img/Arrow-54.png"></a>
-	</div>
-	<div class="col-md-4 mb-3 bg-body rounded">
-	<div class="p-2">
-	
-	<div class="p-1 mt-1"><span class="cl01">Estimated Cost: </span>
-	<h5 class="mt-3 f16"><strong>INR 40,000</strong></h5>
-	</div>
-	</div>
-	</div>
-	
-	
-	</div>
-	<div class="row mt-1">
-	<div class="col-md-5 mb-3 bg-body rounded">
-	
-	
-	<div class="px-3">
-	<h5 class="mt-3 f16"><strong>Document 1:</strong></h5>
-	<h5 class="mt-3 f16">PAN_patient_12345678_bill.pdf</h5>
-	
-	
-	</div>
-	</div>
-	<div class="col-md-3 mb-3 bg-body rounded p-3">
-	<a href="" class="btn btn-outline btn-sm px-3 mt-3 healshadow"> Upload <img src="/assets/img/Arrow-54.png"></a>
-	</div>
-	<div class="col-md-4 mb-3 bg-body rounded">
-	<div class="p-2">
-	
-	<div class="p-1 mt-1"><span class="cl01">Estimated Cost: </span>
-	<h5 class="mt-3 f16"><strong>INR 40,000</strong></h5>
-	</div>
-	</div>
-	</div>
-	
-	
-	</div>
-	<div class="row mt-1">
-	<span class="px-3"><strong>Review Notes:</strong> It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters.</span>
-	</div>
-	</div>
-    
-  </div>
 </div>
-</div>
-</div>
-	
-  
-
-  
-  
-  

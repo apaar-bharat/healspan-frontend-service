@@ -72,3 +72,35 @@ body {
 h1 {
     color:green;
 }
+.mat-stepper-horizontal {
+  margin-top: 8px;
+}
+
+.mat-mdc-form-field {
+  margin-top: 16px;
+}
+
+.upload-btn-wrapper {
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+ 
+}
+
+.btn {
+  border: 2px solid rgb(131, 248, 248);
+  color: rgb(8, 99, 99);
+  background-color: rgb(147, 230, 245);
+  padding: 8px 20px;
+  border-radius: 8px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.upload-btn-wrapper input[type=file] {
+  font-size: 100px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+}
