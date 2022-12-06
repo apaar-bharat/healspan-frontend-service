@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -7,9 +8,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
   }
 
+
+  redirect(){
+    let activeDashboard=sessionStorage.getItem("usertype");
+    if(activeDashboard=='huser'){
+      // alert("huser");
+      this.router.navigate(['hdashboard'])
+
+    }else{
+      // alert("ruser");
+      this.router.navigate(['rdashboard'])
+    }
+  }
 }

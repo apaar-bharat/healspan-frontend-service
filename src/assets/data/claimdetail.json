@@ -36,11 +36,11 @@
         "Status": "Completed",
         "doclist": [
             {
-                "DocName": "Bill.pdf",
+                "DocName": "PAN_patient_12345678_bill.pdf",
                 "Docfile": ""
             },
             {
-                "DocName": "Bill1.pdf",
+                "DocName": "PAN_patient_12345678_p12bill.pdf",
                 "Docfile": ""
             }
           
@@ -53,11 +53,11 @@
         "Status": "Completed",
         "doclist": [
             {
-                "DocName": "Bill.pdf",
+                "DocName": "PAN_patient_12345678_bill.pdf",
                 "Docfile": ""
             },
             {
-                "DocName": "Bill1.pdf",
+                "DocName": "PAN_patient_12345678_bill.pdf",
                 "Docfile": ""
             }
         ]
@@ -69,11 +69,11 @@
         "Status": "Pending Docs",
         "doclist": [
             {
-                "DocName": "Bill.pdf",
+                "DocName": "PAN_patient_12345678_bill.pdf",
                 "Docfile": ""
             },
             {
-                "DocName": "Bill1.pdf",
+                "DocName": "PAN_patient_12345678_bill.pdf",
                 "Docfile": ""
             },
             {
@@ -90,15 +90,15 @@
         "Status": "Approved",
         "doclist": [
             {
-                "DocName": "Bill.pdf",
+                "DocName": "PAN_patient_12345678_bill.pdf",
                 "Docfile": ""
             },
             {
-                "DocName": "Bill1.pdf",
+                "DocName": "PAN_patient_12345678_bill.pdf",
                 "Docfile": ""
             },
             {
-                "DocName": "Bill2.pdf",
+                "DocName": "PAN_patient_12345678_bill.pdf",
                 "Docfile": ""
             }
         ]

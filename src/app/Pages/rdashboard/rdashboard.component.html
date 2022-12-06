@@ -32,7 +32,7 @@
 </div>
 <div class="row mb-3 mt-2 text-center">
 
-	<a href="" class="col-md-2 healbox hlbx1" *ngFor="let a of spaData">
+	<a href="" class="col-md-2 healbox hlbx1" *ngFor="let a of spaData" routerLink="/slastatus" >
 		<p>{{a.Name}}</p>
 		<h2>{{a.Count}}</h2>
 	</a>
@@ -86,7 +86,7 @@
 				<tbody>
 					<tr *ngFor="let h of healspandata">
 						<!-- <td><a href="claim-form2.html" class="tblink">12345678</a></td> -->
-						<td>{{h.ClaimID}}</td>
+						<td><a routerLink="/viewclaim" class="tblink">{{h.ClaimID}}</a></td>
 						<td>{{h.Name}}</td>
 						<td>{{h.Ailment}}</td>
 						<td>{{h.SLA}}</td>
@@ -116,7 +116,7 @@
 				</thead>
 				<tbody>
 					<tr *ngFor="let b of hospitalData">
-						<td>{{b.ClaimID}}</td>
+						<td><a routerLink="/viewclaim" class="tblink">{{b.ClaimID}}</a></td>
 						<td>{{b.Name}}</td>
 						<td>{{b.Ailment}}</td>
 						<td>{{b.SLA}}</td>
@@ -145,7 +145,7 @@
 				</thead>
 				<tbody>
 					<tr *ngFor="let c of ClosedData">
-						<td>{{c.ClaimID}}</td>
+						<td><a routerLink="/viewclaim" class="tblink">{{c.ClaimID}}</a></td>
 						<td>{{c.Name}}</td>
 						<td>{{c.Ailment}}</td>
 						<td>{{c.SLA}}</td>

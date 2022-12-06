@@ -7,6 +7,7 @@ import { HdashboardComponent } from './Pages/hdashboard/hdashboard.component';
 import { ProfileComponent } from './Pages/profile/profile.component';
 import { RdashboardComponent } from './Pages/rdashboard/rdashboard.component';
 import { ResetpasswordComponent } from './Pages/resetpassword/resetpassword.component';
+import { SlaStatusComponent } from './Pages/sla-status/sla-status.component';
 import { ViewclaimComponent } from './Pages/viewclaim/viewclaim.component';
 
 const routes: Routes = [
@@ -21,6 +22,7 @@ const routes: Routes = [
       { path: 'viewclaim',component: ViewclaimComponent},
       { path: 'reset',component: ResetpasswordComponent},
       { path: 'profile',component: ProfileComponent},
+      { path: 'slastatus',component: SlaStatusComponent},
     ]}
   ];
 

@@ -5,6 +5,7 @@ import { ApiService } from '../service/api.service';
 import {  HttpClient } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
 import { Observable ,  throwError } from 'rxjs';
+import { Modal } from 'src/assets/js/bootstrap.bundle';
 import { data } from 'jquery';
 @Component({
   selector: 'app-login',
@@ -14,6 +15,9 @@ import { data } from 'jquery';
 export class LoginComponent implements OnInit {
 
   loginForm!: FormGroup;
+  usermaster:any;
+  displayStyle = "none";
+
 
   constructor(private router: Router, private fb: FormBuilder, private api: ApiService, private http: HttpClient) { }
 
@@ -24,6 +28,20 @@ export class LoginComponent implements OnInit {
       password: ['', [Validators.required]],
 
     });
+    this.usermaster = [
+      {
+        "id" : 1,
+        "usernamename" : 'vishal',
+        "password": '123',
+        "type" : 'huser',
+      },
+      {
+        "id" : 2,
+        "usernamename" : 'divya',
+        "password": '123',
+        "type" : 'ruser'
+      }
+    ]
   }
 
 
@@ -39,9 +57,30 @@ export class LoginComponent implements OnInit {
   }
   OnLogin() {
     console.log(this.loginForm)
-    const formData: any = new FormData();
-    formData.append('username', this.loginForm.get('username')?.value);
-    formData.append('password', this.loginForm.get('password')?.value);
+
+    const abc=this.usermaster.filter((data:any) =>(data.usernamename==this.loginForm.get('username')?.value && data.password==this.loginForm.get('password')?.value));
+    if(abc.length>0)
+    {
+       sessionStorage.setItem("usertype",abc[0].type)
+        if(abc[0].type=='huser'){
+          // alert("huser");
+          this.router.navigate(['hdashboard'])
+
+        }else{
+          // alert("ruser");
+          this.router.navigate(['rdashboard'])
+        }
+    }
+    else{
+      // alert("Invalid userid and pass");
+//document.getElementById("modalChoice").style.display = "block" ;    
+//let modal  = document.getElementById("modalChoice").getAttribute();
+this.displayStyle = "block";
+    }
+
+    // const formData: any = new FormData();
+    // formData.append('username', this.loginForm.get('username')?.value);
+    // formData.append('password', this.loginForm.get('password')?.value);
     // this.api
     //   .post('/login', formData)
     //   .subscribe({
@@ -59,7 +98,7 @@ export class LoginComponent implements OnInit {
     //     error: (error) => console.log("error123",error),
     //   });
     
-      this.router.navigate(['hdashboard'])
+      // this.router.navigate(['hdashboard'])
 
     // this.http.post('http://192.168.15.20:8080/login',formData,{ responseType: 'json' }).subscribe(
     //       {
@@ -67,6 +106,12 @@ export class LoginComponent implements OnInit {
     //         error: (error) => {console.log("error123",(error))},          
     //       })};
 
+   
+  }
+
+  closepopup(){
+    this.displayStyle = "none";
   }
 
 }
+

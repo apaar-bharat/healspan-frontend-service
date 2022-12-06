@@ -104,3 +104,13 @@ h1 {
   top: 0;
   opacity: 0;
 }
+
+
+mat-form-field {
+  width: 100%;
+}
+
+::ng-deep .mat-horizontal-stepper-header-container {
+ margin-left: 50px;
+}
+

@@ -27,4 +27,8 @@ export class ViewclaimComponent implements OnInit {
 
   }
 
+  docopen(){
+    window.open('https://www.africau.edu/images/default/sample.pdf')
+  }
+
 }

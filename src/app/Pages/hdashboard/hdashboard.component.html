@@ -99,8 +99,8 @@
 						<th>ApprovedAmount</th>
 					</thead>
 					<tbody>
-						<tr *ngFor="let p of pendingDataList">
-							<td>{{p.ClaimID}}</td>
+						<tr *ngFor="let p of aprrovalDataList">
+							<td ><a routerLink="/createclaim" class="tblink">{{p.ClaimID}}</a></td>
 							<td>{{p.Name}}</td>
 							<td>{{p.Ailment}}</td>
 							<td>{{p.Stage}}</td>
@@ -129,8 +129,8 @@
 						<th>ApprovedAmount</th>
 					</thead>
 					<tbody>
-						<tr *ngFor="let a of aprrovalDataList">
-							<td (click)="Idrouting()">{{a.ClaimID}}</td>
+						<tr *ngFor="let a of pendingDataList">
+							<td ><a routerLink="/createclaim" class="tblink">{{a.ClaimID}}</a></td>
 							<td>{{a.Name}}</td>
 							<td>{{a.Ailment}}</td>
 							<td>{{a.Stage}}</td>

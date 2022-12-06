@@ -17,6 +17,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { HttpClientModule } from '@angular/common/http';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { HttpClientModule } from '@angular/common/http';
     MatNativeDateModule,
     MatFormFieldModule,
     MatInputModule,
-    HttpClientModule
+    HttpClientModule,
+    MatButtonToggleModule
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
 })

@@ -54,11 +54,11 @@
 
 
 
-  <div class="modal" role="dialog" id="modalChoice">
+  <div class="modal" role="dialog" [ngStyle]="{'display':displayStyle}" id="modalChoice">
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content rounded-3 shadow">
         <div class="modal-header border-bottom-0 p-3 ">
-          <a type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><img
+          <a type="button" class="btn-close" (click)="closepopup()" data-bs-dismiss="modal" aria-label="Close"><img
               src="/assets/img/close-circle.png"></a>
         </div>
         <div class="modal-body p-4 text-center ptt">

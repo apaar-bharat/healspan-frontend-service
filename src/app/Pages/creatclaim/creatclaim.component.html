@@ -1,567 +1,490 @@
 <div class="container-fluid p-0" style="background-color:#f9feff;">
 
+
+
     <div class="row mx-0">
-
         <section class="multi_step_form px-0">
-            <div id="msform">
+            <form id="msform">
                 <!-- Tittle -->
+
                 <!-- progressbar -->
-                <mat-stepper [linear]="isLinear" #stepper>
-
-                    <mat-step [stepControl]="ClaimForm">
-                        <!-- fieldsets -->
-                        <fieldset>
-                            <form [formGroup]="ClaimForm">
-                                <div class="form-row">
-                                    <div class="form-group col-md-12 mb-3">
-                                        <h4 class="float-start">Patient Information</h4>
-                                    </div>
-                                </div>
-                                <div class="form-row">
-
-                                    <div class="form-group col-md-4">
-                                        <label for="" class="form-label float-start">First name*</label>
-                                        <input type="text" class="form-control" formControlName="Fname"
-                                            placeholder="First Name">
-                                        <!-- <div *ngIf="submitted && f['Fname'].invalid" class="invalid-feedback">
-                                            <div *ngIf="f['Fname'].errors?.['required']">First name required*</div>
-                                        </div> -->
-                                    </div>
-
-                                    <div class="form-group col-md-4">
-                                        <label for="" class="form-label float-start">Middle name</label>
-                                        <input type="text" class="form-control" formControlName="Mname"
-                                            placeholder="Middle Name">
-                                        <!-- <div *ngIf="submitted && f['Mname'].invalid" class="invalid-feedback">
-                                            <div *ngIf="f['Mname'].errors?.['required']">Middle Name required*</div>
-                                        </div> -->
-                                    </div>
-                                    <div class="form-group col-md-4">
-                                        <label for="" class="form-label float-start">Last name</label>
-                                        <input type="text" class="form-control" formControlName="Lname"
-                                            formControlName="Lname" placeholder="Last Name">
-                                        <!-- <div *ngIf="submitted && f['Lname'].invalid" class="invalid-feedback">
-                                            <div *ngIf="f['Lname'].errors?.['required']">Last Name required*</div>
-                                        </div> -->
-                                    </div>
-                                </div>
-                                <div class="form-row">
-                                    <div class="form-group col-md-3 mt-5">
-                                        <label for="" class="form-label float-start">Gender*</label>
-
-                                        <select class="form-control form-select" id="country" formControlName="Gender">
-                                            <option value="">Choose...</option>
-                                            <option>Male</option>
-                                            <option>Female</option>
-                                        </select>
-                                        <!-- <div *ngIf="submitted && f['Gender'].invalid" class="invalid-feedback">
-                                            <div *ngIf="f['Gender'].errors?.['required']">Gender required*</div>
-                                        </div> -->
-                                    </div>
-                                    <div class="form-group col-md-3 mt-5">
-                                        <mat-form-field appearance="fill">
-                                            <mat-label>Choose a date</mat-label>
-                                            <input matInput [matDatepicker]="picker" formControlName="DOB">
-                                            <mat-hint>MM/DD/YYYY</mat-hint>
-                                            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-                                            <mat-datepicker #picker></mat-datepicker>
-                                        </mat-form-field>
-                                    </div>
-
-                                    <div class="form-group col-md-3 mt-5">
-                                        <label for="" class="form-label float-start">Age*</label>
-                                        <input type="text" class="form-control" formControlName="Age" placeholder="Age">
-                                        <!-- <div *ngIf="submitted && f['Age'].invalid" class="invalid-feedback">
-                                            <div *ngIf="f['Age'].errors?.['required']">Age required*</div>
-                                        </div> -->
-                                    </div>
-                                    <div class="form-group col-md-3 mt-5">
-                                        <label for="" class="form-label float-start">Stage*</label>
-                                        <input type="text" class="form-control" formControlName="Stage"
-                                            placeholder="Stage">
-                                        <!-- <div *ngIf="submitted && f['Stage'].invalid" class="invalid-feedback">
-                                            <div *ngIf="f['Stage'].errors?.['required']">Stage required*</div>
-                                        </div> -->
-                                    </div>
-                                </div>
-                                <div class="form-row w-100">
-                                    <div class="form-group col-md-12 mt-5">
-                                        <input type="checkbox" class="form-check-input float-start" id="same-address"
-                                            formControlName="patientprimaryInsured">
-                                        <label class="form-check-label  float-start" for="same-address">&nbsp; Patient
-                                            is the
-                                            primary insured*</label>
-                                    </div>
-                                </div>
-                                <div class="form-row">
-                                    <div class="form-group col-md-6 mt-5">
-                                        <label for="" class="form-label float-start">Hospital Name*</label>
-                                        <select class="form-control form-select" id="country"
-                                            formControlName="HospitalName" required>
-                                            <option value="">Choose...</option>
-                                            <option>King Edward Memorial Hospital</option>
-                                        </select>
-                                        <!-- <div *ngIf="submitted && f['HospitalName'].invalid" class="invalid-feedback">
-                                            <div *ngIf="f['HospitalName'].errors?.['required']">Hospital Name required
-                                            </div>
-                                        </div> -->
-                                    </div>
-                                    <div class="form-group col-md-3 mt-5">
-                                        <mat-form-field appearance="fill">
-                                            <mat-label>Choose a date</mat-label>
-                                            <input matInput [matDatepicker]="pickerr" formControlName="DateOfAdmission">
-                                            <mat-hint>MM/DD/YYYY</mat-hint>
-                                            <mat-datepicker-toggle matIconSuffix [for]="pickerr">
-                                            </mat-datepicker-toggle>
-                                            <mat-datepicker #pickerr></mat-datepicker>
-                                        </mat-form-field>
-                                    </div>
-                                    <div class="form-group col-md-3 mt-5">
-                                        <mat-form-field appearance="fill">
-                                            <mat-label>Choose a date</mat-label>
-                                            <input matInput [matDatepicker]="pickerrr"
-                                                formControlName="DateOfAdmission">
-                                            <mat-hint>MM/DD/YYYY</mat-hint>
-                                            <mat-datepicker-toggle matIconSuffix [for]="pickerrr">
-                                            </mat-datepicker-toggle>
-                                            <mat-datepicker #pickerrr></mat-datepicker>
-                                        </mat-form-field>
-                                    </div>
-
-                                </div>
-                                <div class="form-row ">
-                                    <div class="form-group col-md-4 mt-5">
-                                        <label for="" class="form-label float-start">Ailment*</label>
-                                        <select class="form-control form-select" formControlName="Ailment" id="country"
-                                            required>
-                                            <option value="">Choose...</option>
-                                            <option>Road Accident</option>
-                                            <option>Female</option>
-                                        </select>
-                                        <!-- <div *ngIf="submitted && f['Ailment'].invalid" class="invalid-feedback">
-                                            <div *ngIf="f['Ailment'].errors?.['required']">Ailment required</div>
-                                        </div> -->
-                                    </div>
-                                    <div class="form-group col-md-4 mt-5">
-                                        <label for="" class="form-label float-start">Total Bill Amount</label>
-                                        <input type="text" class="form-control" formControlName="TotalBillAmount"
-                                            placeholder="Total Bill Amount">
-                                        <!-- <div *ngIf="submitted && f['TotalBillAmount'].invalid" class="invalid-feedback">
-                                            <div *ngIf="f['TotalBillAmount'].errors?.['required']">Total Bill Amount
-                                                required
-                                            </div>
-                                        </div> -->
-                                    </div>
-                                    <div class="form-group col-md-4 mt-5">
-                                        <label for="" class="form-label float-start">Claim Amount*</label>
-                                        <input type="text" class="form-control" formControlName="ClaimAmount"
-                                            placeholder="Claim Amount">
-                                        <!-- <div *ngIf="submitted && f['ClaimAmount'].invalid" class="invalid-feedback">
-                                            <div *ngIf="f['ClaimAmount'].errors?.['required']">Claim Amount required
-                                            </div>
-                                        </div> -->
-                                    </div>
-                                </div>
-                                <!-- <button type="button"
-                                    class="previous_button btn btn-lg px-5 float-start mt-5">Exit</button> -->
-
-                                <button type="button" class="next action-button float-end mt-3" (click)="Oncontinue()"
-                                    matStepperNext>Continue</button>
-                            </form>
-                        </fieldset>
-                    </mat-step>
-
-                    <mat-step [stepControl]="medicalForm">
-                        <fieldset>
-                            <form [formGroup]="medicalForm">
-                                <div class="form-row">
-                                    <div class="form-group col-md-12 mb-3">
-                                        <h4 class="float-start">Medical Information</h4>
-                                    </div>
-                                </div>
-
-                                <div class="form-row">
-                                    <div class="form-group col-md-4">
-                                        <label for="" class="form-label float-start">Ailment</label>
-                                        <input type="text" class="form-control" formControlName="Ailments"
-                                            placeholder="Road Accident">
-
-                                    </div>
-                                    <div class="form-group col-md-4 ">
-                                        <label for="" class="form-label float-start">Type Of Accident</label>
-                                        <select class="form-control form-select" formControlName="TypeOfAccident"
-                                            id="country" required>
-                                            <option value="">Choose...</option>
-                                            <option>Road Accident</option>
-                                            <option>Female</option>
-                                        </select>
-                                        <!-- <div *ngIf="submitted && f['Ailment'].invalid" class="invalid-feedback">
-                                            <div *ngIf="f['Ailment'].errors?.['required']">Ailment required</div>
-                                        </div> -->
-                                    </div>
-                                    <div class="form-group col-md-4">
-                                        <label for="" class="form-label float-start">Treatment Type</label>
-                                        <select class="form-control form-select" formControlName="TreatmentType"
-                                            id="country" required>
-                                            <option value="">Choose...</option>
-                                            <option>Road Accident</option>
-                                            <option>Female</option>
-                                        </select>
-                                        <!-- <div *ngIf="submitted && f['Ailment'].invalid" class="invalid-feedback">
-                                            <div *ngIf="f['Ailment'].errors?.['required']">Ailment required</div>
-                                        </div> -->
-                                    </div>
-                                </div>
-                                <div class="form-row">
-                                    <div class="form-group col-md-6 mt-5">
-                                        <label for="" class="form-label float-start">Treatment Type</label>
-                                        <select class="form-control form-select" formControlName="TreatmentType"
-                                            id="country" required>
-                                            <option value="">Choose...</option>
-                                            <option>Road Accident</option>
-                                            <option>Female</option>
-                                        </select>
-                                        <!-- <div *ngIf="submitted && f['Ailment'].invalid" class="invalid-feedback">
-                                            <div *ngIf="f['Ailment'].errors?.['required']">Ailment required</div>
-                                        </div> -->
-                                    </div>
-
-                                    <div class="form-group col-md-6 mt-5">
-                                        <label for="" class="form-label float-start">Types Of Vehicles</label>
-                                        <select class="form-control form-select" formControlName="TypeOfVehicle"
-                                            id="country" required>
-                                            <option value="">Choose...</option>
-                                            <option>Road Accident</option>
-                                            <option>Female</option>
-                                        </select>
-                                        <!-- <div *ngIf="submitted && f['Ailment'].invalid" class="invalid-feedback">
-                                            <div *ngIf="f['Ailment'].errors?.['required']">Ailment required</div>
-                                        </div> -->
-                                    </div>
+                <ul id="progressbar">
+                    <li class="active"></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                </ul>
+                <!-- fieldsets -->
 
 
-                                </div>
-                                <div class="form-row">
-                                    <button type="button" class="action-button  previous_button float-start mt-5"
-                                        (click)="OnBack()" matStepperPrevious>Back</button>
-                                    <button type="submit" class="next action-button float-end mt-5"
-                                        (click)="Onmedicalcontinue()" matStepperNext>Continue</button>
-                                </div>
-                            </form>
-                        </fieldset>
-                    </mat-step>
-                    <mat-step [stepControl]="InsuaranceForm">
-                        <fieldset>
+                <fieldset>
 
-                            <form [formGroup]="InsuaranceForm">
-                                <div class="form-row">
-                                    <div class="form-group col-md-12 mb-3">
+                    <form [formGroup]="ClaimForm">
+                        <div class="form-row">
+                            <div class="form-group col-md-12 mb-3">
 
-                                        <h4 class="float-start">Insurance Information</h4>
+                                <h4 class="float-start">Patient Information</h4>
 
-                                    </div>
-                                </div>
-                                <div class="form-row">
-                                    <div class="form-group col-md-6">
-                                        <label for="" class="form-label float-start">Insurance Company*</label>
-                                        <select class="form-control form-select" id="country"
-                                            formControlName="InsuranceCompany" required>
-                                            <option value="">Choose...</option>
-                                            <option>Go Digit</option>
-                                        </select>
-                                        <!-- <div *ngIf="submitted2 && I['InsuranceCompany'].invalid"
-                                            class="invalid-feedback">
-                                            <div *ngIf="I['InsuranceCompany'].errors?.['required']">Insurance Company
-                                                required
-                                            </div>
-                                        </div> -->
-
-                                    </div>
-                                    <div class="form-group col-md-3">
-                                        <label for="" class="form-label float-start">TPA*</label>
-                                        <input type="text" class="form-control" formControlName="TPA" placeholder="TPA">
-                                        <!-- <div *ngIf="submitted2 && I['TPA'].invalid" class="invalid-feedback">
-                                            <div *ngIf="I['TPA'].errors?.['required']">TPA required
-                                            </div>
-                                        </div> -->
-                                    </div>
-                                    <div class="form-group col-md-3">
-                                        <label for="" class="form-label float-start">TPA ID*</label>
-                                        <input type="text" class="form-control" formControlName="TPAID"
-                                            placeholder="TPA ID">
-                                        <!-- <div *ngIf="submitted2 && I['TPAID'].invalid" class="invalid-feedback">
-                                            <div *ngIf="I['TPAID'].errors?.['required']">TPA ID required
-                                            </div>
-                                        </div> -->
-                                    </div>
-                                </div>
-                                <div class="form-row">
-                                    <div class="form-group col-md-3 mt-5">
-                                        <label for="" class="form-label float-start">Policy Holder*</label>
-                                        <input type="text" class="form-control" formControlName="PolicyHolder"
-                                            placeholder="Policy Holder">
-                                        <!-- <div *ngIf="submitted2 && I['PolicyHolder'].invalid" class="invalid-feedback">
-                                            <div *ngIf="I['PolicyHolder'].errors?.['required']">Policy Holder required
-                                            </div>
-                                        </div> -->
-                                    </div>
-                                    <div class="form-group col-md-3 mt-5">
-                                        <label for="" class="form-label float-start">Relation of patient with Policy
-                                            Holder*</label>
-                                        <input type="text" class="form-control" formControlName="RelationOPH"
-                                            placeholder="Relation of patient with Policy Holder">
-                                        <!-- <div *ngIf="submitted2 && I['RelationOPH'].invalid" class="invalid-feedback">
-                                            <div *ngIf="I['RelationOPH'].errors?.['required']">Relation of policy Holder
-                                                required
-                                            </div>
-                                        </div> -->
-                                    </div>
-                                    <div class="form-group col-md-6 mt-5">
-                                        <label for="" class="form-label float-start">Policy Number*</label>
-                                        <input type="text" class="form-control" formControlName="PolicyNumber"
-                                            placeholder="Policy Number ">
-                                        <!-- <div *ngIf="submitted2 && I['PolicyNumber'].invalid" class="invalid-feedback">
-                                            <div *ngIf="I['PolicyNumber'].errors?.['required']">Policy Number required
-                                            </div>
-                                        </div> -->
-
-                                    </div>
-
-                                </div>
-                                <div class="form-row w-100">
-                                    <div class="form-group col-md-6 mt-5">
-                                        <input type="checkbox" class="form-check-input float-start"
-                                            formControlName="GroupPolicy" id="same-address">
-                                        <label class="form-check-label  float-start" for="same-address">&nbsp; Group
-                                            Policy</label>
-                                    </div>
-                                    <div class="form-group col-md-6 mt-5" style="visibility:hidden;">
-                                        <input type="checkbox" class="form-check-input float-start"
-                                            formControlName="GroupPolicy2" id="same-address">
-                                        <label class="form-check-label  float-start" for="same-address">&nbsp; Group
-                                            Policy</label>
-                                    </div>
-                                </div>
-                                <div class="form-row">
-                                    <div class="form-group col-md-6 mt-5">
-                                        <label for="" class="form-label float-start">Company / Corporate /
-                                            Group*</label>
-                                        <input type="text" class="form-control"
-                                            placeholder="Company / Corporate / Group *">
-                                    </div>
-                                    <div class="form-group col-md-6 mt-5" style="visibility:hidden;">
-                                        <label for="" class="form-label float-start">Company / Corporate /
-                                            Group*</label>
-                                        <input type="text" class="form-control"
-                                            placeholder="Company / Corporate / Group *">
-                                    </div>
-                                </div>
-                                <button type="button" class="action-button  previous_button float-start mt-5"
-                                    (click)="OnBack()" matStepperPrevious>Back</button>
-                                <button type="submit" class="next action-button float-end mt-5"
-                                    (click)="OnInsuarancecontinue()" matStepperNext>Continue</button>
-                            </form>
-                        </fieldset>
-                    </mat-step>
-                    <mat-step>
-                        <fieldset>
-
-                            <div class="row mb-5">
-                                <div class="col-md-10">
-                                    <h4 class="float-start">Documents Upload</h4>
-                                </div>
-                                <div class="col-md-2">
-                                    <h5 class="float-start"><a href="" class="nolink"><img src="/assets/img/add.png">
-                                            Add
-                                            File</a></h5>
-                                </div>
                             </div>
-                            <!--  <form id="upload_form" enctype="multipart/form-data" method="post"> -->
-                            <div class="form-row">
-                                <form [formGroup]="DocumentsForm">
-                                    <div class="form-group">
-                                        <input type="file" name="file1" (change)="selectFile($event)" />
-                                        <div *ngIf="currentFile" class="progress">
-                                            <div class="progress-bar progress-bar-info progress-bar-striped"
-                                                role="progressbar" attr.aria-valuenow="{{ progress }}" aria-valuemin="0"
-                                                aria-valuemax="100" [ngStyle]="{ width: progress + '%' }">
-                                                {{ progress }}%
-                                            </div>
-                                        </div>
-                                        <button type="button" class="btn btn-primary" [disabled]="!selectedFiles"
-                                            (click)="upload()">Upload</button>
-                                    </div>
-                                    <!-- <div class="form-group col-md-2 ms-5 me-3">
-                                    <input type="file" name="file1" id="file1" onchange="uploadFile()"
-                                        class="uploadbox healshadow"><br>
-                                    <p class="uploadtext">Hospital Registration Certificate</p>
-                                    <progress id="progressBar" value="0" max="100" class="uploadpro">Upload</progress>
-                                    <h3 id="status"></h3>
-                                    <p id="loaded_n_total"></p>
+                        </div>
+                        <div class="form-row">
 
-                                </div> -->
-                                    <!-- <div class="form-group col-md-3 ms-5 me-3">
-                                        <div class="card" style="width: 14rem;">
-
-                                            <div class="card-body">
-                                                <h5 class="card-title">Card title</h5>
-                                                <p class="card-text">Some quick example text to build on the card title
-                                                    and
-                                                    make up the bulk of the card's content.</p>
-                                                <div class="upload-btn-wrapper">
-                                                    <button class="btn">select File</button>
-                                                    <input type="file" name="file1" id="file" formControlName="file1"
-                                                        (change)="selectFile($event)" class="form-control" />
-                                                </div>
-                                                <button type="button" class="btn btn-primary"
-                                                    (click)="onDocumentSubmit($event)">Upload</button>
-
-                                            </div>
-                                        </div>
-                                        <div class="progress form-group" *ngIf="progress > 0">
-                                            <div class="progress-bar progress-bar-striped bg-success" role="progressbar"
-                                                [style.width.%]="progress">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="form-group col-md-3 mx-3">
-                                        <div class="card" style="width: 14rem;">
-
-                                            <div class="card-body">
-                                                <h5 class="card-title">Card title</h5>
-                                                <p class="card-text">Some quick example text to build on the card title
-                                                    and
-                                                    make up the bulk of the card's content.</p>
-                                                <div class="upload-btn-wrapper">
-                                                    <button class="btn">select file</button>
-                                                    <input type="file" name="file2" id="file2" formControlName="file2"
-                                                        class="form-control" />
-                                                </div>
-                                                <button type="button" class="btn btn-primary">Upload</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="form-group col-md-3 mx-3">
-                                        <div class="card" style="width: 14rem;">
-
-                                            <div class="card-body">
-                                                <h5 class="card-title">Card title</h5>
-                                                <p class="card-text">Some quick example text to build on the card title
-                                                    and
-                                                    make up the bulk of the card's content.</p>
-                                                <div class="upload-btn-wrapper">
-                                                    <button class="btn">Select File</button>
-                                                    <input type="file" name="file3" id="file3" formControlName="file3"
-                                                        class="form-control" />
-                                                </div>
-                                                <button type="button" class="btn btn-primary">Upload</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="form-group col-md-3 mx-3 mt-5">
-                                        <div class="card" style="width: 14rem;">
-
-                                            <div class="card-body">
-                                                <h5 class="card-title">Card title</h5>
-                                                <p class="card-text">Some quick example text to build on the card title
-                                                    and
-                                                    make up the bulk of the card's content.</p>
-                                                <div class="upload-btn-wrapper">
-                                                    <button class="btn">Select file</button>
-                                                    <input type="file" name="file4" id="file4" formControlName="file4"
-                                                        class="form-control" />
-                                                </div>
-                                                <button type="button" class="btn btn-primary">Upload</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="form-group col-md-3 mx-3 mt-5">
-                                        <div class="card" style="width: 14rem;">
-
-                                            <div class="card-body">
-                                                <h5 class="card-title">Card title</h5>
-                                                <p class="card-text">Some quick example text to build on the card title
-                                                    and
-                                                    make up the bulk of the card's content.</p>
-                                                <div class="upload-btn-wrapper">
-                                                    <button class="btn">Select file</button>
-                                                    <input type="file" name="file5" id="file5" formControlName="file5"
-                                                        class="form-control" />
-                                                </div>
-                                                <button type="button" class="btn btn-primary">Upload</button>
-                                            </div>
-                                        </div>
+                            <div class="form-group col-md-4">
+                                <label for="" class="form-label float-start">First name*</label>
+                                <input type="text" class="form-control" formControlName="Fname"
+                                [ngClass]="{ 'is-invalid': submitted && f.Fname.errors }" placeholder="First Name">
+                                <!-- <div *ngIf="submitted && f['Fname'].invalid" class="invalid-feedback">
+                                        <div *ngIf="f['Fname'].errors?.['required']">First name required*</div>
                                     </div> -->
-                                    <!-- <div class="form-group col-md-2 mx-3">
-                                    <input type="file" name="file1" id="file3" onchange="uploadFile()"
-                                        class="uploadbox healshadow"><br>
-                                    <progress id="progressBar" value="0" max="100" class="uploadpro">Upload</progress>
-                                    <h3 id="status"></h3>
-                                    <p id="loaded_n_total"></p>
-                                </div>
-                                <div class="form-group col-md-2 mx-3">
-                                    <input type="file" name="file1" id="file4" onchange="uploadFile()"
-                                        class="uploadbox healshadow"><br>
-                                    <progress id="progressBar" value="0" max="100" class="uploadpro">Upload</progress>
-                                    <h3 id="status"></h3>
-                                    <p id="loaded_n_total"></p>
-                                </div>
-                                <div class="form-group col-md-2 me-3">
-                                    <input type="file" name="file1" id="file5" onchange="uploadFile()"
-                                        class="uploadbox healshadow"><br>
-                                    <progress id="progressBar" value="0" max="100" class="uploadpro">Upload</progress>
-                                    <h3 id="status"></h3>
-                                    <p id="loaded_n_total"></p>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="" class="form-label float-start">Middle name</label>
+                                <input type="text" class="form-control" formControlName="Mname"
+                                    placeholder="Middle Name">
+                                <!-- <div *ngIf="submitted && f['Mname'].invalid" class="invalid-feedback">
+                                        <div *ngIf="f['Mname'].errors?.['required']">Middle Name required*</div>
+                                    </div> -->
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="" class="form-label float-start">Last name</label>
+                                <input type="text" class="form-control" formControlName="Lname" formControlName="Lname"
+                                    placeholder="Last Name">
+                                <!-- <div *ngIf="submitted && f['Lname'].invalid" class="invalid-feedback">
+                                        <div *ngIf="f['Lname'].errors?.['required']">Last Name required*</div>
+                                    </div> -->
+                            </div>
+
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group col-md-3 mt-5">
+                                <label for="" class="form-label float-start">Gender*</label>
+
+                                <select class="form-control form-select" id="country" formControlName="Gender">
+                                    <option value="">Choose...</option>
+                                    <option>Male</option>
+                                    <option>Female</option>
+                                </select>
+                                <!-- <div *ngIf="submitted && f['Gender'].invalid" class="invalid-feedback">
+                                        <div *ngIf="f['Gender'].errors?.['required']">Gender required*</div>
+                                    </div> -->
+                            </div>
+                            <div class="form-group col-md-3 mt-5">
+                                <label for="" class="form-label float-start">Date Of Birth</label>
+                                <input type="date" class="form-control" formControlName="DOB"
+                                    placeholder="Choose a date" id="dob" [max]="date">
+                            </div>
+                            <div class="form-group col-md-3 mt-5">
+                                <label for="" class="form-label float-start">Age*</label>
+                                <input type="text" class="form-control" formControlName="Age" placeholder="Age">
+                                <!-- <div *ngIf="submitted && f['Age'].invalid" class="invalid-feedback">
+                                    <div *ngIf="f['Age'].errors?.['required']">Age required*</div>
+                                </div> -->
+                            </div>
+                            <div class="form-group col-md-3 mt-5">
+                                <label for="" class="form-label float-start">Stage*</label>
+                                <input type="text" class="form-control" formControlName="Stage" placeholder="Stage">
+                                <!-- <div *ngIf="submitted && f['Stage'].invalid" class="invalid-feedback">
+                                    <div *ngIf="f['Stage'].errors?.['required']">Stage required*</div>
+                                </div> -->
+                            </div>
+                        </div>
+                        <div class="form-row w-100">
+                            <div class="form-group col-md-12 mt-5">
+                                <input type="checkbox" class="form-check-input float-start" id="same-address"
+                                    formControlName="patientprimaryInsured">
+                                <label class="form-check-label  float-start" for="same-address">&nbsp; Patient
+                                    is the
+                                    primary insured*</label>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6 mt-5">
+                                <label for="" class="form-label float-start">Hospital Name*</label>
+                                <select class="form-control form-select" id="country" formControlName="HospitalName"
+                                    required>
+                                    <option value="">Choose...</option>
+                                    <option>King Edward Memorial Hospital</option>
+                                </select>
+                                <!-- <div *ngIf="submitted && f['HospitalName'].invalid" class="invalid-feedback">
+                                    <div *ngIf="f['HospitalName'].errors?.['required']">Hospital Name required
+                                    </div>
+                                </div> -->
+                            </div>
+                            <div class="form-group col-md-3 mt-5">
+                                <label for="" class="form-label float-start">Date Of Admission</label>
+
+                                <input type="date" class="form-control" formControlName="DateOfAdmission"
+                                    placeholder="Choose a date" [max]="todaysdate" [(ngModel)]="dateSent"
+                                    (input)="changeDate()">
+
+
+
+                            </div>
+                            <div class="form-group col-md-3 mt-5">
+
+                                <label for="" class="form-label float-start">Date Of Discharge</label>
+                                <input type="date" class="form-control" formControlName="DateOfDischarge"
+                                    placeholder="Choose a date" [disabled]="!dateSent" [min]="dateSent"
+                                    [max]="todaysdate" [value]="dateReceived">
+
+
+                            </div>
+
+                        </div>
+                        <div class="form-row ">
+                            <div class="form-group col-md-4 mt-5">
+                                <label for="" class="form-label float-start">Ailment*</label>
+                                <select class="form-control form-select" formControlName="Ailment" id="country"
+                                    required>
+                                    <option value="">Choose...</option>
+                                    <option>Road Accident</option>
+                                    <option>Female</option>
+                                </select>
+                                <!-- <div *ngIf="submitted && f['Ailment'].invalid" class="invalid-feedback">
+                                    <div *ngIf="f['Ailment'].errors?.['required']">Ailment required</div>
+                                </div> -->
+                            </div>
+                            <div class="form-group col-md-4 mt-5">
+                                <label for="" class="form-label float-start">Total Bill Amount</label>
+                                <input type="text" class="form-control" formControlName="TotalBillAmount"
+                                    placeholder="Total Bill Amount">
+                                <!-- <div *ngIf="submitted && f['TotalBillAmount'].invalid" class="invalid-feedback">
+                                    <div *ngIf="f['TotalBillAmount'].errors?.['required']">Total Bill Amount
+                                        required
+                                    </div>
+                                </div> -->
+                            </div>
+                            <div class="form-group col-md-4 mt-5">
+                                <label for="" class="form-label float-start">Claim Amount*</label>
+                                <input type="text" class="form-control" formControlName="ClaimAmount"
+                                    placeholder="Claim Amount">
+                                <!-- <div *ngIf="submitted && f['ClaimAmount'].invalid" class="invalid-feedback">
+                                    <div *ngIf="f['ClaimAmount'].errors?.['required']">Claim Amount required
+                                    </div>
+                                </div> -->
+                            </div>
+                        </div>
+
+                    </form>
+                    <button type="button" class="previous_button btn btn-lg px-5 float-start mt-5">Exit</button>
+                    <button type="button" class="next btn btn-primary btn-lg px-5 float-end mt-5" (click)="Oncontinue">Continue</button>
+
+
+                </fieldset>
+               
+
+
+                <fieldset>
+                    <form [formGroup]="medicalForm" class="mb-5">
+                        <div class="form-row">
+                            <div class="form-group col-md-12 mb-3">
+                                <h4 class="float-start">Medical Information</h4>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-3">
+                                <label for="" class="form-label float-start">Speciality</label>
+                                <select class="form-control form-select" formControlName="Speciality" id="Speciality" required>
+                                    <option value="">Choose...</option>
+                                    <option value="General Medicine">General Medicine</option>
+                                    <option value="General Surgery">General Surgery</option>
+                                </select>
+
+                            </div>
+
+                            <div class="form-group col-md-3">
+                                <label for="" class="form-label float-start">Ailment</label>
+                                <input type="text" class="form-control" formControlName="Ailments"
+                                    placeholder="Road Accident" readonly>
+
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label for="" class="form-label float-start">Treatment Type</label>
+                                <select class="form-control form-select" formControlName="TreatmentType"
+                                    id="TreatmentType" required>
+                                    <option value="">Choose...</option>
+                                    <option value="Surgical management">Surgical management</option>
+                                    <option value="Medical management">Medical management</option>
+                                </select>
+                                <!-- <div *ngIf="submitted && f['Ailment'].invalid" class="invalid-feedback">
+                                    <div *ngIf="f['Ailment'].errors?.['required']">Ailment required</div>
+                                </div> -->
+                            </div>
+                           
+                            <div class="form-group col-md-3">
+                                <label for="" class="form-label float-start">Gender</label>
+                                <select class="form-control form-select" formControlName="Genders" id="Genders" required>
+                                    <option value="">Choose...</option>                               
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                                    <option value="Any">Any</option>
+                                </select>
+
+                            </div>
+                           
+                       
+
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group col-md-3 mt-5">
+                                <label for="" class="form-label float-start">Age</label>
+                                <select class="form-control form-select" formControlName="Ages" id="Ages" required>
+                                    <option value="">Choose...</option>
+                                    <option value="<40">Less than 40</option>
+                                    <option value=">40">Greater than 40</option>
+                                    <option value="Any">Any</option>
+                                </select>
+
+                            </div>
+                            <div class="form-group col-md-3  mt-5">
+                                <label for="" class="form-label float-start">Duration</label>
+                                <select class="form-control form-select" formControlName="Duration" id="Duration" required>
+                                    <option value="">Choose...</option>
+                                    <option value="Less than 24 hours">Less than 24 hours</option>
+                                    <option value="Greater than 24 hours">Greater than 24 hours</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-3  mt-5">
+                                <label for="" class="form-label float-start">Claim</label>
+                                <select (change)="OnClaimselect($event)" class="form-control form-select" formControlName="Claim" id="Claim" required>
+                                    <option value="">Choose...</option>
+                                    <option value="less than 1 lac">less than 1 lac</option>
+                                    <option value="greater than 1 lac">greater than 1 lac</option>
+                                    <option value="3">Any</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-3  mt-5" *ngIf="IsTypeOfAccident">
+                                <label for="" class="form-label float-start">Type Of Accident</label>
+                                <select class="form-control form-select" (change)="OnTypeofAccident($event)" formControlName="TypeOfAccident" id="TypeOfAccident"
+                                    required>
+                                    <option value="">Choose...</option>
+                                    <option>Vehicle Slide/Head on Collision</option>
+                                    <option>Hit And Run</option>
+                                </select>
+                                <!-- <div *ngIf="submitted && f['Ailment'].invalid" class="invalid-feedback">
+                                    <div *ngIf="f['Ailment'].errors?.['required']">Ailment required</div>
+                                </div> -->
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            
+                            <div class="form-group col-md-4 mt-5" *ngIf="IspassengerType">
+                                <label for="" class="form-label float-start">Passenger/Driver or Implants used?</label>
+                                <select class="form-control form-select" (change)="OnPassengerType($event)" formControlName="passengerType"
+                                    id="passengerType"  required>
+                                    <option value="">Choose...</option>
+                                    <option value="Driver">Driver</option>
+                                    <option value="Passenger">Passenger</option>
+                                    <option value="Yes">Yes</option>
+                                    <option value="No">No</option>
+                                </select>
+                                <!-- <div *ngIf="submitted && f['Ailment'].invalid" class="invalid-feedback">
+                                    <div *ngIf="f['Ailment'].errors?.['required']">Ailment required</div>
+                                </div> -->
+                            </div>
+
+                            <div class="form-group col-md-4 mt-5" *ngIf="IsTypeOfVehicle">
+                                <label for="" class="form-label float-start">Types Of Vehicles</label>
+                                <select class="form-control form-select" formControlName="TypeOfVehicle"
+                                    id="TypeOfVehicle" required>
+                                    <option value="">Choose...</option>
+                                    <option>Speed Limited Scooter</option>
+                                    <option>Others</option>
+                                </select>
+                                <!-- <div *ngIf="submitted && f['Ailment'].invalid" class="invalid-feedback">
+                                    <div *ngIf="f['Ailment'].errors?.['required']">Ailment required</div>
+                                </div> -->
+                            </div>
+
+
+                        </div>
+                    </form>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+                    <button type="button" class="action-button previous previous_button float-start mt-5">Back</button>
+
+                    <button type="button" class="next action-button btn-sm px-5 float-end mt-5">Continue</button>
+
+                    
+                    <p>{{this.doclist1}}</p>
+
+                </fieldset>
+                <fieldset>
+                    <form [formGroup]="InsuaranceForm">
+                        <div class="form-row">
+                            <div class="form-group col-md-12 mb-3">
+
+                                <h4 class="float-start">Insurance Information</h4>
+
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="" class="form-label float-start">Insurance Company*</label>
+                                <select class="form-control form-select" id="country" formControlName="InsuranceCompany"
+                                    required>
+                                    <option value="">Choose...</option>
+                                    <option>Go Digit</option>
+                                </select>
+                                <!-- <div *ngIf="submitted2 && I['InsuranceCompany'].invalid"
+                                    class="invalid-feedback">
+                                    <div *ngIf="I['InsuranceCompany'].errors?.['required']">Insurance Company
+                                        required
+                                    </div>
                                 </div> -->
 
-                                    <div class="form-row mt-5">
-                                        <div class="form-group col-md-6 mt-5">
-                                            <button type="button"
-                                                class="action-button previous previous_button float-start "
-                                                matStepperPrevious (click)="OnBack()">Back</button>
-                                            <button type="button" class="next action-button float-end "
-                                                matStepperNext>Continue</button>
-
-                                        </div>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label for="" class="form-label float-start">TPA*</label>
+                                <input type="text" class="form-control" formControlName="TPA" placeholder="TPA">
+                                <!-- <div *ngIf="submitted2 && I['TPA'].invalid" class="invalid-feedback">
+                                    <div *ngIf="I['TPA'].errors?.['required']">TPA required
                                     </div>
-                                </form>
+                                </div> -->
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label for="" class="form-label float-start">TPA ID*</label>
+                                <input type="text" class="form-control" formControlName="TPAID" placeholder="TPA ID">
+                                <!-- <div *ngIf="submitted2 && I['TPAID'].invalid" class="invalid-feedback">
+                                    <div *ngIf="I['TPAID'].errors?.['required']">TPA ID required
+                                    </div>
+                                </div> -->
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-3 mt-5">
+                                <label for="" class="form-label float-start">Policy Holder*</label>
+                                <input type="text" class="form-control" formControlName="PolicyHolder"
+                                    placeholder="Policy Holder">
+                                <!-- <div *ngIf="submitted2 && I['PolicyHolder'].invalid" class="invalid-feedback">
+                                    <div *ngIf="I['PolicyHolder'].errors?.['required']">Policy Holder required
+                                    </div>
+                                </div> -->
+                            </div>
+                            <div class="form-group col-md-3 mt-5">
+                                <label for="" class="form-label float-start">Relation of patient with Policy
+                                    Holder*</label>
+                                <input type="text" class="form-control" formControlName="RelationOPH"
+                                    placeholder="Relation of patient with Policy Holder">
+                                <!-- <div *ngIf="submitted2 && I['RelationOPH'].invalid" class="invalid-feedback">
+                                    <div *ngIf="I['RelationOPH'].errors?.['required']">Relation of policy Holder
+                                        required
+                                    </div>
+                                </div> -->
+                            </div>
+                            <div class="form-group col-md-6 mt-5">
+                                <label for="" class="form-label float-start">Policy Number*</label>
+                                <input type="text" class="form-control" formControlName="PolicyNumber"
+                                    placeholder="Policy Number ">
+                                <!-- <div *ngIf="submitted2 && I['PolicyNumber'].invalid" class="invalid-feedback">
+                                    <div *ngIf="I['PolicyNumber'].errors?.['required']">Policy Number required
+                                    </div>
+                                </div> -->
+
+                            </div>
+                        </div>
+                        <div class="form-row w-100">
+                            <div class="form-group col-md-6 mt-5">
+                                <input type="checkbox" class="form-check-input float-start" id="same-address">
+                                <label class="form-check-label  float-start" for="same-address">&nbsp; Group
+                                    Policy</label>
+                            </div>
+                            <div class="form-group col-md-6 mt-5" style="visibility:hidden;">
+                                <input type="checkbox" class="form-check-input float-start" id="same-address">
+                                <label class="form-check-label  float-start" for="same-address">&nbsp; Group
+                                    Policy</label>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6 mt-5">
+                                <label for="" class="form-label float-start">Company / Corporate / Group*</label>
+                                <input type="text" class="form-control" placeholder="Company / Corporate / Group *">
+                            </div>
+                            <div class="form-group col-md-6 mt-5" style="visibility:hidden;">
+                                <label for="" class="form-label float-start">Company / Corporate / Group*</label>
+                                <input type="text" class="form-control" placeholder="Company / Corporate / Group *">
+                            </div>
+                        </div>
+
+                    </form>
+                    <button type="button" class="action-button previous previous_button float-start mt-5">Back</button>
+
+                    <button type="button" class="next action-button float-end mt-5">Continue</button>
+
+
+
+                </fieldset>
+                <fieldset>
+                    <form [formGroup]="InsuaranceForm">
+                        <div class="row mb-5">
+
+                            <div class="col-md-10">
+                                <h4 class="float-start">Documents Upload</h4>
+                            </div>
+                            <div class="col-md-2">
+                                <h5 class="float-start"><a href="" class="nolink"><img src="assets/img/add.png"> Add
+                                        File</a>
+                                </h5>
                             </div>
 
 
-                            <!-- </form> -->
-
-
-                        </fieldset>
-                    </mat-step>
-
-                    <mat-step>
-                        <fieldset>
-                            <div class="form-row">
-                                <div class="form-group col-md-12 mb-3">
-                                    <img src="/assets/img/undraw-completing-re-i7ap.png" class="m-3 p-3">
-
-                                    <h5 style="color:#4C9EAA;"><strong>Submitted for Approval Successfully!</strong>
-                                    </h5>
-                                </div>
-                                <div class="form-group col-md-12 mt-5 mb-3">
-                                    <!-- <button type="button" class="action-button previous previous_button">Back</button>  -->
-                                </div>
+                        </div>
+                        <!--  <form id="upload_form" enctype="multipart/form-data" method="post"> -->
+                        <div class="form-row">
+                            <div class="form-group col-md-2 ms-5 me-3" *ngFor="let p of doclist">
+                                <input type="file" name="file1" id="file1" onchange="uploadFile()"
+                                    class="uploadbox healshadow"><br>
+                                <p class="uploadtext">{{p.docname}}</p>
+                                <progress id="progressBar" value="0" max="100" class="uploadpro">Upload</progress>
+                                <h3 id="status"></h3>
+                                <p id="loaded_n_total"></p>
                             </div>
-                            <div class="form-row">
-                                <div class="form-group col-md-6">
-                                    <p>You will be automatically redirected to home page...</p>
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <a href="dashboard-insu.html"
-                                        class="btn btn-primary btn-lg px-5 float-end">Dashboard</a>
-                                </div>
-                            </div>
-                        </fieldset>
-                    </mat-step>
+                         
+                        </div>
+                        <!-- </form> -->
 
-                </mat-stepper>
-            </div>
+
+                    </form>
+                    <button type="button" class="action-button previous previous_button float-start mt-3">Back</button>
+                    <button type="button" class="next action-button float-end mt-3">Continue</button>
+                </fieldset>
+
+                <fieldset>
+                    <div class="form-row">
+                        <div class="form-group col-md-12 mb-3">
+                            <img src="assets/img/undraw-completing-re-i7ap.png" class="m-3 p-3">
+
+                            <h5 style="color:#4C9EAA;"><strong>Submitted for Approval Successfully!</strong></h5>
+                        </div>
+
+
+                        <div class="form-group col-md-12 mt-5 mb-3">
+                            <!-- <button type="button" class="action-button previous previous_button">Back</button>  -->
+
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+
+                            <p>You will be automatically redirected to home page...</p>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <a href="dashboard-insu.html" class="btn btn-primary btn-lg px-5 float-end">Dashboard</a>
+
+                        </div>
+                    </div>
+
+
+
+                </fieldset>
+
+
+            </form>
         </section>
+
     </div>
 
 </div>

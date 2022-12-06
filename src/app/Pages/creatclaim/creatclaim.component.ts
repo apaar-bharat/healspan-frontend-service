@@ -8,6 +8,7 @@ import { error } from 'console';
 import { map } from "rxjs/operators"
 import { FileuploadService } from 'src/app/service/fileupload.service';
 import { Observable } from 'rxjs';
+import { Subject } from 'rxjs';
 // declare function($: any);
 declare function verificationForm(): any;
 //declare function phoneNoselect():any;
@@ -20,9 +21,14 @@ declare function nice_Select(): any;
 })
 export class CreatclaimComponent implements OnInit {
 
-
+  IsTypeOfAccident: boolean = false; IspassengerType: boolean = false; IsTypeOfVehicle: boolean = false;
+  admissiondata: any;
   constructor(private fb: FormBuilder, private api: ApiService, private http: HttpClient,
-    private FileUploadService: FileuploadService) { }
+    private FileUploadService: FileuploadService, private httpClient: HttpClient,) {
+    this.minDateToFinish.subscribe((r: any) => {
+      this.minDate = new Date(r);
+    })
+  }
   ClaimForm!: FormGroup; submitted = false; submitted2 = false; isEditable = false; ailmentList: any
   InsuaranceForm!: FormGroup;
   medicalForm!: FormGroup;
@@ -39,9 +45,23 @@ export class CreatclaimComponent implements OnInit {
   message = '';
   currentFile!: File;
   fileInfos?: Observable<any>;
+  maxDate = new Date();
 
+  date: any;
+  minDateToFinish = new Subject<string>();
+  minDate: any;
 
+  dateSent: any;
+  dateReceived: any;
+  todaysdate: any;
+  show: boolean = false;
+  show2: boolean = false;
+  doclist: any = []; doclist1: any;
   ngOnInit(): void {
+
+    this.todaysdate = new Date().getFullYear() + '-' + ('0' + (new Date().getMonth() + 1)).slice(-2) + '-' + ('0' + new Date().getDate()).slice(-2);
+    console.log(this.todaysdate)
+
     this.fileInfos = this.FileUploadService.getFiles();
     verificationForm();
     // //phoneNoselect();
@@ -67,9 +87,16 @@ export class CreatclaimComponent implements OnInit {
 
     this.medicalForm = this.fb.group({
       Ailments: ["",],
+      Speciality: ["",],
+      Ages: ["",],
+      Genders: ["",],
+      Duration: ["",],
+      Claim: ["",],
       TypeOfAccident: ["",],
       TreatmentType: ["",],
+      passengerType: ["",],
       TypeOfVehicle: ["",],
+
     })
 
     this.InsuaranceForm = this.fb.group({
@@ -92,9 +119,17 @@ export class CreatclaimComponent implements OnInit {
       file5: [''],
     })
 
-    this.BindDropdown()
+    this.bindDropdown()
+
+    this.date = new Date().toISOString().slice(0, 10);
 
   }
+
+  changeDate() {
+    this.dateSent = new Date(this.dateSent).getFullYear() + '-' + ('0' + new Date(this.dateSent).getMonth()).slice(-2) + '-' + ('0' + new Date(this.dateSent).getDate()).slice(-2);
+    this.dateReceived = this.dateSent
+  }
+
 
   async BindDropdown() {
     // this.api.get('/posts').subscribe(
@@ -112,6 +147,8 @@ export class CreatclaimComponent implements OnInit {
 
 
 
+
+
   get f() { return this.ClaimForm.controls; }
 
   get I() { return this.InsuaranceForm.controls; }
@@ -119,13 +156,13 @@ export class CreatclaimComponent implements OnInit {
   Oncontinue() {
     console.log("dfhbd")
     this.submitted = true;
-    // if (this.ClaimForm.valid) {
-    //   alert('Form Submitted succesfully!!!\n Check the values in browser console.');
-    //   console.table(this.ClaimForm.value);
-    // }
-    // else {
-    //   alert("form invalid")
-    // }
+    if (this.ClaimForm.valid) {
+      alert('Form Submitted succesfully!!!\n Check the values in browser console.');
+      console.table(this.ClaimForm.value);
+    }
+    else {
+      alert("form invalid")
+    }
 
     // const servicesData = {
 
@@ -153,8 +190,69 @@ export class CreatclaimComponent implements OnInit {
 
 
   }
-  Onmedicalcontinue() {
 
+  OnClaimselect(event: any) {
+    let Claimvalue = event.target.options[event.target.options.selectedIndex].text;
+
+    this.httpClient.get("assets/data/admission.json").subscribe((data: any) => {
+      this.admissiondata = data["Admission"];
+      console.log("data", data);
+      let Speciality = this.medicalForm.get("Speciality")?.value;
+      let TreatmentType = this.medicalForm.get("TreatmentType")?.value;
+      let Genders = this.medicalForm.get("Genders")?.value;
+      let Ages = this.medicalForm.get("Ages")?.value;
+      let Duration = this.medicalForm.get("Duration")?.value;
+      let Claim = this.medicalForm.get("Claim")?.value;
+
+
+      // this.admissiondata.forEach((element:any) => {
+        let restest = this.admissiondata.filter((element: any) => (element.Speciality == String(Speciality)&& element.TreatmentType == String(TreatmentType)&& element.Gender == String(Genders)&& element.Age == String(Ages)&& element.Durationofstay == String(Duration)&& element.Claimvalue == String(Claimvalue)) );
+      // let res = this.admissiondata.filter((element: any) => (element.Speciality == Speciality && element.TreatmentType == TreatmentType && element.Gender == Genders && element.Age == Ages && element.Durationofstay == Duration && element.Claimvalue == Claimvalue));
+      if (restest.length > 0) {
+        alert(restest[0].Screen);
+        if (restest[0].Screen == "\"This claim is not admissible\"") {
+          alert("This claim is not admissible,may be denied by TPA")
+        } else if (restest[0].Question1) {
+          this.httpClient.get("assets/data/doclist.json").subscribe((data: any) => {
+            //alert(data["list"]);
+            this.doclist = data["list"];
+            this.doclist1 = JSON.stringify(data["list"]);
+          })
+          this.IsTypeOfAccident = true;
+
+          // if (restest[0].Question2) {
+          //   this.IspassengerType = true
+          // } else {
+          //   this.IspassengerType = false
+          // }
+
+          // if (restest[0].Question3) {
+          //   this.IsTypeOfVehicle = true
+          // } else {
+          //   this.IsTypeOfVehicle = false
+          // }
+        }
+      }
+      //(element.Speciality==Speciality&& element.TreatmentType==TreatmentType&&element.Gender==Genders&&element.Age==Ages&&element.Durationofstay==Duration&&element.Claimvalue==Claimvalue));
+
+      // });
+      console.log(restest);
+
+      // if(Speciality == "General Medicine" && TreatmentType=="Medical management"  && Genders == "Any" &&  Ages == "Any" && Duration == "Less than 24 hours" && Claimvalue=="Any")
+      // {
+      //   alert("This claim is not admissible, may be denied by TPA")
+      // }
+
+    })
+  }
+
+  OnTypeofAccident(event: any) {
+    console.log(event.target.value);
+   
+  }
+
+  OnPassengerType(event: any) {
+   
   }
 
   OnInsuarancecontinue() {
@@ -202,49 +300,58 @@ export class CreatclaimComponent implements OnInit {
 
     this.progress = 0;
 
-   // this.currentFile = this.selectedFiles.item(0);
-    this.FileUploadService.upload(this.currentFile).subscribe(
-      (event: any) => {
-        if (event.type === HttpEventType.UploadProgress) {
-          this.progress = Math.round(100 * event.loaded / event.total);
-        } else if (event instanceof HttpResponse) {
-          this.message = event.body.message;
-          this.fileInfos = this.FileUploadService.getFiles();
-        }
-      },
-      err => {
-        this.progress = 0;
-        this.message = 'Could not upload the file!';
-        //this.currentFile = undefined;
-      });
-    //this.selectedFiles = undefined;
+    if (this.selectedFiles) {
+      const file: File | null = this.selectedFiles.item(0);
+
+      if (file) {
+        this.currentFile = file;
+
+        this.FileUploadService.upload(this.currentFile).subscribe(
+          (event: any) => {
+            if (event.type === HttpEventType.UploadProgress) {
+              this.progress = Math.round(100 * event.loaded / event.total);
+            } else if (event instanceof HttpResponse) {
+              this.message = event.body.message;
+              this.fileInfos = this.FileUploadService.getFiles();
+            }
+          },
+          (err: any) => {
+            console.log(err);
+            this.progress = 0;
+
+            if (err.error && err.error.message) {
+              this.message = err.error.message;
+            } else {
+              this.message = 'Could not upload the file!';
+            }
+
+            // this.currentFile = undefined;
+          });
+
+      }
+
+      // this.selectedFiles = undefined;
+    }
   }
+
+  async bindDropdown() {
+
+
+    this.httpClient.get("assets/data/admission.json").subscribe((data: any) => {
+
+
+    })
+  }
+
+
+
+
+
+
+
 
 
 }
 
-// this.FileUploadService.addUser(
-
-//   this.DocumentsForm.value.file1
-// ).subscribe((event1: HttpEvent<any>) => {
-//   switch (event1.type) {
-//     case HttpEventType.Sent:
-//       console.log('Request has been made!');
-//       break;
-//     case HttpEventType.ResponseHeader:
-//       console.log('Response header has been received!');
-//       break;
-//     case HttpEventType.UploadProgress:
-//       this.progress = Math.round(event.loaded / event1.total * 100);
-//       console.log(`Uploaded! ${this.progress}%`);
-//       break;
-//     case HttpEventType.Response:
-//       console.log('User successfully created!', event.body);
-//       setTimeout(() => {
-//         this.progress = 0;
-//       }, 1500);
-//   }
-// })
-// }
 
 

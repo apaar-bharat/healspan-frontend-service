@@ -11,11 +11,13 @@ import { LoginComponent } from './login/login.component';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { environment } from 'src/environments/environment';
 import { ApiService } from './service/api.service';
+import { SlaStatusComponent } from './Pages/sla-status/sla-status.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
+    SlaStatusComponent,
   ],
   imports: [
     BrowserModule,

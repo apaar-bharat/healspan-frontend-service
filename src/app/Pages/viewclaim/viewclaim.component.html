@@ -140,6 +140,7 @@
 									<h5 class="mt-3 f16"><strong>{{patientinfo.Name}}</strong></h5>
 								</div>
 							</div>
+
 						</div>
 
 						<div class="col-md-3 mb-3 bg-body rounded">
@@ -419,7 +420,8 @@
 						<div class="col-md-3 mb-3 bg-body rounded">
 							<div class="px-2">
 
-								<div class="p-1 mt-1">Created Date: <span class="cl01"><strong>{{InitialData.CreatedOn}}</strong>
+								<div class="p-1 mt-1">Created Date: <span
+										class="cl01"><strong>{{InitialData.CreatedOn}}</strong>
 									</span>
 									<h5 class="mt-3 f16"><strong></strong></h5>
 								</div>
@@ -462,152 +464,209 @@
 
 					</div>
 
-					<div class="row mt-1" *ngFor="let h of InitialData['doclist']">
-						<div class="col-md-5 mb-3 bg-body rounded">
+					<div class="row mt-1">
+
+						<div class="col-md-6">
+							<div class="row mb-3 bg-body rounded"
+								*ngFor="let h of InitialData['doclist'] ,let i = index ">
+
+								<div class="col-md-6">
+									<div class="px-3">
+										<h5 class="mt-3 f16"><strong>Document {{i+1}}:</strong></h5>
+										<h5 class="mt-3 f16"><a class="doc" (click)="docopen()">{{h.DocName}}</a></h5>
 
 
-							<div class="px-3">
-								<h5 class="mt-3 f16"><strong>Document 1:</strong></h5>
-								<h5 class="mt-3 f16">{{h.DocName}}</h5>
+									</div>
 
+								</div>
+
+								<div class="col-md-6">
+
+
+
+									<a href="" class="btn btn-primary btn-sm px-3 mt-5 healshadow"> Upload <img
+											src="/assets/img/Arrow-54w.png"> </a>
+								</div>
 
 							</div>
-
-
-
-
 						</div>
-						<div class="col-md-3 mb-3 bg-body rounded p-3">
-							<a href="" class="btn btn-outline btn-sm px-3 mt-3 healshadow"> Upload <img
-									src="/assets/img/Arrow-54.png"></a>
+
+
+
+
+
+						<div class="col-md-2 mb-3 bg-body rounded">
+							<div class="px-2">
+
+								<div class="p-1 mt-1"><span class="cl01">Estimated Cost: </span>
+									<h5 class="mt-3 f16"><strong>INR 40,000</strong></h5>
+								</div>
+								<div class="p-1 mt-1"><span class="cl01">Approval Cost: </span>
+									<h5 class="mt-3 f16"><strong>INR 40,000</strong></h5>
+								</div>
+							</div>
 						</div>
+
 					</div>
-					<div class="col-md-4 mb-3 bg-body rounded">
-						<div class="p-2">
-
-							<div class="p-1 mt-1"><span class="cl01">Estimated Cost: </span>
-								<h5 class="mt-3 f16"><strong>{{InitialData.EstimatedCost}}</strong></h5>
-							</div>
-						</div>
-						<div class="p-2">
-
-							<div class="p-1 mt-1"><span class="cl01">Approved Cost: </span>
-								<h5 class="mt-3 f16"><strong>{{InitialData.ApprovedCost}}</strong></h5>
-							</div>
-						</div>
-
-					</div>
-
+					
 
 				</div>
 				<div class="tab-pane fade" id="Enhancement" role="tabpanel" aria-labelledby="v-pills-profile-tab">
-					<div class="row mt-1" *ngFor="let a of EnhancmentData['doclist']">
-						<div class="col-md-5 mb-3 bg-body rounded">
+				
+
+					<div class="row mt-1">
+
+						<div class="col-md-6">
+							<div class="row mb-3 bg-body rounded"
+								*ngFor="let h of EnhancmentData['doclist'] ,let i = index ">
+
+								<div class="col-md-6">
+									<div class="px-3">
+										<h5 class="mt-3 f16"><strong>Document {{i+1}}:</strong></h5>
+										<h5 class="mt-3 f16"><a class="doc" (click)="docopen()">{{h.DocName}}</a></h5>
 
 
-							<div class="px-3">
-								<h5 class="mt-3 f16"><strong>Document 1:</strong></h5>
-								<h5 class="mt-3 f16">{{a.DocName}}</h5>
+									</div>
 
+								</div>
+
+								<div class="col-md-6">
+
+
+
+									<a href="" class="btn btn-primary btn-sm px-3 mt-5 healshadow"> Upload <img
+											src="/assets/img/Arrow-54w.png"> </a>
+								</div>
 
 							</div>
 						</div>
-						<div class="col-md-3 mb-3 bg-body rounded p-3">
-							<a href="" class="btn btn-outline btn-sm px-3 mt-3 healshadow"> Upload <img
-									src="/assets/img/Arrow-54.png"></a>
+
+
+
+
+
+						<div class="col-md-2 mb-3 bg-body rounded">
+							<div class="px-2">
+
+								<div class="p-1 mt-1"><span class="cl01">Estimated Cost: </span>
+									<h5 class="mt-3 f16"><strong>INR 40,000</strong></h5>
+								</div>
+								<div class="p-1 mt-1"><span class="cl01">Approval Cost: </span>
+									<h5 class="mt-3 f16"><strong>INR 40,000</strong></h5>
+								</div>
+							</div>
 						</div>
+
 					</div>
-					<div class="col-md-4 mb-3 bg-body rounded">
-						<div class="p-2">
-
-							<div class="p-1 mt-1"><span class="cl01">Estimated Cost: </span>
-								<h5 class="mt-3 f16"><strong>{{EnhancmentData.EstimatedCost}}</strong></h5>
-							</div>
-						</div>
-						<div class="p-2">
-
-							<div class="p-1 mt-1"><span class="cl01">Approved Cost: </span>
-								<h5 class="mt-3 f16"><strong>{{EnhancmentData.ApprovedCost}}</strong></h5>
-							</div>
-						</div>
-					</div>
-
-
 
 				</div>
+
+
+
 				<div class="tab-pane fade" id="Discharge" role="tabpanel" aria-labelledby="v-pills-messages-tab">
 
-					<div class="row mt-1" *ngFor="let c of DischargeData['doclist']">
-						<div class="col-md-5 mb-3 bg-body rounded">
+					<div class="row mt-1">
+
+						<div class="col-md-6">
+							<div class="row mb-3 bg-body rounded"
+								*ngFor="let h of DischargeData['doclist'] ,let i = index ">
+
+								<div class="col-md-6">
+									<div class="px-3">
+										<h5 class="mt-3 f16"><strong>Document {{i+1}}:</strong></h5>
+										<h5 class="mt-3 f16"><a class="doc" (click)="docopen()">{{h.DocName}}</a></h5>
 
 
-							<div class="px-3">
-								<h5 class="mt-3 f16"><strong>Document 1:</strong></h5>
-								<h5 class="mt-3 f16">{{c.DocName}}</h5>
+									</div>
 
+								</div>
+
+								<div class="col-md-6">
+
+
+
+									<a href="" class="btn btn-primary btn-sm px-3 mt-5 healshadow"> Upload <img
+											src="/assets/img/Arrow-54w.png"> </a>
+								</div>
 
 							</div>
 						</div>
-						<div class="col-md-3 mb-3 bg-body rounded p-3">
-							<a href="" class="btn btn-outline btn-sm px-3 mt-3 healshadow"> Upload <img
-									src="/assets/img/Arrow-54.png"></a>
-						</div>
-					</div>
-					<div class="col-md-4 mb-3 bg-body rounded">
-						<div class="p-2">
 
-							<div class="p-1 mt-1"><span class="cl01">Total Bill Amount: </span>
-								<h5 class="mt-3 f16"><strong>{{DischargeData.TotalBillAmount}}</strong></h5>
+
+
+
+
+						<div class="col-md-2 mb-3 bg-body rounded">
+							<div class="px-2">
+
+								<div class="p-1 mt-1"><span class="cl01">Estimated Cost: </span>
+									<h5 class="mt-3 f16"><strong>INR 40,000</strong></h5>
+								</div>
+								<div class="p-1 mt-1"><span class="cl01">Approval Cost: </span>
+									<h5 class="mt-3 f16"><strong>INR 40,000</strong></h5>
+								</div>
 							</div>
 						</div>
-						<div class="p-2">
 
-							<div class="p-1 mt-1"><span class="cl01">Claim Amount: </span>
-								<h5 class="mt-3 f16"><strong>{{DischargeData.ClaimAmount}}</strong></h5>
-							</div>
-						</div>
 					</div>
 				</div>
 
 
 				<div class="tab-pane fade" id="Final-Claim" role="tabpanel" aria-labelledby="v-pills-messages-tab">
-
-					<div class="row mt-1" *ngFor="let f of finalClaim['doclist']">
-						<div class="col-md-5 mb-3 bg-body rounded">
-
-
-							<div class="px-3">
-								<h5 class="mt-3 f16"><strong>Document 1:</strong></h5>
-								<h5 class="mt-3 f16">{{f.DocName}}</h5>
-
-
-							</div>
-						</div>
-						<div class="col-md-3 mb-3 bg-body rounded p-3">
-							<a href="" class="btn btn-outline btn-sm px-3 mt-3 healshadow"> Upload <img
-									src="/assets/img/Arrow-54.png"></a>
-						</div>
-						</div>
-						<div class="col-md-4 mb-3 bg-body rounded">
-							<div class="p-2">
-
-								<div class="p-1 mt-1"><span class="cl01">Total Bill Amount</span>
-									<h5 class="mt-3 f16"><strong>{{finalClaim.TotalBillAmount}}</strong></h5>
-								</div>
-								<div class="p-1 mt-1"><span class="cl01">Claim Amount</span>
-									<h5 class="mt-3 f16"><strong>{{finalClaim.ClaimAmount}}</strong></h5>
-								</div>
-							</div>
-						</div>
-					
+	
 					<div class="row mt-1">
-						<span class="px-3"><strong>Review Notes:</strong> It is a long established fact that a reader
-							will be distracted by the readable content of a page when looking at its layout. The point
-							of using Lorem Ipsum is that it has a more-or-less normal distribution of letters.</span>
+
+						<div class="col-md-6">
+							<div class="row mb-3 bg-body rounded"
+								*ngFor="let h of finalClaim['doclist'] ,let i = index ">
+
+								<div class="col-md-6">
+									<div class="px-3">
+										<h5 class="mt-3 f16"><strong>Document {{i+1}}:</strong></h5>
+										<h5 class="mt-3 f16"><a class="doc" (click)="docopen()">{{h.DocName}}</a></h5>
+
+
+									</div>
+
+								</div>
+
+								<div class="col-md-6">
+
+
+
+									<a href="" class="btn btn-primary btn-sm px-3 mt-5 healshadow"> Upload <img
+											src="/assets/img/Arrow-54w.png"> </a>
+								</div>
+
+							</div>
+						</div>
+
+
+
+
+
+						<div class="col-md-2 mb-3 bg-body rounded">
+							<div class="px-2">
+
+								<div class="p-1 mt-1"><span class="cl01">Estimated Cost: </span>
+									<h5 class="mt-3 f16"><strong>INR 40,000</strong></h5>
+								</div>
+								<div class="p-1 mt-1"><span class="cl01">Approval Cost: </span>
+									<h5 class="mt-3 f16"><strong>INR 40,000</strong></h5>
+								</div>
+							</div>
+						</div>
+
+					</div>
+					<div class="row mt-1">
+						<span class="px-3"><strong>Review Notes:</strong> It is a long established fact that a
+							reader
+							will be distracted by the readable content of a page when looking at its layout. The
+							point
+							of using Lorem Ipsum is that it has a more-or-less normal distribution of
+							letters.</span>
 					</div>
 				</div>
-
 			</div>
 		</div>
 	</div>
-</div>
