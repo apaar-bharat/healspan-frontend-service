@@ -1,0 +1,66 @@
+{
+    "GenderName": [
+        {
+            "GenderId": "1",
+            "GenderName": "Male"
+        },
+        {
+            "GenderId": "2",
+            "GenderName": "Female"
+        },
+        {
+            "GenderId": "3",
+            "GenderName": "Other"
+        }
+    ],
+    "Other costs": [
+        {
+            "CostId": "1",
+            "OtherCosts": "Medicines"
+        },
+        {
+            "CostId": "2",
+            "OtherCosts": "Consumables"
+        },
+        {
+            "CostId": "3",
+            "OtherCosts": "Consultation"
+        }
+    ],
+    "procedure": [
+        {
+            "ProcedureId": "1",
+            "ProcedureName": " ORIF(Open reduction internal fixation)"
+        },
+        {
+            "ProcedureId": "2",
+            "ProcedureName": " CRIF(Closed reduction internal fixation)"
+        },
+        {
+            "ProcedureId": "3",
+            "ProcedureName": "Renal Dialysis"
+        },
+        {
+            "ProcedureId": "4",
+            "ProcedureName": "Peritoneal Dialysis"
+        }
+    ],
+    "Room category": [
+        {
+            "roomId": "1",
+            "Roomcategory": " Single Private AC"
+        },
+        {
+            "roomId": "2",
+            "Roomcategory": " Delux Room"
+        },
+        {
+            "roomId": "3",
+            "Roomcategory": "Twin Sharing"
+        },
+        {
+            "roomId": "4",
+            "Roomcategory": "Triple Sharing"
+        }
+    ]
+}

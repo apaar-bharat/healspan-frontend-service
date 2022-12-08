@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { CommonserviceService } from 'src/app/service/commonservice.service';
 
 @Component({
   selector: 'app-header',
@@ -8,21 +9,13 @@ import { Router } from '@angular/router';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  constructor(private router: Router,private commonservice:CommonserviceService) { }
 
   ngOnInit(): void {
   }
 
 
   redirect(){
-    let activeDashboard=sessionStorage.getItem("usertype");
-    if(activeDashboard=='huser'){
-      // alert("huser");
-      this.router.navigate(['hdashboard'])
-
-    }else{
-      // alert("ruser");
-      this.router.navigate(['rdashboard'])
-    }
+    this.commonservice.redirecttoactivedashboard();
   }
 }

@@ -1,11 +1,18 @@
 import { Injectable } from '@angular/core';
 import { HttpHeaders, HttpClient, HttpParams } from '@angular/common/http';
 import { Observable ,  throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { catchError, timeout } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
+const httpOptions= {
+  headers: new HttpHeaders({
+ 'Content-Type':'application/json',
+ })
+};
+
 @Injectable({
   providedIn: 'root'
 })
+
 export class ApiService {
 
   private formatErrors(error: any) {
@@ -18,6 +25,11 @@ export class ApiService {
 
   get(path: string, params: HttpParams = new HttpParams()): Observable<any> {
     return this.http.get(`${environment.baseUrl}${path}`, { params })
+  }
+  
+  getService(url: string):Observable<any> {
+    console.log('service call----->',url);
+    return this.http.get(url, httpOptions).pipe(timeout(150000));;
   }
 
   put(path: string, body: Object = {},params: HttpParams = new HttpParams()): Observable<any> {

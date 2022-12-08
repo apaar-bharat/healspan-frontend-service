@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CommonserviceService } from 'src/app/service/commonservice.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SidebarComponent implements OnInit {
 
-  constructor() { }
+  constructor(private commonservice:CommonserviceService) { }
 
   ngOnInit(): void {
+  }
+
+  redirect(){
+    this.commonservice.redirecttoactivedashboard();
   }
 
 }

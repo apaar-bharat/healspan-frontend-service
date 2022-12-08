@@ -18,7 +18,7 @@ const routes: Routes = [
    children: [
       { path: 'hdashboard',component: HdashboardComponent},
       { path: 'rdashboard',component: RdashboardComponent},
-      { path: 'createclaim',component: CreatclaimComponent},
+      { path: 'createclaim/:stagename',component:CreatclaimComponent},
       { path: 'viewclaim',component: ViewclaimComponent},
       { path: 'reset',component: ResetpasswordComponent},
       { path: 'profile',component: ProfileComponent},
