@@ -29,7 +29,7 @@ export class CreatclaimComponent implements OnInit {
       this.minDate = new Date(r);
     })
   }
-  ClaimForm!: FormGroup; submitted = false; submitted2 = false; isEditable = false; ailmentList: any
+  ClaimForm!: FormGroup; submitted = false; submitted2 = false; submitted3 = false; isEditable = false; ailmentList: any
   InsuaranceForm!: FormGroup;
   medicalForm!: FormGroup;
   DocumentsForm!: FormGroup;
@@ -39,7 +39,7 @@ export class CreatclaimComponent implements OnInit {
   claimformData: Array<any> = [];
   isLinear = false;
   barWidth: string = "0%";
-
+  restest: any;
   selectedFiles!: FileList;
   progress = 0;
   message = '';
@@ -57,10 +57,16 @@ export class CreatclaimComponent implements OnInit {
   show: boolean = false;
   show2: boolean = false;
   doclist: any = []; doclist1: any;
+  procedureDetail: any;
+  GenderDetail: any;
+  OtherCosts: any;
+  roomsDetail: any;
+
+  showAge: any;
   ngOnInit(): void {
 
     this.todaysdate = new Date().getFullYear() + '-' + ('0' + (new Date().getMonth() + 1)).slice(-2) + '-' + ('0' + new Date().getDate()).slice(-2);
-    console.log(this.todaysdate)
+    console.log("kkkk", this.todaysdate)
 
     this.fileInfos = this.FileUploadService.getFiles();
     verificationForm();
@@ -72,28 +78,46 @@ export class CreatclaimComponent implements OnInit {
       Fname: [null, Validators.required],
       Mname: [null, Validators.required],
       Lname: ['', Validators.required],
+      MobileNo: ['', Validators.required,],
+      PHUHID: ['',],
       Gender: ['', Validators.required],
       DOB: ['',],
       Age: ['', Validators.required],
-      Stage: ['', Validators.required],
+      Stage: ['',],
       patientprimaryInsured: [true, Validators.required],
       HospitalName: ['', Validators.required],
       DateOfAdmission: ['',],
       DateOfDischarge: ['',],
+      RoomCategory: ['',],
+      CostPD: ['', Validators.required],
+      totalRC: ['',],
+      OtherC: ['',],
+      OtherCE: ['',],
+      Procedure: ['',],
+      InitialCE: ['',],
+
       Ailment: ['', Validators.required],
       TotalBillAmount: ['', Validators.required],
       ClaimAmount: ['', Validators.required],
     })
 
     this.medicalForm = this.fb.group({
-      Ailments: ["",],
+      Procedures: ["",],
+      TreatmentType: ["",],
+      Provisionaldiagnosis: ["",],
       Speciality: ["",],
+      Dateoffirstdiagnosis: ["",],
+      Pasthistoryofchronicillness: ["",],
+      Nameofthetreatingdoctor: ["",],
+      DrResgistrationnumber: ["",],
+      Qualificationofthetreatingdoctor: ["",],
+      Ailments: ["",],
       Ages: ["",],
       Genders: ["",],
       Duration: ["",],
       Claim: ["",],
       TypeOfAccident: ["",],
-      TreatmentType: ["",],
+
       passengerType: ["",],
       TypeOfVehicle: ["",],
 
@@ -119,10 +143,17 @@ export class CreatclaimComponent implements OnInit {
       file5: [''],
     })
 
-    this.bindDropdown()
+
 
     this.date = new Date().toISOString().slice(0, 10);
+    this.httpClient.get("assets/data/picklist.json").subscribe((data: any) => {
 
+      this.GenderDetail = data["GenderName"];
+      this.procedureDetail = data["procedure"];
+      this.OtherCosts = data["Other costs"]
+      this.roomsDetail = data["Room category"]
+      console.log("sdsd", this.GenderDetail);
+    })
   }
 
   changeDate() {
@@ -153,8 +184,8 @@ export class CreatclaimComponent implements OnInit {
 
   get I() { return this.InsuaranceForm.controls; }
 
-  Oncontinue() {
-    console.log("dfhbd")
+  Oncontinue(formData: any) {
+    console.log("", formData)
     this.submitted = true;
     if (this.ClaimForm.valid) {
       alert('Form Submitted succesfully!!!\n Check the values in browser console.');
@@ -205,14 +236,14 @@ export class CreatclaimComponent implements OnInit {
       let Claim = this.medicalForm.get("Claim")?.value;
 
 
-      // this.admissiondata.forEach((element:any) => {
-        let restest = this.admissiondata.filter((element: any) => (element.Speciality == String(Speciality)&& element.TreatmentType == String(TreatmentType)&& element.Gender == String(Genders)&& element.Age == String(Ages)&& element.Durationofstay == String(Duration)&& element.Claimvalue == String(Claimvalue)) );
+
+      this.restest = this.admissiondata.filter((element: any) => (element.Speciality == String(Speciality) && element.TreatmentType == String(TreatmentType) && element.Gender == String(Genders) && element.Age == String(Ages) && element.Durationofstay == String(Duration) && element.Claimvalue == String(Claimvalue)));
       // let res = this.admissiondata.filter((element: any) => (element.Speciality == Speciality && element.TreatmentType == TreatmentType && element.Gender == Genders && element.Age == Ages && element.Durationofstay == Duration && element.Claimvalue == Claimvalue));
-      if (restest.length > 0) {
-        alert(restest[0].Screen);
-        if (restest[0].Screen == "\"This claim is not admissible\"") {
+      if (this.restest.length > 0) {
+        alert(this.restest[0].Screen);
+        if (this.restest[0].Screen == "\"This claim is not admissible\"") {
           alert("This claim is not admissible,may be denied by TPA")
-        } else if (restest[0].Question1) {
+        } else if (this.restest[0].Q1Options) {
           this.httpClient.get("assets/data/doclist.json").subscribe((data: any) => {
             //alert(data["list"]);
             this.doclist = data["list"];
@@ -236,7 +267,7 @@ export class CreatclaimComponent implements OnInit {
       //(element.Speciality==Speciality&& element.TreatmentType==TreatmentType&&element.Gender==Genders&&element.Age==Ages&&element.Durationofstay==Duration&&element.Claimvalue==Claimvalue));
 
       // });
-      console.log(restest);
+      console.log(this.restest);
 
       // if(Speciality == "General Medicine" && TreatmentType=="Medical management"  && Genders == "Any" &&  Ages == "Any" && Duration == "Less than 24 hours" && Claimvalue=="Any")
       // {
@@ -247,17 +278,29 @@ export class CreatclaimComponent implements OnInit {
   }
 
   OnTypeofAccident(event: any) {
-    console.log(event.target.value);
-   
+    let toa = this.medicalForm.get("TypeOfAccident")?.value;
+    if (toa == this.restest[0].Q1Options) {
+      this.IspassengerType = true
+    } else {
+      this.IspassengerType = true
+    }
+
   }
 
   OnPassengerType(event: any) {
-   
+
+    let poa = this.medicalForm.get("passengerType")?.value;
+    if (poa == this.restest[0].Q2Options) {
+      this.IsTypeOfVehicle = true
+    } else {
+      this.IsTypeOfVehicle = true
+    }
+
   }
 
   OnInsuarancecontinue() {
     console.log("dwefw")
-    this.submitted2 = true;
+    this.submitted3 = true;
     if (this.InsuaranceForm.valid) {
       alert('Form Submitted succesfully!!!\n Check the values in browser console.');
       console.log(this.InsuaranceForm.value);
@@ -267,10 +310,56 @@ export class CreatclaimComponent implements OnInit {
       alert("form invalid")
     }
   }
+  // Questions Call ---end 
 
-  OnBack() {
 
+  ageCalculator() {
+    if (this.ClaimForm.value.DOB) {
+      const convertAge = new Date(this.ClaimForm.value.DOB);
+      const timeDiff = Math.abs(Date.now() - convertAge.getTime());
+      this.showAge = Math.floor((timeDiff / (1000 * 3600 * 24)) / 365);
+    }
+
+    let datee = this.ClaimForm.get("Age")?.value;
+   
+    this.medicalForm.controls['Ages'].setValue(datee)
   }
+
+  // ----------------------------------------------------------------------------------------------
+
+  // Binding Values on selection to Next Form----Start
+  OnGenderSelect(event: any) {
+
+    let Gender = this.ClaimForm.get("Gender")?.value;
+    this.medicalForm.controls['Genders'].setValue(Gender)
+  }
+
+ 
+
+  OnAilmentselect(event: any) {
+    let Ailment = this.ClaimForm.get("Ailment")?.value;
+    this.medicalForm.controls['Ailments'].setValue(Ailment)
+  }
+
+  // Binding Values on selection to Next Form----end
+
+  // --------------------------------------------------------------------------------------------------
+
+
+
+  onMedformSubmit(formData:any) {
+    console.log("dfhbd")
+    this.submitted2 = true;
+    if (this.medicalForm.valid) {
+      alert('Form Submitted succesfully!!!\n Check the values in browser console.');
+      console.table(this.medicalForm.value);
+    }
+    else {
+      alert("form invalid")
+    }
+  }
+
+  // Document Upload ----Start
 
   selectFile(event: any) {
 
@@ -334,14 +423,7 @@ export class CreatclaimComponent implements OnInit {
     }
   }
 
-  async bindDropdown() {
-
-
-    this.httpClient.get("assets/data/admission.json").subscribe((data: any) => {
-
-
-    })
-  }
+  // Document Upload ----End
 
 
 
