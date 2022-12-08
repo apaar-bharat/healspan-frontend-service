@@ -34,25 +34,25 @@
                                 <div class="form-group col-md-3">
                                     <label for="" class="form-label float-start">First name*</label>
                                     <input type="text" class="form-control" formControlName="Fname"
-                                     placeholder="First Name" required>
+                                    [class.is-invalid]="f['Fname'].invalid && (f['Fname'].dirty || f['Fname'].touched)"  placeholder="First Name" required>
 
                                 </div>
                                 <div class="form-group col-md-3">
                                     <label for="" class="form-label float-start">Middle name</label>
                                     <input type="text" class="form-control" formControlName="Mname"
-                                        placeholder="Middle Name">
+                                     placeholder="Middle Name">
 
                                 </div>
                                 <div class="form-group col-md-3">
                                     <label for="" class="form-label float-start">Last name*</label>
                                     <input type="text" class="form-control" formControlName="Lname"
-                                        placeholder="Last Name" required>
+                                    [class.is-invalid]="f['Lname'].invalid && (f['Lname'].dirty || f['Lname'].touched)"  placeholder="Last Name" required>
 
                                 </div>
                                 <div class="form-group col-md-3">
                                     <label for="" class="form-label float-start">Patient Mobile No</label>
-                                    <input type="text" class="form-control" formControlName="MobileNo"
-                                        placeholder="Mobile No" required>
+                                    <input type="number" class="form-control" formControlName="MobileNo"
+                                    [class.is-invalid]="f['MobileNo'].invalid && (f['MobileNo'].dirty || f['MobileNo'].touched)"  placeholder="Mobile No" required>
 
                                 </div>
 
@@ -62,12 +62,12 @@
                                 <div class="form-group col-md-3 mt-5">
                                     <label for="" class="form-label float-start">Patient Hospital UHID</label>
                                     <input type="text" class="form-control" formControlName="PHUHID"
-                                        placeholder="Patient Hospital UHID" required>
+                                    [class.is-invalid]="f['PHUHID'].invalid && (f['PHUHID'].dirty || f['PHUHID'].touched)"  placeholder="Patient Hospital UHID" required>
                                 </div>
                                 <div class="form-group col-md-3 mt-5">
                                     <label for="" class="form-label float-start">Gender</label>
                                     <select class="form-control form-select" formControlName="Gender" id="Gender"
-                                        (change)="OnGenderSelect($event)" required>
+                                    [class.is-invalid]="f['Gender'].invalid && (f['Gender'].dirty || f['Gender'].touched)" (change)="OnGenderSelect($event)" required>
                                         <option value="">Choose...</option>
                                         <option *ngFor="let g of GenderDetail" value={{g.GenderId}}>{{g.GenderName}}
                                         </option>
@@ -108,7 +108,7 @@
                                 <div class="form-group col-md-3 mt-5">
                                     <label for="" class="form-label float-start">Hospital Name*</label>
                                     <select class="form-control form-select" id="country" formControlName="HospitalName"
-                                        required>
+                                    [class.is-invalid]="f['HospitalName'].invalid && (f['HospitalName'].dirty || f['HospitalName'].touched)"  required>
                                         <option value="">Choose...</option>
                                         <option>King Edward Memorial Hospital</option>
                                     </select>
@@ -140,7 +140,7 @@
                                 <div class="form-group col-md-3 mt-5">
                                     <label for="" class="form-label float-start">Room Category</label>
                                     <select class="form-control form-select" formControlName="RoomCategory"
-                                        id="RoomCategory" required>
+                                    [class.is-invalid]="f['RoomCategory'].invalid && (f['RoomCategory'].dirty || f['RoomCategory'].touched)"  id="RoomCategory" required>
                                         <option value="">Choose...</option>
                                         <option *ngFor="let r of roomsDetail" value="{{r.roomId}}">{{r.Roomcategory}}
                                         </option>
@@ -150,20 +150,20 @@
                                 </div>
                                 <div class="form-group col-md-3 mt-5">
                                     <label for="" class="form-label float-start">Cost Per Day</label>
-                                    <input type="text" class="form-control" formControlName="CostPD"
-                                        placeholder="Cost Per Day" required>
+                                    <input type="number" class="form-control" formControlName="CostPD"
+                                    [class.is-invalid]="f['CostPD'].invalid && (f['CostPD'].dirty || f['CostPD'].touched)"  placeholder="Cost Per Day" required>
 
                                 </div>
                                 <div class="form-group col-md-3 mt-5">
                                     <label for="" class="form-label float-start">Total Room Cost</label>
-                                    <input type="text" class="form-control" formControlName="totalRC"
+                                    <input type="number" class="form-control" formControlName="totalRC"
                                         placeholder="Total Room Cost" required>
 
                                 </div>
                                 <div class="form-group col-md-3 mt-5">
                                     <label for="" class="form-label float-start">Other Costs</label>
                                     <select class="form-control form-select" formControlName="OtherC" id="OtherC"
-                                        required>
+                                    required>
                                         <option value="">Choose...</option>
                                         <option *ngFor="let o of OtherCosts" value={{o.CostId}}>{{o.OtherCosts}}
                                         </option>
@@ -182,7 +182,7 @@
                                 <div class="form-group col-md-3 mt-5">
                                     <label for="" class="form-label float-start">Procedure</label>
                                     <select class="form-control form-select" formControlName="Procedure" id="Procedure"
-                                        required>
+                                    (change)="onprocedureSelect($event)" required>
                                         <option value="">Choose...</option>
                                         <option *ngFor="let p of procedureDetail" value={{p.ProcedureName}}>
                                             {{p.ProcedureName}}</option>
@@ -252,14 +252,14 @@
                             <div class="form-group col-md-3">
                                 <label for="" class="form-label float-start">Procedure</label>
                                 <input type="text" class="form-control" formControlName="Procedures"
-                                    placeholder="Claim Amount" required>
+                                    placeholder="Claim Amount" required readonly>
 
                             </div>
 
                             <div class="form-group col-md-3">
                                 <label for="" class="form-label float-start">Treatment Type</label>
                                 <select class="form-control form-select" formControlName="TreatmentType"
-                                    id="TreatmentType" required>
+                                [class.is-invalid]="M['TreatmentType'].invalid && (M['TreatmentType'].dirty || M['TreatmentType'].touched)"  id="TreatmentType" required>
                                     <option value="">Choose...</option>
                                     <option value="Surgical management">Surgical management</option>
                                     <option value="Medical management">Medical management</option>

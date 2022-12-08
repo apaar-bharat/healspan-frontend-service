@@ -84,7 +84,7 @@ export class CreatclaimComponent implements OnInit {
       DOB: ['',],
       Age: ['', Validators.required],
       Stage: ['',],
-      patientprimaryInsured: [true, Validators.required],
+      patientprimaryInsured: [true, ],
       HospitalName: ['', Validators.required],
       DateOfAdmission: ['',],
       DateOfDischarge: ['',],
@@ -103,7 +103,7 @@ export class CreatclaimComponent implements OnInit {
 
     this.medicalForm = this.fb.group({
       Procedures: ["",],
-      TreatmentType: ["",],
+      TreatmentType: ["",Validators.required],
       Provisionaldiagnosis: ["",],
       Speciality: ["",],
       Dateoffirstdiagnosis: ["",],
@@ -182,7 +182,7 @@ export class CreatclaimComponent implements OnInit {
 
   get f() { return this.ClaimForm.controls; }
 
-  get I() { return this.InsuaranceForm.controls; }
+  get M() { return this.medicalForm.controls; }
 
   Oncontinue(formData: any) {
     console.log("", formData)
@@ -339,6 +339,11 @@ export class CreatclaimComponent implements OnInit {
   OnAilmentselect(event: any) {
     let Ailment = this.ClaimForm.get("Ailment")?.value;
     this.medicalForm.controls['Ailments'].setValue(Ailment)
+  }
+
+  onprocedureSelect(event: any){
+    let procedureee = this.ClaimForm.get("Procedure")?.value;
+    this.medicalForm.controls['Procedures'].setValue(procedureee)
   }
 
   // Binding Values on selection to Next Form----end
