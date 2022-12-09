@@ -33,29 +33,30 @@
 
                                 <div class="form-group col-md-3">
                                     <label for="" class="form-label float-start">First name*</label>
-                                    <input type="text" class="form-control" formControlName="Fname" OnlyCharacter
-                                    [class.is-invalid]="f['Fname'].invalid && (f['Fname'].dirty || f['Fname'].touched)"  required>
+                                    <input type="text" class="form-control" formControlName="Fname"
+                                        [class.is-invalid]="f['Fname'].invalid && (f['Fname'].dirty || f['Fname'].touched)"
+                                        required>
 
                                 </div>
                                 <div class="form-group col-md-3">
                                     <label for="" class="form-label float-start">Middle name</label>
-                                    <input type="text" class="form-control" formControlName="Mname"
-                                    >
+                                    <input type="text" class="form-control" formControlName="Mname">
 
                                 </div>
                                 <div class="form-group col-md-3">
                                     <label for="" class="form-label float-start">Last name*</label>
                                     <input type="text" class="form-control" formControlName="Lname"
-                                    [class.is-invalid]="f['Lname'].invalid && (f['Lname'].dirty || f['Lname'].touched)"   required>
+                                        [class.is-invalid]="f['Lname'].invalid && (f['Lname'].dirty || f['Lname'].touched)"
+                                        required>
 
                                 </div>
                                 <div class="form-group col-md-3">
                                     <label for="" class="form-label float-start">Patient Mobile No</label>
-                                    <input type="number" class="form-control" formControlName="MobileNo"
-                                    [(ngModel)]="mobilenumber " onlyNumber required>
-                                    <div *ngIf="f['MobileNo'].touched && f['MobileNo'].invalid"  class="show-error">
-                                        <div *ngIf="f['MobileNo'].errors?.['required'] && f['MobileNo'].dirty" >please enter mobile number</div>
-                                        <div *ngIf="f['MobileNo'].errors?.['pattern'] && f['MobileNo'].dirty" >please enter 10 digit  mobile number</div>
+                                    <input type="number" class="form-control" formControlName="MobileNo" required>
+                                    <div *ngIf=" f['MobileNo'].errors" class="invalid-feedback">
+                                        <div *ngIf="f['MobileNo'].errors['MobileNo']">
+                                            Username must not exceed 40 characters
+                                        </div>
                                     </div>
                                 </div>
 
@@ -65,12 +66,14 @@
                                 <div class="form-group col-md-3 mt-5">
                                     <label for="" class="form-label float-start">Patient Hospital UHID</label>
                                     <input type="text" class="form-control" formControlName="PHUHID"
-                                    [class.is-invalid]="f['PHUHID'].invalid && (f['PHUHID'].dirty || f['PHUHID'].touched)"  required>
+                                        [class.is-invalid]="f['PHUHID'].invalid && (f['PHUHID'].dirty || f['PHUHID'].touched)"
+                                        required>
                                 </div>
                                 <div class="form-group col-md-3 mt-5">
                                     <label for="" class="form-label float-start">Gender</label>
                                     <select class="form-control form-select" formControlName="Gender" id="Gender"
-                                    [class.is-invalid]="f['Gender'].invalid && (f['Gender'].dirty || f['Gender'].touched)" (change)="OnGenderSelect($event)" required>
+                                        [class.is-invalid]="f['Gender'].invalid && (f['Gender'].dirty || f['Gender'].touched)"
+                                        (change)="OnGenderSelect($event)" required>
                                         <option value="">Choose...</option>
                                         <option *ngFor="let g of GenderDetail" value={{g.GenderId}}>{{g.GenderName}}
                                         </option>
@@ -81,8 +84,7 @@
                                 <div class="form-group col-md-3 mt-5">
                                     <label for="" class="form-label float-start">Date Of Birth</label>
                                     <input type="date" class="form-control" formControlName="DOB"
-                                        (input)="ageCalculator()"  id="dob" [max]="date"
-                                        required>
+                                        (input)="ageCalculator()" id="dob" [max]="date" required>
                                 </div>
                                 <div class="form-group col-md-3 mt-5">
                                     <label for="" class="form-label float-start">Age*</label>
@@ -104,14 +106,14 @@
                             <div class="form-row">
                                 <div class="form-group col-md-3 mt-5">
                                     <label for="" class="form-label float-start">Stage*</label>
-                                    <input type="text" class="form-control" formControlName="Stage" 
-                                        required>
+                                    <input type="text" class="form-control" formControlName="Stage" required>
 
                                 </div>
                                 <div class="form-group col-md-3 mt-5">
                                     <label for="" class="form-label float-start">Hospital Name*</label>
                                     <select class="form-control form-select" id="country" formControlName="HospitalName"
-                                    [class.is-invalid]="f['HospitalName'].invalid && (f['HospitalName'].dirty || f['HospitalName'].touched)"  required>
+                                        [class.is-invalid]="f['HospitalName'].invalid && (f['HospitalName'].dirty || f['HospitalName'].touched)"
+                                        required>
                                         <option value="">Choose...</option>
                                         <option>King Edward Memorial Hospital</option>
                                     </select>
@@ -143,7 +145,8 @@
                                 <div class="form-group col-md-3 mt-5">
                                     <label for="" class="form-label float-start">Room Category</label>
                                     <select class="form-control form-select" formControlName="RoomCategory"
-                                    [class.is-invalid]="f['RoomCategory'].invalid && (f['RoomCategory'].dirty || f['RoomCategory'].touched)"  id="RoomCategory" required>
+                                        [class.is-invalid]="f['RoomCategory'].invalid && (f['RoomCategory'].dirty || f['RoomCategory'].touched)"
+                                        id="RoomCategory" required>
                                         <option value="">Choose...</option>
                                         <option *ngFor="let r of roomsDetail" value="{{r.roomId}}">{{r.Roomcategory}}
                                         </option>
@@ -154,19 +157,19 @@
                                 <div class="form-group col-md-3 mt-5">
                                     <label for="" class="form-label float-start">Cost Per Day</label>
                                     <input type="number" class="form-control" formControlName="CostPD"
-                                    [class.is-invalid]="f['CostPD'].invalid && (f['CostPD'].dirty || f['CostPD'].touched)"  required>
+                                        [class.is-invalid]="f['CostPD'].invalid && (f['CostPD'].dirty || f['CostPD'].touched)"
+                                        required>
 
                                 </div>
                                 <div class="form-group col-md-3 mt-5">
                                     <label for="" class="form-label float-start">Total Room Cost</label>
-                                    <input type="number" class="form-control" formControlName="totalRC"
-                                        required>
+                                    <input type="number" class="form-control" formControlName="totalRC" required>
 
                                 </div>
                                 <div class="form-group col-md-3 mt-5">
                                     <label for="" class="form-label float-start">Other Costs</label>
                                     <select class="form-control form-select" formControlName="OtherC" id="OtherC"
-                                    required>
+                                        required>
                                         <option value="">Choose...</option>
                                         <option *ngFor="let o of OtherCosts" value={{o.CostId}}>{{o.OtherCosts}}
                                         </option>
@@ -178,14 +181,13 @@
                             <div class="form-row ">
                                 <div class="form-group col-md-3 mt-5">
                                     <label for="" class="form-label float-start">Other Costs Estimate</label>
-                                    <input type="text" class="form-control" formControlName="OtherCE"
-                                       >
+                                    <input type="text" class="form-control" formControlName="OtherCE">
 
                                 </div>
                                 <div class="form-group col-md-3 mt-5">
                                     <label for="" class="form-label float-start">Procedure</label>
                                     <select class="form-control form-select" formControlName="Procedure" id="Procedure"
-                                    (change)="onprocedureSelect($event)" required>
+                                        (change)="onprocedureSelect($event)" required>
                                         <option value="">Choose...</option>
                                         <option *ngFor="let p of procedureDetail" value={{p.ProcedureName}}>
                                             {{p.ProcedureName}}</option>
@@ -195,8 +197,7 @@
                                 </div>
                                 <div class="form-group col-md-3 mt-5">
                                     <label for="" class="form-label float-start">Inital cost estimate</label>
-                                    <input type="text" class="form-control" formControlName="InitialCE"
-                                        required>
+                                    <input type="text" class="form-control" formControlName="InitialCE" required>
 
                                 </div>
                             </div>
@@ -216,14 +217,12 @@
                                 </div>
                                 <div class="form-group col-md-3 mt-5">
                                     <label for="" class="form-label float-start">Total Bill Amount</label>
-                                    <input type="text" class="form-control" formControlName="TotalBillAmount"
-                                        required>
+                                    <input type="text" class="form-control" formControlName="TotalBillAmount" required>
 
                                 </div>
                                 <div class="form-group col-md-3 mt-5">
                                     <label for="" class="form-label float-start">Claim Amount*</label>
-                                    <input type="text" class="form-control" formControlName="ClaimAmount"
-                                        required>
+                                    <input type="text" class="form-control" formControlName="ClaimAmount" required>
 
                                 </div>
                             </div>
@@ -233,7 +232,7 @@
 
                     <button type="button" class="previous_button btn btn-lg px-5 float-start mt-5">Exit</button>
                     <button type="button" class="next btn btn-primary btn-lg px-5 float-end mt-5" type="submit"
-                       form="ngForm">Continue</button>
+                         form="ngForm">Continue</button>
 
 
                 </fieldset>
@@ -254,15 +253,15 @@
                         <div class="form-row">
                             <div class="form-group col-md-3">
                                 <label for="" class="form-label float-start">Procedure</label>
-                                <input type="text" class="form-control" formControlName="Procedures"
-                                    required readonly>
+                                <input type="text" class="form-control" formControlName="Procedures" required readonly>
 
                             </div>
 
                             <div class="form-group col-md-3">
                                 <label for="" class="form-label float-start">Treatment Type</label>
                                 <select class="form-control form-select" formControlName="TreatmentType"
-                                [class.is-invalid]="M['TreatmentType'].invalid && (M['TreatmentType'].dirty || M['TreatmentType'].touched)"  id="TreatmentType" required>
+                                    [class.is-invalid]="M['TreatmentType'].invalid && (M['TreatmentType'].dirty || M['TreatmentType'].touched)"
+                                    id="TreatmentType" required>
                                     <option value="">Choose...</option>
                                     <option value="Surgical management">Surgical management</option>
                                     <option value="Medical management">Medical management</option>
@@ -271,8 +270,7 @@
                             </div>
                             <div class="form-group col-md-3 ">
                                 <label for="" class="form-label float-start">Provisional diagnosis</label>
-                                <input type="text" class="form-control" formControlName="Provisionaldiagnosis"
-                                    required>
+                                <input type="text" class="form-control" formControlName="Provisionaldiagnosis" required>
 
                             </div>
                             <div class="form-group col-md-3  ">
@@ -285,16 +283,11 @@
                                 </select>
 
                             </div>
-                            
+
                         </div>
 
                         <div class="form-row">
-                            <div class="form-group col-md-3  mt-5">
-                                <label for="" class="form-label float-start">Provisional diagnosis</label>
-                                <input type="text" class="form-control" formControlName="Provisionaldiagnosis"
-                                    required>
-
-                            </div>
+                           
                             <div class="form-group col-md-3 mt-5">
                                 <label for="" class="form-label float-start">Date of first diagnosis</label>
                                 <input type="date" class="form-control" formControlName="Dateoffirstdiagnosis"
@@ -317,20 +310,20 @@
                                     required>
 
                             </div>
-                           
-
-                        </div>
-                        <div class="form-row">
                             <div class="form-group col-md-3  mt-5">
                                 <label for="" class="form-label float-start">Dr Resgistration number</label>
                                 <input type="text" class="form-control" formControlName="DrResgistrationnumber"
                                     required>
 
                             </div>
+
+                        </div>
+                        <div class="form-row">
+                           
                             <div class="form-group col-md-3  mt-5">
                                 <label for="" class="form-label float-start">Qualification of the treatingdoctor</label>
-                                <input type="text" class="form-control" formControlName="Qualificationofthetreatingdoctor"
-                                    required>
+                                <input type="text" class="form-control"
+                                    formControlName="Qualificationofthetreatingdoctor" required>
 
                             </div>
 
@@ -345,14 +338,14 @@
                                 <label for="" class="form-label float-start">Gender</label>
                                 <input type="text" class="form-control" formControlName="Genders" readonly>
                             </div>
-
-                        </div>
-
-                        <div class="form-row">
                             <div class="form-group col-md-3 mt-5">
                                 <label for="" class="form-label float-start">Age</label>
                                 <input type="text" class="form-control" formControlName="Ages" readonly>
                             </div>
+                        </div>
+
+                        <div class="form-row">
+                          
                             <div class="form-group col-md-3  mt-5">
                                 <label for="" class="form-label float-start">Duration</label>
                                 <select class="form-control form-select" formControlName="Duration" id="Duration"
@@ -398,7 +391,7 @@
                                     <option value="Yes">Yes</option>
                                     <option value="No">No</option>
                                 </select>
-                               
+
                             </div>
 
                             <div class="form-group col-md-4 mt-5" *ngIf="IsTypeOfVehicle">
@@ -409,7 +402,7 @@
                                     <option>Speed Limited Scooter</option>
                                     <option>Others</option>
                                 </select>
-                              
+
                             </div>
 
 
@@ -438,44 +431,49 @@
                         <div class="form-row">
                             <div class="form-group col-md-6">
                                 <label for="" class="form-label float-start">Insurance Company*</label>
-                                <select class="form-control form-select" id="country" formControlName="InsuranceCompany"
+                                <select class="form-control form-select" id="InsuranceCompany" formControlName="InsuranceCompany"
                                     required>
                                     <option value="">Choose...</option>
-                                    <option>Go Digit</option>
+                                    <option *ngFor="let y of insuaranceCompanyDetail" value={{y.CompanyName}}>{{y.CompanyName}}</option>
                                 </select>
-                               
+
 
                             </div>
                             <div class="form-group col-md-3">
                                 <label for="" class="form-label float-start">TPA*</label>
-                                <input type="text" class="form-control" formControlName="TPA" >
-                             
+                                <select class="form-control form-select" id="TPA" formControlName="TPA"
+                                    required>
+                                    <option value="">Choose...</option>
+                                    <option *ngFor="let t of TPADetail" value={{t.TPAName}}>{{t.TPAName}}</option>
+                                </select>
+
                             </div>
                             <div class="form-group col-md-3">
                                 <label for="" class="form-label float-start">TPA ID*</label>
-                                <input type="text" class="form-control" formControlName="TPAID" >
-                               
+                                <input type="text" class="form-control" formControlName="TPAID" required>
+
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-3 mt-5">
                                 <label for="" class="form-label float-start">Policy Holder*</label>
-                                <input type="text" class="form-control" formControlName="PolicyHolder"
-                                    >
-                               
+                                <input type="text" class="form-control" formControlName="PolicyHolder" required>
+
                             </div>
                             <div class="form-group col-md-3 mt-5">
                                 <label for="" class="form-label float-start">Relation of patient with Policy
                                     Holder*</label>
-                                <input type="text" class="form-control" formControlName="RelationOPH"
-                                   >
-                               
+                                    <select class="form-control form-select" id="TPA" formControlName="RelationOPH"
+                                    required>
+                                    <option value="">Choose...</option>
+                                    <option *ngFor="let r of RPADetail" value={{r.RPAName}}>{{r.RPAName}}</option>
+                                </select>
+
                             </div>
                             <div class="form-group col-md-6 mt-5">
                                 <label for="" class="form-label float-start">Policy Number*</label>
-                                <input type="text" class="form-control" formControlName="PolicyNumber"
-                                   >
-                               
+                                <input type="text" class="form-control" formControlName="PolicyNumber">
+
 
                             </div>
                         </div>
@@ -486,7 +484,7 @@
                                     Policy</label>
                             </div>
                             <div class="form-group col-md-6 mt-5" style="visibility:hidden;">
-                                <input type="checkbox" class="form-check-input float-start" id="same-address">
+                                <input type="checkbox" class="form-check-input float-start" id="same-address"  formControlName="GroupPolicy">
                                 <label class="form-check-label  float-start" for="same-address">&nbsp; Group
                                     Policy</label>
                             </div>
@@ -494,11 +492,11 @@
                         <div class="form-row">
                             <div class="form-group col-md-6 mt-5">
                                 <label for="" class="form-label float-start">Company / Corporate / Group*</label>
-                                <input type="text" class="form-control" >
+                                <input type="text" class="form-control">
                             </div>
                             <div class="form-group col-md-6 mt-5" style="visibility:hidden;">
                                 <label for="" class="form-label float-start">Company / Corporate / Group*</label>
-                                <input type="text" class="form-control">
+                                <input type="text" class="form-control"  formControlName="GroupPolicy2">
                             </div>
                         </div>
 
@@ -526,23 +524,25 @@
 
                         </div>
                         <!--  <form id="upload_form" enctype="multipart/form-data" method="post"> -->
-                            <div class="form-row row">
-                                <div class="card form-group col-sm-2 col-md-2 mx-3 my-3 p-0" *ngFor="let p of doclist,let i=index">
-                                    <div class="card-body">
-                                        <h6 class="mb-2 text-muted uploadtextb">{{p.docname}}</h6>
-                                        <!-- <p class="card-text">  <input type="file" (change)="fileChange($event)" /></p> -->
-                                        <div class="progress" id=progress_{{i}} *ngIf="progress && currentupload == i" >
-                                          <div class="progress-bar"  [style.width]="progress + '%'">{{progress}}%</div>
-                                        </div>
-                                        <h3 id="status_{{i}}" class="uploadtextc"></h3>
-                                        <div style="text-align:center;">
-                                            <!-- (click)="uploadAndProgressSingle()" -->
-                                            <!-- <button type="file" (change)="fileChange($event)"  class="next action-button float-end mt-3">Upload</button> -->
-                                            <label class="filelabel">Upload<input type="file"(change)="fileChange($event,i)"> </label>
-                                        </div>
-                                      </div>
+                        <div class="form-row row">
+                            <div class="card form-group col-sm-2 col-md-2 mx-3 my-3 p-0"
+                                *ngFor="let p of doclist,let i=index">
+                                <div class="card-body">
+                                    <h6 class="mb-2 text-muted uploadtextb">{{p.docname}}</h6>
+                                    <!-- <p class="card-text">  <input type="file" (change)="fileChange($event)" /></p> -->
+                                    <div class="progress" id=progress_{{i}} *ngIf="progress && currentupload == i">
+                                        <div class="progress-bar" [style.width]="progress + '%'">{{progress}}%</div>
+                                    </div>
+                                    <h3 id="status_{{i}}" class="uploadtextc"></h3>
+                                    <div style="text-align:center;">
+                                        <!-- (click)="uploadAndProgressSingle()" -->
+                                        <!-- <button type="file" (change)="fileChange($event)"  class="next action-button float-end mt-3">Upload</button> -->
+                                        <label class="filelabel">Upload<input type="file"
+                                                (change)="fileChange($event,i)"> </label>
+                                    </div>
                                 </div>
                             </div>
+                        </div>
                         <!-- </form> -->
 
 

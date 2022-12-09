@@ -62,7 +62,9 @@ export class CreatclaimComponent implements OnInit {
   filestatus:any;currentupload:any;
   ActiveStage :any;
   progress :any =0;
- 
+  insuaranceCompanyDetail:any;
+  RPADetail:any;
+  TPADetail:any;
   ngOnInit(): void {
     let stagename = this.route.snapshot.params['stagename'];
     this.ActiveStage = stagename
@@ -70,13 +72,13 @@ export class CreatclaimComponent implements OnInit {
     nice_Select();
     this.todaysdate = new Date().getFullYear() + '-' + ('0' + (new Date().getMonth() + 1)).slice(-2) + '-' + ('0' + new Date().getDate()).slice(-2);
     console.log(this.todaysdate)
-    this.mobilenumber=0;
+   
     this.ClaimForm = this.fb.group({
 
       Fname: [null, Validators.required],
       Mname: [null, Validators.required],
       Lname: ['', Validators.required],
-      MobileNo: ['', Validators.required, Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")],
+      MobileNo: [['', Validators.required,  Validators.maxLength(10)]],
       PHUHID: ['',],
       Gender: ['', Validators.required],
       DOB: ['',],
@@ -120,14 +122,14 @@ export class CreatclaimComponent implements OnInit {
     })
 
     this.InsuaranceForm = this.fb.group({
-      InsuranceCompany: ['',],
-      TPA: ['',],
-      TPAID: ['',],
-      PolicyHolder: ['',],
-      RelationOPH: ['',],
-      PolicyNumber: ['',],
-      GroupPolicy: ['',],
-      GroupPolicy2: ['',],
+      InsuranceCompany: ['', Validators.required],
+      TPA: ['', Validators.required],
+      TPAID: ['', Validators.required],
+      PolicyHolder: ['', Validators.required],
+      RelationOPH: ['', Validators.required],
+      PolicyNumber: ['', Validators.required],
+      GroupPolicy: ['', Validators.required],
+      GroupPolicy2: ['', Validators.required],
     })
 
     this.DocumentsForm = this.fb.group({
@@ -325,7 +327,10 @@ export class CreatclaimComponent implements OnInit {
       this.procedureDetail = data["procedure"];
       this.OtherCosts = data["Other costs"]
       this.roomsDetail = data["Room category"]
-      //console.log("sdsd", this.GenderDetail);
+      this.insuaranceCompanyDetail= data["Insurance company"]
+      this.TPADetail= data["TPA"]
+      this.RPADetail= data["Relation of patient with policy holder"]
+      // console.log("sdsd", this.insuaranceCompanyDetail);
     })
   }
 
