@@ -18,7 +18,7 @@ export class CreatclaimComponent implements OnInit {
 
   
   IsTypeOfAccident: boolean = false; IspassengerType: boolean = false; IsTypeOfVehicle: boolean = false;
-  admissiondata: any;
+  admissiondata: any; mobilenumber!: number;
   constructor(private fb: FormBuilder, private api: ApiService, private http: HttpClient,
      private httpClient: HttpClient,private route:ActivatedRoute) {
     this.minDateToFinish.subscribe((r: any) => {
@@ -62,6 +62,7 @@ export class CreatclaimComponent implements OnInit {
   filestatus:any;currentupload:any;
   ActiveStage :any;
   progress :any =0;
+ 
   ngOnInit(): void {
     let stagename = this.route.snapshot.params['stagename'];
     this.ActiveStage = stagename
@@ -69,18 +70,18 @@ export class CreatclaimComponent implements OnInit {
     nice_Select();
     this.todaysdate = new Date().getFullYear() + '-' + ('0' + (new Date().getMonth() + 1)).slice(-2) + '-' + ('0' + new Date().getDate()).slice(-2);
     console.log(this.todaysdate)
-
+    this.mobilenumber=0;
     this.ClaimForm = this.fb.group({
 
       Fname: [null, Validators.required],
       Mname: [null, Validators.required],
       Lname: ['', Validators.required],
-      MobileNo: ['', Validators.required,],
+      MobileNo: ['', Validators.required, Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")],
       PHUHID: ['',],
       Gender: ['', Validators.required],
       DOB: ['',],
       Age: ['', Validators.required],
-      Stage: ['',],
+      Stage: [this.ActiveStage,],
       patientprimaryInsured: [true, Validators.required],
       HospitalName: ['', Validators.required],
       DateOfAdmission: ['',],
@@ -169,7 +170,8 @@ export class CreatclaimComponent implements OnInit {
 
   GetDocList(){
     
-      this.httpClient.get("assets/data/doclist.json").subscribe((data:any) => {
+      this.api.getService("assets/data/doclist.json").subscribe((data:any) => {
+       
         this.doclist = [];
         if(this.ActiveStage == "Inital"){
            this.doclist = data["Admission"];
@@ -204,7 +206,7 @@ export class CreatclaimComponent implements OnInit {
   OnClaimselect(event: any) {
     let Claimvalue = event.target.options[event.target.options.selectedIndex].text;
 
-    this.httpClient.get("assets/data/admission.json").subscribe((data: any) => {
+    this.api.getService("assets/data/admission.json").subscribe((data: any) => {
       this.admissiondata = data["Admission"];
       console.log("data", data);
       let Speciality = this.medicalForm.get("Speciality")?.value;
@@ -317,7 +319,7 @@ export class CreatclaimComponent implements OnInit {
  //-----------------Bind all dropdown
   bindDropdown() {
 
-    this.httpClient.get("assets/data/picklist.json").subscribe((data: any) => {
+    this.api.getService("assets/data/picklist.json").subscribe((data: any) => {
 
       this.GenderDetail = data["GenderName"];
       this.procedureDetail = data["procedure"];

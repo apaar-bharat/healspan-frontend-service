@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+
+import { ApiService } from 'src/app/service/api.service';
 @Component({
   selector: 'app-rdashboard',
   templateUrl: './rdashboard.component.html',
@@ -10,10 +11,10 @@ export class RdashboardComponent implements OnInit {
   healspandata:any;
   hospitalData:any;
   ClosedData:any;
-  constructor(private httpClient: HttpClient,) { }
+  constructor(private api:ApiService) { }
 
   ngOnInit(): void {
-    this.httpClient.get("assets/data/sla.json").subscribe((data:any) =>{
+    this.api.getService("assets/data/sla.json").subscribe((data:any) =>{
       // console.log("sdsd",data);
       this.spaData = data["statusdatalist"]
       this.healspandata = data["healspanlist"]

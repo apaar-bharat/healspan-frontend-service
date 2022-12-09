@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+
 import { ApiService } from 'src/app/service/api.service';
 @Component({
   selector: 'app-viewclaim',
@@ -8,12 +8,12 @@ import { ApiService } from 'src/app/service/api.service';
 })
 export class ViewclaimComponent implements OnInit {
 
-  constructor(private httpClient: HttpClient,private api:ApiService) { }
+  constructor(private api:ApiService) { }
   claimdetailData:any;patientinfo:any;medicalData:any;InsuaranceData:any;InitialData:any;EnhancmentData:any;DischargeData:any;
   finalClaim:any;
   ngOnInit(): void {
 
-    this.httpClient.get("assets/data/claimdetail.json").subscribe((data:any) =>{
+    this.api.getService("assets/data/claimdetail.json").subscribe((data:any) =>{
  
       this.claimdetailData = data;
      this.patientinfo=data["PatientInfo"]

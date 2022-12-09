@@ -33,27 +33,30 @@
 
                                 <div class="form-group col-md-3">
                                     <label for="" class="form-label float-start">First name*</label>
-                                    <input type="text" class="form-control" formControlName="Fname"
-                                    [class.is-invalid]="f['Fname'].invalid && (f['Fname'].dirty || f['Fname'].touched)"  placeholder="First Name" required>
+                                    <input type="text" class="form-control" formControlName="Fname" OnlyCharacter
+                                    [class.is-invalid]="f['Fname'].invalid && (f['Fname'].dirty || f['Fname'].touched)"  required>
 
                                 </div>
                                 <div class="form-group col-md-3">
                                     <label for="" class="form-label float-start">Middle name</label>
                                     <input type="text" class="form-control" formControlName="Mname"
-                                     placeholder="Middle Name">
+                                    >
 
                                 </div>
                                 <div class="form-group col-md-3">
                                     <label for="" class="form-label float-start">Last name*</label>
                                     <input type="text" class="form-control" formControlName="Lname"
-                                    [class.is-invalid]="f['Lname'].invalid && (f['Lname'].dirty || f['Lname'].touched)"  placeholder="Last Name" required>
+                                    [class.is-invalid]="f['Lname'].invalid && (f['Lname'].dirty || f['Lname'].touched)"   required>
 
                                 </div>
                                 <div class="form-group col-md-3">
                                     <label for="" class="form-label float-start">Patient Mobile No</label>
                                     <input type="number" class="form-control" formControlName="MobileNo"
-                                    [class.is-invalid]="f['MobileNo'].invalid && (f['MobileNo'].dirty || f['MobileNo'].touched)"  placeholder="Mobile No" required>
-
+                                    [(ngModel)]="mobilenumber " onlyNumber required>
+                                    <div *ngIf="f['MobileNo'].touched && f['MobileNo'].invalid"  class="show-error">
+                                        <div *ngIf="f['MobileNo'].errors?.['required'] && f['MobileNo'].dirty" >please enter mobile number</div>
+                                        <div *ngIf="f['MobileNo'].errors?.['pattern'] && f['MobileNo'].dirty" >please enter 10 digit  mobile number</div>
+                                    </div>
                                 </div>
 
                             </div>
@@ -62,7 +65,7 @@
                                 <div class="form-group col-md-3 mt-5">
                                     <label for="" class="form-label float-start">Patient Hospital UHID</label>
                                     <input type="text" class="form-control" formControlName="PHUHID"
-                                    [class.is-invalid]="f['PHUHID'].invalid && (f['PHUHID'].dirty || f['PHUHID'].touched)"  placeholder="Patient Hospital UHID" required>
+                                    [class.is-invalid]="f['PHUHID'].invalid && (f['PHUHID'].dirty || f['PHUHID'].touched)"  required>
                                 </div>
                                 <div class="form-group col-md-3 mt-5">
                                     <label for="" class="form-label float-start">Gender</label>
@@ -78,13 +81,13 @@
                                 <div class="form-group col-md-3 mt-5">
                                     <label for="" class="form-label float-start">Date Of Birth</label>
                                     <input type="date" class="form-control" formControlName="DOB"
-                                        (input)="ageCalculator()" placeholder="Choose a date" id="dob" [max]="date"
+                                        (input)="ageCalculator()"  id="dob" [max]="date"
                                         required>
                                 </div>
                                 <div class="form-group col-md-3 mt-5">
                                     <label for="" class="form-label float-start">Age*</label>
                                     <input type="text" class="form-control" formControlName="Age" [ngModel]="showAge"
-                                        placeholder="Age" readonly>
+                                        readonly>
                                 </div>
 
                             </div>
@@ -101,7 +104,7 @@
                             <div class="form-row">
                                 <div class="form-group col-md-3 mt-5">
                                     <label for="" class="form-label float-start">Stage*</label>
-                                    <input type="text" class="form-control" formControlName="Stage" placeholder="Stage"
+                                    <input type="text" class="form-control" formControlName="Stage" 
                                         required>
 
                                 </div>
@@ -151,13 +154,13 @@
                                 <div class="form-group col-md-3 mt-5">
                                     <label for="" class="form-label float-start">Cost Per Day</label>
                                     <input type="number" class="form-control" formControlName="CostPD"
-                                    [class.is-invalid]="f['CostPD'].invalid && (f['CostPD'].dirty || f['CostPD'].touched)"  placeholder="Cost Per Day" required>
+                                    [class.is-invalid]="f['CostPD'].invalid && (f['CostPD'].dirty || f['CostPD'].touched)"  required>
 
                                 </div>
                                 <div class="form-group col-md-3 mt-5">
                                     <label for="" class="form-label float-start">Total Room Cost</label>
                                     <input type="number" class="form-control" formControlName="totalRC"
-                                        placeholder="Total Room Cost" required>
+                                        required>
 
                                 </div>
                                 <div class="form-group col-md-3 mt-5">
@@ -176,7 +179,7 @@
                                 <div class="form-group col-md-3 mt-5">
                                     <label for="" class="form-label float-start">Other Costs Estimate</label>
                                     <input type="text" class="form-control" formControlName="OtherCE"
-                                        placeholder="Other Costs Estimate">
+                                       >
 
                                 </div>
                                 <div class="form-group col-md-3 mt-5">
@@ -193,7 +196,7 @@
                                 <div class="form-group col-md-3 mt-5">
                                     <label for="" class="form-label float-start">Inital cost estimate</label>
                                     <input type="text" class="form-control" formControlName="InitialCE"
-                                        placeholder="Inital cost estimate" required>
+                                        required>
 
                                 </div>
                             </div>
@@ -214,13 +217,13 @@
                                 <div class="form-group col-md-3 mt-5">
                                     <label for="" class="form-label float-start">Total Bill Amount</label>
                                     <input type="text" class="form-control" formControlName="TotalBillAmount"
-                                        placeholder="Total Bill Amount" required>
+                                        required>
 
                                 </div>
                                 <div class="form-group col-md-3 mt-5">
                                     <label for="" class="form-label float-start">Claim Amount*</label>
                                     <input type="text" class="form-control" formControlName="ClaimAmount"
-                                        placeholder="Claim Amount" required>
+                                        required>
 
                                 </div>
                             </div>
@@ -230,7 +233,7 @@
 
                     <button type="button" class="previous_button btn btn-lg px-5 float-start mt-5">Exit</button>
                     <button type="button" class="next btn btn-primary btn-lg px-5 float-end mt-5" type="submit"
-                        form="ngForm">Continue</button>
+                       form="ngForm">Continue</button>
 
 
                 </fieldset>
@@ -252,7 +255,7 @@
                             <div class="form-group col-md-3">
                                 <label for="" class="form-label float-start">Procedure</label>
                                 <input type="text" class="form-control" formControlName="Procedures"
-                                    placeholder="Claim Amount" required readonly>
+                                    required readonly>
 
                             </div>
 
@@ -269,7 +272,7 @@
                             <div class="form-group col-md-3 ">
                                 <label for="" class="form-label float-start">Provisional diagnosis</label>
                                 <input type="text" class="form-control" formControlName="Provisionaldiagnosis"
-                                    placeholder="Provisional diagnosis" required>
+                                    required>
 
                             </div>
                             <div class="form-group col-md-3  ">
@@ -289,7 +292,7 @@
                             <div class="form-group col-md-3  mt-5">
                                 <label for="" class="form-label float-start">Provisional diagnosis</label>
                                 <input type="text" class="form-control" formControlName="Provisionaldiagnosis"
-                                    placeholder="Provisional diagnosis" required>
+                                    required>
 
                             </div>
                             <div class="form-group col-md-3 mt-5">
@@ -311,7 +314,7 @@
                             <div class="form-group col-md-3  mt-5">
                                 <label for="" class="form-label float-start">Name of the treating doctor</label>
                                 <input type="text" class="form-control" formControlName="Nameofthetreatingdoctor"
-                                    placeholder="Name of the treating doctor" required>
+                                    required>
 
                             </div>
                            
@@ -321,13 +324,13 @@
                             <div class="form-group col-md-3  mt-5">
                                 <label for="" class="form-label float-start">Dr Resgistration number</label>
                                 <input type="text" class="form-control" formControlName="DrResgistrationnumber"
-                                    placeholder="Dr Resgistration number" required>
+                                    required>
 
                             </div>
                             <div class="form-group col-md-3  mt-5">
                                 <label for="" class="form-label float-start">Qualification of the treatingdoctor</label>
                                 <input type="text" class="form-control" formControlName="Qualificationofthetreatingdoctor"
-                                    placeholder="Qualification of the treatingdoctor" required>
+                                    required>
 
                             </div>
 
@@ -445,12 +448,12 @@
                             </div>
                             <div class="form-group col-md-3">
                                 <label for="" class="form-label float-start">TPA*</label>
-                                <input type="text" class="form-control" formControlName="TPA" placeholder="TPA">
+                                <input type="text" class="form-control" formControlName="TPA" >
                              
                             </div>
                             <div class="form-group col-md-3">
                                 <label for="" class="form-label float-start">TPA ID*</label>
-                                <input type="text" class="form-control" formControlName="TPAID" placeholder="TPA ID">
+                                <input type="text" class="form-control" formControlName="TPAID" >
                                
                             </div>
                         </div>
@@ -458,20 +461,20 @@
                             <div class="form-group col-md-3 mt-5">
                                 <label for="" class="form-label float-start">Policy Holder*</label>
                                 <input type="text" class="form-control" formControlName="PolicyHolder"
-                                    placeholder="Policy Holder">
+                                    >
                                
                             </div>
                             <div class="form-group col-md-3 mt-5">
                                 <label for="" class="form-label float-start">Relation of patient with Policy
                                     Holder*</label>
                                 <input type="text" class="form-control" formControlName="RelationOPH"
-                                    placeholder="Relation of patient with Policy Holder">
+                                   >
                                
                             </div>
                             <div class="form-group col-md-6 mt-5">
                                 <label for="" class="form-label float-start">Policy Number*</label>
                                 <input type="text" class="form-control" formControlName="PolicyNumber"
-                                    placeholder="Policy Number ">
+                                   >
                                
 
                             </div>
@@ -491,11 +494,11 @@
                         <div class="form-row">
                             <div class="form-group col-md-6 mt-5">
                                 <label for="" class="form-label float-start">Company / Corporate / Group*</label>
-                                <input type="text" class="form-control" placeholder="Company / Corporate / Group *">
+                                <input type="text" class="form-control" >
                             </div>
                             <div class="form-group col-md-6 mt-5" style="visibility:hidden;">
                                 <label for="" class="form-label float-start">Company / Corporate / Group*</label>
-                                <input type="text" class="form-control" placeholder="Company / Corporate / Group *">
+                                <input type="text" class="form-control">
                             </div>
                         </div>
 
