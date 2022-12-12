@@ -1,0 +1,106 @@
+{
+    "ClaimID": "12345",
+    "Name": "Vijay Patil",
+    "AdmissionDate": "21 May 2022",
+    "Status": "Pending Docs",
+    "Ailment": "Road accident",
+    "DischargeDate": "31 May 2022",
+    "Stage": "Discharge",
+    "PatientInfo": {
+        "Name": "Vijay Patil",
+        "Age": "23 years",
+        "Gender": "Male",
+        "DOB": "17 Jan 1995",
+        "Status": "Completed"
+    },
+    "MedicalInfo": {
+        "Typeofaccident": "Vehicle slide",
+        "Treatmenttype": "surgical management",
+        "DriverPassenger": "driver",
+        "Typeofvehicle": "speed limit electric scooter",
+        "Status": "Completed"
+    },
+    "InsuranceInfo": {
+        "Insurancecompany": "ABCD Company",
+        "Tpa": "Medi Assit",
+        "Tpaid": "1234567",
+        "Company": "ABCD Company",
+        "Relation": "Self",
+        "Policyholder": "Vijay Patil",
+        "Status": "Completed"
+    },
+    "InitialAuthInfo": {
+        "CreatedOn": "21/12/2021",
+        "EstimatedCost": "INR 40000",
+        "ApprovedCost": "INR 50000",
+        "Status": "Completed",
+        "doclist": [
+            {
+                "DocName": "PAN_patient_12345678_bill.pdf",
+                "Docfile": ""
+            },
+            {
+                "DocName": "PAN_patient_12345678_p12bill.pdf",
+                "Docfile": ""
+            }
+          
+        ]
+    },
+    "Enhancement": {
+        "CreatedOn": "21/12/2021",
+        "EstimatedCost": "INR 40000",
+        "ApprovedCost": "INR 50000",
+        "Status": "Completed",
+        "doclist": [
+            {
+                "DocName": "PAN_patient_12345678_bill.pdf",
+                "Docfile": ""
+            },
+            {
+                "DocName": "PAN_patient_12345678_bill.pdf",
+                "Docfile": ""
+            }
+        ]
+    },
+    "Discharge": {
+        "CreatedOn": "21/12/2021",
+        "TotalBillAmount": "INR 40000",
+        "ClaimAmount": "INR 40000",
+        "Status": "Pending Docs",
+        "doclist": [
+            {
+                "DocName": "PAN_patient_12345678_bill.pdf",
+                "Docfile": ""
+            },
+            {
+                "DocName": "PAN_patient_12345678_bill.pdf",
+                "Docfile": ""
+            },
+            {
+                "DocName": "",
+                "Docfile": ""
+            }
+        ]
+    },
+    "FinalClaim": {
+        "CreatedOn": "21/12/2021",
+        "TotalBillAmount": "INR 40000",
+        "ClaimAmount": "INR 40000",
+        "ApprovedAmount": "INR 40000",
+        "Status": "Approved",
+        "doclist": [
+            {
+                "DocName": "PAN_patient_12345678_bill.pdf",
+                "Docfile": ""
+            },
+            {
+                "DocName": "PAN_patient_12345678_bill.pdf",
+                "Docfile": ""
+            },
+            {
+                "DocName": "PAN_patient_12345678_bill.pdf",
+                "Docfile": ""
+            }
+        ]
+    }
+}

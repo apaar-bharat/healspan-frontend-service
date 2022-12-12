@@ -1,0 +1,123 @@
+{
+    "GenderName": [
+        {
+            "GenderId": "1",
+            "GenderName": "Male"
+        },
+        {
+            "GenderId": "2",
+            "GenderName": "Female"
+        },
+        {
+            "GenderId": "3",
+            "GenderName": "Other"
+        }
+    ],
+    "Other costs": [
+        {
+            "CostId": "1",
+            "OtherCosts": "Medicines"
+        },
+        {
+            "CostId": "2",
+            "OtherCosts": "Consumables"
+        },
+        {
+            "CostId": "3",
+            "OtherCosts": "Consultation"
+        }
+    ],
+    "procedure": [
+        {
+            "ProcedureId": "1",
+            "ProcedureName": " ORIF(Open reduction internal fixation)"
+        },
+        {
+            "ProcedureId": "2",
+            "ProcedureName": " CRIF(Closed reduction internal fixation)"
+        },
+        {
+            "ProcedureId": "3",
+            "ProcedureName": "Renal Dialysis"
+        },
+        {
+            "ProcedureId": "4",
+            "ProcedureName": "Peritoneal Dialysis"
+        }
+    ],
+    "Room category": [
+        {
+            "roomId": "1",
+            "Roomcategory": " Single Private AC"
+        },
+        {
+            "roomId": "2",
+            "Roomcategory": " Delux Room"
+        },
+        {
+            "roomId": "3",
+            "Roomcategory": "Twin Sharing"
+        },
+        {
+            "roomId": "4",
+            "Roomcategory": "Triple Sharing"
+        }
+    ],
+
+    "Insurance company": [
+        {
+            "InsuaranceId": "1",
+            "CompanyName": " Acko General Insurance Ltd."
+        },
+        {
+            "InsuaranceId": "2",
+            "CompanyName": " Aditya Birla Health Insurance Co. Ltd."
+        },
+        {
+            "InsuaranceId": "3",
+            "CompanyName": " Agriculture Insurance Company of India Ltd."
+        },
+        {
+            "InsuaranceId": "4",
+            "CompanyName": " Bajaj Allianz General Insurance Co. Ltd"
+        }
+    ],
+
+    "TPA": [
+        {
+            "TPAId": "1",
+            "TPAName": " Medi Assist Insurance TPA Private Limited"
+        },
+        {
+            "TPAId": "2",
+            "TPAName": " MDIndia Health Insurance TPA Private Limited"
+        },
+        {
+            "TPAId": "3",
+            "TPAName": " Paramount Health Services & Insurance TPA Private Limited"
+        },
+        {
+            "TPAId": "4",
+            "TPAName": " Heritage Health Insurance TPA Private Limited"
+        }
+    ],
+
+    "Relation of patient with policy holder": [
+        {
+            "RPAId": "1",
+            "RPAName": " Self"
+        },
+        {
+            "RPAId": "2",
+            "RPAName": "Spouse"
+        },
+        {
+            "RPAId": "3",
+            "RPAName": "Father"
+        },
+        {
+            "RPAId": "4",
+            "RPAName": "Mother"
+        }
+    ]
+}

@@ -6,13 +6,13 @@
     <div class="offcanvas-body nopadding pdrl0">
       <ul class="navbar-nav justify-content-end flex-grow-1 menutxt heallink">
               <li class="nav-item">
-                <a class="nav-link heallink active" aria-current="page" href="#">Dashboard</a>
+                <a class="nav-link heallink active" aria-current="page" (click)="redirect()">Dashboard</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link heallink" href="#">Reports</a>
+                <a class="nav-link heallink">Reports</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link heallink" href="#">Network</a>
+                <a class="nav-link heallink">Network</a>
               </li>
               
             </ul>
@@ -33,7 +33,7 @@
         </svg>
     </button>
 
-    <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+    <a (click)="redirect()" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none" >
         <span class="fs-4"> Dashboard</span>
     </a>
     <div class="">

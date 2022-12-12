@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { CommonserviceService } from 'src/app/service/commonservice.service';
 
 @Component({
   selector: 'app-header',
@@ -7,9 +9,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router,private commonservice:CommonserviceService) { }
 
   ngOnInit(): void {
   }
 
+
+  redirect(){
+    this.commonservice.redirecttoactivedashboard();
+  }
 }

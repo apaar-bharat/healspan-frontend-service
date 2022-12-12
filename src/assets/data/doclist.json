@@ -1,0 +1,26 @@
+
+
+{
+    "Admission": [
+        { "docname": "Report supporting the diagnosis"},
+        { "docname": "Etiology of ailment/Consultation papers"},
+        { "docname": "Patient address proof (Pref. Aadhar)"},
+        { "docname": "Insured PAN Card"},
+        { "docname": "Claim Form (Part A)"}
+    ],
+    "Discharge": [
+        { "docname": "All the reports pertaining to the lab bills submitted"},
+        { "docname": "All medicine prescription papers for the medicine bills submitted"},
+        { "docname": "Detailed IP costwise itemwise break up bill"},
+        { "docname": "Detailed Discharge Summary"}
+    ],
+    "FinalClaim": [
+        { "docname": "Patient PAN Card"},
+        { "docname": "Patient address proof (Pref. Aadhar)"},
+        { "docname": "Insurance card"},
+        { "docname": "Final Bill"},
+        { "docname": "Claim Form (Part A & B)"},
+        { "docname": "Discharge Summary (with seal & signature)"}
+    ]
+   
+}

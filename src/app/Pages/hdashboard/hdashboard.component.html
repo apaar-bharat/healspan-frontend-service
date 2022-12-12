@@ -9,16 +9,16 @@
 			<div class="modal" role="dialog" id="modalChoice3">
 				<div class="modal-dialog healm" role="document">
 					<ul class="healmenulist">
-						<a href="/createclaim">
+						<a href="/createclaim/Inital">
 							<li class="healmenu">Inital Authorization</li>
 						</a>
-						<a href="#">
+						<a href="/createclaim/Enhance">
 							<li class="healmenu">Enhance</li>
 						</a>
-						<a href="#">
+						<a href="/createclaim/Discharge">
 							<li class="healmenu">Discharge</li>
 						</a>
-						<a href="#">
+						<a href="/createclaim/FinalClaim">
 							<li class="healmenu">Final Claim</li>
 						</a>
 					</ul>
@@ -29,17 +29,17 @@
 	
 	<div class="row mb-3 mt-2 mx-3 text-center">
 
-		<a href="#" class="col-md-3 ps-0 text-decoration-none">
-			<div class="healboxx healshadow1">
-				<p><strong>Initial Authorization</strong> </p>
-				<h2 class="bxt"><strong>14</strong></h2>
-				<p class="bxtt">Pending</p>
+		<a href="#" class="col-md-3 ps-0 text-decoration-none"  *ngFor="let a of statusDetail">
+			<div class="healboxx healshadow1" >
+				<p><strong>{{a.Name}}</strong> </p>
+				<h2 class="bxt"><strong>{{a.Count}}</strong></h2>
+				<p class="bxtt">{{a.Status}}</p>
 			</div>
 		</a>
 
-		<a href="#" class="col-md-3 text-decoration-none">
+		<!-- <a href="#" class="col-md-3 text-decoration-none">
 			<div class="healboxx healshadow1">
-				<p><strong>Enhancement</strong> </p>
+				<p><strong>Enhancement</strong> </p>	
 				<h2 class="bxt"><strong>14</strong></h2>
 				<p class="bxtt">Pending</p>
 			</div>
@@ -59,7 +59,7 @@
 				<h2 class="bxt"><strong>14</strong></h2>
 				<p class="bxtt">Pending</p>
 			</div>
-		</a>
+		</a> -->
 	</div>
 
 	<div class="row mt-5 pt-3 pb-3">
@@ -72,222 +72,78 @@
 
 	<div class="row">
 		<ul class="nav nav-tabs" id="myTab" role="tablist">
-			<li class="nav-item" role="presentation">
+			<li class="nav-item" role="presentation" >
 				<button class="nav-link healspantab active" id="home-tab" data-bs-toggle="tab"
 					data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane"
-					aria-selected="true">Healspan</button>
+					aria-selected="true">Pending</button>
 			</li>
 			<li class="nav-item" role="presentation">
 				<button class="nav-link healspantab" id="profile-tab" data-bs-toggle="tab"
 					data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane"
-					aria-selected="false">Hospital</button>
+					aria-selected="false">Approval</button>
 			</li>
-			<li class="nav-item " role="presentation">
-				<button class="nav-link healspantab" id="contact-tab" data-bs-toggle="tab"
-					data-bs-target="#contact-tab-pane" type="button" role="tab" aria-controls="contact-tab-pane"
-					aria-selected="false">Closed</button>
-			</li>
+			
 		</ul>
 		<div class="tab-content" id="myTabContent">
-			<div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab"
+			<div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0" style="height: 250px; overflow: auto">
+				<table class="table tstriped table-borderless mt-3 healshadow1">
+					<thead>
+						<th>Claim ID</th>
+						<th>Name</th>
+						<th>Ailment</th>
+						<th>Stage</th>
+						<th>Status</th>
+						<th>AdmissionDate</th>
+						<th>DischargeDate</th>
+						<th>Ageing</th>
+						<th>ApprovedAmount</th>
+					</thead>
+					<tbody>
+						<tr *ngFor="let p of aprrovalDataList">
+							<td ><a routerLink="/viewclaim" class="tblink">{{p.ClaimID}}</a></td>
+							<td>{{p.Name}}</td>
+							<td>{{p.Ailment}}</td>
+							<td>{{p.Stage}}</td>
+							<td>{{p.Status}}</td>
+							<td>{{p.AdmissionDate}}</td>
+							<td>{{p.DischargeDate}}</td>
+							<td>{{p.Ageing}}</td>
+							<td>{{p.ApprovedAmount}}</td>
+						</tr>
+						
+					</tbody>
+				</table>
+			</div>
+			<div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" style="height: 250px; overflow: auto"
 				tabindex="0">
 				<table class="table tstriped table-borderless mt-3 healshadow1">
 					<thead>
 						<th>Claim ID</th>
 						<th>Name</th>
 						<th>Ailment</th>
-						<th>SLA</th>
-						<th>P-TAT</th>
 						<th>Stage</th>
-						<th>Approved Amount</th>
-						<th>Hospital</th>
+						<th>Status</th>
+						<th>AdmissionDate</th>
+						<th>DischargeDate</th>
+						<th>Ageing</th>
+						<th>ApprovedAmount</th>
 					</thead>
 					<tbody>
-						<tr>
-							<td><a routerLink="/viewclaim"  class="tblink">12345678</a></td>
-							<td>Saravanan</td>
-							<td>Heart surgery</td>
-							<td>25%</td>
-							<td>-</td>
-							<td>Pending Approval</td>
-							<td>Rs. 11,23,000</td>
-							<td>Sant Parmanand Hospital</td>
-						</tr>
-						<tr>
-							<td><a href="" class="tblink">12345678</a></td>
-							<td>Saravanan</td>
-							<td>Heart surgery</td>
-							<td>25%</td>
-							<td>-</td>
-							<td>Pending Approval</td>
-							<td>Rs. 11,23,000</td>
-							<td>Sant Parmanand Hospital</td>
-						</tr>
-						<tr>
-							<td><a href="" class="tblink">12345678</a></td>
-							<td>Saravanan</td>
-							<td>Heart surgery</td>
-							<td>25%</td>
-							<td>-</td>
-							<td>Pending Approval</td>
-							<td>Rs. 11,23,000</td>
-							<td>Sant Parmanand Hospital</td>
-						</tr>
-						<tr>
-							<td><a href="" class="tblink">12345678</a></td>
-							<td>Saravanan</td>
-							<td>Heart surgery</td>
-							<td>25%</td>
-							<td>-</td>
-							<td>Pending Approval</td>
-							<td>Rs. 11,23,000</td>
-							<td>Sant Parmanand Hospital</td>
-						</tr>
-						<tr>
-							<td><a href="" class="tblink">12345678</a></td>
-							<td>Saravanan</td>
-							<td>Heart surgery</td>
-							<td>25%</td>
-							<td>-</td>
-							<td>Pending Approval</td>
-							<td>Rs. 11,23,000</td>
-							<td>Sant Parmanand Hospital</td>
+						<tr *ngFor="let a of pendingDataList">
+							<td ><a routerLink="/viewclaim" class="tblink">{{a.ClaimID}}</a></td>
+							<td>{{a.Name}}</td>
+							<td>{{a.Ailment}}</td>
+							<td>{{a.Stage}}</td>
+							<td>{{a.Status}}</td>
+							<td>{{a.AdmissionDate}}</td>
+							<td>{{a.DischargeDate}}</td>
+							<td>{{a.Ageing}}</td>
+							<td>{{a.ApprovedAmount}}</td>
 						</tr>
 					</tbody>
 				</table>
 			</div>
-			<div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
-				<table class="table tstriped table-borderless mt-3 healshadow1">
-					<thead>
-						<th>Claim ID</th>
-						<th>Name</th>
-						<th>Ailment</th>
-						<th>SLA</th>
-						<th>P-TAT</th>
-						<th>Stage</th>
-						<th>Approved Amount</th>
-						<th>Hospital</th>
-					</thead>
-					<tbody>
-						<tr>
-							<td>12345678</td>
-							<td>Saravanan</td>
-							<td>Heart surgery</td>
-							<td>25%</td>
-							<td>-</td>
-							<td>Pending Approval</td>
-							<td>Rs. 11,23,000</td>
-							<td>Sant Parmanand Hospital</td>
-						</tr>
-						<tr>
-							<td>12345678</td>
-							<td>Saravanan</td>
-							<td>Heart surgery</td>
-							<td>25%</td>
-							<td>-</td>
-							<td>Pending Approval</td>
-							<td>Rs. 11,23,000</td>
-							<td>Sant Parmanand Hospital</td>
-						</tr>
-						<tr>
-							<td>12345678</td>
-							<td>Saravanan</td>
-							<td>Heart surgery</td>
-							<td>25%</td>
-							<td>-</td>
-							<td>Pending Approval</td>
-							<td>Rs. 11,23,000</td>
-							<td>Sant Parmanand Hospital</td>
-						</tr>
-						<tr>
-							<td>12345678</td>
-							<td>Saravanan</td>
-							<td>Heart surgery</td>
-							<td>25%</td>
-							<td>-</td>
-							<td>Pending Approval</td>
-							<td>Rs. 11,23,000</td>
-							<td>Sant Parmanand Hospital</td>
-						</tr>
-						<tr>
-							<td>12345678</td>
-							<td>Saravanan</td>
-							<td>Heart surgery</td>
-							<td>25%</td>
-							<td>-</td>
-							<td>Pending Approval</td>
-							<td>Rs. 11,23,000</td>
-							<td>Sant Parmanand Hospital</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-			<div class="tab-pane fade" id="contact-tab-pane" role="tabpanel" aria-labelledby="contact-tab" tabindex="0">
-				<table class="table tstriped table-borderless mt-3 healshadow1">
-					<thead>
-						<th>Claim ID</th>
-						<th>Name</th>
-						<th>Ailment</th>
-						<th>SLA</th>
-						<th>P-TAT</th>
-						<th>Stage</th>
-						<th>Approved Amount</th>
-						<th>Hospital</th>
-					</thead>
-					<tbody>
-						<tr>
-							<td>12345678</td>
-							<td>Saravanan</td>
-							<td>Heart surgery</td>
-							<td>25%</td>
-							<td>-</td>
-							<td>Pending Approval</td>
-							<td>Rs. 11,23,000</td>
-							<td>Sant Parmanand Hospital</td>
-						</tr>
-						<tr>
-							<td>12345678</td>
-							<td>Saravanan</td>
-							<td>Heart surgery</td>
-							<td>25%</td>
-							<td>-</td>
-							<td>Pending Approval</td>
-							<td>Rs. 11,23,000</td>
-							<td>Sant Parmanand Hospital</td>
-						</tr>
-						<tr>
-							<td>12345678</td>
-							<td>Saravanan</td>
-							<td>Heart surgery</td>
-							<td>25%</td>
-							<td>-</td>
-							<td>Pending Approval</td>
-							<td>Rs. 11,23,000</td>
-							<td>Sant Parmanand Hospital</td>
-						</tr>
-						<tr>
-							<td>12345678</td>
-							<td>Saravanan</td>
-							<td>Heart surgery</td>
-							<td>25%</td>
-							<td>-</td>
-							<td>Pending Approval</td>
-							<td>Rs. 11,23,000</td>
-							<td>Sant Parmanand Hospital</td>
-						</tr>
-						<tr>
-							<td>12345678</td>
-							<td>Saravanan</td>
-							<td>Heart surgery</td>
-							<td>25%</td>
-							<td>-</td>
-							<td>Pending Approval</td>
-							<td>Rs. 11,23,000</td>
-							<td>Sant Parmanand Hospital</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
+		
 		</div>
 	</div>
 </div>

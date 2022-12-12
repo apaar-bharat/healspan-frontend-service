@@ -108,8 +108,8 @@ body{font-family:Nunito-Regular !important;}
 .bxtt {color: #343A40;}
   
 
-.healspantab {padding:20px 0px; border:none !important; width:147px; font-size:24px !important; color:#757575 !important;}
-.healspantab.active{ background-image: url("../img/Rectangle-194.png") !important; background-repeat: no-repeat !important; background-position: bottom !important; color:#000000 !important;}
+.healspantab {padding:20px 0px; border:none !important; width:147px; margin-right: 35px !important; font-size:24px !important; color:#757575 !important;}
+.healspantab.active{ background-image: url("../img/Rectangle-194.png") !important; background-repeat: no-repeat !important; background-position: bottom !important; color:#000000 !important}
 .healspantab {padding:20px 30px; border:none !important;}
 
 .vtabborder {border:1px solid #cccccc; border-radius: 12px 0px 0px 12px;} 
@@ -161,7 +161,7 @@ thead {background-color:#4c9eaa; color:#ffffff;}
     top: -54px;
     position: relative;
 	border:1px solid #4C9EAA; border-radius: 0px 0px 12px 12px; background-color: #e6f9f6;} */
-.uploadpro {width: 200px;
+.uploadpro {width: 100%;
     
     margin-bottom: 50px;
     height:54px;
@@ -230,7 +230,7 @@ text-align:center;
   text-align: center;
   position: relative;
   padding-top: 50px;
-  min-height: 820px;
+  min-height: 920px;
 /*   max-width: 810px; */
   margin: 0 auto;
  /*  background: #ffffff; */
@@ -482,7 +482,7 @@ text-align:center;
   list-style-type: none;
   color: #99a2a8;
   font-size: 9px;
-  width: calc(100%/4);
+  width: calc(100%/5);
   float: left;
   position: relative;
   font: 500 13px/1 "Roboto", sans-serif;
@@ -495,6 +495,9 @@ text-align:center;
 }
 .multi_step_form #msform #progressbar li:nth-child(4):before {
   content: "4";
+}
+.multi_step_form #msform #progressbar li:nth-child(5):before {
+  content: "5";
 }
 .multi_step_form #msform #progressbar li:before {
   content: "1";

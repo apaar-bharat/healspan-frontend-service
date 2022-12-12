@@ -1,0 +1,357 @@
+{
+    "statusdatalist" :[
+        {
+            "Name": "SLA < 25%",
+            "Count": "14"
+        },
+        {
+            "Name": "SLA 25%-50%",
+            "Count": "12"        
+        },
+        {
+            "Name": "SLA 50%-75%",
+            "Count": "8"
+        },
+        {
+            "Name": "SLA 75%-100%",
+            "Count": "14"
+        },
+        {
+            "Name": "SLA > 100%",
+            "Count": "0"
+        }
+
+    ],
+    "healspanlist": [
+      {
+        "ClaimID": 123456,
+        "Name": "Vijay",
+        "Ailment": "Heart Surgery",
+        "SLA":"25%",
+        "PTAT":"-",
+        "Stage": "Enhancement",
+        "Status": "PendingApproval",
+        "ApprovedAmount": "Rs.11,23,000",
+        "Hospital": "KEM Hospital"
+      },
+      {
+        "ClaimID": 123457,
+        "Name": "Vijay",
+        "Ailment": "Heart Surgery",
+        "SLA":"25%",
+        "PTAT":"-",
+        "Stage": "Enhancement",
+        "Status": "PendingApproval",
+        "ApprovedAmount": "Rs.11,23,001",
+        "Hospital": "City Hospital"
+      },
+      {
+        "ClaimID": 123458,
+        "Name": "Vijay",
+        "Ailment": "Heart Surgery",
+        "SLA":"25%",
+        "PTAT":"-",
+        "Stage": "Enhancement",
+        "Status": "PendingApproval",
+        "ApprovedAmount": "Rs.11,23,002",
+        "Hospital": "City Hospital"
+      },
+      {
+        "ClaimID": 123459,
+        "Name": "Vijay",
+        "Ailment": "Heart Surgery",
+        "SLA":"25%",
+        "PTAT":"-",
+        "Stage": "Enhancement",
+        "Status": "PendingApproval",
+        "ApprovedAmount": "Rs.11,23,003",
+        "Hospital": "City Hospital"
+      },
+      {
+        "ClaimID": 123460,
+        "Name": "Vijay",
+        "Ailment": "Heart Surgery",
+        "SLA":"25%",
+        "PTAT":"-",
+        "Stage": "Enhancement",
+        "Status": "PendingApproval",
+        "ApprovedAmount": "Rs.11,23,004",
+        "Hospital": "City Hospital"
+
+      },
+      {
+        "ClaimID": 123461,
+        "Name": "Vijay",
+        "Ailment": "Heart Surgery",
+        "SLA":"25%",
+        "PTAT":"-",
+        "Stage": "Enhancement",
+        "Status": "PendingApproval",
+        "ApprovedAmount": "Rs.11,23,005",
+        "Hospital": "City Hospital"
+
+      },
+      {
+        "ClaimID": 123462,
+        "Name": "Vijay",
+        "Ailment": "Heart Surgery",
+        "SLA":"25%",
+        "PTAT":"-",
+        "Stage": "Enhancement",
+        "Status": "PendingApproval",
+        "ApprovedAmount": "Rs.11,23,006",
+        "Hospital": "City Hospital"
+      },
+      {
+        "ClaimID": 123463,
+        "Name": "Vijay",
+        "Ailment": "Heart Surgery",
+        "SLA":"25%",
+        "PTAT":"-",
+        "Stage": "Enhancement",
+        "Status": "PendingApproval",
+        "ApprovedAmount": "Rs.11,23,007",
+        "Hospital": "City Hospital"
+      },
+      {
+        "ClaimID": 123464,
+        "Name": "Vijay",
+        "Ailment": "Heart Surgery",
+        "SLA":"25%",
+        "PTAT":"-",
+        "Stage": "Enhancement",
+        "Status": "PendingApproval",
+        "ApprovedAmount": "Rs.11,23,008",
+        "Hospital": "City Hospital"
+      },
+      {
+        "ClaimID": 123465,
+        "Name": "Vijay",
+        "Ailment": "Heart Surgery",
+        "SLA":"25%",
+        "PTAT":"-",
+        "Stage": "Enhancement",
+        "Status": "PendingApproval",
+        "ApprovedAmount": "Rs.11,23,009",
+        "Hospital": "City Hospital"
+
+      },
+      {
+        "ClaimID": 123466,
+        "Name": "Vijay",
+        "Ailment": "Heart Surgery",
+        "SLA":"25%",
+        "PTAT":"-",
+        "Stage": "Enhancement",
+        "Status": "PendingApproval",
+        "ApprovedAmount": "Rs.11,23,010",
+        "Hospital": "City Hospital"
+
+      },
+      {
+        "ClaimID": 123467,
+        "Name": "Vijay",
+        "Ailment": "Heart Surgery",
+        "SLA":"25%",
+        "PTAT":"-",
+        "Stage": "Enhancement",
+        "Status": "PendingApproval",
+        "ApprovedAmount": "Rs.11,23,011",
+        "Hospital": "City Hospital"
+
+      },
+      {
+        "ClaimID": 123468,
+        "Name": "Vijay",
+        "Ailment": "Heart Surgery",
+        "SLA":"25%",
+        "PTAT":"-",
+        "Stage": "Enhancement",
+        "Status": "PendingApproval",
+        "ApprovedAmount": "Rs.11,23,012",
+        "Hospital": "City Hospital"
+
+      },
+      {
+        "ClaimID": 123469,
+        "Name": "Vijay",
+        "Ailment": "Heart Surgery",
+        "SLA":"25%",
+        "PTAT":"-",
+        "Stage": "Enhancement",
+        "Status": "PendingApproval",
+        "ApprovedAmount": "Rs.11,23,013",
+        "Hospital": "City Hospital"
+
+      },
+      {
+        "ClaimID": 123470,
+        "Name": "Vijay",
+        "Ailment": "Heart Surgery",
+        "SLA":"25%",
+        "PTAT":"-",
+        "Stage": "Enhancement",
+        "Status": "PendingApproval",
+        "ApprovedAmount": "Rs.11,23,014",
+        "Hospital": "City Hospital"
+
+      },
+      {
+        "ClaimID": 123471,
+        "Name": "Vijay",
+        "Ailment": "Heart Surgery",
+        "SLA":"25%",
+        "PTAT":"-",
+        "Stage": "Enhancement",
+        "Status": "PendingApproval",
+        "ApprovedAmount": "Rs.11,23,015",
+        "Hospital": "City Hospital"
+
+      }
+    ],
+    "hospitallist": [
+          {
+            "ClaimID": 123461,
+            "Name": "Vijay",
+            "Ailment": "Heart Surgery",
+            "SLA":"25%",
+            "PTAT":"-",
+            "Stage": "Enhancement",
+            "Status": "PendingApproval",
+            "ApprovedAmount": "Rs.11,23,005",
+            "Hospital": "City Hospital"
+    
+          },
+          {
+            "ClaimID": 123462,
+            "Name": "Vijay",
+            "Ailment": "Heart Surgery",
+            "SLA":"25%",
+            "PTAT":"-",
+            "Stage": "Enhancement",
+            "Status": "PendingApproval",
+            "ApprovedAmount": "Rs.11,23,006",
+            "Hospital": "City Hospital"
+          },
+          {
+            "ClaimID": 123463,
+            "Name": "Vijay",
+            "Ailment": "Heart Surgery",
+            "SLA":"25%",
+            "PTAT":"-",
+            "Stage": "Enhancement",
+            "Status": "PendingApproval",
+            "ApprovedAmount": "Rs.11,23,007",
+            "Hospital": "City Hospital"
+          },
+          {
+            "ClaimID": 123464,
+            "Name": "Vijay",
+            "Ailment": "Heart Surgery",
+            "SLA":"25%",
+            "PTAT":"-",
+            "Stage": "Enhancement",
+            "Status": "PendingApproval",
+            "ApprovedAmount": "Rs.11,23,008",
+            "Hospital": "City Hospital"
+          },
+          {
+            "ClaimID": 123465,
+            "Name": "Vijay",
+            "Ailment": "Heart Surgery",
+            "SLA":"25%",
+            "PTAT":"-",
+            "Stage": "Enhancement",
+            "Status": "PendingApproval",
+            "ApprovedAmount": "Rs.11,23,009",
+            "Hospital": "City Hospital"
+    
+          },
+          {
+            "ClaimID": 123466,
+            "Name": "Vijay",
+            "Ailment": "Heart Surgery",
+            "SLA":"25%",
+            "PTAT":"-",
+            "Stage": "Enhancement",
+            "Status": "PendingApproval",
+            "ApprovedAmount": "Rs.11,23,010",
+            "Hospital": "City Hospital"
+    
+          }
+         
+      ],
+    "closeslist": [
+        {
+          "ClaimID": 123461,
+          "Name": "Vijay",
+          "Ailment": "Heart Surgery",
+          "SLA":"25%",
+          "PTAT":"-",
+          "Stage": "Enhancement",
+          "Status": "PendingApproval",
+          "ApprovedAmount": "Rs.11,23,005",
+          "Hospital": "City Hospital"
+  
+        },
+        {
+          "ClaimID": 123462,
+          "Name": "Vijay",
+          "Ailment": "Heart Surgery",
+          "SLA":"25%",
+          "PTAT":"-",
+          "Stage": "Enhancement",
+          "Status": "PendingApproval",
+          "ApprovedAmount": "Rs.11,23,006",
+          "Hospital": "City Hospital"
+        },
+        {
+          "ClaimID": 123463,
+          "Name": "Vijay",
+          "Ailment": "Heart Surgery",
+          "SLA":"25%",
+          "PTAT":"-",
+          "Stage": "Enhancement",
+          "Status": "PendingApproval",
+          "ApprovedAmount": "Rs.11,23,007",
+          "Hospital": "City Hospital"
+        },
+        {
+          "ClaimID": 123464,
+          "Name": "Vijay",
+          "Ailment": "Heart Surgery",
+          "SLA":"25%",
+          "PTAT":"-",
+          "Stage": "Enhancement",
+          "Status": "PendingApproval",
+          "ApprovedAmount": "Rs.11,23,008",
+          "Hospital": "City Hospital"
+        },
+        {
+          "ClaimID": 123465,
+          "Name": "Vijay",
+          "Ailment": "Heart Surgery",
+          "SLA":"25%",
+          "PTAT":"-",
+          "Stage": "Enhancement",
+          "Status": "PendingApproval",
+          "ApprovedAmount": "Rs.11,23,009",
+          "Hospital": "City Hospital"
+  
+        },
+        {
+          "ClaimID": 123466,
+          "Name": "Vijay",
+          "Ailment": "Heart Surgery",
+          "SLA":"25%",
+          "PTAT":"-",
+          "Stage": "Enhancement",
+          "Status": "PendingApproval",
+          "ApprovedAmount": "Rs.11,23,010",
+          "Hospital": "City Hospital"
+  
+        }
+       
+    ]
+
+}
