@@ -1,0 +1,248 @@
+{
+    "insurance_company_master": [
+        {
+            "id": 2,
+            "name": "Aditya Birla Health Insurance Co. Ltd.",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01T12:12:42.964785"
+        },
+        {
+            "id": 3,
+            "name": "Agriculture Insurance Company of India Ltd.",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01T12:12:42.964785"
+        },
+        {
+            "id": 4,
+            "name": "Bajaj Allianz General Insurance Co. Ltd",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01T12:12:42.964785"
+        },
+        {
+            "id": 5,
+            "name": "Cholamandalam MS General Insurance Co. Ltd.",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01T12:12:42.964785"
+        }
+    ],
+
+
+    "room_master": [
+        {
+            "id": 1,
+            "category": "Single Private AC",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01T12:23:15.329326"
+        },
+        {
+            "id": 2,
+            "category": "Delux Room",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01T12:23:15.329326"
+        },
+        {
+            "id": 3,
+            "category": "Twin Sharing",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01T12:23:15.329326"
+        },
+        {
+            "id": 4,
+            "category": "Triple Sharing",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01T12:23:15.329326"
+        }
+       
+    ],
+    "tpa_master": [
+        {
+            "id": 1,
+            "name": "Medvantage Insurance TPA Private Limited (formerly known as United Health Care Parekh Insurance TPA Private Limited)",
+            "contactNo": 0,
+            "emailId": " ",
+            "createdBy": 1,
+            "createdDatetime": "2022-12-01T00:00:00",
+            "modifiedBy": 0,
+            "modifiedDatetime": null,
+            "active": true
+        },
+        {
+            "id": 2,
+            "name": "Medi Assist Insurance TPA Private Limited",
+            "contactNo": 0,
+            "emailId": " ",
+            "createdBy": 1,
+            "createdDatetime": "2022-12-01T00:00:00",
+            "modifiedBy": 0,
+            "modifiedDatetime": null,
+            "active": true
+        },
+        {
+            "id": 3,
+            "name": "MDIndia Health Insurance TPA Private Limited",
+            "contactNo": 0,
+            "emailId": " ",
+            "createdBy": 1,
+            "createdDatetime": "2022-12-01T00:00:00",
+            "modifiedBy": 0,
+            "modifiedDatetime": null,
+            "active": true
+        },
+        {
+            "id": 4,
+            "name": "Paramount Health Services & Insurance TPA Private Limited",
+            "contactNo": 0,
+            "emailId": " ",
+            "createdBy": 1,
+            "createdDatetime": "2022-12-01T00:00:00",
+            "modifiedBy": 0,
+            "modifiedDatetime": null,
+            "active": true
+        }
+   
+    ],
+    "other_cost_master": [
+        {
+            "id": 7,
+            "costType": "Medicines",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01T11:49:38.300246"
+        },
+        {
+            "id": 8,
+            "costType": "Consumables",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01T11:49:38.300246"
+        },
+        {
+            "id": 9,
+            "costType": "Consultation",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01T11:49:38.300246"
+        },
+        {
+            "id": 10,
+            "costType": "OT Charges",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01T11:49:38.300246"
+        }
+       
+    ],
+    "medical_procedure_master": [
+        {
+            "id": 1,
+            "name": "ORIF(Open reduction internal fixation)",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01T12:02:30.138336"
+        },
+        {
+            "id": 2,
+            "name": "CRIF(Closed reduction internal fixation)",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01T12:02:30.138336"
+        },
+        {
+            "id": 3,
+            "name": "Renal Dialysis",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01T12:02:30.138336"
+        },
+        {
+            "id": 4,
+            "name": "Peritoneal Dialysis",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01T12:02:30.138336"
+        }
+    ],
+    "diagnosis_speciality_master": [
+        {
+            "id": 1,
+            "name": "Neurology",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01"
+        },
+        {
+            "id": 2,
+            "name": "Cardiology",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01"
+        },
+        {
+            "id": 3,
+            "name": "CardioRespiratory",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01"
+        },
+        {
+            "id": 4,
+            "name": "Opthalmology",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01"
+        }
+    ],
+    "hospital_master": [
+        {
+            "name": "DSF",
+            "address": "DZFS",
+            "contactPerson": "DFSVGSDF",
+            "contactNumber": 5463453456,
+            "hospitalUhId": 2156564561,
+            "createdBy": 1,
+            "createdDateTime": "2022-12-02T05:32:05.776613",
+            "id": 1
+        }
+    ],
+    "cronic_illness_master": [
+        {
+            "id": 2,
+            "name": "acute illness",
+            "createdBy": 1,
+            "createdDatetime": "2022-12-01T17:49:58.714937"
+        },
+        {
+            "id": 3,
+            "name": "sub acute illnes",
+            "createdBy": 1,
+            "createdDatetime": "2022-12-01T17:49:58.714937"
+        },
+        {
+            "id": 4,
+            "name": "acute onset chronic illness",
+            "createdBy": 1,
+            "createdDatetime": "2022-12-01T17:49:58.714937"
+        }
+      
+    ],
+    "diagnosis_master": [
+        {
+            "id": 24,
+            "name": "Road traffic accident",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01T11:59:45.535981"
+        },
+        {
+            "id": 25,
+            "name": "Respiratory illness",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01T11:59:45.535981"
+        },
+        {
+            "id": 26,
+            "name": "Chronic Kidney Disease",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01T11:59:45.535981"
+        },
+        {
+            "id": 27,
+            "name": "Angina/Chest Pain",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01T11:59:45.535981"
+        },
+        {
+            "id": 28,
+            "name": "Cancer",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01T11:59:45.535981"
+        }
+    ]
+}

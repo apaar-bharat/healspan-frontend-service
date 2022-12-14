@@ -9,6 +9,7 @@ import { RdashboardComponent } from './Pages/rdashboard/rdashboard.component';
 import { ResetpasswordComponent } from './Pages/resetpassword/resetpassword.component';
 import { SlaStatusComponent } from './Pages/sla-status/sla-status.component';
 import { ViewclaimComponent } from './Pages/viewclaim/viewclaim.component';
+import { AuthGuard } from './service/auth.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -16,7 +17,7 @@ const routes: Routes = [
   { path: '',
    component: DefaultComponent,
    children: [
-      { path: 'hdashboard',component: HdashboardComponent},
+      { path: 'hdashboard', canActivate:[AuthGuard],component: HdashboardComponent},
       { path: 'rdashboard',component: RdashboardComponent},
       { path: 'createclaim/:stagename',component:CreatclaimComponent},
       { path: 'viewclaim',component: ViewclaimComponent},

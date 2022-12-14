@@ -12,6 +12,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import { environment } from 'src/environments/environment';
 import { ApiService } from './service/api.service';
 import { SlaStatusComponent } from './Pages/sla-status/sla-status.component';
+import { AuthGuard } from './service/auth.guard';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,7 @@ import { SlaStatusComponent } from './Pages/sla-status/sla-status.component';
     MatFormFieldModule,
     HttpClientModule
   ],
-  providers: [ApiService,],
+  providers: [ApiService,AuthGuard],
   bootstrap: [AppComponent],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
 })

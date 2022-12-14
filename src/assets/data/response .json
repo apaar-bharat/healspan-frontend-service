@@ -1,0 +1,1470 @@
+{
+    "claim_stage_master": [
+        {
+            "id": 1,
+            "name": "Initial Authorisation",
+            "description": null,
+            "createdBy": 1,
+            "createdDateTime": "2022-12-02T13:24:24.213271",
+            "modifiedBy": null,
+            "modifiedDateTime": null,
+            "active": true
+        },
+        {
+            "id": 2,
+            "name": "Enhancement",
+            "description": null,
+            "createdBy": 1,
+            "createdDateTime": "2022-12-02T13:24:24.213271",
+            "modifiedBy": null,
+            "modifiedDateTime": null,
+            "active": true
+        },
+        {
+            "id": 3,
+            "name": "Discharge",
+            "description": null,
+            "createdBy": 1,
+            "createdDateTime": "2022-12-02T13:24:24.213271",
+            "modifiedBy": null,
+            "modifiedDateTime": null,
+            "active": true
+        },
+        {
+            "id": 4,
+            "name": "Final Claim",
+            "description": null,
+            "createdBy": 1,
+            "createdDateTime": "2022-12-02T13:24:24.213271",
+            "modifiedBy": null,
+            "modifiedDateTime": null,
+            "active": true
+        }
+    ],
+    "cronic_illness_master": [
+        {
+            "id": 2,
+            "name": "acute illness",
+            "createdBy": 1,
+            "createdDatetime": "2022-12-01T17:49:58.714937"
+        },
+        {
+            "id": 3,
+            "name": "sub acute illnes",
+            "createdBy": 1,
+            "createdDatetime": "2022-12-01T17:49:58.714937"
+        },
+        {
+            "id": 4,
+            "name": "acute onset chronic illness",
+            "createdBy": 1,
+            "createdDatetime": "2022-12-01T17:49:58.714937"
+        },
+        {
+            "id": 5,
+            "name": "Chronic Illnesses",
+            "createdBy": 1,
+            "createdDatetime": "2022-12-01T17:49:58.714937"
+        }
+    ],
+    "document_type_master": [
+        {
+            "id": 1,
+            "name": "abcd",
+            "description": "null",
+            "createdBy": 1,
+            "createdDatetime": "2022-12-06T05:30:00",
+            "modifiedBy": null,
+            "modifiedDatetime": null,
+            "active": true
+        }
+    ],
+    "hospital_master": [
+        {
+            "name": "DSF",
+            "address": "DZFS",
+            "contactPerson": "DFSVGSDF",
+            "contactNumber": 5463453456,
+            "hospitalUhId": 2156564561,
+            "createdBy": 1,
+            "createdDateTime": "2022-12-02T05:32:05.776613",
+            "id": 1
+        }
+    ],
+    "diagnosis_speciality_master": [
+        {
+            "id": 1,
+            "name": "Neurology",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01"
+        },
+        {
+            "id": 2,
+            "name": "Cardiology",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01"
+        },
+        {
+            "id": 3,
+            "name": "CardioRespiratory",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01"
+        },
+        {
+            "id": 4,
+            "name": "Opthalmology",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01"
+        },
+        {
+            "id": 5,
+            "name": "Nephrology",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01"
+        },
+        {
+            "id": 6,
+            "name": "Endocrinology",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01"
+        },
+        {
+            "id": 7,
+            "name": "Muskuloskeletal",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01"
+        },
+        {
+            "id": 8,
+            "name": "Obs and Gynacecology",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01"
+        },
+        {
+            "id": 9,
+            "name": "General Medicine",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01"
+        },
+        {
+            "id": 10,
+            "name": "General Surgery",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01"
+        }
+    ],
+    "medical_procedure_master": [
+        {
+            "id": 1,
+            "name": "ORIF(Open reduction internal fixation)",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01T12:02:30.138336"
+        },
+        {
+            "id": 2,
+            "name": "CRIF(Closed reduction internal fixation)",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01T12:02:30.138336"
+        },
+        {
+            "id": 3,
+            "name": "Renal Dialysis",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01T12:02:30.138336"
+        },
+        {
+            "id": 4,
+            "name": "Peritoneal Dialysis",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01T12:02:30.138336"
+        },
+        {
+            "id": 5,
+            "name": "Coronary Angioplasty (PTCA)/Angioplasty+Stent",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01T12:02:30.138336"
+        },
+        {
+            "id": 6,
+            "name": "Oral Chemotherapy",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01T12:02:30.138336"
+        },
+        {
+            "id": 7,
+            "name": "FTND(Normal Delivery)",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01T12:02:30.138336"
+        },
+        {
+            "id": 8,
+            "name": "LSCS(Caesarean section)",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01T12:02:30.138336"
+        },
+        {
+            "id": 9,
+            "name": "Open/MESH repair",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01T12:02:30.138336"
+        },
+        {
+            "id": 10,
+            "name": "MICS+IOL",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01T12:02:30.138336"
+        },
+        {
+            "id": 11,
+            "name": "PHACO+IOL",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01T12:02:30.138336"
+        },
+        {
+            "id": 12,
+            "name": "Dilatation and Curettage",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01T12:02:30.138336"
+        },
+        {
+            "id": 13,
+            "name": "Total Knee Replacement",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01T12:02:30.138336"
+        },
+        {
+            "id": 14,
+            "name": "CABG Cornary Artery Bypass Graft",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01T12:02:30.138336"
+        },
+        {
+            "id": 15,
+            "name": "ACL recontruction",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01T12:02:30.138336"
+        },
+        {
+            "id": 16,
+            "name": "Cholecystectomy",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01T12:02:30.138336"
+        },
+        {
+            "id": 17,
+            "name": "Appendicectomy",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01T12:02:30.138336"
+        },
+        {
+            "id": 18,
+            "name": "TURP Transurethral resection of Prostrate",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01T12:02:30.138336"
+        },
+        {
+            "id": 19,
+            "name": "polypectomy",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01T12:02:30.138336"
+        },
+        {
+            "id": 20,
+            "name": "cervical cerclage",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01T12:02:30.138336"
+        },
+        {
+            "id": 21,
+            "name": "Lithotripsy",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01T12:02:30.138336"
+        },
+        {
+            "id": 22,
+            "name": "Tonsilectomy",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01T12:02:30.138336"
+        },
+        {
+            "id": 23,
+            "name": "Cystectomy",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01T12:02:30.138336"
+        },
+        {
+            "id": 24,
+            "name": "Debridement",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01T12:02:30.138336"
+        },
+        {
+            "id": 25,
+            "name": "Haemorrhoidectomy",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01T12:02:30.138336"
+        },
+        {
+            "id": 26,
+            "name": "Hysterectomy, Bilateral Salpingo opherectomy",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01T12:02:30.138336"
+        },
+        {
+            "id": 27,
+            "name": "LASIK",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01T12:02:30.138336"
+        },
+        {
+            "id": 28,
+            "name": "Circumcission",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01T12:02:30.138336"
+        },
+        {
+            "id": 29,
+            "name": "Laprotomy",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01T12:02:30.138336"
+        },
+        {
+            "id": 30,
+            "name": "Open Heart surgery",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01T12:02:30.138336"
+        }
+    ],
+    "user_type_master": [
+        {
+            "id": 1,
+            "userType": "System",
+            "createdBy": 1,
+            "datetime": "2022-12-02T08:00:33.406357"
+        },
+        {
+            "id": 2,
+            "userType": "Hospital User",
+            "createdBy": 1,
+            "datetime": "2022-12-02T08:00:33.406357"
+        },
+        {
+            "id": 3,
+            "userType": "Healspan User",
+            "createdBy": 1,
+            "datetime": "2022-12-02T08:00:33.406357"
+        },
+        {
+            "id": 4,
+            "userType": "Admin",
+            "createdBy": 1,
+            "datetime": "2022-12-02T08:00:33.406357"
+        },
+        {
+            "id": 5,
+            "userType": "Courier Executive",
+            "createdBy": 1,
+            "datetime": "2022-12-02T08:00:33.406357"
+        }
+    ],
+    "other_cost_master": [
+        {
+            "id": 7,
+            "costType": "Medicines",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01T11:49:38.300246"
+        },
+        {
+            "id": 8,
+            "costType": "Consumables",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01T11:49:38.300246"
+        },
+        {
+            "id": 9,
+            "costType": "Consultation",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01T11:49:38.300246"
+        },
+        {
+            "id": 10,
+            "costType": "OT Charges",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01T11:49:38.300246"
+        },
+        {
+            "id": 11,
+            "costType": "Surgeon & Anasthesia",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01T11:49:38.300246"
+        },
+        {
+            "id": 12,
+            "costType": "Investigations",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01T11:49:38.300246"
+        },
+        {
+            "id": 13,
+            "costType": "Other hospital expenses",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01T11:49:38.300246"
+        },
+        {
+            "id": 14,
+            "costType": "Medicines",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01T12:22:00.558517"
+        },
+        {
+            "id": 15,
+            "costType": "Consumables",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01T12:22:00.558517"
+        },
+        {
+            "id": 16,
+            "costType": "Consultation",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01T12:22:00.558517"
+        },
+        {
+            "id": 17,
+            "costType": "OT Charges",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01T12:22:00.558517"
+        },
+        {
+            "id": 18,
+            "costType": "Surgeon & Anasthesia",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01T12:22:00.558517"
+        },
+        {
+            "id": 19,
+            "costType": "Investigations",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01T12:22:00.558517"
+        },
+        {
+            "id": 20,
+            "costType": "Other hospital expenses",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01T12:22:00.558517"
+        }
+    ],
+    "user_master": [
+        {
+            "userId": 1,
+            "password": "12345",
+            "userType": [],
+            "hospital": [],
+            "emailAddress": "gsdv@dfsvgh",
+            "username": "sagar",
+            "firstname": "dfsaf",
+            "lastname": "fsdaf",
+            "mobileNo": 154215615,
+            "createdBy": 11,
+            "createdDatetime": "2022-12-02T05:30:00",
+            "modifiedBy": 11,
+            "modifiedDatetime": "2022-10-01T05:30:00",
+            "active": true
+        },
+        {
+            "userId": 2,
+            "password": "54321",
+            "userType": [],
+            "hospital": [],
+            "emailAddress": "aknsdjchsuy",
+            "username": "satya",
+            "firstname": "sfsdv",
+            "lastname": "svdsv",
+            "mobileNo": 6528165265,
+            "createdBy": 2,
+            "createdDatetime": "2022-12-08T05:30:00",
+            "modifiedBy": null,
+            "modifiedDatetime": null,
+            "active": true
+        },
+        {
+            "userId": 3,
+            "password": "11111",
+            "userType": [],
+            "hospital": [],
+            "emailAddress": "vfhfgh@fsef",
+            "username": "shradha",
+            "firstname": "fsgg",
+            "lastname": "grht",
+            "mobileNo": 354657,
+            "createdBy": 3,
+            "createdDatetime": "2022-12-08T05:30:00",
+            "modifiedBy": null,
+            "modifiedDatetime": null,
+            "active": true
+        },
+        {
+            "userId": 5,
+            "password": "55555",
+            "userType": [],
+            "hospital": [],
+            "emailAddress": "rgry@ghjgj",
+            "username": "jayant",
+            "firstname": "sdgdf",
+            "lastname": "gfklj",
+            "mobileNo": 4575686,
+            "createdBy": 4,
+            "createdDatetime": "2022-09-12T05:30:00",
+            "modifiedBy": null,
+            "modifiedDatetime": null,
+            "active": true
+        }
+    ],
+    "tpa_master": [
+        {
+            "id": 1,
+            "name": "Medvantage Insurance TPA Private Limited (formerly known as United Health Care Parekh Insurance TPA Private Limited)",
+            "contactNo": 0,
+            "emailId": " ",
+            "createdBy": 1,
+            "createdDatetime": "2022-12-01T00:00:00",
+            "modifiedBy": 0,
+            "modifiedDatetime": null,
+            "active": true
+        },
+        {
+            "id": 2,
+            "name": "Medi Assist Insurance TPA Private Limited",
+            "contactNo": 0,
+            "emailId": " ",
+            "createdBy": 1,
+            "createdDatetime": "2022-12-01T00:00:00",
+            "modifiedBy": 0,
+            "modifiedDatetime": null,
+            "active": true
+        },
+        {
+            "id": 3,
+            "name": "MDIndia Health Insurance TPA Private Limited",
+            "contactNo": 0,
+            "emailId": " ",
+            "createdBy": 1,
+            "createdDatetime": "2022-12-01T00:00:00",
+            "modifiedBy": 0,
+            "modifiedDatetime": null,
+            "active": true
+        },
+        {
+            "id": 4,
+            "name": "Paramount Health Services & Insurance TPA Private Limited",
+            "contactNo": 0,
+            "emailId": " ",
+            "createdBy": 1,
+            "createdDatetime": "2022-12-01T00:00:00",
+            "modifiedBy": 0,
+            "modifiedDatetime": null,
+            "active": true
+        },
+        {
+            "id": 5,
+            "name": "Heritage Health Insurance TPA Private Limited",
+            "contactNo": 0,
+            "emailId": " ",
+            "createdBy": 1,
+            "createdDatetime": "2022-12-01T00:00:00",
+            "modifiedBy": 0,
+            "modifiedDatetime": null,
+            "active": true
+        },
+        {
+            "id": 6,
+            "name": "Family Health Plan Insurance TPA Limited",
+            "contactNo": 0,
+            "emailId": " ",
+            "createdBy": 1,
+            "createdDatetime": "2022-12-01T00:00:00",
+            "modifiedBy": 0,
+            "modifiedDatetime": null,
+            "active": true
+        },
+        {
+            "id": 7,
+            "name": "Raksha Health Insurance TPA Private Limited",
+            "contactNo": 0,
+            "emailId": " ",
+            "createdBy": 1,
+            "createdDatetime": "2022-12-01T00:00:00",
+            "modifiedBy": 0,
+            "modifiedDatetime": null,
+            "active": true
+        },
+        {
+            "id": 8,
+            "name": "Vidal Health Insurance TPA Private Limited",
+            "contactNo": 0,
+            "emailId": " ",
+            "createdBy": 1,
+            "createdDatetime": "2022-12-01T00:00:00",
+            "modifiedBy": 0,
+            "modifiedDatetime": null,
+            "active": true
+        },
+        {
+            "id": 9,
+            "name": "East West Assist Insurance TPA Private Limited",
+            "contactNo": 0,
+            "emailId": " ",
+            "createdBy": 1,
+            "createdDatetime": "2022-12-01T00:00:00",
+            "modifiedBy": 0,
+            "modifiedDatetime": null,
+            "active": true
+        },
+        {
+            "id": 10,
+            "name": "Medsave Health Insurance TPA Limited",
+            "contactNo": 0,
+            "emailId": " ",
+            "createdBy": 1,
+            "createdDatetime": "2022-12-01T00:00:00",
+            "modifiedBy": 0,
+            "modifiedDatetime": null,
+            "active": true
+        },
+        {
+            "id": 11,
+            "name": "Genins India Insurance TPA Limited",
+            "contactNo": 0,
+            "emailId": " ",
+            "createdBy": 1,
+            "createdDatetime": "2022-12-01T00:00:00",
+            "modifiedBy": 0,
+            "modifiedDatetime": null,
+            "active": true
+        },
+        {
+            "id": 12,
+            "name": "Health India Insurance TPA Services Private Limited",
+            "contactNo": 0,
+            "emailId": " ",
+            "createdBy": 1,
+            "createdDatetime": "2022-12-01T00:00:00",
+            "modifiedBy": 0,
+            "modifiedDatetime": null,
+            "active": true
+        },
+        {
+            "id": 13,
+            "name": "Good Health Insurance TPA Limited",
+            "contactNo": 0,
+            "emailId": " ",
+            "createdBy": 1,
+            "createdDatetime": "2022-12-01T00:00:00",
+            "modifiedBy": 0,
+            "modifiedDatetime": null,
+            "active": true
+        },
+        {
+            "id": 14,
+            "name": "Park Mediclaim Insurance TPA Private Limited",
+            "contactNo": 0,
+            "emailId": " ",
+            "createdBy": 1,
+            "createdDatetime": "2022-12-01T00:00:00",
+            "modifiedBy": 0,
+            "modifiedDatetime": null,
+            "active": true
+        },
+        {
+            "id": 15,
+            "name": "Safeway Insurance TPA Private Limited",
+            "contactNo": 0,
+            "emailId": " ",
+            "createdBy": 1,
+            "createdDatetime": "2022-12-01T00:00:00",
+            "modifiedBy": 0,
+            "modifiedDatetime": null,
+            "active": true
+        },
+        {
+            "id": 16,
+            "name": "Anmol Medicare Insurance TPA Limited",
+            "contactNo": 0,
+            "emailId": " ",
+            "createdBy": 1,
+            "createdDatetime": "2022-12-01T00:00:00",
+            "modifiedBy": 0,
+            "modifiedDatetime": null,
+            "active": true
+        },
+        {
+            "id": 17,
+            "name": "Rothshield Insurance TPA Limited",
+            "contactNo": 0,
+            "emailId": " ",
+            "createdBy": 1,
+            "createdDatetime": "2022-12-01T00:00:00",
+            "modifiedBy": 0,
+            "modifiedDatetime": null,
+            "active": true
+        },
+        {
+            "id": 18,
+            "name": "Ericson Insurance TPA Private Limited",
+            "contactNo": 0,
+            "emailId": " ",
+            "createdBy": 1,
+            "createdDatetime": "2022-12-01T00:00:00",
+            "modifiedBy": 0,
+            "modifiedDatetime": null,
+            "active": true
+        },
+        {
+            "id": 19,
+            "name": "Health Insurance TPA of India Limited",
+            "contactNo": 0,
+            "emailId": " ",
+            "createdBy": 1,
+            "createdDatetime": "2022-12-01T00:00:00",
+            "modifiedBy": 0,
+            "modifiedDatetime": null,
+            "active": true
+        },
+        {
+            "id": 20,
+            "name": "Vision Digital Insurance TPA Private Limited",
+            "contactNo": 0,
+            "emailId": " ",
+            "createdBy": 1,
+            "createdDatetime": "2022-12-01T00:00:00",
+            "modifiedBy": 0,
+            "modifiedDatetime": null,
+            "active": true
+        }
+    ],
+    "status_master": [
+        {
+            "id": 1,
+            "type": null,
+            "name": "Pending Documents",
+            "createdBy": 1,
+            "createdDatetime": "2022-12-02T08:12:44.705896"
+        },
+        {
+            "id": 2,
+            "type": null,
+            "name": "Pending HS Approval",
+            "createdBy": 1,
+            "createdDatetime": "2022-12-02T08:12:44.705896"
+        },
+        {
+            "id": 3,
+            "type": null,
+            "name": "Pending TPA Approval",
+            "createdBy": 1,
+            "createdDatetime": "2022-12-02T08:12:44.705896"
+        },
+        {
+            "id": 4,
+            "type": null,
+            "name": "TPA Query",
+            "createdBy": 1,
+            "createdDatetime": "2022-12-02T08:12:44.705896"
+        },
+        {
+            "id": 5,
+            "type": null,
+            "name": "Rejected",
+            "createdBy": 1,
+            "createdDatetime": "2022-12-02T08:12:44.705896"
+        },
+        {
+            "id": 6,
+            "type": null,
+            "name": "Pending Documents",
+            "createdBy": 1,
+            "createdDatetime": "2022-12-02T08:12:44.705896"
+        },
+        {
+            "id": 7,
+            "type": null,
+            "name": "Pending HS Approval",
+            "createdBy": 1,
+            "createdDatetime": "2022-12-02T08:12:44.705896"
+        },
+        {
+            "id": 8,
+            "type": null,
+            "name": "Hard copies to be sent",
+            "createdBy": 1,
+            "createdDatetime": "2022-12-02T08:12:44.705896"
+        },
+        {
+            "id": 9,
+            "type": null,
+            "name": "Documents dispatched",
+            "createdBy": 1,
+            "createdDatetime": "2022-12-02T08:12:44.705896"
+        },
+        {
+            "id": 10,
+            "type": null,
+            "name": "Pending TPA Approval",
+            "createdBy": 1,
+            "createdDatetime": "2022-12-02T08:12:44.705896"
+        },
+        {
+            "id": 11,
+            "type": null,
+            "name": "TPA Query",
+            "createdBy": 1,
+            "createdDatetime": "2022-12-02T08:12:44.705896"
+        },
+        {
+            "id": 12,
+            "type": null,
+            "name": "Approved",
+            "createdBy": 1,
+            "createdDatetime": "2022-12-02T08:12:44.705896"
+        },
+        {
+            "id": 13,
+            "type": null,
+            "name": "Settled",
+            "createdBy": 1,
+            "createdDatetime": "2022-12-02T08:12:44.705896"
+        },
+        {
+            "id": 14,
+            "type": null,
+            "name": "Rejected",
+            "createdBy": 1,
+            "createdDatetime": "2022-12-02T08:12:44.705896"
+        },
+        {
+            "id": 15,
+            "type": null,
+            "name": "Drafting",
+            "createdBy": 1,
+            "createdDatetime": "2022-12-02T08:12:44.705896"
+        },
+        {
+            "id": 16,
+            "type": null,
+            "name": "Submitted",
+            "createdBy": 1,
+            "createdDatetime": "2022-12-02T08:12:44.705896"
+        }
+    ],
+    "diagnosis_master": [
+        {
+            "id": 24,
+            "name": "Road traffic accident",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01T11:59:45.535981"
+        },
+        {
+            "id": 25,
+            "name": "Respiratory illness",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01T11:59:45.535981"
+        },
+        {
+            "id": 26,
+            "name": "Chronic Kidney Disease",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01T11:59:45.535981"
+        },
+        {
+            "id": 27,
+            "name": "Angina/Chest Pain",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01T11:59:45.535981"
+        },
+        {
+            "id": 28,
+            "name": "Cancer",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01T11:59:45.535981"
+        },
+        {
+            "id": 29,
+            "name": "Maternity",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01T11:59:45.535981"
+        },
+        {
+            "id": 30,
+            "name": "Hernia",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01T11:59:45.535981"
+        },
+        {
+            "id": 31,
+            "name": "Fractures",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01T11:59:45.535981"
+        },
+        {
+            "id": 32,
+            "name": "Dengue",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01T11:59:45.535981"
+        },
+        {
+            "id": 33,
+            "name": "Cataract",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01T11:59:45.535981"
+        },
+        {
+            "id": 34,
+            "name": "Essential Hypertension",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01T11:59:45.535981"
+        },
+        {
+            "id": 35,
+            "name": "Viral Fever",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01T11:59:45.535981"
+        },
+        {
+            "id": 36,
+            "name": "Acute Gastroeteritis",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01T11:59:45.535981"
+        },
+        {
+            "id": 37,
+            "name": "Abortion",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01T11:59:45.535981"
+        },
+        {
+            "id": 38,
+            "name": "Osteoarthrithis Knee",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01T11:59:45.535981"
+        },
+        {
+            "id": 39,
+            "name": "Coronary Artery Disease CAD",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01T11:59:45.535981"
+        },
+        {
+            "id": 40,
+            "name": "Bronchitis",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01T11:59:45.535981"
+        },
+        {
+            "id": 41,
+            "name": "ACL tear",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01T11:59:45.535981"
+        },
+        {
+            "id": 42,
+            "name": "Cholecystitis",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01T11:59:45.535981"
+        },
+        {
+            "id": 43,
+            "name": "Pancreatitis",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01T11:59:45.535981"
+        },
+        {
+            "id": 44,
+            "name": "Chronic Liver Disease",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01T11:59:45.535981"
+        },
+        {
+            "id": 45,
+            "name": "Appendicitis",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01T11:59:45.535981"
+        },
+        {
+            "id": 46,
+            "name": "BPH Benign Prostatic Hyperplasia",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01T11:59:45.535981"
+        },
+        {
+            "id": 47,
+            "name": "COPD Chronic Obstructive Pulmonary Disease",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01T11:59:45.535981"
+        },
+        {
+            "id": 48,
+            "name": "Liver Cirrhosis",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01T11:59:45.535981"
+        },
+        {
+            "id": 49,
+            "name": "COVID",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01T11:59:45.535981"
+        },
+        {
+            "id": 50,
+            "name": "uterus polyp",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01T11:59:45.535981"
+        },
+        {
+            "id": 51,
+            "name": "Threatened abortion",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01T11:59:45.535981"
+        },
+        {
+            "id": 52,
+            "name": "Renal stones",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01T11:59:45.535981"
+        },
+        {
+            "id": 53,
+            "name": "tonsilitis",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01T11:59:45.535981"
+        },
+        {
+            "id": 54,
+            "name": "Ovarian Cyst",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01T11:59:45.535981"
+        },
+        {
+            "id": 55,
+            "name": "Pelvic Inflammatory disease",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01T11:59:45.535981"
+        },
+        {
+            "id": 56,
+            "name": "Stroke",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01T11:59:45.535981"
+        },
+        {
+            "id": 57,
+            "name": "Urinary Tract Infection",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01T11:59:45.535981"
+        },
+        {
+            "id": 58,
+            "name": "Kidney Disorders",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01T11:59:45.535981"
+        },
+        {
+            "id": 59,
+            "name": "Neonatal Jaundice/Hyperbilirubinemia",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01T11:59:45.535981"
+        },
+        {
+            "id": 60,
+            "name": "Respiratory Distress of the newborn",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01T11:59:45.535981"
+        },
+        {
+            "id": 61,
+            "name": "Skin disorders",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01T11:59:45.535981"
+        },
+        {
+            "id": 62,
+            "name": "Diabetes Mellitus",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01T11:59:45.535981"
+        },
+        {
+            "id": 63,
+            "name": "Gangrene of foot",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01T11:59:45.535981"
+        },
+        {
+            "id": 64,
+            "name": "wound/burn/infection",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01T11:59:45.535981"
+        },
+        {
+            "id": 65,
+            "name": "Haemorrhoids",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01T11:59:45.535981"
+        },
+        {
+            "id": 66,
+            "name": "Menstural bleeding/Uterine prolapse/Uterine fibroids",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01T11:59:45.535981"
+        },
+        {
+            "id": 67,
+            "name": "Eye disorder(RE issues)",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01T11:59:45.535981"
+        },
+        {
+            "id": 68,
+            "name": "Phimosis",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01T11:59:45.535981"
+        },
+        {
+            "id": 69,
+            "name": "Congenital Disorders",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01T11:59:45.535981"
+        },
+        {
+            "id": 70,
+            "name": "Diabetes Mellitus",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01T11:59:45.535981"
+        },
+        {
+            "id": 71,
+            "name": "Dyspnea",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01T11:59:45.535981"
+        },
+        {
+            "id": 72,
+            "name": "Sepsis",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01T11:59:45.535981"
+        },
+        {
+            "id": 73,
+            "name": "Ectopic pregnancy",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01T11:59:45.535981"
+        },
+        {
+            "id": 74,
+            "name": "Hyperemesis Gravidarum",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01T11:59:45.535981"
+        },
+        {
+            "id": 75,
+            "name": "Newborn small for gestational age",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01T11:59:45.535981"
+        },
+        {
+            "id": 76,
+            "name": "Extremely low birthweigyht newborn",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01T11:59:45.535981"
+        },
+        {
+            "id": 77,
+            "name": "Cancer of Breast",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01T11:59:45.535981"
+        },
+        {
+            "id": 78,
+            "name": "Cancer of Ovary",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01T11:59:45.535981"
+        },
+        {
+            "id": 79,
+            "name": "Myocardial Infarction",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01T11:59:45.535981"
+        },
+        {
+            "id": 80,
+            "name": "Atrial Septal defect",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01T11:59:45.535981"
+        },
+        {
+            "id": 81,
+            "name": "Anemia",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01T11:59:45.535981"
+        },
+        {
+            "id": 82,
+            "name": "Varicose Veins",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01T11:59:45.535981"
+        }
+    ],
+    "insurance_company_master": [
+        {
+            "id": 2,
+            "name": "Aditya Birla Health Insurance Co. Ltd.",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01T12:12:42.964785"
+        },
+        {
+            "id": 3,
+            "name": "Agriculture Insurance Company of India Ltd.",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01T12:12:42.964785"
+        },
+        {
+            "id": 4,
+            "name": "Bajaj Allianz General Insurance Co. Ltd",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01T12:12:42.964785"
+        },
+        {
+            "id": 5,
+            "name": "Cholamandalam MS General Insurance Co. Ltd.",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01T12:12:42.964785"
+        },
+        {
+            "id": 6,
+            "name": "Manipal Cigna Health Insurance Company Limited",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01T12:12:42.964785"
+        },
+        {
+            "id": 7,
+            "name": "Navi General Insurance Ltd.",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01T12:12:42.964785"
+        },
+        {
+            "id": 8,
+            "name": "Edelweiss General Insurance Co. Ltd.",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01T12:12:42.964785"
+        },
+        {
+            "id": 9,
+            "name": "ECGC Ltd.",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01T12:12:42.964785"
+        },
+        {
+            "id": 10,
+            "name": "Future Generali India Insurance Co. Ltd.",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01T12:12:42.964785"
+        },
+        {
+            "id": 11,
+            "name": "Go Digit General Insurance Ltd",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01T12:12:42.964785"
+        },
+        {
+            "id": 12,
+            "name": "HDFC ERGO General Insurance Co.Ltd.",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01T12:12:42.964785"
+        },
+        {
+            "id": 13,
+            "name": "ICICI LOMBARD General Insurance Co. Ltd.",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01T12:12:42.964785"
+        },
+        {
+            "id": 14,
+            "name": "IFFCO TOKIO General Insurance Co. Ltd.",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01T12:12:42.964785"
+        },
+        {
+            "id": 15,
+            "name": "Kotak Mahindra General Insurance Co. Ltd.",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01T12:12:42.964785"
+        },
+        {
+            "id": 16,
+            "name": "Liberty General Insurance Ltd.",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01T12:12:42.964785"
+        },
+        {
+            "id": 17,
+            "name": "Magma HDI General Insurance Co. Ltd.",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01T12:12:42.964785"
+        },
+        {
+            "id": 18,
+            "name": "Niva Bupa Health Insurance Co Ltd.",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01T12:12:42.964785"
+        },
+        {
+            "id": 19,
+            "name": "National Insurance Co. Ltd.",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01T12:12:42.964785"
+        },
+        {
+            "id": 20,
+            "name": "Raheja QBE General Insurance Co. Ltd.",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01T12:12:42.964785"
+        },
+        {
+            "id": 21,
+            "name": "Reliance General Insurance Co.Ltd",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01T12:12:42.964785"
+        },
+        {
+            "id": 22,
+            "name": "Reliance Health Insurance Ltd.",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01T12:12:42.964785"
+        },
+        {
+            "id": 23,
+            "name": "Care Health Insurance Ltd(formerly known as Religare Health Insurance Co. Ltd.)",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01T12:12:42.964785"
+        },
+        {
+            "id": 24,
+            "name": "Royal Sundaram General Insurance Co. Ltd.",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01T12:12:42.964785"
+        },
+        {
+            "id": 25,
+            "name": "SBI General Insurance Co. Ltd.",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01T12:12:42.964785"
+        },
+        {
+            "id": 26,
+            "name": "Shriram General Insurance Co. Ltd.",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01T12:12:42.964785"
+        },
+        {
+            "id": 27,
+            "name": "Star Health & Allied Insurance Co.Ltd.",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01T12:12:42.964785"
+        },
+        {
+            "id": 28,
+            "name": "Tata AIG General Insurance Co. Ltd.",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01T12:12:42.964785"
+        },
+        {
+            "id": 29,
+            "name": "The New India Assurance Co. Ltd",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01T12:12:42.964785"
+        },
+        {
+            "id": 30,
+            "name": "The Oriental Insurance Co. Ltd.",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01T12:12:42.964785"
+        },
+        {
+            "id": 31,
+            "name": "United India Insurance Co. Ltd.",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01T12:12:42.964785"
+        },
+        {
+            "id": 32,
+            "name": "Universal Sompo General Insurance Co. Ltd.",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01T12:12:42.964785"
+        }
+    ],
+    "room_master": [
+        {
+            "id": 1,
+            "category": "Single Private AC",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01T12:23:15.329326"
+        },
+        {
+            "id": 2,
+            "category": "Delux Room",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01T12:23:15.329326"
+        },
+        {
+            "id": 3,
+            "category": "Twin Sharing",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01T12:23:15.329326"
+        },
+        {
+            "id": 4,
+            "category": "Triple Sharing",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01T12:23:15.329326"
+        },
+        {
+            "id": 5,
+            "category": "General Ward",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01T12:23:15.329326"
+        },
+        {
+            "id": 6,
+            "category": "Super Delux",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01T12:23:15.329326"
+        },
+        {
+            "id": 7,
+            "category": "Suite",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01T12:23:15.329326"
+        },
+        {
+            "id": 8,
+            "category": "Non/Ac room",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01T12:23:15.329326"
+        },
+        {
+            "id": 9,
+            "category": "ICU/NICU/SICU",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01T12:23:15.329326"
+        },
+        {
+            "id": 10,
+            "category": "Daycare",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01T12:23:15.329326"
+        },
+        {
+            "id": 11,
+            "category": "OPD",
+            "createdBy": 1,
+            "createdDateTime": "2022-12-01T12:23:15.329326"
+        }
+    ]
+}

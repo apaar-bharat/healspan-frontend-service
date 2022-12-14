@@ -39,7 +39,7 @@ export class ApiService {
     ).pipe(catchError(this.formatErrors));
   }
 
-  post(path: string, body: FormData): Observable<any> {
+  post(path: string, body: any): Observable<any> {
     return this.http.post(
       `${environment.baseUrl}${path}`,
       body

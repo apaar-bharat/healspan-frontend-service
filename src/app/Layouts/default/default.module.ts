@@ -18,6 +18,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { HttpClientModule } from '@angular/common/http';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
     MatFormFieldModule,
     MatInputModule,
     HttpClientModule,
-    MatButtonToggleModule
+    MatButtonToggleModule,
+    NgMultiSelectDropDownModule.forRoot()
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
 })
