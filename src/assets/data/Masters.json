@@ -271,5 +271,128 @@
             "createdBy": 1,
             "createdDatetime": "2022-12-13T07:03:36.905177"
         }
+    ],
+
+
+    "status_master": [
+        {
+            "id": 1,
+            "name": "Created",
+            "description": null,
+            "createdBy": 1,
+            "createdDatetime": "2022-12-13T07:04:36.344535"
+        },
+        {
+            "id": 2,
+            "name": "Draft",
+            "description": null,
+            "createdBy": 1,
+            "createdDatetime": "2022-12-13T07:04:36.344535"
+        },
+        {
+            "id": 3,
+            "name": "Submitted",
+            "description": null,
+            "createdBy": 1,
+            "createdDatetime": "2022-12-13T07:04:36.344535"
+        },
+        {
+            "id": 4,
+            "name": "Reviewer Assigned",
+            "description": null,
+            "createdBy": 1,
+            "createdDatetime": "2022-12-13T07:04:36.344535"
+        },
+        {
+            "id": 5,
+            "name": "Pending Review",
+            "description": null,
+            "createdBy": 1,
+            "createdDatetime": "2022-12-13T07:04:36.344535"
+        },
+        {
+            "id": 6,
+            "name": "Reviewed",
+            "description": null,
+            "createdBy": 1,
+            "createdDatetime": "2022-12-13T07:04:36.344535"
+        },
+        {
+            "id": 7,
+            "name": "Pending Documents",
+            "description": null,
+            "createdBy": 1,
+            "createdDatetime": "2022-12-13T07:04:36.344535"
+        },
+        {
+            "id": 8,
+            "name": "Pending HS Approval",
+            "description": null,
+            "createdBy": 1,
+            "createdDatetime": "2022-12-13T07:04:36.344535"
+        },
+        {
+            "id": 9,
+            "name": "Pending TPA Approval",
+            "description": null,
+            "createdBy": 1,
+            "createdDatetime": "2022-12-13T07:04:36.344535"
+        },
+        {
+            "id": 10,
+            "name": "TPA Query Raised",
+            "description": null,
+            "createdBy": 1,
+            "createdDatetime": "2022-12-13T07:04:36.344535"
+        },
+        {
+            "id": 11,
+            "name": "TPA Query Responded",
+            "description": null,
+            "createdBy": 1,
+            "createdDatetime": "2022-12-13T07:04:36.344535"
+        },
+        {
+            "id": 12,
+            "name": "Rejected",
+            "description": null,
+            "createdBy": 1,
+            "createdDatetime": "2022-12-13T07:04:36.344535"
+        },
+        {
+            "id": 13,
+            "name": "Hard copies to be sent",
+            "description": null,
+            "createdBy": 1,
+            "createdDatetime": "2022-12-13T07:04:36.344535"
+        },
+        {
+            "id": 14,
+            "name": "Documents dispatched",
+            "description": null,
+            "createdBy": 1,
+            "createdDatetime": "2022-12-13T07:04:36.344535"
+        },
+        {
+            "id": 15,
+            "name": "Approved",
+            "description": null,
+            "createdBy": 1,
+            "createdDatetime": "2022-12-13T07:04:36.344535"
+        },
+        {
+            "id": 16,
+            "name": "Settled",
+            "description": null,
+            "createdBy": 1,
+            "createdDatetime": "2022-12-13T07:04:36.344535"
+        },
+        {
+            "id": 17,
+            "name": "Rejected",
+            "description": null,
+            "createdBy": 1,
+            "createdDatetime": "2022-12-13T07:04:36.344535"
+        }
     ]
 }
