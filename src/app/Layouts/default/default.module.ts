@@ -19,6 +19,8 @@ import { MatInputModule } from '@angular/material/input';
 import { HttpClientModule } from '@angular/common/http';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { MatSelectModule } from '@angular/material/select';
+
 
 @NgModule({
   declarations: [
@@ -28,7 +30,8 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
     CreatclaimComponent,
     ViewclaimComponent,
     ResetpasswordComponent,
-    ProfileComponent
+    ProfileComponent,
+    
   ],
   imports: [
     CommonModule,
@@ -40,6 +43,7 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
     MatDatepickerModule,
     MatNativeDateModule,
     MatFormFieldModule,
+    MatSelectModule,
     MatInputModule,
     HttpClientModule,
     MatButtonToggleModule,

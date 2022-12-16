@@ -1,0 +1,84 @@
+{
+    "id": 28,
+    "healspanId": null,
+    "tpaClaimId": null,
+    "claimDetailsForStageList": [
+        {
+            "id": 8,
+            "statusId": 1,
+            "claimStageId": 1,
+            "billAmount": 12000.0,
+            "claimedAmount": 10000.0,
+            "approvedAmount": 10000.0,
+            "createdById": 2,
+            "createdDataTime": "2022-12-13T08:47:57.885",
+            "patientInformationList": [
+                {
+                    "id": 6,
+                    "firstName": "Ram",
+                    "middleName": "Vilas",
+                    "lastName": "Kale",
+                    "mobileNumber": "9874563210",
+                    "uhidNumber": "4561230",
+                    "gender": "Male",
+                    "dateOfBirth": "2000-05-11T18:30:00.000+00:00",
+                    "age": 25,
+                    "dateOfAdmission": "2022-12-13T08:54:42.676",
+                    "dateOfDischarge": "2022-12-18T12:30:00",
+                    "costPerDay": 1200.0,
+                    "estimatedCost": 10000.0,
+                    "enhancedCost": 8000.0,
+                    "finalBillAmount": 12000.0,
+                    "claimAmount": 12000.0,
+                    "billNumber": 101,
+                    "createdBy": 2,
+                    "createdDateTime": "2022-12-13T08:54:42.676",
+                    "statusId": 1,
+                    "roomId": 2,
+                    "medicalProcedureId": 1,
+                    "patientOtherCostList": [],
+                    "primaryInsured": true
+                }
+            ],
+            "patientMedicalInfoList": [
+                {
+                    "id": 2,
+                    "treatmentType": null,
+                    "firstDiagnosisDate": "2022-12-13T09:34:27.697",
+                    "doctorName": "Dr. Amol Inamdar",
+                    "doctorRegNumber": 56123,
+                    "docQualification": "M.D",
+                    "createdBy": 2,
+                    "createdDateTime": "2022-12-13T09:34:27.697",
+                    "medicalProcedureId": 1,
+                    "statusId": 1,
+                    "diagnosisId": 2,
+                    "diagnosisSpecialityId": 9,
+                    "sequentialQuestionsList": [],
+                    "patientChronicIllnessList": []
+                }
+            ],
+            "patientInsuranceInfoList": [
+                {
+                    "id": 2,
+                    "tpaNumber": "17878",
+                    "policyHolderName": "Ram",
+                    "policyNumber": 123456,
+                    "patientRelation": "1",
+                    "groupCompanyName": "Apaar InfoSystems Pvt. Ltd.",
+                    "tpaClaimId": 121,
+                    "initialApprovedAmount": 6000.0,
+                    "enhancementApprovedAmount": 12000.0,
+                    "dischargeApprovedAmount": 10000.0,
+                    "createdBy": 2,
+                    "createdDateTime": "2022-12-13T09:14:18.532",
+                    "statusId": 1,
+                    "insuranceCompanyId": 1,
+                    "tpaId": 1,
+                    "relationshipId": 1,
+                    "groupPolicy": true
+                }
+            ]
+        }
+    ]
+}

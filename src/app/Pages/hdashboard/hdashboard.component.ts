@@ -11,14 +11,18 @@ export class HdashboardComponent implements OnInit {
   statusDetail: any;
   aprrovalDataList:any;
   pendingDataList:any;
+  statusss:any
   constructor(private router: Router,private apiservice:ApiService) { }
 
   ngOnInit(): void {
-    this.apiservice.getService("assets/data/claim.json").subscribe((data:any) =>{
+    this.apiservice.getService("assets/data/claims2.json").subscribe((data:any) =>{
       // console.log("sdsd",data);
-      this.statusDetail = data["statusdatalist"];
-      this.aprrovalDataList = data["approvaldatalist"];
-      this.pendingDataList = data["pendingdatalist"]
+      this.statusDetail = data["stageWiseClaimCount"];
+      this.aprrovalDataList = data["claimDtoList"];
+      this.statusss = [];
+
+    
+      this.pendingDataList = data["claimDtoList"]
       console.log("ere",this.statusDetail);
     })
 

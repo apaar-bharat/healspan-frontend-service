@@ -33,7 +33,7 @@
 
                                 <div class="form-group col-md-3">
                                     <label for="" class="form-label float-start">First name*</label>
-                                    <input type="text" class="form-control" formControlName="Fname"
+                                    <input type="text" class="form-control"  formControlName="Fname" 
                                         [class.is-invalid]="f['Fname'].invalid && (f['Fname'].dirty || f['Fname'].touched)"
                                         required>
 
@@ -124,9 +124,9 @@
                                     <label for="" class="form-label float-start">Date Of Admission</label>
 
                                     <input type="date" class="form-control" formControlName="DateOfAdmission"
-                                        placeholder="Choose a date" [max]="todaysdate" [(ngModel)]="dateSent"
-                                        (input)="changeDate()" required>
-
+                                        placeholder="Choose a date" [max]="todaysdate | date:'HH:mm'"
+                                        [(ngModel)]="dateSent" (input)="changeDate()" required>
+                                    
 
 
                                 </div>
@@ -169,19 +169,25 @@
                                 </div>
                                 <div class="form-group col-md-3 mt-5">
                                     <label for="" class="form-label float-start">Other Costs</label>
-                                    <select class="form-control form-select" formControlName="OtherC" id="OtherC"
+                                    <!-- <select class="form-control form-select" formControlName="OtherC" id="OtherC"
                                         required>
                                         <option value="">Choose...</option>
                                         <option *ngFor="let o of OtherCosts" value={{o.id}}>{{o.costType}}
                                         </option>
 
-                                    </select>
+                                    </select> -->
+                                    <mat-form-field >
+                                      
+                                        <mat-select class="form-control form-select" formControlName="OtherC"   placeholder="Choose" (selectionChange)="costSelect($event)" multiple>
+                                            <mat-option *ngFor="let o of OtherCosts" value={{o.id}}>{{o.costType}}</mat-option>
+                                          </mat-select>
+                                    </mat-form-field>
 
                                 </div>
                             </div>
                             <div class="form-row ">
-                                <div class="form-group col-md-3 mt-5">
-                                    <label for="" class="form-label float-start">Other Costs Estimate</label>
+                                <div class="form-group col-md-3 mt-5" *ngFor="let n1 of othercostheader">
+                                    <label for="" class="form-label float-start">{{n1.costType}}</label>
                                     <input type="text" class="form-control" formControlName="OtherCE">
 
                                 </div>
@@ -422,15 +428,16 @@
 
                     <button type="button" class="action-button previous previous_button float-start mt-5">Back</button>
 
-                    <button type="submit" class="next action-button btn-sm px-5 float-end mt-5"
-                        form="medform"   [disabled]="!medicalForm.valid">Continue</button>
+                    <button type="submit" class="next action-button btn-sm px-5 float-end mt-5" form="medform"
+                        [disabled]="!medicalForm.valid">Continue</button>
 
 
                     <p>{{this.doclist1}}</p>
 
                 </fieldset>
                 <fieldset>
-                    <form [formGroup]="InsuaranceForm" class="mb-5" id="insuarance" (ngSubmit)="OnInsuarancecontinue(InsuaranceForm)">
+                    <form [formGroup]="InsuaranceForm" class="mb-5" id="insuarance"
+                        (ngSubmit)="OnInsuarancecontinue(InsuaranceForm)">
                         <div class="form-row">
                             <div class="form-group col-md-12 mb-3">
 
@@ -474,16 +481,18 @@
                             <div class="form-group col-md-3 mt-5">
                                 <label for="" class="form-label float-start">Policy Holder*</label>
                                 <input type="text" class="form-control" formControlName="PolicyHolder"
-                                [class.is-invalid]="I['PolicyHolder'].invalid && (I['PolicyHolder'].dirty || I['PolicyHolder'].touched)" required>
+                                    [class.is-invalid]="I['PolicyHolder'].invalid && (I['PolicyHolder'].dirty || I['PolicyHolder'].touched)"
+                                    required>
 
                             </div>
                             <div class="form-group col-md-3 mt-5">
                                 <label for="" class="form-label float-start">Relation of patient with Policy
                                     Holder*</label>
                                 <select class="form-control form-select" id="TPA" formControlName="RelationOPH"
-                                [class.is-invalid]="I['RelationOPH'].invalid && (I['RelationOPH'].dirty || I['RelationOPH'].touched)"  required>
+                                    [class.is-invalid]="I['RelationOPH'].invalid && (I['RelationOPH'].dirty || I['RelationOPH'].touched)"
+                                    required>
                                     <option value="">Choose...</option>
-                                    <option *ngFor="let r of RPADetail" value={{r.RPAName}}>{{r.RPAName}}</option>
+                                    <option *ngFor="let r of RPADetail" value={{r.id}}>{{r.relationshipName}}</option>
                                 </select>
 
                             </div>
@@ -496,14 +505,13 @@
                         </div>
                         <div class="form-row w-100">
                             <div class="form-group col-md-6 mt-5">
-                                <input type="checkbox"
-                                formControlName="GroupPolicy" class="form-check-input float-start" id="same-address">
+                                <input type="checkbox" formControlName="GroupPolicy"
+                                    class="form-check-input float-start" id="same-address">
                                 <label class="form-check-label  float-start" for="same-address">&nbsp; Group
                                     Policy</label>
                             </div>
                             <div class="form-group col-md-6 mt-5" style="visibility:hidden;">
-                                <input type="checkbox" class="form-check-input float-start" id="same-address"
-                                   >
+                                <input type="checkbox" class="form-check-input float-start" id="same-address">
                                 <label class="form-check-label  float-start" for="same-address">&nbsp; Group
                                     Policy</label>
                             </div>
@@ -515,15 +523,15 @@
                             </div>
                             <div class="form-group col-md-6 mt-5" style="visibility:hidden;">
                                 <label for="" class="form-label float-start">Company / Corporate / Group*</label>
-                                <input type="text" class="form-control" >
+                                <input type="text" class="form-control">
                             </div>
                         </div>
 
                     </form>
                     <button type="button" class="action-button previous previous_button float-start mt-5">Back</button>
 
-                    <button type="submit" class="next action-button btn-sm px-5 float-end mt-5"
-                    form="insuarance" [disabled]="!InsuaranceForm.valid"  >Continue</button>
+                    <button type="submit" class="next action-button btn-sm px-5 float-end mt-5" form="insuarance"
+                        [disabled]="!InsuaranceForm.valid">Continue</button>
 
 
 
@@ -544,25 +552,24 @@
 
                         </div>
                         <!--  <form id="upload_form" enctype="multipart/form-data" method="post"> -->
-                        <div class="form-row row">
-                            <div class="card form-group col-sm-2 col-md-2 mx-3 my-3 p-0"
-                                *ngFor="let p of doclist,let i=index">
-                                <div class="card-body">
-                                    <h6 class="mb-2 text-muted uploadtextb">{{p.docname}}</h6>
-                                    <!-- <p class="card-text">  <input type="file" (change)="fileChange($event)" /></p> -->
-                                    <div class="progress" id=progress_{{i}} *ngIf="progress && currentupload == i">
-                                        <div class="progress-bar" [style.width]="progress + '%'">{{progress}}%</div>
-                                    </div>
-                                    <h3 id="status_{{i}}" class="uploadtextc"></h3>
-                                    <div style="text-align:center;">
-                                        <!-- (click)="uploadAndProgressSingle()" -->
-                                        <!-- <button type="file" (change)="fileChange($event)"  class="next action-button float-end mt-3">Upload</button> -->
-                                        <label class="filelabel">Upload<input type="file"
-                                                (change)="fileChange($event,i)"> </label>
-                                    </div>
+                            <div class="form-row row">
+                                <div class="card form-group col-sm-2 col-md-2 mx-3 my-3 p-0" *ngFor="let p of doclist,let i=index">
+                                    <div class="card-body">
+                                        <h6 class="mb-2 text-muted uploadtextb">{{p.docname}}</h6>
+                                        <!-- <p class="card-text">  <input type="file" (change)="fileChange($event)" /></p> -->
+                                        <div class="progress" id=progress_{{i}} *ngIf="progress && currentupload == i" >
+                   
+                                            <div class="progress-bar"  [style.width]="progress + '%'">{{progress}}%</div>
+                                        </div>
+                                        <h3 id="status_{{i}}" class="uploadtextc"></h3>
+                                        <div style="text-align:center;">
+                                            <!-- (click)="uploadAndProgressSingle()" -->
+                                            <!-- <button type="file" (change)="fileChange($event)"  class="next action-button float-end mt-3">Upload</button> -->
+                                            <label class="filelabel">Upload<input type="file"(change)="fileChange($event,i)"> </label>
+                                        </div>
+                                      </div>
                                 </div>
                             </div>
-                        </div>
                         <!-- </form> -->
 
 

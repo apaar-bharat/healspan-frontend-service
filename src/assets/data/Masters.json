@@ -244,5 +244,32 @@
             "createdBy": 1,
             "createdDateTime": "2022-12-01T11:59:45.535981"
         }
+    ],
+
+    "relationship_master": [
+        {
+            "id": 1,
+            "relationshipName": "Self",
+            "createdBy": 1,
+            "createdDatetime": "2022-12-13T07:03:36.905177"
+        },
+        {
+            "id": 2,
+            "relationshipName": "Spouse",
+            "createdBy": 1,
+            "createdDatetime": "2022-12-13T07:03:36.905177"
+        },
+        {
+            "id": 3,
+            "relationshipName": "Father",
+            "createdBy": 1,
+            "createdDatetime": "2022-12-13T07:03:36.905177"
+        },
+        {
+            "id": 4,
+            "relationshipName": "Mother",
+            "createdBy": 1,
+            "createdDatetime": "2022-12-13T07:03:36.905177"
+        }
     ]
 }

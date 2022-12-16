@@ -17,13 +17,13 @@ const routes: Routes = [
   { path: '',
    component: DefaultComponent,
    children: [
-      { path: 'hdashboard', canActivate:[AuthGuard],component: HdashboardComponent},
-      { path: 'rdashboard',component: RdashboardComponent},
-      { path: 'createclaim/:stagename',component:CreatclaimComponent},
-      { path: 'viewclaim',component: ViewclaimComponent},
-      { path: 'reset',component: ResetpasswordComponent},
-      { path: 'profile',component: ProfileComponent},
-      { path: 'slastatus',component: SlaStatusComponent},
+    { path: 'hdashboard',component: HdashboardComponent,canActivate:[AuthGuard]},
+    { path: 'rdashboard',component: RdashboardComponent,canActivate:[AuthGuard]},
+    { path: 'createclaim/:stagename',component:CreatclaimComponent,canActivate:[AuthGuard]},
+    { path: 'viewclaim',component: ViewclaimComponent,canActivate:[AuthGuard]},
+    { path: 'reset',component: ResetpasswordComponent,canActivate:[AuthGuard]},
+    { path: 'profile',component: ProfileComponent,canActivate:[AuthGuard]},
+    { path: 'slastatus',component: SlaStatusComponent,canActivate:[AuthGuard]},
     ]}
   ];
 

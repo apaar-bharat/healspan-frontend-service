@@ -1,0 +1,79 @@
+{
+    "stageWiseClaimCount": {
+        "Initial Authorisation": 3,
+        "Final Claim": 1,
+        "Enhancement": 1,
+        "Discharge": 1
+    },
+    "claimDtoList": [
+        {
+            "claimID": 28,
+            "name": "Ram",
+            "ailment": "Optional[Diagnosis(id=2, name=Respiratory illness, createdBy=1, dateTime=2022-12-13T06:57:20.620424)]",
+            "stage": "Initial Authorisation",
+            "status": "Created",
+            "admissionDate": "2022-12-13T08:54:42.676",
+            "dischargeDate": "2022-12-18T12:30:00",
+            "ageing": 5,
+            "approvedAmount": 10000.0
+        },
+        {
+            "claimID": 29,
+            "name": "Ram",
+            "ailment": "Optional[Diagnosis(id=2, name=Respiratory illness, createdBy=1, dateTime=2022-12-13T06:57:20.620424)]",
+            "stage": "Enhancement",
+            "status": "Created",
+            "admissionDate": "2022-12-13T08:54:42.676",
+            "dischargeDate": "2022-12-18T12:30:00",
+            "ageing": 5,
+            "approvedAmount": 10000.0
+        },
+        {
+            "claimID": 30,
+            "name": "Ram",
+            "ailment": "Optional[Diagnosis(id=2, name=Respiratory illness, createdBy=1, dateTime=2022-12-13T06:57:20.620424)]",
+            "stage": "Discharge",
+            "status": "Created",
+            "admissionDate": "2022-12-13T08:54:42.676",
+            "dischargeDate": "2022-12-18T12:30:00",
+            "ageing": 5,
+            "approvedAmount": 10000.0
+        },
+        {
+            "claimID": 31,
+            "name": "Hari",
+            "ailment": "Optional[Diagnosis(id=2, name=Respiratory illness, createdBy=1, dateTime=2022-12-13T06:57:20.620424)]",
+            "stage": "Final Claim",
+            "status": "Created",
+            "admissionDate": "2022-12-13T08:54:42.676",
+            "dischargeDate": "2022-12-18T12:30:00",
+            "ageing": 5,
+            "approvedAmount": 1000.0
+        },
+        {
+            "claimID": 32,
+            "name": "Hare",
+            "ailment": "Optional[Diagnosis(id=2, name=Respiratory illness, createdBy=1, dateTime=2022-12-13T06:57:20.620424)]",
+            "stage": "Initial Authorisation",
+            "status": "Created",
+            "admissionDate": "2022-12-13T08:54:42.676729",
+            "dischargeDate": "2022-12-18T12:30:00",
+            "ageing": 5,
+            "approvedAmount": 0.0
+        },
+        {
+            "claimID": 33,
+            "name": "New",
+            "ailment": null,
+            "stage": "Initial Authorisation",
+            "status": "Created",
+            "admissionDate": "2022-12-13T08:54:42.676729",
+            "dischargeDate": "2022-12-16T12:30:00",
+            "ageing": 3,
+            "approvedAmount": 0.0
+        }
+    ]
+
+
+    
+}

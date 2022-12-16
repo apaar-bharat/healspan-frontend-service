@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import * as $ from 'jquery';
-import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule, FormControl } from '@angular/forms';
 import { ApiService } from 'src/app/service/api.service';
 import { HttpHeaders, HttpClient, HttpParams, HttpEvent, HttpEventType, HttpProgressEvent, HttpResponse } from '@angular/common/http';
 import { catchError, map } from "rxjs/operators"
 import { Subject, throwError } from 'rxjs';
 import { ActivatedRoute, Route } from '@angular/router';
+
 declare function verificationForm(): any;
 //declare function phoneNoselect():any;
 declare function nice_Select(): any;
@@ -70,8 +71,8 @@ export class CreatclaimComponent implements OnInit {
   patientSave: any = {};
   medicalSave: any = {};
   InsuaranceSave: any = {};
-
- 
+  othercostarray: Array<number> = [];
+  othercostheader: any;
   constructor(private fb: FormBuilder, private api: ApiService, private http: HttpClient,
     private httpClient: HttpClient, private route: ActivatedRoute) {
     this.minDateToFinish.subscribe((r: any) => {
@@ -157,7 +158,7 @@ export class CreatclaimComponent implements OnInit {
     this.bindDropdown();
     this.GetDocList();
 
-    this.date = new Date().toISOString().slice(0, 10) + "  " + (new Date().getHours()) + ":" + (new Date().getMinutes());;
+    this.date = new Date().toISOString().slice(0, 10);
     console.log("helo", this.date)
     this.dropdownSettings = {
 
@@ -218,43 +219,41 @@ export class CreatclaimComponent implements OnInit {
       alert("form valid")
       this.patientSave = {
 
-        ClaimId: "",
-        LoggedInuserId: 101,
-        RoleId: 1,
-        StageID: "1",
-        StatusID: "1",
-        PatientInfo: {
-          FirstName: this.ClaimForm.value.Fname,
-          MiddleName: this.ClaimForm.value.Mname,
-          LastName: this.ClaimForm.value.Lname,
-          PatientMobileNo: this.ClaimForm.value.MobileNo,
-          PatientHospitalUHID: this.ClaimForm.value.PHUHID,
-          Gender: this.ClaimForm.value.Gender,
-          DateOfBirth: this.ClaimForm.value.DOB,
-          Age: this.ClaimForm.value.Age,
-          Stage: this.ClaimForm.value.Stage,
-          DateOfAdmission: this.ClaimForm.value.DateOfAdmission,
-          EstimatedDateOfDischarge: this.ClaimForm.value.DateOfDischarge,
-          RoomCategoryID: this.ClaimForm.value.RoomCategory,
-          CostPerDay: this.ClaimForm.value.CostPD,
-          TotalRoomCost: this.ClaimForm.value.totalRC,
-          OtherCosts: [
-            { name: this.ClaimForm.value.OtherC, estimatedcost: this.ClaimForm.value.OtherCE, },
-
-          ],
-          ProcedureID: "1",
-          InitalCostEstimate: "",
-          EnhancementEstimate: "",
-          DateOfDischarge: "",
-          FinalBillAmount: "",
-          ClaimedAmount: "",
-          BillNumber: "",
-          HospitalD: this.ClaimForm.value.HospitalName,
-          AilmentID: "1",
-          TotalBillAmount: this.ClaimForm.value.TotalBillAmount,
-          ClaimAmount: this.ClaimForm.value.ClaimAmount,
-
-        },
+        userId: 2,
+        claimDetailsForStageRequestDto: {
+          claimStageId: 1,
+          statusId: 1,
+          claimedAmount: 25000,
+          patientInformationDto: {
+            statusId: 1,
+            firstName: this.ClaimForm.value.Fname,
+            middleName: this.ClaimForm.value.Mname,
+            lastName: this.ClaimForm.value.Lname,
+            mobileNumber: this.ClaimForm.value.MobileNo,
+            uhidNumber: this.ClaimForm.value.PHUHID,
+            gender: this.ClaimForm.value.Gender,
+            dateOfBirth: this.ClaimForm.value.DOB,
+            age: this.ClaimForm.value.Age,
+            dateOfAdmission: this.ClaimForm.value.DateOfAdmission,
+            dateOfDischarge: this.ClaimForm.value.DateOfDischarge,
+            costPerDay: this.ClaimForm.value.CostPD,
+            estimatedCost: this.ClaimForm.value.InitialCE,
+            finalBillAmount: this.ClaimForm.value.TotalBillAmount,
+            claimAmount: this.ClaimForm.value.ClaimAmount,
+            billNumber: "",
+            roomId: this.ClaimForm.value.RoomCategory,
+            medicalProcedureId: "",
+            patientOtherCostList: [{
+              otherCostId: this.ClaimForm.value.OtherC,
+              estimatedCost: this.ClaimForm.value.OtherCE,
+            },
+            {
+              otherCostId: this.ClaimForm.value.OtherC,
+              estimatedCost: this.ClaimForm.value.OtherCE,
+            }],
+            primaryInsured: this.ClaimForm.value.patientprimaryInsured,
+          }
+        }
       }
 
       // this.claimsave["PatientInfo"].FirstName = this.ClaimForm.value.Fname;
@@ -296,30 +295,31 @@ export class CreatclaimComponent implements OnInit {
     }
     else {
       alert("form valid and submitted")
+
       this.medicalSave = {
-        ProcedureID: this.medicalForm.value.Procedures,
-        SequentialQuestions: [
-          {
-            Question: this.medicalForm.value.Procedures,
-            Answer: this.medicalForm.value.Procedures,
+        userId: 2,
+        claimId: 32,
+        claimDetailsStageId: 12,
+        patientMedicalInfoDto: {
+          treatmentType: this.medicalForm.value.TreatmentType,
+          firstDiagnosisDate: this.medicalForm.value.Dateoffirstdiagnosis,
+          doctorName: this.medicalForm.value.Nameofthetreatingdoctor,
+          doctorRegNumber: this.medicalForm.value.DrResgistrationnumber,
+          docQualification: this.medicalForm.value.Qualificationofthetreatingdoctor,
+          medicalProcedureId: this.medicalForm.value.Procedures,
+          statusId: 1,
+          diagnosisId: this.medicalForm.value.Diagnosis,
+          diagnosisSpecialityId: this.medicalForm.value.Provisionaldiagnosis,
+          sequentialQuestionsList: [],
+          patientChronicIllnessList: [{
+            chronicIllnessI: this.medicalForm.value.Pasthistoryofchronicillness,
           },
           {
-            Question: this.medicalForm.value.Procedures,
-            Answer: this.medicalForm.value.Procedures,
-          }
-        ],
-        TreatmentType: this.medicalForm.value.TreatmentType,
-        ProvisionalDiagnosisID: this.medicalForm.value.Provisionaldiagnosis,
-        SpecialityID: this.medicalForm.value.Speciality,
-        DateOfFirstDiagnosis: this.medicalForm.value.Dateoffirstdiagnosis,
-        PastHistoryOfChronicillness: [
-          { ChronicillnessName: this.medicalForm.value.Pasthistoryofchronicillness, },
-
-        ],
-        NameoftheTreatingDoctor: this.medicalForm.value.Nameofthetreatingdoctor,
-        DrResgistrationNumber: this.medicalForm.value.DrResgistrationnumber,
-        QualificationOfTheTreatingDoctor: this.medicalForm.value.Qualificationofthetreatingdoctor,
+            chronicIllnessId: this.medicalForm.value.Pasthistoryofchronicillness,
+          }]
+        }
       }
+
 
       console.log("med", this.medicalSave)
       // this.claimsave["MedicalInfo"].ProcedureID = this.ClaimForm.value.Fname;
@@ -349,40 +349,49 @@ export class CreatclaimComponent implements OnInit {
     else {
       alert("form valid")
       this.InsuaranceSave = {
-        InsuranceCompanyID: this.InsuaranceForm.value.InsuranceCompany,
-        TPAID: this.InsuaranceForm.value.TPA,
-        TPAIDNo: this.InsuaranceForm.value.TPAID,
-        RelationOfPatientWithPolicyHolderID: this.InsuaranceForm.value.RelationOPH,
-        PolicyHolderName: this.InsuaranceForm.value.PolicyHolder,
-        PolicyNumber: this.InsuaranceForm.value.PolicyNumber,
-        GroupPolicy: this.InsuaranceForm.value.GroupPolicy,
-        // Company/Corporate:,
-        // ClaimID/PreauthNo:,
-        // InitialApprovalAmount:this.InsuaranceForm.value.DrResgistrationnumber,
-        // ApprovedEnhancementsAmount:this.InsuaranceForm.value.DrResgistrationnumber,
-        // ApprovedAmount(AtDischarge):    
+
+        userId: 2,
+        claimId: 31,
+        claimDetailsStageId: 11,
+        patientInsuranceInfoDto: {
+          tpaNumber: this.InsuaranceForm.value.TPAID,
+          policyHolderName: this.InsuaranceForm.value.PolicyHolder,
+          policyNumber: this.InsuaranceForm.value.PolicyNumber,
+          groupCompanyName:  this.InsuaranceForm.value.GroupPolicy2,
+          tpaClaimId: this.InsuaranceForm.value.TPA,
+          initialApprovedAmount: 6000.0,
+          enhancementApprovedAmount: 12000.0,
+          dischargeApprovedAmount: 10000.0,
+          statusId: 1,
+          insuranceCompanyId: this.InsuaranceForm.value.InsuranceCompany,
+          tpaId: 1,
+          relationshipId: this.InsuaranceForm.value.RelationOPH,
+          groupPolicy: this.InsuaranceForm.value.GroupPolicy,
+        }
 
       }
-      console.log("med", this.InsuaranceSave)
+
     }
-
-
-    // this.claimsave["InsuranceInfo"].InsuranceCompanyID = this.ClaimForm.value.InsuranceCompany;
-    // this.claimsave["InsuranceInfo"].TPAID = this.ClaimForm.value.TPA;
-    // this.claimsave["InsuranceInfo"].TPAIDNo = this.ClaimForm.value.TPAID;
-    // this.claimsave["InsuranceInfo"].RelationOfPatientWithPolicyHolderID = this.ClaimForm.value.RelationOPH;
-    // this.claimsave["InsuranceInfo"].PolicyHolderName = this.ClaimForm.value.PolicyHolder;
-    // this.claimsave["InsuranceInfo"].PolicyNumber = this.ClaimForm.value.PolicyNumber;
-    // this.claimsave["InsuranceInfo"].GroupPolicy = this.ClaimForm.value.GroupPolicy;
-    // this.claimsave["InsuranceInfo"]["Company/Corporate"] = this.ClaimForm.value.Company;
-    // this.claimsave["InsuranceInfo"].ClaimID/PreauthNo = this.ClaimForm.value.Stage;
-    // this.claimsave["InsuranceInfo"].InitialApprovalAmount = this.ClaimForm.value.DateOfAdmission;
-    // this.claimsave["InsuranceInfo"].ApprovedEnhancementsAmount = this.ClaimForm.value.DateOfAdmission;
-    // this.claimsave["InsuranceInfo"].InitialApprovalAmount = this.ClaimForm.value.DateOfAdmission;
-    // this.claimsave["InsuranceInfo"].ApprovedAmount(AtDischarge) = this.ClaimForm.value.DateOfAdmission;
-
-
+    console.log("ins", this.InsuaranceSave)
   }
+
+
+  // this.claimsave["InsuranceInfo"].InsuranceCompanyID = this.ClaimForm.value.InsuranceCompany;
+  // this.claimsave["InsuranceInfo"].TPAID = this.ClaimForm.value.TPA;
+  // this.claimsave["InsuranceInfo"].TPAIDNo = this.ClaimForm.value.TPAID;
+  // this.claimsave["InsuranceInfo"].RelationOfPatientWithPolicyHolderID = this.ClaimForm.value.RelationOPH;
+  // this.claimsave["InsuranceInfo"].PolicyHolderName = this.ClaimForm.value.PolicyHolder;
+  // this.claimsave["InsuranceInfo"].PolicyNumber = this.ClaimForm.value.PolicyNumber;
+  // this.claimsave["InsuranceInfo"].GroupPolicy = this.ClaimForm.value.GroupPolicy;
+  // this.claimsave["InsuranceInfo"]["Company/Corporate"] = this.ClaimForm.value.Company;
+  // this.claimsave["InsuranceInfo"].ClaimID/PreauthNo = this.ClaimForm.value.Stage;
+  // this.claimsave["InsuranceInfo"].InitialApprovalAmount = this.ClaimForm.value.DateOfAdmission;
+  // this.claimsave["InsuranceInfo"].ApprovedEnhancementsAmount = this.ClaimForm.value.DateOfAdmission;
+  // this.claimsave["InsuranceInfo"].InitialApprovalAmount = this.ClaimForm.value.DateOfAdmission;
+  // this.claimsave["InsuranceInfo"].ApprovedAmount(AtDischarge) = this.ClaimForm.value.DateOfAdmission;
+
+
+
 
   GetDocList() {
 
@@ -526,7 +535,7 @@ export class CreatclaimComponent implements OnInit {
     this.api.getService("assets/data/picklist.json").subscribe((data: any) => {
 
       this.GenderDetail = data["GenderName"];
-      this.RPADetail = data["Relation of patient with policy holder"]
+
 
 
 
@@ -544,9 +553,11 @@ export class CreatclaimComponent implements OnInit {
       this.specialityDetail = data["diagnosis_speciality_master"];
       this.hospitalDetail = data["hospital_master"];
       this.chronicillnessDetail = data["cronic_illness_master"];
-      this.DiagnosisDetail = data["diagnosis_master"]
-    })
+      this.DiagnosisDetail = data["diagnosis_master"];
+      this.RPADetail = data["relationship_master"]
 
+    })
+    console.log("jj", this.RPADetail)
   }
 
   //---------Start Binding Values on selection to Next medical Form
@@ -575,7 +586,31 @@ export class CreatclaimComponent implements OnInit {
 
   // --------------------------------------------------------------------------------------------------
 
+  costSelect(event: any) {
+    //this.othercostarray=[];
+    console.log("event1", event.value)
+    //console.log("event2",event.target.options[event.target.options.selectedIndex].text); 
+    // if(event.value.length>0){
+    //   // this.othercostarray.push(Number(event.value));
+    //   console.log("event",event.value.toISOString())     
+    // }
+    this.othercostarray = event.value.map(function (items: any) {
+      return { items }
+    })
+    this.othercostheader = [];
+    //console.log("event3",this.othercostarray) ; 
+    for (let i = 0; i < event.value.length; i++) {
+      const cstvar = this.OtherCosts.filter((x: any) => x.id == event.value[i]);
+      //
+      this.othercostheader.push({
+        "id": cstvar[0].id,
+        "costType": cstvar[0].costType,
+      });
 
+    }
+    console.log("OtherCosts", this.othercostheader);
+
+  }
 
 
 
