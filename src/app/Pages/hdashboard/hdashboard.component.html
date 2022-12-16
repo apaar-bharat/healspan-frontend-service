@@ -117,8 +117,8 @@
 							<td>{{p.ailment}}</td>
 							<td>{{p.stage}}</td>
 							<td>{{p.status}}</td>
-							<td>{{p.admissionDate}}</td>
-							<td>{{p.dischargeDate}}</td>
+							<td>{{p.admissionDate | date:'short'}}</td>
+							<td>{{p.dischargeDate| date:'short'}}</td>
 							<td>{{p.ageing}}</td>
 							<td>{{p.approvedAmount}}</td>
 						</tr>
@@ -141,14 +141,14 @@
 						<th>ApprovedAmount</th>
 					</thead>
 					<tbody>
-						<tr *ngFor="let a of pendingDataList">
+						<tr *ngFor="let a of aprrovalDataList">
 							<td ><a routerLink="/createclaim" class="tblink">{{a.claimID}}</a></td>
 							<td>{{a.name}}</td>
 							<td>{{a.ailment}}</td>
 							<td>{{a.stage}}</td>
 							<td>{{a.status}}</td>
-							<td>{{a.admissionDate  | date:'short':'GMT'}}</td>
-							<td>{{a.dischargeDate  | date:'short':'GMT'}}</td>
+							<td>{{a.admissionDate  | date:'short'}}</td>
+							<td>{{a.dischargeDate  | date:'short'}}</td>
 							<td>{{a.ageing}}</td>
 							<td>{{a.approvedAmount}}</td>
 						</tr>
