@@ -6,6 +6,7 @@ import { HttpHeaders, HttpClient, HttpParams, HttpEvent, HttpEventType, HttpProg
 import { catchError, map } from "rxjs/operators"
 import { Subject, throwError } from 'rxjs';
 import { ActivatedRoute, Route } from '@angular/router';
+import { DataService } from 'src/app/service/data.service';
 
 declare function verificationForm(): any;
 //declare function phoneNoselect():any;
@@ -65,16 +66,15 @@ export class CreatclaimComponent implements OnInit {
   hospitalDetail: any;
   chronicillnessDetail: any;
   DiagnosisDetail: any;
-  dropdownSettings = {};
-  dropdownList: any;
-  selectedItems: any
+ 
   patientSave: any = {};
   medicalSave: any = {};
   InsuaranceSave: any = {};
   othercostarray: Array<number> = [];
   othercostheader: any;
+  claimdata:any=[];
   constructor(private fb: FormBuilder, private api: ApiService, private http: HttpClient,
-    private httpClient: HttpClient, private route: ActivatedRoute) {
+    private httpClient: HttpClient, private route: ActivatedRoute,private dataservice : DataService) {
     this.minDateToFinish.subscribe((r: any) => {
       this.minDate = new Date(r);
     })
@@ -82,12 +82,29 @@ export class CreatclaimComponent implements OnInit {
 
   ngOnInit(): void {
     let stagename = this.route.snapshot.params['stagename'];
+    this.dataservice.currentclaimdetails_data.subscribe((res:any) =>{
+        this.claimdata = res ;
+        if(this.claimdata.length != 0){
+          this.AssignFormControlValues(this.claimdata)
+        }
+         
+    });
+    //console.log("claim currentclaimdetails_data" ,this.claimdata)
+   
+
+
     this.ActiveStage = stagename
     nice_Select();
     verificationForm();
+    this.DefineFormControls();
     this.todaysdate = new Date().getFullYear() + '-' + ('0' + (new Date().getMonth() + 1)).slice(-2) + '-' + ('0' + new Date().getDate()).slice(-2) + "  " + (new Date().getHours()) + ":" + (new Date().getMinutes());
-    console.log(this.todaysdate)
+    console.log(this.todaysdate)  
+    this.bindDropdown();
+    this.GetDocList();
+    this.date = new Date().toISOString().slice(0, 10);
+  }
 
+  DefineFormControls(){
     this.ClaimForm = this.fb.group({
 
       Fname: [null, Validators.required],
@@ -155,49 +172,20 @@ export class CreatclaimComponent implements OnInit {
       file5: [''],
     })
 
-    this.bindDropdown();
-    this.GetDocList();
-
-    this.date = new Date().toISOString().slice(0, 10);
-    console.log("helo", this.date)
-    this.dropdownSettings = {
-
-      singleSelection: false,
-      idField: 'item_id',
-      textField: 'item_text',
-      enableCheckAll: true,
-      selectAllText: 'Chọn All',
-      unSelectAllText: 'Hủy chọn',
-      allowSearchFilter: true,
-      limitSelection: -1,
-      clearSearchFilter: true,
-      maxHeight: 197,
-      itemsShowLimit: 3,
-      searchPlaceholderText: 'Tìm kiếm',
-      noDataAvailablePlaceholderText: 'Không có dữ liệu',
-      closeDropDownOnSelection: false,
-      showSelectedItemsAtTop: false,
-      defaultOpen: false
-
-    };
-
-    this.dropdownList = [
-      { item_id: 1, item_text: 'Mumbai' },
-      { item_id: 2, item_text: 'Bangaluru' },
-      { item_id: 3, item_text: 'Pune' },
-      { item_id: 4, item_text: 'Navsari' },
-      { item_id: 5, item_text: 'New Delhi' }
-    ];
-    this.selectedItems = [
-      { item_id: 3, item_text: 'Pune' },
-      { item_id: 4, item_text: 'Navsari' }
-    ];
-
   }
 
+  AssignFormControlValues(data:any){
+  
+    let patientInformationList = data.claimDetailsForStageList[0].patientInformationList;
+    let patientMedicalInfoList = data.claimDetailsForStageList[0].patientMedicalInfoList;
+    let patientInsuranceInfoList = data.claimDetailsForStageList[0].patientInsuranceInfoList;
+    //alert(JSON.stringify(claimDetailsForStageList));
+
+    this.ClaimForm.controls["Fname"].setValue(patientInformationList[0].firstName)
+  }
+  
   get f() { return this.ClaimForm.controls; }
   get M() { return this.medicalForm.controls; }
-
   get I() { return this.InsuaranceForm.controls; }
 
   changeDate() {
@@ -255,31 +243,6 @@ export class CreatclaimComponent implements OnInit {
           }
         }
       }
-
-      // this.claimsave["PatientInfo"].FirstName = this.ClaimForm.value.Fname;
-      // this.claimsave["PatientInfo"].MiddleName = this.ClaimForm.value.Mname;
-      // this.claimsave["PatientInfo"].LastName = this.ClaimForm.value.Lname;
-      // this.claimsave["PatientInfo"].PatientMobileNo = this.ClaimForm.value.MobileNo;
-      // this.claimsave["PatientInfo"].PatientHospitalUHID = this.ClaimForm.value.PHUHID;
-      // this.claimsave["PatientInfo"].Gender = this.ClaimForm.value.Gender;
-      // this.claimsave["PatientInfo"].DateOfBirth = this.ClaimForm.value.DOB;
-      // this.claimsave["PatientInfo"].Age = this.ClaimForm.value.Age;
-      // this.claimsave["PatientInfo"].Stage = this.ClaimForm.value.Stage;
-      // this.claimsave["PatientInfo"].DateOfAdmission = this.ClaimForm.value.DateOfAdmission;
-      // this.claimsave["PatientInfo"].EstimatedDateOfDischarge = this.ClaimForm.value.DateOfDischarge;
-      // this.claimsave["PatientInfo"].RoomCategoryID = this.ClaimForm.value.RoomCategory;
-      // this.claimsave["PatientInfo"].TotalRoomCost = this.ClaimForm.value.totalRC;
-      // this.claimsave["PatientInfo"].OtherCosts.push({ "name": this.ClaimForm.value.OtherC, "estimatedcost": this.ClaimForm.value.OtherCE },);
-      // this.claimsave["PatientInfo"].ProcedureID = this.ClaimForm.value.Procedure;
-      // this.claimsave["PatientInfo"].InitalCostEstimate = this.ClaimForm.value.InitialCE;
-      // // this.claimsave["PatientInfo"].EnhancementEstimate = this.ClaimForm.value.totalRC;
-      // // this.claimsave["PatientInfo"].DateOfDischarge = this.ClaimForm.value.totalRC;
-      // // this.claimsave["PatientInfo"].FinalBillAmount = this.ClaimForm.value.totalRC;
-      // // this.claimsave["PatientInfo"].BillNumber = this.ClaimForm.value.totalRC;
-      // this.claimsave["PatientInfo"].HospitalD = this.ClaimForm.value.HospitalName;
-      // this.claimsave["PatientInfo"].ClaimedAmount = this.ClaimForm.value.ClaimAmount;
-
-
       console.log("qq", this.patientSave)
 
     }
@@ -375,24 +338,6 @@ export class CreatclaimComponent implements OnInit {
     console.log("ins", this.InsuaranceSave)
   }
 
-
-  // this.claimsave["InsuranceInfo"].InsuranceCompanyID = this.ClaimForm.value.InsuranceCompany;
-  // this.claimsave["InsuranceInfo"].TPAID = this.ClaimForm.value.TPA;
-  // this.claimsave["InsuranceInfo"].TPAIDNo = this.ClaimForm.value.TPAID;
-  // this.claimsave["InsuranceInfo"].RelationOfPatientWithPolicyHolderID = this.ClaimForm.value.RelationOPH;
-  // this.claimsave["InsuranceInfo"].PolicyHolderName = this.ClaimForm.value.PolicyHolder;
-  // this.claimsave["InsuranceInfo"].PolicyNumber = this.ClaimForm.value.PolicyNumber;
-  // this.claimsave["InsuranceInfo"].GroupPolicy = this.ClaimForm.value.GroupPolicy;
-  // this.claimsave["InsuranceInfo"]["Company/Corporate"] = this.ClaimForm.value.Company;
-  // this.claimsave["InsuranceInfo"].ClaimID/PreauthNo = this.ClaimForm.value.Stage;
-  // this.claimsave["InsuranceInfo"].InitialApprovalAmount = this.ClaimForm.value.DateOfAdmission;
-  // this.claimsave["InsuranceInfo"].ApprovedEnhancementsAmount = this.ClaimForm.value.DateOfAdmission;
-  // this.claimsave["InsuranceInfo"].InitialApprovalAmount = this.ClaimForm.value.DateOfAdmission;
-  // this.claimsave["InsuranceInfo"].ApprovedAmount(AtDischarge) = this.ClaimForm.value.DateOfAdmission;
-
-
-
-
   GetDocList() {
 
     this.api.getService("assets/data/doclist.json").subscribe((data: any) => {
@@ -460,15 +405,10 @@ export class CreatclaimComponent implements OnInit {
 
   OnTypeofAccident(event: any) {
     console.log(event.target.value);
-
   }
 
   OnPassengerType(event: any) {
-
   }
-
-
-
 
   //-----Start File Upload Logic ------------------------
   fileChange(event: any, id: any) {
@@ -533,15 +473,7 @@ export class CreatclaimComponent implements OnInit {
   bindDropdown() {
 
     this.api.getService("assets/data/picklist.json").subscribe((data: any) => {
-
       this.GenderDetail = data["GenderName"];
-
-
-
-
-
-
-      // console.log("sdsd", this.insuaranceCompanyDetail);
     })
 
     this.api.getService("assets/data/Masters.json").subscribe((data: any) => {
@@ -635,7 +567,7 @@ export class CreatclaimComponent implements OnInit {
   }
 
 
-
+  
 
 }
 

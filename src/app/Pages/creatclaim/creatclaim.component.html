@@ -176,9 +176,8 @@
                                         </option>
 
                                     </select> -->
-                                    <mat-form-field >
-                                      
-                                        <mat-select class="form-control form-select" formControlName="OtherC"   placeholder="Choose" (selectionChange)="costSelect($event)" multiple>
+                                    <mat-form-field>              
+                                        <mat-select class="form-control form-select" formControlName="OtherC"  placeholder="Choose" (selectionChange)="costSelect($event)" multiple>
                                             <mat-option *ngFor="let o of OtherCosts" value={{o.id}}>{{o.costType}}</mat-option>
                                           </mat-select>
                                     </mat-form-field>

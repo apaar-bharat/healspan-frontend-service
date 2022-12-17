@@ -9,10 +9,10 @@
 			<div class="modal" role="dialog" id="modalChoice3">
 				<div class="modal-dialog healm" role="document">
 					<ul class="healmenulist">
-						<a href="/createclaim/Inital">
-							<li class="healmenu">Inital Authorization</li>
+						<a href="/createclaim/Inital Authorization">
+							<li class="healmenu">Inital Authorization</li> 
 						</a>
-						<a href="/createclaim/Enhance">
+						<a href="/createclaim/Enhancement">
 							<li class="healmenu">Enhance</li>
 						</a>
 						<a href="/createclaim/Discharge">
@@ -31,37 +31,35 @@
 
 		<a href="#" class="col-md-3 ps-0 text-decoration-none">
 			<div class="healboxx healshadow1" >
-				<!-- <p><strong>{{a.statusDetail}}</strong> </p> -->
-				<h2 class="bxt"><strong>Initial Authorisation
-				</strong></h2>
-				<p class="bxtt">{{statusDetail["Initial Authorisation"]}}</p>
+				<p><strong>Initial Authorisation</strong></p>
+				<h2 class="bxt"><strong>{{statusDetail["Initial Authorisation"]}}</strong></h2>
+				<p class="bxtt">Pending</p>
 			</div>
 		</a>
 
 		
 
 		<a href="#" class="col-md-3 ps-0 text-decoration-none">
-			<div class="healboxx healshadow1" >
-				<!-- <p><strong>{{a.statusDetail}}</strong> </p> -->
-				<h2 class="bxt"><strong>Discharge
-				</strong></h2>
-				<p class="bxtt">{{statusDetail["Discharge"]}}</p>
+			<div class="healboxx healshadow1" >		
+				<p><strong>Discharge</strong></p>
+				<h2 class="bxt"><strong>{{statusDetail["Discharge"]}}</strong></h2>
+				<p class="bxtt">Pending</p>
 			</div>
 		</a>
 
 		<a href="#" class="col-md-3 text-decoration-none">
 			<div class="healboxx healshadow1">
-				<!-- <p><strong>Enhancement</strong> </p>	 -->
-				<h2 class="bxt"><strong>Enhancement</strong></h2>
-				<p class="bxtt">{{statusDetail["Enhancement"]}}</p>
+				<p><strong>Enhancement</strong></p>
+				<h2 class="bxt"><strong>{{statusDetail["Enhancement"]}}</strong></h2>
+				<p class="bxtt">Pending</p>
 			</div>
 		</a>
 
 		<a href="#" class="col-md-3 text-decoration-none">
 			<div class="healboxx healshadow1">
-				<!-- <p><strong>Discharge</strong></p> -->
-				<h2 class="bxt"><strong>Final Claim</strong></h2>
-				<p class="bxtt">{{statusDetail["Final Claim"]}}</p>
+				<p><strong>Final Claim</strong></p>
+				<h2 class="bxt"><strong>{{statusDetail["Final Claim"]}}</strong></h2>
+				<p class="bxtt">Pending</p>
 			</div>
 		</a>
 
@@ -112,7 +110,7 @@
 					</thead>
 					<tbody>
 						<tr *ngFor="let p of aprrovalDataList">
-							<td ><a routerLink="/createclaim" class="tblink">{{p.claimID}}</a></td>
+							<td ><a (click)="GotoClaim(p.stage,p.claimID)" class="tblink">{{p.claimID}}</a></td>
 							<td>{{p.name}}</td>
 							<td>{{p.ailment}}</td>
 							<td>{{p.stage}}</td>
@@ -142,7 +140,7 @@
 					</thead>
 					<tbody>
 						<tr *ngFor="let a of aprrovalDataList">
-							<td ><a routerLink="/createclaim" class="tblink">{{a.claimID}}</a></td>
+							<td ><a (click)="GotoClaim(a.stage,a.claimID)"  class="tblink">{{a.claimID}}</a></td>
 							<td>{{a.name}}</td>
 							<td>{{a.ailment}}</td>
 							<td>{{a.stage}}</td>
