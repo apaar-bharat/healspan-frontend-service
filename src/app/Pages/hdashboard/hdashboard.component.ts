@@ -34,7 +34,7 @@ export class HdashboardComponent implements OnInit {
 
   GotoClaim(stage:any,claimID:number){
       let url = 'createclaim/'+stage;
-      this.apiservice.getService("assets/data/claimdetail2.json").subscribe((data: any) => {
+      this.apiservice.getService("http://3.109.1.145:8109/healspan/claim/retrieveclaim/27").subscribe((data: any) => {
         this.dataservice.updateclaimdetails_data(data);
       })
       this.router.navigate([url]);

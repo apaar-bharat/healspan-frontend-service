@@ -7,6 +7,7 @@ import { catchError, map } from "rxjs/operators"
 import { Subject, throwError } from 'rxjs';
 import { ActivatedRoute, Route } from '@angular/router';
 import { DataService } from 'src/app/service/data.service';
+import { formatDate } from '@angular/common';
 
 declare function verificationForm(): any;
 //declare function phoneNoselect():any;
@@ -84,6 +85,7 @@ export class CreatclaimComponent implements OnInit {
     let stagename = this.route.snapshot.params['stagename'];
     this.dataservice.currentclaimdetails_data.subscribe((res:any) =>{
         this.claimdata = res ;
+        console.log("hh",this.claimdata)
         if(this.claimdata.length != 0){
           this.AssignFormControlValues(this.claimdata)
         }
@@ -116,7 +118,7 @@ export class CreatclaimComponent implements OnInit {
       DOB: ['',],
       Age: ['', Validators.required],
       Stage: [this.ActiveStage,],
-      patientprimaryInsured: [true, Validators.required],
+      patientprimaryInsured: [true],
       HospitalName: ['', Validators.required],
       DateOfAdmission: ['',],
       DateOfDischarge: ['',],
@@ -133,16 +135,16 @@ export class CreatclaimComponent implements OnInit {
     })
 
     this.medicalForm = this.fb.group({
-      Procedures: ["",],
-      TreatmentType: ["",],
-      Provisionaldiagnosis: ["",],
-      Speciality: ["",],
-      Dateoffirstdiagnosis: ["",],
-      Pasthistoryofchronicillness: ["",],
-      Nameofthetreatingdoctor: ["",],
-      DrResgistrationnumber: ["",],
-      Qualificationofthetreatingdoctor: ["",],
-      Diagnosis: ["",],
+      Procedures: ["",Validators.required],
+      TreatmentType: ["",Validators.required],
+      Provisionaldiagnosis: ["",Validators.required],
+      Speciality: ["",Validators.required],
+      Dateoffirstdiagnosis: ["",Validators.required],
+      Pasthistoryofchronicillness: ["",Validators.required],
+      Nameofthetreatingdoctor: ["",Validators.required],
+      DrResgistrationnumber: ["",Validators.required],
+      Qualificationofthetreatingdoctor: ["",Validators.required],
+     
       Ages: ["",],
       Genders: ["",],
       Duration: ["",],
@@ -160,8 +162,8 @@ export class CreatclaimComponent implements OnInit {
       PolicyHolder: ['', Validators.required],
       RelationOPH: ['', Validators.required],
       PolicyNumber: ['', Validators.required],
-      GroupPolicy: ['', Validators.required],
-      GroupPolicy2: ['', Validators.required],
+      IsGroupPolicy: ['', Validators.required],
+      Groupcompany: ['', Validators.required],
     })
 
     this.DocumentsForm = this.fb.group({
@@ -175,13 +177,75 @@ export class CreatclaimComponent implements OnInit {
   }
 
   AssignFormControlValues(data:any){
+    console.log("qq",data[0].patientInfo)
+    let patientInformationList =data[0].patientInfo;
+    let patientMedicalInfoList = data[0].medicalInfo;
+    let patientInsuranceInfoList = data[0].insuranceInfo;
+
   
-    let patientInformationList = data.claimDetailsForStageList[0].patientInformationList;
-    let patientMedicalInfoList = data.claimDetailsForStageList[0].patientMedicalInfoList;
-    let patientInsuranceInfoList = data.claimDetailsForStageList[0].patientInsuranceInfoList;
     //alert(JSON.stringify(claimDetailsForStageList));
 
-    this.ClaimForm.controls["Fname"].setValue(patientInformationList[0].firstName)
+    let dateBirth =patientInformationList.dateBirth;
+    let AdmissionDate=patientInformationList.dateOfAdmission;
+    let dischargeDate=patientInformationList.dateOfDischarge;
+   
+
+
+    this.ClaimForm.controls["Fname"].setValue(patientInformationList.firstName);
+    this.ClaimForm.controls["Mname"].setValue(patientInformationList.middleName);
+    this.ClaimForm.controls["Lname"].setValue(patientInformationList.lastname);
+    this.ClaimForm.controls["RoomCategory"].setValue(patientInformationList.roomId);
+this.ClaimForm.controls["MobileNo"].setValue(patientInformationList.mobileNo);
+    this.ClaimForm.controls["PHUHID"].setValue(patientInformationList.uhidNumber);
+    this.ClaimForm.controls["Gender"].setValue(patientInformationList.gender);
+    if(dateBirth !=null){
+    this.ClaimForm.get("DOB")?.setValue(formatDate(dateBirth,'yyyy-MM-dd','en'));}
+    this.ClaimForm.controls["Age"].setValue(patientInformationList.age);
+    if(AdmissionDate !=null){
+    this.ClaimForm.get("DateOfAdmission")?.setValue(formatDate(AdmissionDate,'yyyy-MM-dd','en'));}
+    if(dischargeDate !=null){
+    this.ClaimForm.get("DateOfDischarge")?.setValue(formatDate(dischargeDate,'yyyy-MM-dd','en'));}
+    this.ClaimForm.controls["CostPD"].setValue(patientInformationList.costPerDay);
+    this.ClaimForm.controls["InitialCE"].setValue(patientInformationList.initialCostEstimate);
+    this.ClaimForm.controls["TotalBillAmount"].setValue(patientInformationList.finalBillAmount);
+    this.ClaimForm.controls["ClaimAmount"].setValue(patientInformationList.claimedAmount);
+    this.ClaimForm.controls["patientprimaryInsured"].setValue(patientInformationList.primaryInsured);
+    this.ClaimForm.controls["Procedure"].setValue(patientInformationList.medicalProcedureId);
+    this.ClaimForm.controls["totalRC"].setValue(patientInformationList.totalRoomCost);
+    this.ClaimForm.controls["OtherCE"].setValue(patientInformationList.otherCostsEstimate);
+    this.ClaimForm.controls["HospitalName"].setValue(patientInformationList.hospitalId);
+
+
+
+
+    let dateofirstdiagDate=patientMedicalInfoList.dateOfFirstDiagnosis;
+
+    if(dateofirstdiagDate !=null){
+    this.ClaimForm.get("Dateoffirstdiagnosis")?.setValue(formatDate(dateofirstdiagDate,'yyyy-MM-dd','en'));}
+    this.medicalForm.controls["Nameofthetreatingdoctor"].setValue(patientMedicalInfoList.doctorName),
+    this.medicalForm.controls["DrResgistrationnumber"].setValue(patientMedicalInfoList.doctorRegistrationNumber),
+    this.medicalForm.controls["Qualificationofthetreatingdoctor"].setValue(patientMedicalInfoList.doctorQualification),
+    this.medicalForm.controls["Provisionaldiagnosis"].setValue("28"),
+    this.medicalForm.controls["Speciality"].setValue(patientMedicalInfoList.specialityId)
+    this.medicalForm.controls["Pasthistoryofchronicillness"].setValue(patientMedicalInfoList.diagnosisSpecialitmedicalform)
+    
+
+    // const insuaranceCompDetail=this.insuaranceCompanyDetail.filter((x:any)=>x.name==data.name);
+    // const tpaMasterDetail=this.TPADetail.filter((x:any)=>x.name==data.name);
+    // const rpaDetail=this.RPADetail.filter((x:any)=>x.relationshipName==data.relationshipName);
+
+
+    this.InsuaranceForm.controls["TPAID"].setValue(patientInsuranceInfoList.tpaNumber),
+    this.InsuaranceForm.controls["PolicyHolder"].setValue(patientInsuranceInfoList.policyHolderName),
+    this.InsuaranceForm.controls["PolicyNumber"].setValue(patientInsuranceInfoList.policyNumber),
+    // this.ClaimForm.controls["TreatmentType"].setValue(patientInsuranceInfoList[0].patientRelation),
+    this.InsuaranceForm.controls["Groupcompany"].setValue(patientInsuranceInfoList.groupCompany),
+    this.InsuaranceForm.controls["TPA"].setValue(patientInsuranceInfoList.tpaMst.id),
+    this.InsuaranceForm.controls["InsuranceCompany"].setValue(patientInsuranceInfoList.insuranceCompanyMst.id),
+    // this.ClaimForm.controls["TreatmentType"].setValue(patientInsuranceInfoList[0].tpaId),
+    this.InsuaranceForm.controls["RelationOPH"].setValue(patientInsuranceInfoList.relationshipId),
+    this.InsuaranceForm.controls["IsGroupPolicy"].setValue(patientInsuranceInfoList.isGroupPolicy)
+   
   }
   
   get f() { return this.ClaimForm.controls; }
@@ -230,7 +294,7 @@ export class CreatclaimComponent implements OnInit {
             claimAmount: this.ClaimForm.value.ClaimAmount,
             billNumber: "",
             roomId: this.ClaimForm.value.RoomCategory,
-            medicalProcedureId: "",
+            medicalProcedureId:this.ClaimForm.value.Procedure,
             patientOtherCostList: [{
               otherCostId: this.ClaimForm.value.OtherC,
               estimatedCost: this.ClaimForm.value.OtherCE,
@@ -320,16 +384,16 @@ export class CreatclaimComponent implements OnInit {
           tpaNumber: this.InsuaranceForm.value.TPAID,
           policyHolderName: this.InsuaranceForm.value.PolicyHolder,
           policyNumber: this.InsuaranceForm.value.PolicyNumber,
-          groupCompanyName:  this.InsuaranceForm.value.GroupPolicy2,
-          tpaClaimId: this.InsuaranceForm.value.TPA,
+          groupCompanyName:  this.InsuaranceForm.value.Groupcompany,
+          // tpaClaimId: this.InsuaranceForm.value.TPA,
           initialApprovedAmount: 6000.0,
           enhancementApprovedAmount: 12000.0,
           dischargeApprovedAmount: 10000.0,
           statusId: 1,
           insuranceCompanyId: this.InsuaranceForm.value.InsuranceCompany,
-          tpaId: 1,
+          tpaId: this.InsuaranceForm.value.TPA,
           relationshipId: this.InsuaranceForm.value.RelationOPH,
-          groupPolicy: this.InsuaranceForm.value.GroupPolicy,
+          groupPolicy: this.InsuaranceForm.value.IsGroupPolicy,
         }
 
       }

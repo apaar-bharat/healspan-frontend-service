@@ -169,24 +169,24 @@
                                 </div>
                                 <div class="form-group col-md-3 mt-5">
                                     <label for="" class="form-label float-start">Other Costs</label>
-                                    <!-- <select class="form-control form-select" formControlName="OtherC" id="OtherC"
+                                    <select class="form-control form-select" formControlName="OtherC" id="OtherC"
                                         required>
                                         <option value="">Choose...</option>
                                         <option *ngFor="let o of OtherCosts" value={{o.id}}>{{o.costType}}
                                         </option>
 
-                                    </select> -->
-                                    <mat-form-field>              
+                                    </select>
+                                    <!-- <mat-form-field>              
                                         <mat-select class="form-control form-select" formControlName="OtherC"  placeholder="Choose" (selectionChange)="costSelect($event)" multiple>
                                             <mat-option *ngFor="let o of OtherCosts" value={{o.id}}>{{o.costType}}</mat-option>
                                           </mat-select>
-                                    </mat-form-field>
+                                    </mat-form-field> -->
 
                                 </div>
                             </div>
                             <div class="form-row ">
-                                <div class="form-group col-md-3 mt-5" *ngFor="let n1 of othercostheader">
-                                    <label for="" class="form-label float-start">{{n1.costType}}</label>
+                                <div class="form-group col-md-3 mt-5" >
+                                    <label for="" class="form-label float-start">Other Cost Estimate</label>
                                     <input type="text" class="form-control" formControlName="OtherCE">
 
                                 </div>
@@ -228,7 +228,7 @@
 
                     </form>
 
-                    <button type="button" class="previous_button btn btn-lg px-5 float-start mt-5">Exit</button>
+                    <button type="button"  form="ngForm"  class="previous_button btn btn-lg px-5 float-start mt-5">Exit</button>
                     <button type="button" class="next btn btn-primary btn-lg px-5 float-end mt-5" type="submit"
                         form="ngForm" [disabled]="!ClaimForm.valid">Continue</button>
 
@@ -272,7 +272,9 @@
                                     [class.is-invalid]="M['Provisionaldiagnosis'].invalid && (M['Provisionaldiagnosis'].dirty || M['Provisionaldiagnosis'].touched)"
                                     id="Provisionaldiagnosis" required>
                                     <option value="">Choose...</option>
-                                    <option value="1">Surgical management</option>
+                                    <option *ngFor="let p of DiagnosisDetail" value={{p.id}}>
+                                        {{p.name}}</option>
+
 
                                 </select>
 
@@ -349,18 +351,7 @@
                         </div>
 
                         <div class="form-row">
-                            <div class="form-group col-md-3 mt-5">
-                                <label for="" class="form-label float-start">Diagnosis</label>
-                                <select class="form-control form-select" formControlName="Diagnosis" id="country"
-                                    [class.is-invalid]="M['Diagnosis'].invalid && (M['Diagnosis'].dirty || M['Diagnosis'].touched)"
-                                    required>
-                                    <option value="">Choose...</option>
-                                    <option *ngFor="let p of DiagnosisDetail" value={{p.id}}>
-                                        {{p.name}}</option>
-
-                                </select>
-
-                            </div>
+                           
                             <div class="form-group col-md-3  mt-5">
                                 <label for="" class="form-label float-start">Duration</label>
                                 <select class="form-control form-select" formControlName="Duration" id="Duration"
@@ -452,7 +443,7 @@
                                     [class.is-invalid]="I['InsuranceCompany'].invalid && (I['InsuranceCompany'].dirty || I['InsuranceCompany'].touched)"
                                     required>
                                     <option value="">Choose...</option>
-                                    <option *ngFor="let y of insuaranceCompanyDetail" value={{y.name}}>{{y.name}}
+                                    <option *ngFor="let y of insuaranceCompanyDetail" value={{y.id}}>{{y.name}}
                                     </option>
                                 </select>
 
@@ -464,7 +455,7 @@
                                     [class.is-invalid]="I['TPA'].invalid && (I['TPA'].dirty || I['TPA'].touched)"
                                     required>
                                     <option value="">Choose...</option>
-                                    <option *ngFor="let t of TPADetail" value={{t.name}}>{{t.name}}</option>
+                                    <option *ngFor="let t of TPADetail" value={{t.id}}>{{t.name}}</option>
                                 </select>
 
                             </div>
@@ -504,7 +495,7 @@
                         </div>
                         <div class="form-row w-100">
                             <div class="form-group col-md-6 mt-5">
-                                <input type="checkbox" formControlName="GroupPolicy"
+                                <input type="checkbox" formControlName="IsGroupPolicy"
                                     class="form-check-input float-start" id="same-address">
                                 <label class="form-check-label  float-start" for="same-address">&nbsp; Group
                                     Policy</label>
@@ -518,7 +509,7 @@
                         <div class="form-row">
                             <div class="form-group col-md-6 mt-5">
                                 <label for="" class="form-label float-start">Company / Corporate / Group*</label>
-                                <input type="text" formControlName="GroupPolicy2" class="form-control">
+                                <input type="text" formControlName="Groupcompany" class="form-control">
                             </div>
                             <div class="form-group col-md-6 mt-5" style="visibility:hidden;">
                                 <label for="" class="form-label float-start">Company / Corporate / Group*</label>
