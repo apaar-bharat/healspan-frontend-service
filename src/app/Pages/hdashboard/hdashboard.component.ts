@@ -12,32 +12,38 @@ export class HdashboardComponent implements OnInit {
   statusDetail: any;
   aprrovalDataList:any;
   pendingDataList:any;
-  statusss:any
+  statusss:any;
+  currentuserdata:any;
   constructor(private router: Router,private apiservice:ApiService,private dataservice : DataService) { }
 
   ngOnInit(): void {
-    this.apiservice.getService("assets/data/claims2.json").subscribe((data:any) =>{
-      this.statusDetail = data["stageWiseClaimCount"];
-      this.aprrovalDataList = data["claimDtoList"];
-      this.statusss = [];
-      this.pendingDataList = data["claimDtoList"]
-    })
+
+   this.dataservice.currentuser_data.subscribe((res) =>{
+    console.log("currentuserdata" + res);
+    this.currentuserdata = res
+   })
+   
+  //healspan/claim/retrieveallclaimsofloggedinuser/"+ this.currentuserdata[0].id
+  this.apiservice.getService("healspan/claim/retrieveallclaimsofloggedinuser/1").subscribe((data:any) =>{
+    //this.statusDetail = data["stageWiseClaimCount"];
+    this.aprrovalDataList = data;
+    this.statusss = [];
+    this.pendingDataList = data
+  })
 
     // this.dataservice.currentclaimdetails_data.subscribe((res:any) =>
     //    console.log("currentclaimdetails_data" ,res)
     //  );
   }
 
-  Idrouting(){
-    this.router.navigate(['createclaim']);
-  }
 
   GotoClaim(stage:any,claimID:number){
       let url = 'createclaim/'+stage;
-      this.apiservice.getService("http://3.109.1.145:8109/healspan/claim/retrieveclaim/27").subscribe((data: any) => {
+      this.apiservice.getService("healspan/claim/retrieveclaim/"+claimID).subscribe((data: any) => {
         this.dataservice.updateclaimdetails_data(data);
+        this.router.navigate([url]);
+
       })
-      this.router.navigate([url]);
   }
 
 }

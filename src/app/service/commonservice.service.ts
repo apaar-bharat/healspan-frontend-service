@@ -9,7 +9,7 @@ export class CommonserviceService {
   constructor(private router: Router) { }
 
   redirecttoactivedashboard(){
-    let activeDashboard=sessionStorage.getItem("usertype");
+    let activeDashboard=localStorage.getItem("usertype");
     if(activeDashboard=='huser'){
       this.router.navigate(['hdashboard'])
 

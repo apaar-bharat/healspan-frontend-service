@@ -67,7 +67,7 @@
                                     <label for="" class="form-label float-start">Patient Hospital UHID</label>
                                     <input type="text" class="form-control" formControlName="PHUHID"
                                         [class.is-invalid]="f['PHUHID'].invalid && (f['PHUHID'].dirty || f['PHUHID'].touched)"
-                                        required>
+                                     >
                                 </div>
                                 <div class="form-group col-md-3 mt-5">
                                     <label for="" class="form-label float-start">Gender</label>
@@ -75,7 +75,7 @@
                                         [class.is-invalid]="f['Gender'].invalid && (f['Gender'].dirty || f['Gender'].touched)"
                                         (change)="OnGenderSelect($event)" required>
                                         <option value="">Choose...</option>
-                                        <option *ngFor="let g of GenderDetail" value={{g.GenderName}}>{{g.GenderName}}
+                                        <option *ngFor="let g of GenderDetail" value={{g.id}}>{{g.name}}
                                         </option>
 
                                     </select>
@@ -111,8 +111,8 @@
                                 </div>
                                 <div class="form-group col-md-3 mt-5">
                                     <label for="" class="form-label float-start">Hospital Name*</label>
-                                    <select class="form-control form-select" id="country" formControlName="HospitalName"
-                                        [class.is-invalid]="f['HospitalName'].invalid && (f['HospitalName'].dirty || f['HospitalName'].touched)"
+                                    <select class="form-control form-select" id="country" formControlName="Hospital"
+                                        [class.is-invalid]="f['Hospital'].invalid && (f['Hospital'].dirty || f['Hospital'].touched)"
                                         required>
                                         <option value="">Choose...</option>
                                         <option *ngFor="let r of hospitalDetail" value="{{r.id}}">{{r.name}}
@@ -149,7 +149,7 @@
                                         [class.is-invalid]="f['RoomCategory'].invalid && (f['RoomCategory'].dirty || f['RoomCategory'].touched)"
                                         id="RoomCategory" required>
                                         <option value="">Choose...</option>
-                                        <option *ngFor="let r of roomsDetail" value="{{r.id}}">{{r.category}}
+                                        <option *ngFor="let r of roomsDetail" value="{{r.id}}">{{r.name}}
                                         </option>
 
                                     </select>
@@ -172,7 +172,7 @@
                                     <select class="form-control form-select" formControlName="OtherC" id="OtherC"
                                         required>
                                         <option value="">Choose...</option>
-                                        <option *ngFor="let o of OtherCosts" value={{o.id}}>{{o.costType}}
+                                        <option *ngFor="let o of OtherCosts" value={{o.id}}>{{o.name}}
                                         </option>
 
                                     </select>
@@ -223,16 +223,18 @@
                                     <input type="text" class="form-control" formControlName="ClaimAmount" required>
 
                                 </div>
-                            </div>
+                                
+
+                             </div>
                         </div>
 
                     </form>
 
                     <button type="button"  form="ngForm"  class="previous_button btn btn-lg px-5 float-start mt-5">Exit</button>
                     <button type="button" class="next btn btn-primary btn-lg px-5 float-end mt-5" type="submit"
-                        form="ngForm" [disabled]="!ClaimForm.valid">Continue</button>
+                        form="ngForm" >Continue</button>
 
-
+                        <!-- [disabled]="!ClaimForm.valid" -->
                 </fieldset>
 
 
@@ -251,24 +253,33 @@
                         <div class="form-row">
                             <div class="form-group col-md-3">
                                 <label for="" class="form-label float-start">Procedure</label>
-                                <input type="text" class="form-control" formControlName="Procedures" required readonly>
+                                <!-- <input type="text" class="form-control" formControlName="Procedures" required readonly> -->
+                                <select class="form-control form-select" formControlName="Procedures" (change)="onprocedureSelect($event)"
+                                [class.is-invalid]="M['Procedures'].invalid && (M['Procedures'].dirty || M['Procedures'].touched)"
+                                id="Procedures" required>
+                                <option value="">Choose...</option>
+                                <option *ngFor="let p of procedureDetail" value={{p.id}}>
+                                    {{p.name}}</option>
 
+
+                                </select>
                             </div>
 
                             <div class="form-group col-md-3">
                                 <label for="" class="form-label float-start">Treatment Type</label>
-                                <select class="form-control form-select" formControlName="TreatmentType"
+                                <select class="form-control form-select" formControlName="TreatmentType" (change)="OntreatmentType($event)"
                                     [class.is-invalid]="M['TreatmentType'].invalid && (M['TreatmentType'].dirty || M['TreatmentType'].touched)"
                                     id="TreatmentType" required>
                                     <option value="">Choose...</option>
                                     <option value="1">Surgical management</option>
                                     <option value="2">Medical management</option>
+                                    <option value="3">Medical/Surgical management</option>
                                 </select>
 
                             </div>
                             <div class="form-group col-md-3 ">
                                 <label for="" class="form-label float-start">Provisional diagnosis</label>
-                                <select class="form-control form-select" formControlName="Provisionaldiagnosis"
+                                <select class="form-control form-select" (change)="Ondiagnosis($event)" formControlName="Provisionaldiagnosis"
                                     [class.is-invalid]="M['Provisionaldiagnosis'].invalid && (M['Provisionaldiagnosis'].dirty || M['Provisionaldiagnosis'].touched)"
                                     id="Provisionaldiagnosis" required>
                                     <option value="">Choose...</option>
@@ -357,13 +368,13 @@
                                 <select class="form-control form-select" formControlName="Duration" id="Duration"
                                     required>
                                     <option value="">Choose...</option>
-                                    <option value="Less than 24 hours">Less than 24 hours</option>
-                                    <option value="Greater than 24 hours">Greater than 24 hours</option>
+                                    <option value="<24 hours"><24 hours</option>
+                                    <option value=">24 hours">>24 hours</option>
                                 </select>
                             </div>
                             <div class="form-group col-md-3  mt-5">
                                 <label for="" class="form-label float-start">Claim</label>
-                                <select (change)="OnClaimselect($event)" class="form-control form-select"
+                                <select (change)="OnClaimSelect()"  class="form-control form-select"
                                     formControlName="Claim" id="Claim" required>
                                     <option value="">Choose...</option>
                                     <option value="less than 1 lac">less than 1 lac</option>
@@ -371,7 +382,18 @@
                                     <option value="3">Any</option>
                                 </select>
                             </div>
-                            <div class="form-group col-md-3  mt-5" *ngIf="IsTypeOfAccident">
+
+                            <div *ngFor="let q of questioncostheader" class="form-group col-md-3 mt-5" >
+                                <label for="" class="form-label float-start">{{q.label}}</label>
+                                <!-- <input  type="text" class="form-control" formControlName="q.costType"> -->
+                                <select class="form-control form-select"
+                                formControlName="q.label" (change)="OnQuestionSelect($event)">
+                                <option value="">Choose...</option>
+                                <option *ngFor="let p of q.options" value={{p.value}}>
+                                    {{p.label}}</option>
+                               </select>
+                            </div>
+                            <!-- <div class="form-group col-md-3  mt-5" *ngIf="IsTypeOfAccident">
                                 <label for="" class="form-label float-start">Type Of Accident</label>
                                 <select (change)="OnTypeofAccident($event)" class="form-control form-select"
                                     formControlName="TypeOfAccident" id="TypeOfAccident">
@@ -380,14 +402,12 @@
                                     </option>
                                     <option vale="2">Hit And Run</option>
                                 </select>
-                                <!-- <div *ngIf="submitted && f['Ailment'].invalid" class="invalid-feedback">
-                                    <div *ngIf="f['Ailment'].errors?.['required']">Ailment required</div>
-                                </div> -->
-                            </div>
+                           
+                            </div> -->
                         </div>
                         <div class="form-row">
 
-                            <div class="form-group col-md-4 mt-5" *ngIf="IspassengerType">
+                            <!-- <div class="form-group col-md-4 mt-5" *ngIf="IspassengerType">
                                 <label for="" class="form-label float-start">Passenger/Driver or Implants used?</label>
                                 <select class="form-control form-select" (change)="OnPassengerType($event)"
                                     formControlName="passengerType" id="passengerType">
@@ -398,9 +418,9 @@
                                     <option value="4">No</option>
                                 </select>
 
-                            </div>
+                            </div> -->
 
-                            <div class="form-group col-md-4 mt-5" *ngIf="IsTypeOfVehicle">
+                            <!-- <div class="form-group col-md-4 mt-5" *ngIf="IsTypeOfVehicle">
                                 <label for="" class="form-label float-start">Types Of Vehicles</label>
                                 <select class="form-control form-select" formControlName="TypeOfVehicle"
                                     id="TypeOfVehicle">
@@ -409,8 +429,17 @@
                                     <option value="2">Others</option>
                                 </select>
 
-                            </div>
+                            </div> -->
 
+                            <!-- <div formArrayName="Questions">
+                                <div class="row" *ngFor="let q of medicalForm.get('Questions').controls; let i = index"
+                                    [formGroupName]="i">
+                            
+                                  <div class="col-1">
+                                    <mat-icon class="mt-3">q{{i}}</mat-icon>
+                                  </div>
+                                </div>
+                              </div> -->
 
                         </div>
                     </form>
@@ -451,8 +480,8 @@
                             </div>
                             <div class="form-group col-md-3">
                                 <label for="" class="form-label float-start">TPA*</label>
-                                <select class="form-control form-select" id="TPA" formControlName="TPA"
-                                    [class.is-invalid]="I['TPA'].invalid && (I['TPA'].dirty || I['TPA'].touched)"
+                                <select class="form-control form-select" id="TPA" formControlName="TPAID"
+                                    [class.is-invalid]="I['TPAID'].invalid && (I['TPAID'].dirty || I['TPAID'].touched)"
                                     required>
                                     <option value="">Choose...</option>
                                     <option *ngFor="let t of TPADetail" value={{t.id}}>{{t.name}}</option>
@@ -461,8 +490,8 @@
                             </div>
                             <div class="form-group col-md-3">
                                 <label for="" class="form-label float-start">TPA ID*</label>
-                                <input type="text" class="form-control" formControlName="TPAID"
-                                    [class.is-invalid]="I['TPAID'].invalid && (I['TPAID'].dirty || I['TPAID'].touched)"
+                                <input type="text" class="form-control" formControlName="TPAnumber"
+                                    [class.is-invalid]="I['TPAnumber'].invalid && (I['TPAnumber'].dirty || I['TPAnumber'].touched)"
                                     required>
 
                             </div>
@@ -482,7 +511,7 @@
                                     [class.is-invalid]="I['RelationOPH'].invalid && (I['RelationOPH'].dirty || I['RelationOPH'].touched)"
                                     required>
                                     <option value="">Choose...</option>
-                                    <option *ngFor="let r of RPADetail" value={{r.id}}>{{r.relationshipName}}</option>
+                                    <option *ngFor="let r of RPADetail" value={{r.id}}>{{r.name}}</option>
                                 </select>
 
                             </div>

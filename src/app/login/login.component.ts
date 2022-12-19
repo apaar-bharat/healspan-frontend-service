@@ -40,14 +40,17 @@ export class LoginComponent implements OnInit {
   get password() {
     return this.loginForm.get('password');
   }
+  
   private formatErrors(error: any) {
     return throwError(() => error);
   }
+
   OnLogin() {
     console.log(this.loginForm)
     if (this.authservice.login(this.loginForm.get('username')?.value, this.loginForm.get('password')?.value)) {  
         this.dataservice.currentuser_data.subscribe((res:any) =>{
           if (res.length > 0) {
+            localStorage.setItem("usertype",res[0].type);
             if (res[0].type == 'huser') {
               this.router.navigate(['hdashboard'])
 
@@ -55,15 +58,11 @@ export class LoginComponent implements OnInit {
               this.router.navigate(['rdashboard'])
             }
           }
-          else {
-            alert("Invalid userid and pass");
-            this.displayStyle = "block";
-          } 
         })
       
     }  
     else  {
-      alert("Wrong username or password");  
+      this.displayStyle = "block"; 
     }  
 
   }

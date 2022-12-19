@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import * as $ from 'jquery';
-import { FormBuilder, FormGroup, Validators, ReactiveFormsModule, FormControl } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule, FormControl, FormArray } from '@angular/forms';
 import { ApiService } from 'src/app/service/api.service';
 import { HttpHeaders, HttpClient, HttpParams, HttpEvent, HttpEventType, HttpProgressEvent, HttpResponse } from '@angular/common/http';
 import { catchError, map } from "rxjs/operators"
@@ -74,6 +74,14 @@ export class CreatclaimComponent implements OnInit {
   othercostarray: Array<number> = [];
   othercostheader: any;
   claimdata:any=[];
+  currentuserdata:any;
+
+  //------Response Field-------------------
+  patientInfoResponse:any;medicalInfoResponse:any ; insuranceInfoResponse:any
+  questioncostheader: any =[];Questions:any=[];answerparam:any="";
+
+  diagnosis:any="" ; treatmentType:any="";procedure:any="";duration:any="";
+
   constructor(private fb: FormBuilder, private api: ApiService, private http: HttpClient,
     private httpClient: HttpClient, private route: ActivatedRoute,private dataservice : DataService) {
     this.minDateToFinish.subscribe((r: any) => {
@@ -83,18 +91,7 @@ export class CreatclaimComponent implements OnInit {
 
   ngOnInit(): void {
     let stagename = this.route.snapshot.params['stagename'];
-    this.dataservice.currentclaimdetails_data.subscribe((res:any) =>{
-        this.claimdata = res ;
-        console.log("hh",this.claimdata)
-        if(this.claimdata.length != 0){
-          this.AssignFormControlValues(this.claimdata)
-        }
-         
-    });
     //console.log("claim currentclaimdetails_data" ,this.claimdata)
-   
-
-
     this.ActiveStage = stagename
     nice_Select();
     verificationForm();
@@ -104,6 +101,21 @@ export class CreatclaimComponent implements OnInit {
     this.bindDropdown();
     this.GetDocList();
     this.date = new Date().toISOString().slice(0, 10);
+    
+
+    this.dataservice.currentuser_data.subscribe((res) =>{
+      console.log("currentuserdata" + res);
+      this.currentuserdata = res
+     })
+
+    this.dataservice.currentclaimdetails_data.subscribe((res:any) =>{
+        this.claimdata = res ;
+        console.log("hh",this.claimdata)
+        if(this.claimdata.length != 0){
+          this.AssignFormControlValues(this.claimdata)
+        }
+         
+    });
   }
 
   DefineFormControls(){
@@ -119,7 +131,7 @@ export class CreatclaimComponent implements OnInit {
       Age: ['', Validators.required],
       Stage: [this.ActiveStage,],
       patientprimaryInsured: [true],
-      HospitalName: ['', Validators.required],
+      Hospital: ['', Validators.required],
       DateOfAdmission: ['',],
       DateOfDischarge: ['',],
       RoomCategory: ['',],
@@ -144,7 +156,6 @@ export class CreatclaimComponent implements OnInit {
       Nameofthetreatingdoctor: ["",Validators.required],
       DrResgistrationnumber: ["",Validators.required],
       Qualificationofthetreatingdoctor: ["",Validators.required],
-     
       Ages: ["",],
       Genders: ["",],
       Duration: ["",],
@@ -157,8 +168,8 @@ export class CreatclaimComponent implements OnInit {
 
     this.InsuaranceForm = this.fb.group({
       InsuranceCompany: ['', Validators.required],
-      TPA: ['', Validators.required],
       TPAID: ['', Validators.required],
+      TPAnumber: ['', Validators.required],
       PolicyHolder: ['', Validators.required],
       RelationOPH: ['', Validators.required],
       PolicyNumber: ['', Validators.required],
@@ -194,30 +205,40 @@ export class CreatclaimComponent implements OnInit {
     this.ClaimForm.controls["Fname"].setValue(patientInformationList.firstName);
     this.ClaimForm.controls["Mname"].setValue(patientInformationList.middleName);
     this.ClaimForm.controls["Lname"].setValue(patientInformationList.lastname);
-    this.ClaimForm.controls["RoomCategory"].setValue(patientInformationList.roomId);
-this.ClaimForm.controls["MobileNo"].setValue(patientInformationList.mobileNo);
+    this.ClaimForm.controls["RoomCategory"].setValue(patientInformationList.roomCategoryId);
+    this.ClaimForm.controls["MobileNo"].setValue(patientInformationList.mobileNo);
     this.ClaimForm.controls["PHUHID"].setValue(patientInformationList.uhidNumber);
-    this.ClaimForm.controls["Gender"].setValue(patientInformationList.gender);
+    this.ClaimForm.controls["Gender"].setValue(patientInformationList.genderId);
+    //this.ClaimForm.controls["Age"].setValue(patientInformationList.age);
+    this.showAge = patientInformationList.age;
+
     if(dateBirth !=null){
     this.ClaimForm.get("DOB")?.setValue(formatDate(dateBirth,'yyyy-MM-dd','en'));}
-    this.ClaimForm.controls["Age"].setValue(patientInformationList.age);
+
     if(AdmissionDate !=null){
     this.ClaimForm.get("DateOfAdmission")?.setValue(formatDate(AdmissionDate,'yyyy-MM-dd','en'));}
+
     if(dischargeDate !=null){
     this.ClaimForm.get("DateOfDischarge")?.setValue(formatDate(dischargeDate,'yyyy-MM-dd','en'));}
+    
     this.ClaimForm.controls["CostPD"].setValue(patientInformationList.costPerDay);
     this.ClaimForm.controls["InitialCE"].setValue(patientInformationList.initialCostEstimate);
     this.ClaimForm.controls["TotalBillAmount"].setValue(patientInformationList.finalBillAmount);
     this.ClaimForm.controls["ClaimAmount"].setValue(patientInformationList.claimedAmount);
     this.ClaimForm.controls["patientprimaryInsured"].setValue(patientInformationList.primaryInsured);
-    this.ClaimForm.controls["Procedure"].setValue(patientInformationList.medicalProcedureId);
+    this.ClaimForm.controls["Procedure"].setValue(patientInformationList.procedureId);
+    
     this.ClaimForm.controls["totalRC"].setValue(patientInformationList.totalRoomCost);
+    
+    if(patientInformationList.otherCostId !=null){
+    this.ClaimForm.controls["OtherC"].setValue(patientInformationList.otherCostId);}
+
     this.ClaimForm.controls["OtherCE"].setValue(patientInformationList.otherCostsEstimate);
-    this.ClaimForm.controls["HospitalName"].setValue(patientInformationList.hospitalId);
 
+    this.ClaimForm.controls["Hospital"].setValue(patientInformationList.hospitalId);
+    this.ClaimForm.controls["PHUHID"].setValue(patientInformationList.hospitalUhid);
 
-
-
+    
     let dateofirstdiagDate=patientMedicalInfoList.dateOfFirstDiagnosis;
 
     if(dateofirstdiagDate !=null){
@@ -261,54 +282,51 @@ this.ClaimForm.controls["MobileNo"].setValue(patientInformationList.mobileNo);
   OnPatientSubmit(formData: any) {
     console.log("", formData)
     this.submitted = true;
-
-
     if (this.ClaimForm.invalid) {
       alert('form invalid');
 
     }
     else {
-      alert("form valid")
-      this.patientSave = {
-
-        userId: 2,
-        claimDetailsForStageRequestDto: {
-          claimStageId: 1,
-          statusId: 1,
-          claimedAmount: 25000,
-          patientInformationDto: {
-            statusId: 1,
-            firstName: this.ClaimForm.value.Fname,
-            middleName: this.ClaimForm.value.Mname,
-            lastName: this.ClaimForm.value.Lname,
-            mobileNumber: this.ClaimForm.value.MobileNo,
-            uhidNumber: this.ClaimForm.value.PHUHID,
-            gender: this.ClaimForm.value.Gender,
-            dateOfBirth: this.ClaimForm.value.DOB,
-            age: this.ClaimForm.value.Age,
-            dateOfAdmission: this.ClaimForm.value.DateOfAdmission,
-            dateOfDischarge: this.ClaimForm.value.DateOfDischarge,
-            costPerDay: this.ClaimForm.value.CostPD,
-            estimatedCost: this.ClaimForm.value.InitialCE,
-            finalBillAmount: this.ClaimForm.value.TotalBillAmount,
-            claimAmount: this.ClaimForm.value.ClaimAmount,
-            billNumber: "",
-            roomId: this.ClaimForm.value.RoomCategory,
-            medicalProcedureId:this.ClaimForm.value.Procedure,
-            patientOtherCostList: [{
-              otherCostId: this.ClaimForm.value.OtherC,
-              estimatedCost: this.ClaimForm.value.OtherCE,
-            },
-            {
-              otherCostId: this.ClaimForm.value.OtherC,
-              estimatedCost: this.ClaimForm.value.OtherCE,
-            }],
-            primaryInsured: this.ClaimForm.value.patientprimaryInsured,
-          }
+      //alert("form valid")
+      let patientbody = {
+        "tpaClaimId" : null,
+        "userId" : 1,
+        "hospitalId" : this.ClaimForm.value.Hospital,
+        "claimStageId" : 1,
+        "statusId" : 2,
+        "patientInfoDto" : {
+            "firstName" : this.ClaimForm.value.Fname,
+            "middleName" : this.ClaimForm.value.Mname,
+            "lastname" : this.ClaimForm.value.Lname,
+            "mobileNo" : this.ClaimForm.value.MobileNo,
+            "dateBirth" : this.ClaimForm.value.DOB,
+            "age" : this.ClaimForm.value.Age,
+            "dateOfAdmission" : this.ClaimForm.value.DateOfAdmission,
+            "estimatedDateOfDischarge" : this.ClaimForm.value.DateOfDischarge,
+            "dateOfDischarge" : this.ClaimForm.value.DateOfDischarge,
+            "costPerDay" : this.ClaimForm.value.CostPD,
+            "totalRoomCost" : this.ClaimForm.value.totalRC,
+            "otherCostsEstimate" : this.ClaimForm.value.OtherCE,
+            "initialCostEstimate" : this.ClaimForm.value.InitialCE,
+            "billNumber" : "dummy",
+            "claimedAmount" : this.ClaimForm.value.ClaimAmount,
+            "enhancementEstimate" : 0,
+            "finalBillAmount" : this.ClaimForm.value.TotalBillAmount,
+            "hospitalUhid" : this.ClaimForm.value.PHUHID,
+            "hospitalId" : this.ClaimForm.value.Hospital,
+            "otherCostId" : this.ClaimForm.value.OtherC,
+            "roomCategoryId" : this.ClaimForm.value.RoomCategory,
+            "procedureId" : this.ClaimForm.value.Procedure,
+            "genderId" : this.ClaimForm.value.Gender
         }
       }
-      console.log("qq", this.patientSave)
 
+      this.api.post('healspan/claim/createorupdateclaimandpatientinfo',patientbody).subscribe((res) =>{
+        console.log("patientSave response",res);
+        if(res.responseStatus == "SUCCESS"){
+          this.patientInfoResponse = res;
+        }
+      })
     }
   }
 
@@ -318,50 +336,53 @@ this.ClaimForm.controls["MobileNo"].setValue(patientInformationList.mobileNo);
     this.submitted2 = true;
     if (this.medicalForm.invalid) {
       alert('form invalid');
-      console.table(this.medicalForm.value);
+      console.log(this.medicalForm.value);
     }
     else {
-      alert("form valid and submitted")
-
-      this.medicalSave = {
-        userId: 2,
-        claimId: 32,
-        claimDetailsStageId: 12,
-        patientMedicalInfoDto: {
-          treatmentType: this.medicalForm.value.TreatmentType,
-          firstDiagnosisDate: this.medicalForm.value.Dateoffirstdiagnosis,
-          doctorName: this.medicalForm.value.Nameofthetreatingdoctor,
-          doctorRegNumber: this.medicalForm.value.DrResgistrationnumber,
-          docQualification: this.medicalForm.value.Qualificationofthetreatingdoctor,
-          medicalProcedureId: this.medicalForm.value.Procedures,
-          statusId: 1,
-          diagnosisId: this.medicalForm.value.Diagnosis,
-          diagnosisSpecialityId: this.medicalForm.value.Provisionaldiagnosis,
-          sequentialQuestionsList: [],
-          patientChronicIllnessList: [{
-            chronicIllnessI: this.medicalForm.value.Pasthistoryofchronicillness,
-          },
-          {
-            chronicIllnessId: this.medicalForm.value.Pasthistoryofchronicillness,
-          }]
-        }
+      //alert("form valid and submitted")
+      let medicalparam ={
+        "claimId" : this.patientInfoResponse.claimInfoId,
+        "dateOfFirstDiagnosis" : this.medicalForm.value.Dateoffirstdiagnosis,
+        "claimStageId" : 1,
+        "doctorName" : this.medicalForm.value.Nameofthetreatingdoctor,
+        "doctorQualification" :this.medicalForm.value.Qualificationofthetreatingdoctor,
+        "pastChronicIllness" : this.medicalForm.value.Pasthistoryofchronicillness,
+        "diagnosisId" : this.medicalForm.value.Diagnosis,
+        "procedureId" : this.medicalForm.value.Procedures,
+        "specialityId" : this.medicalForm.value.Speciality,
+        "treatmentTypeId" : this.medicalForm.value.TreatmentType
       }
-
-
-      console.log("med", this.medicalSave)
-      // this.claimsave["MedicalInfo"].ProcedureID = this.ClaimForm.value.Fname;
-      // this.claimsave["MedicalInfo"].SequentialQuestions.push({ "Question": this.ClaimForm.value.OtherC, "Answer": this.ClaimForm.value.OtherCE }, { "Question": this.ClaimForm.value.OtherC, "Answer": this.ClaimForm.value.OtherCE });
-      // this.claimsave["MedicalInfo"].TreatmentType = this.ClaimForm.value.TreatmentType;
-      // this.claimsave["MedicalInfo"].ProvisionalDiagnosisID = this.ClaimForm.value.Provisionaldiagnosis;
-      // this.claimsave["MedicalInfo"].SpecialityID = this.ClaimForm.value.Speciality;
-      // this.claimsave["MedicalInfo"].DateOfFirstDiagnosis = this.ClaimForm.value.Dateoffirstdiagnosis;
-      // this.claimsave["MedicalInfo"].PastHistoryOfChronicillness.push({ ChronicillnessName: this.medicalForm.value.Pasthistoryofchronicillness },)
-      // this.claimsave["MedicalInfo"].NameoftheTreatingDoctor = this.ClaimForm.value.Nameofthetreatingdoctor;
-      // this.claimsave["MedicalInfo"].DrResgistrationNumber = this.ClaimForm.value.DrResgistrationnumber;
-      // this.claimsave["MedicalInfo"].QualificationOfTheTreatingDoctor = this.ClaimForm.value.Qualificationofthetreatingdoctor;
-      // console.log(this.claimsave)
-      // console.log(this.medicalSave)
-
+      this.api.post('healspan/claim/createorupdatemedicalinfo',medicalparam).subscribe((res) =>{
+        console.log("medicalSave response",res);
+        if(res.responseStatus == "SUCCESS"){
+        this.medicalInfoResponse = res;       
+          let ruleengineres = {
+            "medicalInfoId": this.medicalInfoResponse.medicalInfoId,
+            "sequentialQuestion": [
+                {
+                    "question": "Who are you ?",
+                    "answer": "Sagar"
+                },
+                {
+                    "question": "Are you married?",
+                    "answer": "No"
+                },
+                {
+                    "question": "Are you graduate?",
+                    "answer": "Yes"
+                }
+            ],
+            "documentList": [
+                "PAN Card",
+                "Adhar Card",
+                "Voter Id"
+            ]
+          }
+          this.api.post('healspan/claim/savequestionnairesanddocument',ruleengineres).subscribe((ruleres) =>{
+            console.log("ruleres",ruleres)
+          })
+        }
+      })
     }
   }
 
@@ -375,70 +396,68 @@ this.ClaimForm.controls["MobileNo"].setValue(patientInformationList.mobileNo);
 
     else {
       alert("form valid")
-      this.InsuaranceSave = {
-
-        userId: 2,
-        claimId: 31,
-        claimDetailsStageId: 11,
-        patientInsuranceInfoDto: {
-          tpaNumber: this.InsuaranceForm.value.TPAID,
-          policyHolderName: this.InsuaranceForm.value.PolicyHolder,
-          policyNumber: this.InsuaranceForm.value.PolicyNumber,
-          groupCompanyName:  this.InsuaranceForm.value.Groupcompany,
-          // tpaClaimId: this.InsuaranceForm.value.TPA,
-          initialApprovedAmount: 6000.0,
-          enhancementApprovedAmount: 12000.0,
-          dischargeApprovedAmount: 10000.0,
-          statusId: 1,
-          insuranceCompanyId: this.InsuaranceForm.value.InsuranceCompany,
-          tpaId: this.InsuaranceForm.value.TPA,
-          relationshipId: this.InsuaranceForm.value.RelationOPH,
-          groupPolicy: this.InsuaranceForm.value.IsGroupPolicy,
-        }
-
+      
+      let Insuranceparam = {
+        "claimId" : this.patientInfoResponse.claimInfoId,
+        "claimStageId" : 1,
+        "tpaIdNumber" : this.InsuaranceForm.value.TPAnumber,
+        "policyHolderName" : this.InsuaranceForm.value.PolicyHolder,
+        "policyNumber" : this.InsuaranceForm.value.PolicyNumber,
+        "isGroupPolicy" : this.InsuaranceForm.value.IsGroupPolicy,
+        "groupCompany" : this.InsuaranceForm.value.Groupcompany,
+        "claimIDPreAuthNumber" : null,
+        "initialApprovalAmount" : null,
+        "approvedEnhancementsAmount" : null,
+        "approvedAmountAtDischarge" : null,
+        "tpaId" : this.InsuaranceForm.value.TPAID,
+        "insuranceCompanyId" : this.InsuaranceForm.value.InsuranceCompany,
+        "relationshipId" : this.InsuaranceForm.value.RelationOPH
       }
 
+      this.api.post('healspan/claim/createorupdateinsuranceinfo',Insuranceparam).subscribe((res) =>{
+        console.log("InsuranceSave response",res)
+      })
+
     }
-    console.log("ins", this.InsuaranceSave)
   }
 
   GetDocList() {
+    // this.api.getService("assets/data/doclist.json").subscribe((data: any) => {
 
-    this.api.getService("assets/data/doclist.json").subscribe((data: any) => {
+    //   this.doclist = [];
+    //   if (this.ActiveStage == "Inital") {
+    //     this.doclist = data["Admission"];
+    //     this.doclist1 = JSON.stringify(data["Admission"]);
 
-      this.doclist = [];
-      if (this.ActiveStage == "Inital") {
-        this.doclist = data["Admission"];
-        this.doclist1 = JSON.stringify(data["Admission"]);
+    //   } else if (this.ActiveStage == "Discharge") {
+    //     data["Admission"].forEach((element: any) => {
+    //       this.doclist.push(element)
+    //     });
+    //     data["Discharge"].forEach((element: any) => {
+    //       this.doclist.push(element)
+    //     });
+    //     console.log(this.doclist);
 
-      } else if (this.ActiveStage == "Discharge") {
-        data["Admission"].forEach((element: any) => {
-          this.doclist.push(element)
-        });
-        data["Discharge"].forEach((element: any) => {
-          this.doclist.push(element)
-        });
-        console.log(this.doclist);
-
-      } else if (this.ActiveStage == "FinalClaim") {
-        data["Admission"].forEach((element: any) => {
-          this.doclist.push(element)
-        });
-        data["Discharge"].forEach((element: any) => {
-          this.doclist.push(element)
-        });
-        data["FinalClaim"].forEach((element: any) => {
-          this.doclist.push(element)
-        });
-        console.log(this.doclist);
-      }
-    })
+    //   } else if (this.ActiveStage == "FinalClaim") {
+    //     data["Admission"].forEach((element: any) => {
+    //       this.doclist.push(element)
+    //     });
+    //     data["Discharge"].forEach((element: any) => {
+    //       this.doclist.push(element)
+    //     });
+    //     data["FinalClaim"].forEach((element: any) => {
+    //       this.doclist.push(element)
+    //     });
+    //     console.log(this.doclist);
+    //   }
+    // })
 
   }
 
   // ----For Sequential question-------------------
-  OnClaimselect(event: any) {
-    let Claimvalue = event.target.options[event.target.options.selectedIndex].text;
+  OnClaimselect1(event: any) {
+    
+     let Claimvalue = event.target.options[event.target.options.selectedIndex].text;
 
     this.api.getService("assets/data/admission.json").subscribe((data: any) => {
       this.admissiondata = data["Admission"];
@@ -535,30 +554,25 @@ this.ClaimForm.controls["MobileNo"].setValue(patientInformationList.mobileNo);
 
   //-----------------Bind all dropdown
   bindDropdown() {
-
-    this.api.getService("assets/data/picklist.json").subscribe((data: any) => {
-      this.GenderDetail = data["GenderName"];
+    this.api.getService('admin/masters/allmastertables').subscribe((data: any) => {
+      this.insuaranceCompanyDetail = data["insurance_company_mst"];
+      this.roomsDetail = data["room_category_mst"];
+      this.TPADetail = data["tpa_mst"];
+      this.OtherCosts = data["other_costs_mst"];
+      this.procedureDetail = data["procedure_mst"];
+      this.specialityDetail = data["speciality_mst"];
+      this.hospitalDetail = data["hospital_mst"];
+      this.chronicillnessDetail = data["chronic_illness_mst"];
+      this.DiagnosisDetail = data["diagnosis_mst"];
+      this.RPADetail = data["relationship_mst"];
+      this.GenderDetail = data["gender_mst"];
     })
-
-    this.api.getService("assets/data/Masters.json").subscribe((data: any) => {
-      this.insuaranceCompanyDetail = data["insurance_company_master"];
-      this.roomsDetail = data["room_master"];
-      this.TPADetail = data["tpa_master"];
-      this.OtherCosts = data["other_cost_master"];
-      this.procedureDetail = data["medical_procedure_master"];
-      this.specialityDetail = data["diagnosis_speciality_master"];
-      this.hospitalDetail = data["hospital_master"];
-      this.chronicillnessDetail = data["cronic_illness_master"];
-      this.DiagnosisDetail = data["diagnosis_master"];
-      this.RPADetail = data["relationship_master"]
-
-    })
-    console.log("jj", this.RPADetail)
   }
 
   //---------Start Binding Values on selection to Next medical Form
   OnGenderSelect(event: any) {
-    let Gender = this.ClaimForm.get("Gender")?.value;
+    //let Gender = this.ClaimForm.get("Gender")?.value;
+    let Gender = event.target.options[event.target.options.selectedIndex].text;
     this.medicalForm.controls['Genders'].setValue(Gender)
   }
   // OnAilmentselect(event: any) {
@@ -607,17 +621,19 @@ this.ClaimForm.controls["MobileNo"].setValue(patientInformationList.mobileNo);
     console.log("OtherCosts", this.othercostheader);
 
   }
-
-
-
-
+  Ondiagnosis(event: any){
+    this.diagnosis = event.target.options[event.target.options.selectedIndex].text;
+  }
   onprocedureSelect(event: any) {
     //let procedureee = this.ClaimForm.get("Procedure")?.value;
+    this.procedure = event.target.options[event.target.options.selectedIndex].text;
+
     let procedureee = event.target.options[event.target.options.selectedIndex].text;
     this.medicalForm.controls['Procedures'].setValue(procedureee)
   }
-
-
+  OntreatmentType(event:any){
+    this.treatmentType = event.target.options[event.target.options.selectedIndex].text;
+  }
   // ng multiselect Dropdown Start
 
   onItemSelect(item: any) {
@@ -630,8 +646,112 @@ this.ClaimForm.controls["MobileNo"].setValue(patientInformationList.mobileNo);
     console.log(item);
   }
 
+  OnClaimSelect(){
 
-  
+    // let bodyparam ={
+    //   "diagnosis": this.diagnosis,
+    //   "treatmentType":this.treatmentType,
+    //   "procedure":this.procedure,
+    //   "duration":">24 hours"
+    // }
+    let bodyparam ={
+      "diagnosis": "Maternity",
+      "treatmentType":"Medical/Surgical management",
+      "procedure":"FTND/LSCS",
+      "duration":">24 hours"
+    }
+
+    this.GenerateRuleEngineModel(bodyparam)
+  }
+
+  GenerateRuleEngineModel(bodyparam:any){
+
+    this.api.postService("http://3.109.1.145:9999/ruleengine/processRules", bodyparam).subscribe(res => {
+    console.log(res); 
+    //   let apiresponse = {
+    //     "document": "GPLA Status",
+    //     "question": "Initial/Final?",
+    //     "options": "Initial |Final",
+    //     "status": "Question"
+    //  }
+    let data: any = [];
+    data.push(res)
+      for (var obj in data) {
+      if (data.hasOwnProperty(obj)) {
+        //----loop for questions---------------------
+        for (var prop in data[obj]) {
+          if (data[obj].hasOwnProperty(prop)) {
+            if (data[obj][prop] == "Question") {
+          
+            //console.log(this.countObectKeys(apiresponse));
+              var object: any = {};
+             
+                  console.log(data[obj][prop])
+                  if(data[obj][prop] != null){
+                  //----loop for answer---------------------
+                 
+                   
+                      //------Declare and split options ,push value to array---------------
+                      let options:any = [];
+                      var substring = data[obj]["options"].split("|");
+                      //console.log(substring)
+
+                      substring.forEach((element:any) => {
+                        let optionsres = {"label" : element,"value":element}
+                        options.push(optionsres);
+                        //options.push(element)
+                      });
+
+                     
+                      object["rlabel"]= data[obj]["question"];
+                      //object[prop] = data[obj][prop];
+                      object["roptions"] = options;
+                      object["value"] = "",
+                      object["type"] = "select",
+                      //const newObj= { prop: object };
+                      this.Questions =[];
+                      this.Questions.push(object);               
+                  //}
+                  }
+            }
+
+          }
+        }
+      }
+      }
+      console.log(JSON.stringify(this.Questions));
+      this.BuildRuleForm();
+    })
+  }
+ 
+  BuildRuleForm(){
+    //this.questioncostheader = [];
+    this.questioncostheader.push({
+      label: this.Questions[0].rlabel,
+      value: "",
+      type: "select",
+      options:this.Questions[0].roptions,
+    });
+    console.log("OtherCosts", this.questioncostheader);
+  }
+
+  OnQuestionSelect(event:any){
+    //alert(event.target.value)
+    if(this.answerparam == ""){
+      this.answerparam = event.target.value;
+    }else{
+      this.answerparam = this.answerparam +'|'+ event.target.value;
+    }
+    let bodyparam ={
+      "diagnosis": "Maternity",
+      "treatmentType":"Medical/Surgical management",
+      "procedure":"FTND/LSCS",
+      "duration":">24 hours",
+      "answer":this.answerparam
+    }
+
+    this.GenerateRuleEngineModel(bodyparam)
+  }
 
 }
 

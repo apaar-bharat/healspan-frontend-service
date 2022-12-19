@@ -27,9 +27,9 @@ export class ApiService {
     return this.http.get(`${environment.baseUrl}${path}`, { params })
   }
   
-  getService(url: string):Observable<any> {
-    console.log('service call----->',url);
-    return this.http.get(url, httpOptions).pipe(timeout(150000));;
+  getService(path: string):Observable<any> {
+    // console.log('service call----->',path);
+    return this.http.get(`${environment.baseUrl}${path}`, httpOptions).pipe(timeout(150000));;
   }
 
   put(path: string, body: Object = {},params: HttpParams = new HttpParams()): Observable<any> {
@@ -44,6 +44,10 @@ export class ApiService {
       `${environment.baseUrl}${path}`,
       body
     ).pipe(catchError(this.formatErrors));
+  }
+
+  postService(url: string, request: any){
+    return this.http.post(url,request,httpOptions).pipe(timeout(150000));
   }
 
   // post(path: string, body: Object = {},params: HttpParams = new HttpParams()): Observable<any> {

@@ -32,7 +32,8 @@
 		<a href="#" class="col-md-3 ps-0 text-decoration-none">
 			<div class="healboxx healshadow1" >
 				<p><strong>Initial Authorisation</strong></p>
-				<h2 class="bxt"><strong>{{statusDetail["Initial Authorisation"]}}</strong></h2>
+				<h2 class="bxt"><strong>0</strong></h2>
+				<!-- {{statusDetail["Initial Authorisation"]}} -->
 				<p class="bxtt">Pending</p>
 			</div>
 		</a>
@@ -42,7 +43,8 @@
 		<a href="#" class="col-md-3 ps-0 text-decoration-none">
 			<div class="healboxx healshadow1" >		
 				<p><strong>Discharge</strong></p>
-				<h2 class="bxt"><strong>{{statusDetail["Discharge"]}}</strong></h2>
+				<h2 class="bxt"><strong>0</strong></h2>
+				<!-- {{statusDetail["Discharge"]}} -->
 				<p class="bxtt">Pending</p>
 			</div>
 		</a>
@@ -50,31 +52,25 @@
 		<a href="#" class="col-md-3 text-decoration-none">
 			<div class="healboxx healshadow1">
 				<p><strong>Enhancement</strong></p>
-				<h2 class="bxt"><strong>{{statusDetail["Enhancement"]}}</strong></h2>
+				<h2 class="bxt"><strong>0</strong></h2>
 				<p class="bxtt">Pending</p>
+				<!-- {{statusDetail["Enhancement"]}} -->
 			</div>
 		</a>
 
 		<a href="#" class="col-md-3 text-decoration-none">
 			<div class="healboxx healshadow1">
 				<p><strong>Final Claim</strong></p>
-				<h2 class="bxt"><strong>{{statusDetail["Final Claim"]}}</strong></h2>
+				<h2 class="bxt"><strong>0</strong></h2>
 				<p class="bxtt">Pending</p>
+				<!-- {{statusDetail["Final Claim"]}} -->
 			</div>
 		</a>
-
-		<!-- <a href="#" class="col-md-3 pe-0 text-decoration-none">
-			<div class="healboxx healshadow1">
-				<p><strong>Final Claim</strong> </p>
-				<h2 class="bxt"><strong>14</strong></h2>
-				<p class="bxtt">Pending</p>
-			</div>
-		</a> -->
 	</div>
 
 	<div class="row mt-5 pt-3 pb-3">
 		<div class="col-md-6">
-			<h3>Recent Updates</h3>
+			<h3>Recent Updates</h3>  <h3><a (click)="GotoClaim('Initial Authorisation',41)">GoTo Claim</a></h3>
 		</div>
 		<div class="col-md-6"></div>
 		<div></div>
