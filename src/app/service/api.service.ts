@@ -23,8 +23,8 @@ export class ApiService {
 
 
 
-  get(path: string, params: HttpParams = new HttpParams()): Observable<any> {
-    return this.http.get(`${environment.baseUrl}${path}`, { params })
+  get(path: string): Observable<any> {
+    return this.http.get(`${path}`)
   }
   
   getService(path: string):Observable<any> {

@@ -24,7 +24,7 @@ export class HdashboardComponent implements OnInit {
    })
    
   //healspan/claim/retrieveallclaimsofloggedinuser/"+ this.currentuserdata[0].id
-  this.apiservice.getService("healspan/claim/retrieveallclaimsofloggedinuser/1").subscribe((data:any) =>{
+  this.apiservice.getService("healspan/claim/retrieveallclaimsofloggedinuser/3").subscribe((data:any) =>{
     //this.statusDetail = data["stageWiseClaimCount"];
     this.aprrovalDataList = data;
     this.statusss = [];

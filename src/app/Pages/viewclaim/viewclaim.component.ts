@@ -13,12 +13,16 @@ export class ViewclaimComponent implements OnInit {
   finalClaim: any;
   statusmaster: any;
   insuaranceCompanyDetail: any;
-  RPADetail:any;
-  TPADetail:any
-  allmasterData:any;
+  RPADetail: any;
+  TPADetail: any
+  allmasterData: any;
+  statuss: any;
+  insuarancecom:any;
+  relation:any;
+  tpam:any;
   ngOnInit(): void {
 
-    this.api.getService("assets/data/claimdetail2.json").subscribe((data: any) => {
+    this.api.get("assets/data/viewclaim2.json").subscribe((data: any) => {
 
       this.claimdetailData = data;
       console.log("213546", data.claimDetailsForStageList[0].patientInformationList)
@@ -30,18 +34,30 @@ export class ViewclaimComponent implements OnInit {
       console.log("rr", this.claimdetailData)
     })
 
-    this.api.getService("assets/data/Masters.json").subscribe((data: any) => {
-      this.allmasterData=data;
-      this.statusmaster = data["status_master"];
-      this.insuaranceCompanyDetail = data["insurance_company_master"];
+    this.api.get("assets/data/Masters.json").subscribe((data: any) => {
+      this.allmasterData = data;
+     
 
       console.log("master", this.allmasterData.status_master);
-      console.log("claimData", this.claimdetailData.claimDetailsForStageList[0].statusId );
-      const StatusCt=this.allmasterData.status_master.filter((x:any)=>x.id==Number(this.claimdetailData.claimDetailsForStageList[0].statusId))
-      console.log("213546",StatusCt)
+      console.log("claimData", this.claimdetailData.claimDetailsForStageList[0].statusId);
+      const StatusCt = this.allmasterData.status_master.filter((x: any) => x.id == Number(this.claimdetailData.claimDetailsForStageList[0].statusId))
+      this.statuss = StatusCt[0].name
+      console.log("213546", StatusCt[0].name)
+
+      const insuarancecoms = this.allmasterData.insurance_company_master.filter((x: any) => x.id == Number(this.claimdetailData.claimDetailsForStageList[0].patientInsuranceInfoList[0].insuranceCompanyId))
+      console.log("hello", insuarancecoms)
+      this.insuarancecom = insuarancecoms[0].name
+     
+      const rpa = this.allmasterData.relationship_master.filter((x: any) => x.id == Number(this.claimdetailData.claimDetailsForStageList[0].patientInsuranceInfoList[0].relationshipId))
+      console.log("hello", rpa)
+      this.relation = rpa[0].relationshipName
+
+      const tpa = this.allmasterData.tpa_master.filter((x: any) => x.id == Number(this.claimdetailData.claimDetailsForStageList[0].patientInsuranceInfoList[0].tpaId))
+      console.log("hello", tpa)
+      this.tpam = tpa[0].name
     }
     )
-    this.api.getService("assets/data/claimdetail.json").subscribe((data: any) => {
+    this.api.get("assets/data/claimdetail.json").subscribe((data: any) => {
       this.InitialData = data["InitialAuthInfo"]
       this.EnhancmentData = data["Enhancement"]
       this.DischargeData = data["Discharge"]
