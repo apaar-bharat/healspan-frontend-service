@@ -8,6 +8,7 @@ import { Subject, throwError } from 'rxjs';
 import { ActivatedRoute, Route } from '@angular/router';
 import { DataService } from 'src/app/service/data.service';
 import { formatDate } from '@angular/common';
+import { CommonserviceService } from 'src/app/service/commonservice.service';
 
 declare function verificationForm(): any;
 //declare function phoneNoselect():any;
@@ -67,6 +68,7 @@ export class CreatclaimComponent implements OnInit {
   hospitalDetail: any;
   chronicillnessDetail: any;
   DiagnosisDetail: any;
+  claimStageMaster:any = [];
  
   patientSave: any = {};
   medicalSave: any = {};
@@ -79,30 +81,30 @@ export class CreatclaimComponent implements OnInit {
   //------Response Field-------------------
   patientInfoResponse:any;medicalInfoResponse:any ; insuranceInfoResponse:any
   questioncostheader: any =[];Questions:any=[];answerparam:any="";
-
+  claimInfoID:number = 0;claimStageId :number = 0;
   diagnosis:any="" ; treatmentType:any="";procedure:any="";duration:any="";
 
   constructor(private fb: FormBuilder, private api: ApiService, private http: HttpClient,
-    private httpClient: HttpClient, private route: ActivatedRoute,private dataservice : DataService) {
+    private httpClient: HttpClient, private route: ActivatedRoute,
+    private dataservice : DataService,private commonservice:CommonserviceService) {
+
     this.minDateToFinish.subscribe((r: any) => {
       this.minDate = new Date(r);
     })
+
   }
 
   ngOnInit(): void {
     let stagename = this.route.snapshot.params['stagename'];
-    //console.log("claim currentclaimdetails_data" ,this.claimdata)
-    this.ActiveStage = stagename
+    this.ActiveStage = stagename;
     nice_Select();
     verificationForm();
     this.DefineFormControls();
     this.todaysdate = new Date().getFullYear() + '-' + ('0' + (new Date().getMonth() + 1)).slice(-2) + '-' + ('0' + new Date().getDate()).slice(-2) + "  " + (new Date().getHours()) + ":" + (new Date().getMinutes());
     console.log(this.todaysdate)  
     this.bindDropdown();
-    this.GetDocList();
     this.date = new Date().toISOString().slice(0, 10);
     
-
     this.dataservice.currentuser_data.subscribe((res) =>{
       console.log("currentuserdata" + res);
       this.currentuserdata = res
@@ -117,7 +119,10 @@ export class CreatclaimComponent implements OnInit {
          
     });
   }
-
+  redirect(){
+    this.commonservice.redirecttoactivedashboard();
+  }
+  
   DefineFormControls(){
     this.ClaimForm = this.fb.group({
 
@@ -188,6 +193,9 @@ export class CreatclaimComponent implements OnInit {
   }
 
   AssignFormControlValues(data:any){
+    this.claimInfoID = data[0].claimInfo.id;
+    this.claimStageId = data[0].claimStageMst.claimStageMstId;
+    //alert(this.claimInfoID + '-'+ this.claimStageId);
     console.log("qq",data[0].patientInfo)
     let patientInformationList =data[0].patientInfo;
     let patientMedicalInfoList = data[0].medicalInfo;
@@ -201,7 +209,7 @@ export class CreatclaimComponent implements OnInit {
     let dischargeDate=patientInformationList.dateOfDischarge;
    
 
-
+  if(patientInformationList != null){
     this.ClaimForm.controls["Fname"].setValue(patientInformationList.firstName);
     this.ClaimForm.controls["Mname"].setValue(patientInformationList.middleName);
     this.ClaimForm.controls["Lname"].setValue(patientInformationList.lastname);
@@ -217,6 +225,8 @@ export class CreatclaimComponent implements OnInit {
 
     if(AdmissionDate !=null){
     this.ClaimForm.get("DateOfAdmission")?.setValue(formatDate(AdmissionDate,'yyyy-MM-dd','en'));}
+    this.dateSent = AdmissionDate;
+    // formatDate(AdmissionDate,'yyyy-MM-dd','en'
 
     if(dischargeDate !=null){
     this.ClaimForm.get("DateOfDischarge")?.setValue(formatDate(dischargeDate,'yyyy-MM-dd','en'));}
@@ -243,19 +253,31 @@ export class CreatclaimComponent implements OnInit {
 
     if(dateofirstdiagDate !=null){
     this.ClaimForm.get("Dateoffirstdiagnosis")?.setValue(formatDate(dateofirstdiagDate,'yyyy-MM-dd','en'));}
+  }
+    
+  if(patientMedicalInfoList!=null){
     this.medicalForm.controls["Nameofthetreatingdoctor"].setValue(patientMedicalInfoList.doctorName),
     this.medicalForm.controls["DrResgistrationnumber"].setValue(patientMedicalInfoList.doctorRegistrationNumber),
     this.medicalForm.controls["Qualificationofthetreatingdoctor"].setValue(patientMedicalInfoList.doctorQualification),
     this.medicalForm.controls["Provisionaldiagnosis"].setValue("28"),
     this.medicalForm.controls["Speciality"].setValue(patientMedicalInfoList.specialityId)
-    this.medicalForm.controls["Pasthistoryofchronicillness"].setValue(patientMedicalInfoList.diagnosisSpecialitmedicalform)
+    this.medicalForm.controls["Pasthistoryofchronicillness"].setValue(patientMedicalInfoList.pastChronicIllness)
     
+    this.medicalForm.controls["Procedures"].setValue(patientMedicalInfoList.procedureId);
+    this.medicalForm.controls["TreatmentType"].setValue(patientMedicalInfoList.treatmentTypeId)
+    this.medicalForm.controls["Dateoffirstdiagnosis"].setValue(patientMedicalInfoList.dateOfFirstDiagnosis)
+    this.medicalForm.controls["Genders"].setValue(patientInformationList.genderId)
+    this.medicalForm.controls["Ages"].setValue(this.showAge)
 
-    // const insuaranceCompDetail=this.insuaranceCompanyDetail.filter((x:any)=>x.name==data.name);
-    // const tpaMasterDetail=this.TPADetail.filter((x:any)=>x.name==data.name);
-    // const rpaDetail=this.RPADetail.filter((x:any)=>x.relationshipName==data.relationshipName);
+    
+    
+    
+    // Pasthistoryofchronicillness
+    // DrResgistrationnumber
 
-
+  }
+  
+  if(patientInsuranceInfoList != null){
     this.InsuaranceForm.controls["TPAID"].setValue(patientInsuranceInfoList.tpaNumber),
     this.InsuaranceForm.controls["PolicyHolder"].setValue(patientInsuranceInfoList.policyHolderName),
     this.InsuaranceForm.controls["PolicyNumber"].setValue(patientInsuranceInfoList.policyNumber),
@@ -266,7 +288,8 @@ export class CreatclaimComponent implements OnInit {
     // this.ClaimForm.controls["TreatmentType"].setValue(patientInsuranceInfoList[0].tpaId),
     this.InsuaranceForm.controls["RelationOPH"].setValue(patientInsuranceInfoList.relationshipId),
     this.InsuaranceForm.controls["IsGroupPolicy"].setValue(patientInsuranceInfoList.isGroupPolicy)
-   
+    }
+
   }
   
   get f() { return this.ClaimForm.controls; }
@@ -283,7 +306,7 @@ export class CreatclaimComponent implements OnInit {
     console.log("", formData)
     this.submitted = true;
     if (this.ClaimForm.invalid) {
-      alert('form invalid');
+      //alert('form invalid');
 
     }
     else {
@@ -292,7 +315,7 @@ export class CreatclaimComponent implements OnInit {
         "tpaClaimId" : null,
         "userId" : 1,
         "hospitalId" : this.ClaimForm.value.Hospital,
-        "claimStageId" : 1,
+        "claimStageId" : this.claimStageId,
         "statusId" : 2,
         "patientInfoDto" : {
             "firstName" : this.ClaimForm.value.Fname,
@@ -335,71 +358,78 @@ export class CreatclaimComponent implements OnInit {
     console.log("dfhbd", formData)
     this.submitted2 = true;
     if (this.medicalForm.invalid) {
-      alert('form invalid');
+      //alert('form invalid');
       console.log(this.medicalForm.value);
     }
     else {
       //alert("form valid and submitted")
-      let medicalparam ={
-        "claimId" : this.patientInfoResponse.claimInfoId,
+     if(this.claimInfoID == 0){
+      this.claimInfoID = this.patientInfoResponse.claimInfoId;
+     }
+      let medicalparam = {
+        "claimId" : this.claimInfoID,
         "dateOfFirstDiagnosis" : this.medicalForm.value.Dateoffirstdiagnosis,
-        "claimStageId" : 1,
+        "claimStageId" : this.claimStageId,
         "doctorName" : this.medicalForm.value.Nameofthetreatingdoctor,
-        "doctorQualification" :this.medicalForm.value.Qualificationofthetreatingdoctor,
-        "pastChronicIllness" : this.medicalForm.value.Pasthistoryofchronicillness,
-        "diagnosisId" : this.medicalForm.value.Diagnosis,
-        "procedureId" : this.medicalForm.value.Procedures,
-        "specialityId" : this.medicalForm.value.Speciality,
-        "treatmentTypeId" : this.medicalForm.value.TreatmentType
+        "doctorQualification" : this.medicalForm.value.Qualificationofthetreatingdoctor,
+        "pastChronicIllness" : parseInt(this.medicalForm.value.Pasthistoryofchronicillness),
+        "diagnosisId" : parseInt(this.medicalForm.value.Provisionaldiagnosis),
+        "procedureId" : parseInt(this.medicalForm.value.Procedures),
+        "specialityId" : parseInt(this.medicalForm.value.Speciality),
+        "treatmentTypeId" : parseInt(this.medicalForm.value.TreatmentType)
       }
+ 
       this.api.post('healspan/claim/createorupdatemedicalinfo',medicalparam).subscribe((res) =>{
         console.log("medicalSave response",res);
         if(res.responseStatus == "SUCCESS"){
         this.medicalInfoResponse = res;       
-          let ruleengineres = {
-            "medicalInfoId": this.medicalInfoResponse.medicalInfoId,
-            "sequentialQuestion": [
-                {
-                    "question": "Who are you ?",
-                    "answer": "Sagar"
-                },
-                {
-                    "question": "Are you married?",
-                    "answer": "No"
-                },
-                {
-                    "question": "Are you graduate?",
-                    "answer": "Yes"
-                }
-            ],
-            "documentList": [
-                "PAN Card",
-                "Adhar Card",
-                "Voter Id"
-            ]
-          }
-          this.api.post('healspan/claim/savequestionnairesanddocument',ruleengineres).subscribe((ruleres) =>{
-            console.log("ruleres",ruleres)
-          })
+        
         }
       })
     }
+    this.GetSequentialquestion();
+  }
+
+  SaveSequentialQue(){
+    let ruleengineres = {
+      "medicalInfoId": this.medicalInfoResponse.medicalInfoId,
+      "sequentialQuestion": [
+          {
+              "question": "Who are you ?",
+              "answer": "Sagar"
+          },
+          {
+              "question": "Are you married?",
+              "answer": "No"
+          },
+          {
+              "question": "Are you graduate?",
+              "answer": "Yes"
+          }
+      ],
+      "documentList": this.doclist
+    }
+    this.api.post('healspan/claim/savequestionnairesanddocument',ruleengineres).subscribe((ruleres) =>{
+      console.log("ruleres",ruleres)
+    })
   }
 
   OnInsuarancecontinue(formData: any) {
     console.log("dwefw", formData)
     this.submitted3 = true;
     if (this.InsuaranceForm.invalid) {
-      alert('Form invalid');
+     // alert('Form invalid');
       console.log(this.InsuaranceForm.value);
     }
 
     else {
-      alert("form valid")
-      
+      //alert("form valid")
+      if(this.claimInfoID == 0){
+        this.claimInfoID = this.patientInfoResponse.claimInfoId;
+       }
       let Insuranceparam = {
-        "claimId" : this.patientInfoResponse.claimInfoId,
-        "claimStageId" : 1,
+        "claimId" : this.claimInfoID,
+        "claimStageId" : this.claimStageId,
         "tpaIdNumber" : this.InsuaranceForm.value.TPAnumber,
         "policyHolderName" : this.InsuaranceForm.value.PolicyHolder,
         "policyNumber" : this.InsuaranceForm.value.PolicyNumber,
@@ -421,39 +451,7 @@ export class CreatclaimComponent implements OnInit {
     }
   }
 
-  GetDocList() {
-    // this.api.getService("assets/data/doclist.json").subscribe((data: any) => {
-
-    //   this.doclist = [];
-    //   if (this.ActiveStage == "Inital") {
-    //     this.doclist = data["Admission"];
-    //     this.doclist1 = JSON.stringify(data["Admission"]);
-
-    //   } else if (this.ActiveStage == "Discharge") {
-    //     data["Admission"].forEach((element: any) => {
-    //       this.doclist.push(element)
-    //     });
-    //     data["Discharge"].forEach((element: any) => {
-    //       this.doclist.push(element)
-    //     });
-    //     console.log(this.doclist);
-
-    //   } else if (this.ActiveStage == "FinalClaim") {
-    //     data["Admission"].forEach((element: any) => {
-    //       this.doclist.push(element)
-    //     });
-    //     data["Discharge"].forEach((element: any) => {
-    //       this.doclist.push(element)
-    //     });
-    //     data["FinalClaim"].forEach((element: any) => {
-    //       this.doclist.push(element)
-    //     });
-    //     console.log(this.doclist);
-    //   }
-    // })
-
-  }
-
+ 
   // ----For Sequential question-------------------
   OnClaimselect1(event: any) {
     
@@ -566,19 +564,20 @@ export class CreatclaimComponent implements OnInit {
       this.DiagnosisDetail = data["diagnosis_mst"];
       this.RPADetail = data["relationship_mst"];
       this.GenderDetail = data["gender_mst"];
+      this.claimStageMaster = data["claim_stage_mst"];
+
+      let claim = this.claimStageMaster.filter((x:any) =>x.name ==  this.ActiveStage);
+      this.claimInfoID = claim[0].id;
+      //alert(claim[0].id+claim[0].name)
+      
     })
   }
 
   //---------Start Binding Values on selection to Next medical Form
   OnGenderSelect(event: any) {
-    //let Gender = this.ClaimForm.get("Gender")?.value;
-    let Gender = event.target.options[event.target.options.selectedIndex].text;
-    this.medicalForm.controls['Genders'].setValue(Gender)
+    //let Gender = event.target.options[event.target.options.selectedIndex].text;
+    this.medicalForm.controls['Genders'].setValue(event.target.value)
   }
-  // OnAilmentselect(event: any) {
-  //   let Ailment = this.ClaimForm.get("Ailment")?.value;
-  //   this.medicalForm.controls['Ailments'].setValue(Ailment)
-  // }
   // -------------End Binding Values on selection to Next medical Form
 
   ageCalculator() {
@@ -597,18 +596,11 @@ export class CreatclaimComponent implements OnInit {
   // --------------------------------------------------------------------------------------------------
 
   costSelect(event: any) {
-    //this.othercostarray=[];
     console.log("event1", event.value)
-    //console.log("event2",event.target.options[event.target.options.selectedIndex].text); 
-    // if(event.value.length>0){
-    //   // this.othercostarray.push(Number(event.value));
-    //   console.log("event",event.value.toISOString())     
-    // }
     this.othercostarray = event.value.map(function (items: any) {
       return { items }
     })
     this.othercostheader = [];
-    //console.log("event3",this.othercostarray) ; 
     for (let i = 0; i < event.value.length; i++) {
       const cstvar = this.OtherCosts.filter((x: any) => x.id == event.value[i]);
       //
@@ -621,16 +613,18 @@ export class CreatclaimComponent implements OnInit {
     console.log("OtherCosts", this.othercostheader);
 
   }
+
+
   Ondiagnosis(event: any){
     this.diagnosis = event.target.options[event.target.options.selectedIndex].text;
   }
-  onprocedureSelect(event: any) {
-    //let procedureee = this.ClaimForm.get("Procedure")?.value;
-    this.procedure = event.target.options[event.target.options.selectedIndex].text;
 
-    let procedureee = event.target.options[event.target.options.selectedIndex].text;
-    this.medicalForm.controls['Procedures'].setValue(procedureee)
+  onprocedureSelect(event: any) {
+    //this.procedure = event.target.options[event.target.options.selectedIndex].text;
+    //let procedureee = event.target.options[event.target.options.selectedIndex].text;
+    this.medicalForm.controls['Procedures'].setValue(event.target.value)
   }
+
   OntreatmentType(event:any){
     this.treatmentType = event.target.options[event.target.options.selectedIndex].text;
   }
@@ -646,20 +640,17 @@ export class CreatclaimComponent implements OnInit {
     console.log(item);
   }
 
-  OnClaimSelect(){
-
-    // let bodyparam ={
-    //   "diagnosis": this.diagnosis,
-    //   "treatmentType":this.treatmentType,
-    //   "procedure":this.procedure,
-    //   "duration":">24 hours"
-    // }
+  GetSequentialquestion(){
     let bodyparam ={
       "diagnosis": "Maternity",
-      "treatmentType":"Medical/Surgical management",
-      "procedure":"FTND/LSCS",
-      "duration":">24 hours"
-    }
+      "claimStage":"Final",
+      "treatmentType":"Medical management",
+      "gender":"Female",
+      "age":"",
+      "procedure":"FTND",
+      "duration":"> 7 days",
+      "claimValue":""
+      }
 
     this.GenerateRuleEngineModel(bodyparam)
   }
@@ -668,59 +659,48 @@ export class CreatclaimComponent implements OnInit {
 
     this.api.postService("http://3.109.1.145:9999/ruleengine/processRules", bodyparam).subscribe(res => {
     console.log(res); 
-    //   let apiresponse = {
-    //     "document": "GPLA Status",
-    //     "question": "Initial/Final?",
-    //     "options": "Initial |Final",
-    //     "status": "Question"
-    //  }
     let data: any = [];
     data.push(res)
-      for (var obj in data) {
-      if (data.hasOwnProperty(obj)) {
-        //----loop for questions---------------------
-        for (var prop in data[obj]) {
-          if (data[obj].hasOwnProperty(prop)) {
-            if (data[obj][prop] == "Question") {
-          
-            //console.log(this.countObectKeys(apiresponse));
-              var object: any = {};
-             
-                  console.log(data[obj][prop])
-                  if(data[obj][prop] != null){
-                  //----loop for answer---------------------
-                 
-                   
-                      //------Declare and split options ,push value to array---------------
-                      let options:any = [];
-                      var substring = data[obj]["options"].split("|");
-                      //console.log(substring)
+ 
+              if (data[0].operation == "Question") {
+                //console.log(this.countObectKeys(apiresponse));
+                  var object: any = {};
+                 if(data[0].question != null){
+                      //----loop for answer---------------------
+                          //------Declare and split options ,push value to array---------------
+                          let options:any = [];
+                          var substring = data[0].options.split("|");
+                          //console.log(substring)
+    
+                          substring.forEach((element:any) => {
+                            let optionsres = {"label" : element,"value":element}
+                            options.push(optionsres);
+                          });
+                          object["rlabel"]= data[0].question;
+                          object["roptions"] = options;
+                          object["value"] = "",
+                          object["type"] = "select",
 
-                      substring.forEach((element:any) => {
-                        let optionsres = {"label" : element,"value":element}
-                        options.push(optionsres);
-                        //options.push(element)
-                      });
-
-                     
-                      object["rlabel"]= data[obj]["question"];
-                      //object[prop] = data[obj][prop];
-                      object["roptions"] = options;
-                      object["value"] = "",
-                      object["type"] = "select",
-                      //const newObj= { prop: object };
-                      this.Questions =[];
-                      this.Questions.push(object);               
-                  //}
+                          // object["question"] = data[0].question;
+                          // object["answer"] = options
+                          this.Questions =[];
+                          this.Questions.push(object);   
+                          
+                         
                   }
-            }
+                  this.BuildRuleForm();
 
-          }
-        }
-      }
-      }
-      console.log(JSON.stringify(this.Questions));
-      this.BuildRuleForm();
+              }else{
+                  var docsubstring = data[0].document.split("|");
+                  docsubstring.forEach((element:any) => {
+                    //let optionsres = {element}
+                    this.doclist.push(element);
+                  });
+                  alert(JSON.stringify(this.doclist));
+
+              }
+  
+      
     })
   }
  

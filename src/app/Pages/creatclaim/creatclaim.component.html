@@ -22,14 +22,14 @@
 
                     <form [formGroup]="ClaimForm" (ngSubmit)="OnPatientSubmit(ClaimForm)" id="ngForm">
                         <div class="col-md-12">
-                            <div class="form-row">
+                            <div class="form-row w-100">
                                 <div class="form-group col-md-12 mb-3">
 
                                     <h4 class="float-start">Patient Information</h4>
 
                                 </div>
                             </div>
-                            <div class="form-row ">
+                            <div class="form-row w-100">
 
                                 <div class="form-group col-md-3">
                                     <label for="" class="form-label float-start">First name*</label>
@@ -61,15 +61,14 @@
                                 </div>
 
                             </div>
-
-                            <div class="form-row">
-                                <div class="form-group col-md-3 mt-5">
+                            <div class="form-row w-100">
+                                <div class="form-group col-md-3 mt-3">
                                     <label for="" class="form-label float-start">Patient Hospital UHID</label>
                                     <input type="text" class="form-control" formControlName="PHUHID"
                                         [class.is-invalid]="f['PHUHID'].invalid && (f['PHUHID'].dirty || f['PHUHID'].touched)"
                                      >
                                 </div>
-                                <div class="form-group col-md-3 mt-5">
+                                <div class="form-group col-md-3 mt-3">
                                     <label for="" class="form-label float-start">Gender</label>
                                     <select class="form-control form-select" formControlName="Gender" id="Gender"
                                         [class.is-invalid]="f['Gender'].invalid && (f['Gender'].dirty || f['Gender'].touched)"
@@ -81,12 +80,12 @@
                                     </select>
 
                                 </div>
-                                <div class="form-group col-md-3 mt-5">
+                                <div class="form-group col-md-3 mt-3">
                                     <label for="" class="form-label float-start">Date Of Birth</label>
                                     <input type="date" class="form-control" formControlName="DOB"
                                         (input)="ageCalculator()" id="dob" [max]="date" required>
                                 </div>
-                                <div class="form-group col-md-3 mt-5">
+                                <div class="form-group col-md-3 mt-3">
                                     <label for="" class="form-label float-start">Age*</label>
                                     <input type="text" class="form-control" formControlName="Age" [ngModel]="showAge"
                                         readonly>
@@ -94,7 +93,7 @@
 
                             </div>
                             <div class="form-row w-100">
-                                <div class="form-group col-md-12 mt-5">
+                                <div class="form-group col-md-12 mt-3">
                                     <input type="checkbox" class="form-check-input float-start" id="same-address"
                                         formControlName="patientprimaryInsured">
                                     <label class="form-check-label  float-start" for="same-address">&nbsp; Patient
@@ -102,14 +101,13 @@
                                         primary insured*</label>
                                 </div>
                             </div>
-
-                            <div class="form-row">
-                                <div class="form-group col-md-3 mt-5">
+                            <div class="form-row w-100">
+                                <div class="form-group col-md-3 mt-3">
                                     <label for="" class="form-label float-start">Stage*</label>
                                     <input type="text" class="form-control" formControlName="Stage" required readonly>
 
                                 </div>
-                                <div class="form-group col-md-3 mt-5">
+                                <div class="form-group col-md-3 mt-3">
                                     <label for="" class="form-label float-start">Hospital Name*</label>
                                     <select class="form-control form-select" id="country" formControlName="Hospital"
                                         [class.is-invalid]="f['Hospital'].invalid && (f['Hospital'].dirty || f['Hospital'].touched)"
@@ -120,18 +118,21 @@
                                     </select>
 
                                 </div>
-                                <div class="form-group col-md-3 mt-5">
+                                <div class="form-group col-md-3 mt-3">
                                     <label for="" class="form-label float-start">Date Of Admission</label>
 
                                     <input type="date" class="form-control" formControlName="DateOfAdmission"
-                                        placeholder="Choose a date" [max]="todaysdate | date:'HH:mm'"
-                                        [(ngModel)]="dateSent" (input)="changeDate()" required>
+                                        placeholder="Choose a date"  [max]="todaysdate"
+                                        (input)="changeDate()" required>
+                                        <!-- [(ngModel)]="dateSent" [max]="todaysdate" | date:'HH:mm' -->
                                     
-
+                                        <!-- <input type="date" class="form-control" formControlName="DateOfAdmission"
+                                        placeholder="Choose a date" [disabled]="!dateSent" [min]="dateSent"
+                                        [max]="todaysdate" [value]="dateReceived" required> -->
 
                                 </div>
 
-                                <div class="form-group col-md-3 mt-5">
+                                <div class="form-group col-md-3 mt-3">
 
                                     <label for="" class="form-label float-start">Estimated date of discharge</label>
                                     <input type="date" class="form-control" formControlName="DateOfDischarge"
@@ -142,8 +143,8 @@
                                 </div>
 
                             </div>
-                            <div class="form-row ">
-                                <div class="form-group col-md-3 mt-5">
+                            <div class="form-row w-100">
+                                <div class="form-group col-md-3 mt-3">
                                     <label for="" class="form-label float-start">Room Category</label>
                                     <select class="form-control form-select" formControlName="RoomCategory"
                                         [class.is-invalid]="f['RoomCategory'].invalid && (f['RoomCategory'].dirty || f['RoomCategory'].touched)"
@@ -155,19 +156,19 @@
                                     </select>
 
                                 </div>
-                                <div class="form-group col-md-3 mt-5">
+                                <div class="form-group col-md-3 mt-3">
                                     <label for="" class="form-label float-start">Cost Per Day</label>
                                     <input type="number" class="form-control" formControlName="CostPD"
                                         [class.is-invalid]="f['CostPD'].invalid && (f['CostPD'].dirty || f['CostPD'].touched)"
                                         required>
 
                                 </div>
-                                <div class="form-group col-md-3 mt-5">
+                                <div class="form-group col-md-3 mt-3">
                                     <label for="" class="form-label float-start">Total Room Cost</label>
                                     <input type="number" class="form-control" formControlName="totalRC" required>
 
                                 </div>
-                                <div class="form-group col-md-3 mt-5">
+                                <div class="form-group col-md-3 mt-3">
                                     <label for="" class="form-label float-start">Other Costs</label>
                                     <select class="form-control form-select" formControlName="OtherC" id="OtherC"
                                         required>
@@ -184,13 +185,13 @@
 
                                 </div>
                             </div>
-                            <div class="form-row ">
-                                <div class="form-group col-md-3 mt-5" >
+                            <div class="form-row w-100">
+                                <div class="form-group col-md-3 mt-3" >
                                     <label for="" class="form-label float-start">Other Cost Estimate</label>
                                     <input type="text" class="form-control" formControlName="OtherCE">
 
                                 </div>
-                                <div class="form-group col-md-3 mt-5">
+                                <div class="form-group col-md-3 mt-3">
                                     <label for="" class="form-label float-start">Procedure</label>
                                     <select class="form-control form-select" formControlName="Procedure" id="Procedure"
                                         (change)="onprocedureSelect($event)" required>
@@ -201,60 +202,48 @@
                                     </select>
 
                                 </div>
-                                <div class="form-group col-md-3 mt-5">
+                                <div class="form-group col-md-3 mt-3">
                                     <label for="" class="form-label float-start">Inital cost estimate</label>
                                     <input type="text" class="form-control" formControlName="InitialCE" required>
 
                                 </div>
-                                <div class="form-group col-md-3 mt-5">
+                                <div class="form-group col-md-3 mt-3">
                                     <label for="" class="form-label float-start">Total Bill Amount</label>
                                     <input type="text" class="form-control" formControlName="TotalBillAmount" required>
 
                                 </div>
                             </div>
-
-
-
-                            <div class="form-row ">
-
-
-                                <div class="form-group col-md-3 mt-5">
+                            <div class="form-row w-100">
+                                <div class="form-group col-md-3 mt-3">
                                     <label for="" class="form-label float-start">Claim Amount*</label>
                                     <input type="text" class="form-control" formControlName="ClaimAmount" required>
-
                                 </div>
-                                
-
                              </div>
                         </div>
 
                     </form>
 
-                    <button type="button"  form="ngForm"  class="previous_button btn btn-lg px-5 float-start mt-5">Exit</button>
-                    <button type="button" class="next btn btn-primary btn-lg px-5 float-end mt-5" type="submit"
-                        form="ngForm" >Continue</button>
+                    <button type="button" (click)="redirect()" form="ngForm"  class="previous_button btn btn-sm px-5 float-start mt-3 mx-2">Exit</button>
+                    <button type="button" class="next btn btn-primary btn-sm px-5 float-end mt-3 mx-2" type="submit"
+                    [disabled]="!ClaimForm.valid"  form="ngForm" >Continue</button>
 
-                        <!-- [disabled]="!ClaimForm.valid" -->
+                    <!-- [disabled]="!ClaimForm.valid" -->
                 </fieldset>
 
 
 
                 <fieldset>
                     <form [formGroup]="medicalForm" class="mb-5" id="medform" (ngSubmit)="onMedformSubmit(medicalForm)">
-                        <div class="form-row">
+                        <div class="form-row w-100">
                             <div class="form-group col-md-12 mb-3">
                                 <h4 class="float-start">Medical Information</h4>
                             </div>
                         </div>
-                        <div class="form-row">
-
-                        </div>
-
-                        <div class="form-row">
+                        <div class="form-row w-100">
                             <div class="form-group col-md-3">
                                 <label for="" class="form-label float-start">Procedure</label>
                                 <!-- <input type="text" class="form-control" formControlName="Procedures" required readonly> -->
-                                <select class="form-control form-select" formControlName="Procedures" (change)="onprocedureSelect($event)"
+                                <select  class="form-control form-select" formControlName="Procedures" 
                                 [class.is-invalid]="M['Procedures'].invalid && (M['Procedures'].dirty || M['Procedures'].touched)"
                                 id="Procedures" required>
                                 <option value="">Choose...</option>
@@ -306,15 +295,15 @@
 
                         </div>
 
-                        <div class="form-row">
+                        <div class="form-row w-100">
 
-                            <div class="form-group col-md-3 mt-5">
+                            <div class="form-group col-md-3 mt-3">
                                 <label for="" class="form-label float-start">Date of first diagnosis</label>
                                 <input type="date" class="form-control" formControlName="Dateoffirstdiagnosis"
                                     placeholder="Choose a date" id="Dateoffirstdiagnosis" [max]="date" required>
                             </div>
 
-                            <div class="form-group col-md-3  mt-5">
+                            <div class="form-group col-md-3  mt-3">
                                 <label for="" class="form-label float-start">Past history of chronic illness</label>
                                 <select class="form-control form-select" formControlName="Pasthistoryofchronicillness"
                                     [class.is-invalid]="M['Pasthistoryofchronicillness'].invalid && (M['Pasthistoryofchronicillness'].dirty || M['Pasthistoryofchronicillness'].touched)"
@@ -322,18 +311,18 @@
                                     <option value="">Choose...</option>
                                     <option *ngFor="let p of chronicillnessDetail" value={{p.id}}>
                                         {{p.name}}</option>
-
+                                        <!-- {{p.id}} -->
                                 </select>
 
                             </div>
-                            <div class="form-group col-md-3  mt-5">
+                            <div class="form-group col-md-3  mt-3">
                                 <label for="" class="form-label float-start">Name of the treating doctor</label>
                                 <input type="text" class="form-control" formControlName="Nameofthetreatingdoctor"
                                     [class.is-invalid]="M['Nameofthetreatingdoctor'].invalid && (M['Nameofthetreatingdoctor'].dirty || M['Nameofthetreatingdoctor'].touched)"
                                     required>
 
                             </div>
-                            <div class="form-group col-md-3  mt-5">
+                            <div class="form-group col-md-3  mt-3">
                                 <label for="" class="form-label float-start">Dr Resgistration number</label>
                                 <input type="text" class="form-control" formControlName="DrResgistrationnumber"
                                     required>
@@ -341,130 +330,102 @@
                             </div>
 
                         </div>
-                        <div class="form-row">
+                        <div class="form-row w-100">
 
-                            <div class="form-group col-md-3  mt-5">
+                            <div class="form-group col-md-3  mt-3">
                                 <label for="" class="form-label float-start">Qualification of the Treating
                                     Doctor</label>
                                 <input type="text" class="form-control"
                                     formControlName="Qualificationofthetreatingdoctor" required>
 
                             </div>
-
-                            <div class="form-group col-md-3 mt-5">
+                            <div class="form-group col-md-3 mt-3">
                                 <label for="" class="form-label float-start">Gender</label>
-                                <input type="text" class="form-control" formControlName="Genders" readonly>
+                                <!--<input type="text" class="form-control" formControlName="Genders" readonly> -->
+                                <select class="form-control form-select" formControlName="Genders" id="Genders" readonly>
+                                <option value="">Choose...</option>
+                                <option *ngFor="let g of GenderDetail" value={{g.id}}>{{g.name}}
+                                </option>
+
+                            </select>
                             </div>
-                            <div class="form-group col-md-3 mt-5">
+                            <div class="form-group col-md-3 mt-3">
                                 <label for="" class="form-label float-start">Age</label>
                                 <input type="text" class="form-control" formControlName="Ages" readonly>
                             </div>
-                        </div>
-
-                        <div class="form-row">
-                           
-                            <div class="form-group col-md-3  mt-5">
+                            <div class="form-group col-md-3  mt-3">
                                 <label for="" class="form-label float-start">Duration</label>
                                 <select class="form-control form-select" formControlName="Duration" id="Duration"
-                                    required>
+                                    >
                                     <option value="">Choose...</option>
                                     <option value="<24 hours"><24 hours</option>
                                     <option value=">24 hours">>24 hours</option>
+                                    <option value=">24 hours">>24 hours</option>
+                                    <option value="> 7 days">> 7 days</option>
+                                    <option value="<= 7 days"><= 7 days</option>
                                 </select>
                             </div>
-                            <div class="form-group col-md-3  mt-5">
+                        </div>
+                        <div class="form-row w-100">
+                            <div class="form-group col-md-3  mt-3">
                                 <label for="" class="form-label float-start">Claim</label>
-                                <select (change)="OnClaimSelect()"  class="form-control form-select"
-                                    formControlName="Claim" id="Claim" required>
+                                <!--(change)="OnClaimSelect()" -->
+                                <select class="form-control form-select"
+                                    formControlName="Claim" id="Claim">
                                     <option value="">Choose...</option>
                                     <option value="less than 1 lac">less than 1 lac</option>
                                     <option value="greater than 1 lac">greater than 1 lac</option>
                                     <option value="3">Any</option>
                                 </select>
                             </div>
-
-                            <div *ngFor="let q of questioncostheader" class="form-group col-md-3 mt-5" >
-                                <label for="" class="form-label float-start">{{q.label}}</label>
-                                <!-- <input  type="text" class="form-control" formControlName="q.costType"> -->
-                                <select class="form-control form-select"
-                                formControlName="q.label" (change)="OnQuestionSelect($event)">
-                                <option value="">Choose...</option>
-                                <option *ngFor="let p of q.options" value={{p.value}}>
-                                    {{p.label}}</option>
-                               </select>
+                            <div class="form-group col-md-9  mt-3">
+                                <button type="submit" class="action-button btn-primary btn-sm px-5 float-end mt-3" form="medform">
+                                    Save MedicalInfo</button>
                             </div>
-                            <!-- <div class="form-group col-md-3  mt-5" *ngIf="IsTypeOfAccident">
-                                <label for="" class="form-label float-start">Type Of Accident</label>
-                                <select (change)="OnTypeofAccident($event)" class="form-control form-select"
-                                    formControlName="TypeOfAccident" id="TypeOfAccident">
-                                    <option value="">Choose...</option>
-                                    <option value="1">Vehicle Slide/Head on collision
-                                    </option>
-                                    <option vale="2">Hit And Run</option>
-                                </select>
-                           
-                            </div> -->
                         </div>
-                        <div class="form-row">
-
-                            <!-- <div class="form-group col-md-4 mt-5" *ngIf="IspassengerType">
-                                <label for="" class="form-label float-start">Passenger/Driver or Implants used?</label>
-                                <select class="form-control form-select" (change)="OnPassengerType($event)"
-                                    formControlName="passengerType" id="passengerType">
-                                    <option value="">Choose...</option>
-                                    <option value="1">Driver</option>
-                                    <option value="2">Passenger</option>
-                                    <option value="3">Yes</option>
-                                    <option value="4">No</option>
-                                </select>
-
-                            </div> -->
-
-                            <!-- <div class="form-group col-md-4 mt-5" *ngIf="IsTypeOfVehicle">
-                                <label for="" class="form-label float-start">Types Of Vehicles</label>
-                                <select class="form-control form-select" formControlName="TypeOfVehicle"
-                                    id="TypeOfVehicle">
-                                    <option value="">Choose...</option>
-                                    <option value="1">Speed Limited Scooter</option>
-                                    <option value="2">Others</option>
-                                </select>
-
-                            </div> -->
-
-                            <!-- <div formArrayName="Questions">
-                                <div class="row" *ngFor="let q of medicalForm.get('Questions').controls; let i = index"
-                                    [formGroupName]="i">
-                            
-                                  <div class="col-1">
-                                    <mat-icon class="mt-3">q{{i}}</mat-icon>
-                                  </div>
-                                </div>
-                              </div> -->
-
-                        </div>
+                     
                     </form>
-                    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 
-                    <button type="button" class="action-button previous previous_button float-start mt-5">Back</button>
+                    
+                     
+                      
+                    <div class="form-row w-100 card mt-3 mx-2" style="min-height: 200px;">
+        
+        
+        <div class="form-group col-md-12 mb-3 card-header">
+              <p class="text-center mt-3">Sequential Question</p>
+        </div>
+                    <div *ngFor="let q of questioncostheader" class="form-group col-md-3 mt-3" >
+                        <label for="" class="form-label float-start">{{q.label}}</label>
+                        <select class="form-control form-select"
+                        formControlName="q.label" (change)="OnQuestionSelect($event)">
+                        <option value="">Choose...</option>
+                        <option *ngFor="let p of q.options" value={{p.value}}>
+                            {{p.label}}</option>
+                       </select>
+                    </div>
+        
+                    </div>
+                    <button type="button" class="previous previous_button btn btn-sm px-5 float-start mt-3 mx-2">Back</button>
 
-                    <button type="submit" class="next action-button btn-sm px-5 float-end mt-5" form="medform"
-                        [disabled]="!medicalForm.valid">Continue</button>
+                    <button class="next btn btn-primary btn-sm px-5 float-end mt-3 mx-2" type="submit" (Click)="SaveSequentialQue()" 
+                      >Continue</button>
 
-
-                    <p>{{this.doclist1}}</p>
-
+                      <!-- [disabled]="!medicalForm.valid" -->
+               
                 </fieldset>
+                
                 <fieldset>
                     <form [formGroup]="InsuaranceForm" class="mb-5" id="insuarance"
                         (ngSubmit)="OnInsuarancecontinue(InsuaranceForm)">
-                        <div class="form-row">
+                        <div class="form-row w-100">
                             <div class="form-group col-md-12 mb-3">
 
                                 <h4 class="float-start">Insurance Information</h4>
 
                             </div>
                         </div>
-                        <div class="form-row">
+                        <div class="form-row w-100">
                             <div class="form-group col-md-6">
                                 <label for="" class="form-label float-start">Insurance Company*</label>
                                 <select class="form-control form-select" formControlName="InsuranceCompany"
@@ -496,15 +457,15 @@
 
                             </div>
                         </div>
-                        <div class="form-row">
-                            <div class="form-group col-md-3 mt-5">
+                        <div class="form-row w-100">
+                            <div class="form-group col-md-3 mt-3">
                                 <label for="" class="form-label float-start">Policy Holder*</label>
                                 <input type="text" class="form-control" formControlName="PolicyHolder"
                                     [class.is-invalid]="I['PolicyHolder'].invalid && (I['PolicyHolder'].dirty || I['PolicyHolder'].touched)"
                                     required>
 
                             </div>
-                            <div class="form-group col-md-3 mt-5">
+                            <div class="form-group col-md-6 mt-3">
                                 <label for="" class="form-label float-start">Relation of patient with Policy
                                     Holder*</label>
                                 <select class="form-control form-select" id="TPA" formControlName="RelationOPH"
@@ -515,7 +476,7 @@
                                 </select>
 
                             </div>
-                            <div class="form-group col-md-6 mt-5">
+                            <div class="form-group col-md-3 mt-3">
                                 <label for="" class="form-label float-start">Policy Number*</label>
                                 <input type="text" class="form-control" formControlName="PolicyNumber">
 
@@ -523,38 +484,39 @@
                             </div>
                         </div>
                         <div class="form-row w-100">
-                            <div class="form-group col-md-6 mt-5">
+                            <div class="form-group col-md-6 mt-3">
                                 <input type="checkbox" formControlName="IsGroupPolicy"
                                     class="form-check-input float-start" id="same-address">
                                 <label class="form-check-label  float-start" for="same-address">&nbsp; Group
                                     Policy</label>
                             </div>
-                            <div class="form-group col-md-6 mt-5" style="visibility:hidden;">
+                            <div class="form-group col-md-6 mt-3" style="visibility:hidden;">
                                 <input type="checkbox" class="form-check-input float-start" id="same-address">
                                 <label class="form-check-label  float-start" for="same-address">&nbsp; Group
                                     Policy</label>
                             </div>
                         </div>
-                        <div class="form-row">
-                            <div class="form-group col-md-6 mt-5">
+                        <div class="form-row w-100">
+                            <div class="form-group col-md-6 mt-3">
                                 <label for="" class="form-label float-start">Company / Corporate / Group*</label>
                                 <input type="text" formControlName="Groupcompany" class="form-control">
                             </div>
-                            <div class="form-group col-md-6 mt-5" style="visibility:hidden;">
+                            <div class="form-group col-md-6 mt-3" style="visibility:hidden;">
                                 <label for="" class="form-label float-start">Company / Corporate / Group*</label>
                                 <input type="text" class="form-control">
                             </div>
                         </div>
 
                     </form>
-                    <button type="button" class="action-button previous previous_button float-start mt-5">Back</button>
+                    
+                        <!-- [disabled]="!InsuaranceForm.valid" -->
 
-                    <button type="submit" class="next action-button btn-sm px-5 float-end mt-5" form="insuarance"
-                        [disabled]="!InsuaranceForm.valid">Continue</button>
+                        <button type="button" class="previous previous_button btn btn-sm px-5 float-start mt-3 mx-2">Back</button>
 
-
-
+                        <button class="next btn btn-primary btn-sm px-5 float-end mt-3 mx-2" type="submit" form="insuarance"
+                          >Continue</button>
                 </fieldset>
+
                 <fieldset>
                     <form [formGroup]="DocumentsForm">
                         <div class="row mb-5">
@@ -571,10 +533,10 @@
 
                         </div>
                         <!--  <form id="upload_form" enctype="multipart/form-data" method="post"> -->
-                            <div class="form-row row">
+                            <div class="form-row row w-100">
                                 <div class="card form-group col-sm-2 col-md-2 mx-3 my-3 p-0" *ngFor="let p of doclist,let i=index">
                                     <div class="card-body">
-                                        <h6 class="mb-2 text-muted uploadtextb">{{p.docname}}</h6>
+                                        <h6 class="mb-2 text-muted uploadtextb">{{p}}</h6>
                                         <!-- <p class="card-text">  <input type="file" (change)="fileChange($event)" /></p> -->
                                         <div class="progress" id=progress_{{i}} *ngIf="progress && currentupload == i" >
                    
@@ -593,12 +555,18 @@
 
 
                     </form>
-                    <button type="button" class="action-button previous previous_button float-start mt-3">Back</button>
-                    <button type="button" class="next action-button float-end mt-3">Continue</button>
+                    <!-- <button type="button" class="action-button previous previous_button float-start mt-3">Back</button>
+                    <button type="button" class="next action-button float-end mt-3">Continue</button> -->
+               
+               
+                    <button type="button" class="previous previous_button btn btn-sm px-5 float-start mt-3 mx-2">Back</button>
+
+                    <button class="next btn btn-primary btn-sm px-5 float-end mt-3 mx-2" type="submit" form="insuarance"
+                      >Continue</button>
                 </fieldset>
 
                 <fieldset>
-                    <div class="form-row">
+                    <div class="form-row  w-100">
                         <div class="form-group col-md-12 mb-3">
                             <img src="assets/img/undraw-completing-re-i7ap.png" class="m-3 p-3">
 
@@ -606,18 +574,18 @@
                         </div>
 
 
-                        <div class="form-group col-md-12 mt-5 mb-3">
+                        <div class="form-group col-md-12 mt-3 mb-3">
                             <!-- <button type="button" class="action-button previous previous_button">Back</button>  -->
 
                         </div>
                     </div>
-                    <div class="form-row">
+                    <div class="form-row w-100">
                         <div class="form-group col-md-6">
 
                             <p>You will be automatically redirected to home page...</p>
                         </div>
                         <div class="form-group col-md-6">
-                            <a href="dashboard-insu.html" class="btn btn-primary btn-lg px-5 float-end">Dashboard</a>
+                            <a (click)="redirect()" class="btn btn-primary btn-lg px-5 float-end">Dashboard</a>
 
                         </div>
                     </div>
@@ -625,8 +593,6 @@
 
 
                 </fieldset>
-
-
             </form>
         </section>
 

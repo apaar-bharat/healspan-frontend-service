@@ -1,5 +1,5 @@
 <div class="container">
-	<div class="row mt-5 pt-3 pb-3">
+	<div class="row mt-2 pt-3 pb-3">
 		<div class="col-md-6">
 			<h3 class="mx-3">Overview</h3>
 		</div>
@@ -9,8 +9,8 @@
 			<div class="modal" role="dialog" id="modalChoice3">
 				<div class="modal-dialog healm" role="document">
 					<ul class="healmenulist">
-						<a href="/createclaim/Inital Authorization">
-							<li class="healmenu">Inital Authorization</li> 
+						<a href="/createclaim/Initial Authorisation">
+							<li class="healmenu">Initial Authorisation</li> 
 						</a>
 						<a href="/createclaim/Enhancement">
 							<li class="healmenu">Enhance</li>
@@ -18,7 +18,7 @@
 						<a href="/createclaim/Discharge">
 							<li class="healmenu">Discharge</li>
 						</a>
-						<a href="/createclaim/FinalClaim">
+						<a href="/createclaim/Final Claim">
 							<li class="healmenu">Final Claim</li>
 						</a>
 					</ul>
@@ -28,52 +28,49 @@
 	</div>
 	
 	<div class="row mb-3 mt-2 mx-3 text-center">
-
-		<a href="#" class="col-md-3 ps-0 text-decoration-none">
+		<a  class="col-md-3 ps-0 text-decoration-none">
 			<div class="healboxx healshadow1" >
 				<p><strong>Initial Authorisation</strong></p>
-				<h2 class="bxt"><strong>0</strong></h2>
-				<!-- {{statusDetail["Initial Authorisation"]}} -->
+				<h2 class="bxt"><strong>{{statusDetail.initialAuthorizationCount}}</strong></h2>
+				<!-- {{statusDetail["initialAuthorizationCount"]}} -->
 				<p class="bxtt">Pending</p>
 			</div>
 		</a>
-
-		
-
-		<a href="#" class="col-md-3 ps-0 text-decoration-none">
+		<a class="col-md-3 ps-0 text-decoration-none">
 			<div class="healboxx healshadow1" >		
 				<p><strong>Discharge</strong></p>
-				<h2 class="bxt"><strong>0</strong></h2>
+				<h2 class="bxt"><strong>{{statusDetail.dischargeCount}}</strong></h2>
 				<!-- {{statusDetail["Discharge"]}} -->
 				<p class="bxtt">Pending</p>
 			</div>
 		</a>
-
-		<a href="#" class="col-md-3 text-decoration-none">
+		<a class="col-md-3 text-decoration-none">
 			<div class="healboxx healshadow1">
 				<p><strong>Enhancement</strong></p>
-				<h2 class="bxt"><strong>0</strong></h2>
+				<h2 class="bxt"><strong>{{statusDetail.enhancementCount}}</strong></h2>
 				<p class="bxtt">Pending</p>
 				<!-- {{statusDetail["Enhancement"]}} -->
 			</div>
 		</a>
-
-		<a href="#" class="col-md-3 text-decoration-none">
+		<a class="col-md-3 text-decoration-none">
 			<div class="healboxx healshadow1">
 				<p><strong>Final Claim</strong></p>
-				<h2 class="bxt"><strong>0</strong></h2>
+				<h2 class="bxt"><strong>{{statusDetail.finalClaimCount}}</strong></h2>
 				<p class="bxtt">Pending</p>
 				<!-- {{statusDetail["Final Claim"]}} -->
 			</div>
 		</a>
 	</div>
 
-	<div class="row mt-5 pt-3 pb-3">
+	<div class="row mt-3">
 		<div class="col-md-6">
-			<h3>Recent Updates</h3>  <h3><a (click)="GotoClaim('Initial Authorisation',41)">GoTo Claim</a></h3>
+			<h3>Recent Updates</h3>  
+			<!-- <h3><a (click)="GotoClaim('Initial Authorisation',41)">GoTo Claim</a></h3> -->
 		</div>
-		<div class="col-md-6"></div>
-		<div></div>
+		<!-- <div class="col-md-6"></div>
+		<div>
+
+		</div> -->
 	</div>
 
 	<div class="row">
@@ -122,7 +119,7 @@
 			</div>
 			<div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" style="height: 250px; overflow: auto"
 				tabindex="0">
-				<table class="table tstriped table-borderless mt-3 healshadow1">
+				<table id="example" class="table tstriped table-borderless mt-3 healshadow1">
 					<thead>
 						<th>Claim ID</th>
 						<th>Name</th>
@@ -135,7 +132,7 @@
 						<th>ApprovedAmount</th>
 					</thead>
 					<tbody>
-						<tr *ngFor="let a of aprrovalDataList">
+						<tr *ngFor="let a of pendingDataList">
 							<td ><a (click)="GotoClaim(a.stage,a.claimID)"  class="tblink">{{a.claimID}}</a></td>
 							<td>{{a.name}}</td>
 							<td>{{a.ailment}}</td>

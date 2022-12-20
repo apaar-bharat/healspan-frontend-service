@@ -12,8 +12,8 @@ export class HdashboardComponent implements OnInit {
   statusDetail: any;
   aprrovalDataList:any;
   pendingDataList:any;
-  statusss:any;
   currentuserdata:any;
+  LoggedInId:any;
   constructor(private router: Router,private apiservice:ApiService,private dataservice : DataService) { }
 
   ngOnInit(): void {
@@ -22,13 +22,16 @@ export class HdashboardComponent implements OnInit {
     console.log("currentuserdata" + res);
     this.currentuserdata = res
    })
+
+  let LoggedInId = localStorage.getItem("LoggedInId");
    
   //healspan/claim/retrieveallclaimsofloggedinuser/"+ this.currentuserdata[0].id
-  this.apiservice.getService("healspan/claim/retrieveallclaimsofloggedinuser/1").subscribe((data:any) =>{
-    //this.statusDetail = data["stageWiseClaimCount"];
-    this.aprrovalDataList = data;
-    this.statusss = [];
-    this.pendingDataList = data
+  this.apiservice.getService("healspan/claim/retrieveallclaimsofloggedinuser/"+LoggedInId).subscribe((data:any) =>{
+    this.statusDetail = data["claimStageCount"];
+    this.aprrovalDataList = data["loggedInUserClaimData"].filter((x:any)=>x.status == "Approved");
+    this.pendingDataList = data["loggedInUserClaimData"].filter((x:any)=>x.status != "Approved");
+
+    
   })
 
     // this.dataservice.currentclaimdetails_data.subscribe((res:any) =>

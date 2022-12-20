@@ -88,12 +88,12 @@ display: inline-block;
 }
 
 .btn {
-border: 2px solid rgb(131, 248, 248);
+border: 1px solid rgb(131, 248, 248);
 color: rgb(8, 99, 99);
 background-color: rgb(147, 230, 245);
-padding: 8px 20px;
+padding: 5px 10px;
 border-radius: 8px;
-font-size: 20px;
+font-size: 18px;
 font-weight: bold;
 }
 

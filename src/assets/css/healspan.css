@@ -230,7 +230,7 @@ text-align:center;
   text-align: center;
   position: relative;
   padding-top: 50px;
-  min-height: 920px;
+  min-height: 800px;
 /*   max-width: 810px; */
   margin: 0 auto;
  /*  background: #ffffff; */
@@ -313,11 +313,11 @@ text-align:center;
   padding-bottom: 70px;
 }
 .multi_step_form #msform fieldset .form-control, .multi_step_form #msform fieldset .product_select {
-  border-radius: 12px;
+  border-radius:8px;
   border: 1px solid #90A4AE;
   padding: 0 20px;
   height: auto;
-  font: 400 15px/48px "Roboto", sans-serif;
+  font: 400 15px/35px "Roboto", sans-serif;
   color: #5f6771;
   box-shadow: none;
   outline: none;
@@ -644,3 +644,5 @@ text-align:center;
   color: #cd595a;
   position: absolute;
 }
+
+.form-row {float:left !important;}

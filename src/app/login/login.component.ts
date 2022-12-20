@@ -51,6 +51,7 @@ export class LoginComponent implements OnInit {
         this.dataservice.currentuser_data.subscribe((res:any) =>{
           if (res.length > 0) {
             localStorage.setItem("usertype",res[0].type);
+            localStorage.setItem("LoggedInId",res[0].id);
             if (res[0].type == 'huser') {
               this.router.navigate(['hdashboard'])
 
