@@ -50,6 +50,8 @@ export class ApiService {
     return this.http.post(url,request,httpOptions).pipe(timeout(150000));
   }
 
+ 
+
   // post(path: string, body: Object = {},params: HttpParams = new HttpParams()): Observable<any> {
   //   return this.http.post(
   //     `${environment.baseUrl}${path}`,

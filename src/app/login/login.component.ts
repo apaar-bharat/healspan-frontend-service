@@ -9,6 +9,7 @@ import { Modal } from 'src/assets/js/bootstrap.bundle';
 import { data } from 'jquery';
 import { AuthenticationService } from '../service/authentication.service';
 import { DataService } from '../service/data.service';
+import { CommonserviceService } from '../service/commonservice.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -22,7 +23,8 @@ export class LoginComponent implements OnInit {
   loginData: any;
 
   constructor(private router: Router, private fb: FormBuilder, private api: ApiService, 
-    private http: HttpClient,private authservice:AuthenticationService,private dataservice:DataService) { }
+    private http: HttpClient,private authservice:AuthenticationService,
+    private dataservice:DataService,private commonservice:CommonserviceService) { }
 
   ngOnInit(): void {
     this.loginForm = this.fb.group({
@@ -48,19 +50,7 @@ export class LoginComponent implements OnInit {
   OnLogin() {
     console.log(this.loginForm)
     if (this.authservice.login(this.loginForm.get('username')?.value, this.loginForm.get('password')?.value)) {  
-        this.dataservice.currentuser_data.subscribe((res:any) =>{
-          if (res.length > 0) {
-            localStorage.setItem("usertype",res[0].type);
-            localStorage.setItem("LoggedInId",res[0].id);
-            if (res[0].type == 'huser') {
-              this.router.navigate(['hdashboard'])
-
-            } else {
-              this.router.navigate(['rdashboard'])
-            }
-          }
-        })
-      
+      this.commonservice.redirecttoactivedashboard();
     }  
     else  {
       this.displayStyle = "block"; 

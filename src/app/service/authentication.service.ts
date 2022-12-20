@@ -38,8 +38,11 @@ export class AuthenticationService {
     if(userdata.length>0)
     {
       localStorage.setItem('currentUser', "loggedin"); 
-      this.dataservice.updateclaimdetails_data(userdata); 
-      return userdata; 
+      localStorage.setItem("usertype",userdata[0].type);
+      localStorage.setItem("LoggedInId",userdata[0].id);
+      this.dataservice.updatecurrentuser_data(userdata); 
+      // return userdata; 
+      return true;
       
     }
     return false;

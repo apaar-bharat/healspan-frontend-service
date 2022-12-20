@@ -41,12 +41,13 @@ export class HdashboardComponent implements OnInit {
 
 
   GotoClaim(stage:any,claimID:number){
-      let url = 'createclaim/'+stage;
+      let url = '/createclaim/'+stage;
       this.apiservice.getService("healspan/claim/retrieveclaim/"+claimID).subscribe((data: any) => {
         this.dataservice.updateclaimdetails_data(data);
         this.router.navigate([url]);
-
       })
+
+      
   }
 
 }

@@ -13,6 +13,7 @@ import { environment } from 'src/environments/environment';
 import { ApiService } from './service/api.service';
 import { SlaStatusComponent } from './Pages/sla-status/sla-status.component';
 import { AuthenticationService } from './service/authentication.service';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
 
 
@@ -21,7 +22,6 @@ import { AuthenticationService } from './service/authentication.service';
     AppComponent,
     LoginComponent,
     SlaStatusComponent,
-  
   ],
   imports: [
     BrowserModule,
@@ -33,6 +33,7 @@ import { AuthenticationService } from './service/authentication.service';
     MatFormFieldModule,
     HttpClientModule
   ],
+  // { provide: LocationStrategy, useClass: HashLocationStrategy}
   providers: [ApiService,AuthenticationService],
   bootstrap: [AppComponent],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],

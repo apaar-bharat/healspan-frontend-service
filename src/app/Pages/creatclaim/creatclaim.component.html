@@ -225,7 +225,7 @@
 
                     <button type="button" (click)="redirect()" form="ngForm"  class="previous_button btn btn-sm px-5 float-start mt-3 mx-2">Exit</button>
                     <button type="button" class="next btn btn-primary btn-sm px-5 float-end mt-3 mx-2" type="submit"
-                    [disabled]="!ClaimForm.valid"  form="ngForm" >Continue</button>
+                    form="ngForm" >Continue</button>
 
                     <!-- [disabled]="!ClaimForm.valid" -->
                 </fieldset>
@@ -245,7 +245,7 @@
                                 <!-- <input type="text" class="form-control" formControlName="Procedures" required readonly> -->
                                 <select  class="form-control form-select" formControlName="Procedures" 
                                 [class.is-invalid]="M['Procedures'].invalid && (M['Procedures'].dirty || M['Procedures'].touched)"
-                                id="Procedures" required>
+                                id="Procedures"  [attr.disabled]="false" required>
                                 <option value="">Choose...</option>
                                 <option *ngFor="let p of procedureDetail" value={{p.id}}>
                                     {{p.name}}</option>
@@ -342,7 +342,7 @@
                             <div class="form-group col-md-3 mt-3">
                                 <label for="" class="form-label float-start">Gender</label>
                                 <!--<input type="text" class="form-control" formControlName="Genders" readonly> -->
-                                <select class="form-control form-select" formControlName="Genders" id="Genders" readonly>
+                                <select class="form-control form-select" formControlName="Genders" id="Genders"  [attr.disabled]="false" >
                                 <option value="">Choose...</option>
                                 <option *ngFor="let g of GenderDetail" value={{g.id}}>{{g.name}}
                                 </option>
@@ -408,7 +408,7 @@
                     </div>
                     <button type="button" class="previous previous_button btn btn-sm px-5 float-start mt-3 mx-2">Back</button>
 
-                    <button class="next btn btn-primary btn-sm px-5 float-end mt-3 mx-2" type="submit" (Click)="SaveSequentialQue()" 
+                    <button class="next btn btn-primary btn-sm px-5 float-end mt-3 mx-2" (click)="SaveSequentialQue()" 
                       >Continue</button>
 
                       <!-- [disabled]="!medicalForm.valid" -->
@@ -536,17 +536,17 @@
                             <div class="form-row row w-100">
                                 <div class="card form-group col-sm-2 col-md-2 mx-3 my-3 p-0" *ngFor="let p of doclist,let i=index">
                                     <div class="card-body">
-                                        <h6 class="mb-2 text-muted uploadtextb">{{p}}</h6>
+                                        <h6 class="mb-2 text-muted uploadtextb">{{p.docname}}</h6>
                                         <!-- <p class="card-text">  <input type="file" (change)="fileChange($event)" /></p> -->
                                         <div class="progress" id=progress_{{i}} *ngIf="progress && currentupload == i" >
                    
                                             <div class="progress-bar"  [style.width]="progress + '%'">{{progress}}%</div>
                                         </div>
-                                        <h3 id="status_{{i}}" class="uploadtextc"></h3>
+                                        <a (click)="OnDownload(p.docid)"><h3 id="status_{{i}}" class="uploadtextc"></h3></a>
                                         <div style="text-align:center;">
                                             <!-- (click)="uploadAndProgressSingle()" -->
                                             <!-- <button type="file" (change)="fileChange($event)"  class="next action-button float-end mt-3">Upload</button> -->
-                                            <label class="filelabel">Upload<input type="file"(change)="fileChange($event,i)"> </label>
+                                            <label class="filelabel">Upload<input type="file"(change)="fileChange($event,i,p.docid)"> </label>
                                         </div>
                                       </div>
                                 </div>
@@ -561,7 +561,7 @@
                
                     <button type="button" class="previous previous_button btn btn-sm px-5 float-start mt-3 mx-2">Back</button>
 
-                    <button class="next btn btn-primary btn-sm px-5 float-end mt-3 mx-2" type="submit" form="insuarance"
+                    <button class="next btn btn-primary btn-sm px-5 float-end mt-3 mx-2" type="submit" form="DocumentsForm"
                       >Continue</button>
                 </fieldset>
 

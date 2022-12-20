@@ -9,6 +9,7 @@ import { ActivatedRoute, Route } from '@angular/router';
 import { DataService } from 'src/app/service/data.service';
 import { formatDate } from '@angular/common';
 import { CommonserviceService } from 'src/app/service/commonservice.service';
+import { environment } from 'src/environments/environment';
 
 declare function verificationForm(): any;
 //declare function phoneNoselect():any;
@@ -79,11 +80,11 @@ export class CreatclaimComponent implements OnInit {
   currentuserdata:any;
 
   //------Response Field-------------------
-  patientInfoResponse:any;medicalInfoResponse:any ; insuranceInfoResponse:any
+  patientInfoResponse:any;medicalInfoResponse:any ; insuranceInfoResponse:any ;ruleInfoResponse:any;
   questioncostheader: any =[];Questions:any=[];answerparam:any="";
-  claimInfoID:number = 0;claimStageId :number = 0;
+  claimInfoID:any = null;claimStageId :any = null;
   diagnosis:any="" ; treatmentType:any="";procedure:any="";duration:any="";
-
+  DocumentIds:any=[];blob:any;
   constructor(private fb: FormBuilder, private api: ApiService, private http: HttpClient,
     private httpClient: HttpClient, private route: ActivatedRoute,
     private dataservice : DataService,private commonservice:CommonserviceService) {
@@ -193,6 +194,7 @@ export class CreatclaimComponent implements OnInit {
   }
 
   AssignFormControlValues(data:any){
+    this.doclist =[];
     this.claimInfoID = data[0].claimInfo.id;
     this.claimStageId = data[0].claimStageMst.claimStageMstId;
     //alert(this.claimInfoID + '-'+ this.claimStageId);
@@ -249,41 +251,41 @@ export class CreatclaimComponent implements OnInit {
     this.ClaimForm.controls["PHUHID"].setValue(patientInformationList.hospitalUhid);
 
     
+    
+    this.medicalForm.controls["Genders"].setValue(patientInformationList.genderId);
+    this.medicalForm.controls["Procedures"].setValue(patientInformationList.procedureId);
+
+  }
+  
+  if(patientMedicalInfoList!=null){
+    this.medicalForm.controls["Nameofthetreatingdoctor"].setValue(patientMedicalInfoList.doctorName);
+    this.medicalForm.controls["DrResgistrationnumber"].setValue(patientMedicalInfoList.doctorRegistrationNumber);
+    this.medicalForm.controls["Qualificationofthetreatingdoctor"].setValue(patientMedicalInfoList.doctorQualification);
+    this.medicalForm.controls["Provisionaldiagnosis"].setValue(patientMedicalInfoList.diagnosisId);
+    this.medicalForm.controls["Speciality"].setValue(patientMedicalInfoList.specialityId);
+    this.medicalForm.controls["Pasthistoryofchronicillness"].setValue(patientMedicalInfoList.pastChronicIllness);
+    
+    this.medicalForm.controls["TreatmentType"].setValue(patientMedicalInfoList.treatmentTypeId);
+    this.medicalForm.controls["Dateoffirstdiagnosis"].setValue(patientMedicalInfoList.dateOfFirstDiagnosis);
+   
+    this.medicalForm.controls["Ages"].setValue(this.showAge);
     let dateofirstdiagDate=patientMedicalInfoList.dateOfFirstDiagnosis;
 
     if(dateofirstdiagDate !=null){
     this.ClaimForm.get("Dateoffirstdiagnosis")?.setValue(formatDate(dateofirstdiagDate,'yyyy-MM-dd','en'));}
-  }
-    
-  if(patientMedicalInfoList!=null){
-    this.medicalForm.controls["Nameofthetreatingdoctor"].setValue(patientMedicalInfoList.doctorName),
-    this.medicalForm.controls["DrResgistrationnumber"].setValue(patientMedicalInfoList.doctorRegistrationNumber),
-    this.medicalForm.controls["Qualificationofthetreatingdoctor"].setValue(patientMedicalInfoList.doctorQualification),
-    this.medicalForm.controls["Provisionaldiagnosis"].setValue("28"),
-    this.medicalForm.controls["Speciality"].setValue(patientMedicalInfoList.specialityId)
-    this.medicalForm.controls["Pasthistoryofchronicillness"].setValue(patientMedicalInfoList.pastChronicIllness)
-    
-    this.medicalForm.controls["Procedures"].setValue(patientMedicalInfoList.procedureId);
-    this.medicalForm.controls["TreatmentType"].setValue(patientMedicalInfoList.treatmentTypeId)
-    this.medicalForm.controls["Dateoffirstdiagnosis"].setValue(patientMedicalInfoList.dateOfFirstDiagnosis)
-    this.medicalForm.controls["Genders"].setValue(patientInformationList.genderId)
-    this.medicalForm.controls["Ages"].setValue(this.showAge)
-
-    
-    
-    
+ 
     // Pasthistoryofchronicillness
     // DrResgistrationnumber
 
   }
   
   if(patientInsuranceInfoList != null){
-    this.InsuaranceForm.controls["TPAID"].setValue(patientInsuranceInfoList.tpaNumber),
+    this.InsuaranceForm.controls["TPAnumber"].setValue(patientInsuranceInfoList.tpaNumber),
     this.InsuaranceForm.controls["PolicyHolder"].setValue(patientInsuranceInfoList.policyHolderName),
     this.InsuaranceForm.controls["PolicyNumber"].setValue(patientInsuranceInfoList.policyNumber),
     // this.ClaimForm.controls["TreatmentType"].setValue(patientInsuranceInfoList[0].patientRelation),
     this.InsuaranceForm.controls["Groupcompany"].setValue(patientInsuranceInfoList.groupCompany),
-    this.InsuaranceForm.controls["TPA"].setValue(patientInsuranceInfoList.tpaMst.id),
+    this.InsuaranceForm.controls["TPAID"].setValue(patientInsuranceInfoList.tpaMst.id),
     this.InsuaranceForm.controls["InsuranceCompany"].setValue(patientInsuranceInfoList.insuranceCompanyMst.id),
     // this.ClaimForm.controls["TreatmentType"].setValue(patientInsuranceInfoList[0].tpaId),
     this.InsuaranceForm.controls["RelationOPH"].setValue(patientInsuranceInfoList.relationshipId),
@@ -307,11 +309,11 @@ export class CreatclaimComponent implements OnInit {
     this.submitted = true;
     if (this.ClaimForm.invalid) {
       //alert('form invalid');
-
     }
     else {
-      //alert("form valid")
+      //alert("form valid") id is claimid
       let patientbody = {
+        "id": this.claimInfoID,
         "tpaClaimId" : null,
         "userId" : 1,
         "hospitalId" : this.ClaimForm.value.Hospital,
@@ -353,7 +355,6 @@ export class CreatclaimComponent implements OnInit {
     }
   }
 
-
   onMedformSubmit(formData: any) {
     console.log("dfhbd", formData)
     this.submitted2 = true;
@@ -363,7 +364,7 @@ export class CreatclaimComponent implements OnInit {
     }
     else {
       //alert("form valid and submitted")
-     if(this.claimInfoID == 0){
+     if(this.claimInfoID != null){
       this.claimInfoID = this.patientInfoResponse.claimInfoId;
      }
       let medicalparam = {
@@ -393,24 +394,35 @@ export class CreatclaimComponent implements OnInit {
   SaveSequentialQue(){
     let ruleengineres = {
       "medicalInfoId": this.medicalInfoResponse.medicalInfoId,
+      //46, 
       "sequentialQuestion": [
-          {
-              "question": "Who are you ?",
-              "answer": "Sagar"
-          },
-          {
-              "question": "Are you married?",
-              "answer": "No"
-          },
-          {
-              "question": "Are you graduate?",
-              "answer": "Yes"
-          }
-      ],
+        {
+            "question": "Who are you ?",
+            "answer": "Sagar"
+        },
+        {
+            "question": "Are you married?",
+            "answer": "No"
+        },
+        {
+            "question": "Are you graduate?",
+            "answer": "Yes"
+        }
+    ],
       "documentList": this.doclist
     }
     this.api.post('healspan/claim/savequestionnairesanddocument',ruleengineres).subscribe((ruleres) =>{
-      console.log("ruleres",ruleres)
+      console.log("ruleres",ruleres);
+      this.ruleInfoResponse = ruleres;
+      this.doclist =[];
+      for (var obj in ruleres.documentId) {
+        if (ruleres.documentId.hasOwnProperty(obj)) {  
+          //----loop--------------------
+            let element  ={"docid": ruleres.documentId[obj],"docname" : obj}
+            this.doclist.push(element);
+        }
+      }
+      console.log("DocumentIds",this.doclist);
     })
   }
 
@@ -424,7 +436,7 @@ export class CreatclaimComponent implements OnInit {
 
     else {
       //alert("form valid")
-      if(this.claimInfoID == 0){
+      if(this.claimInfoID != null){
         this.claimInfoID = this.patientInfoResponse.claimInfoId;
        }
       let Insuranceparam = {
@@ -452,49 +464,10 @@ export class CreatclaimComponent implements OnInit {
   }
 
  
-  // ----For Sequential question-------------------
-  OnClaimselect1(event: any) {
-    
-     let Claimvalue = event.target.options[event.target.options.selectedIndex].text;
-
-    this.api.getService("assets/data/admission.json").subscribe((data: any) => {
-      this.admissiondata = data["Admission"];
-      console.log("data", data);
-      let Speciality = this.medicalForm.get("Speciality")?.value;
-      let TreatmentType = this.medicalForm.get("TreatmentType")?.value;
-      let Genders = this.medicalForm.get("Genders")?.value;
-      let Ages = this.medicalForm.get("Ages")?.value;
-      let Duration = this.medicalForm.get("Duration")?.value;
-      let Claim = this.medicalForm.get("Claim")?.value;
-
-      let restest = this.admissiondata.filter((element: any) => (element.Speciality == String(Speciality) && element.TreatmentType == String(TreatmentType) && element.Gender == String(Genders) && element.Age == String(Ages) && element.Durationofstay == String(Duration) && element.Claimvalue == String(Claimvalue)));
-      // let res = this.admissiondata.filter((element: any) => (element.Speciality == Speciality && element.TreatmentType == TreatmentType && element.Gender == Genders && element.Age == Ages && element.Durationofstay == Duration && element.Claimvalue == Claimvalue));
-      if (restest.length > 0) {
-        alert(restest[0].Screen);
-        if (restest[0].Screen == "\"This claim is not admissible\"") {
-          alert("This claim is not admissible,may be denied by TPA")
-        } else if (restest[0].Question1) {
-          this.IsTypeOfAccident = true;
-        }
-      }
-      //(element.Speciality==Speciality&& element.TreatmentType==TreatmentType&&element.Gender==Genders&&element.Age==Ages&&element.Durationofstay==Duration&&element.Claimvalue==Claimvalue));
-
-      // });
-      console.log(restest);
-    })
-  }
-
-  OnTypeofAccident(event: any) {
-    console.log(event.target.value);
-  }
-
-  OnPassengerType(event: any) {
-  }
-
   //-----Start File Upload Logic ------------------------
-  fileChange(event: any, id: any) {
-    this.currentupload = id;
-    alert('progress_' + id);
+  fileChange(event: any,i:any, docid: any) {
+    this.currentupload = docid;
+    alert('progress_' + docid);
     const fileList: FileList = event.target.files;
     //check whether file is selected or not
     if (fileList.length > 0) {
@@ -504,12 +477,24 @@ export class CreatclaimComponent implements OnInit {
       console.log('finfo', file.name, file.size, file.type);
       //max file size is 4 mb
       if ((file.size / 1048576) <= 50) {
-        let formData = new FormData();
-        formData.append('file', file, file.name);
-        formData.append('tz', new Date().toISOString())
-        this.file_data = formData
-        console.log(this.file_data);
-        this.uploadAndProgressSingle(id);
+        // ----Cooment----------
+        // let formData = new FormData();
+        // formData.append('file', file, file.name);
+        // formData.append('tz', new Date().toISOString())
+        // this.file_data = formData
+        // console.log(this.file_data);
+        //this.uploadAndProgressSingle(id,file);
+        // ----EndCooment----------
+        let body = new FormData();
+        body.append('file', file),
+        body.append('inputDocId', docid),
+    
+        this.http.post('http://3.109.1.145:8109/healspan/claim/upload',body).subscribe((res:any) =>{
+          alert(JSON.stringify(res));
+          let input = document.getElementById('status_' + i) as HTMLInputElement | undefined;
+          input!.innerText = file.name;
+        });
+    
       } else {
         //this.snackBar.open('File size exceeds 4 MB. Please choose less than 4 MB','',{duration: 2000});
       }
@@ -518,13 +503,29 @@ export class CreatclaimComponent implements OnInit {
 
   }
 
-  uploadAndProgressSingle(id: any) {
+  OnDownload(docid:any){
+    window.open(environment.baseUrl+'healspan/claim/download/'+docid);
+  }
+
+  //currently not using this method
+  uploadAndProgressSingle(id: any,file:any) {
     this.progress = 1;
+    let inputDocId = 113;
+    // healspan/claim/upload
+    let body = new FormData();
+    body.append('file', file),
+    body.append('inputDocId', '113'),
+
+    this.http.post('http://3.109.1.145:8109/healspan/claim/upload', body).subscribe((res:any) =>{
+      alert(JSON.stringify(res));
+    });
+
     this.http
       .post("https://file.io", this.file_data, {
         reportProgress: true,
         observe: "events"
       })
+    //this.http.post('http://3.109.1.145:8109/healspan/claim/upload', body)
       .pipe(
         map((event: any) => {
           if (event.type == HttpEventType.UploadProgress) {
@@ -567,7 +568,7 @@ export class CreatclaimComponent implements OnInit {
       this.claimStageMaster = data["claim_stage_mst"];
 
       let claim = this.claimStageMaster.filter((x:any) =>x.name ==  this.ActiveStage);
-      this.claimInfoID = claim[0].id;
+      this.claimStageId = claim[0].id;
       //alert(claim[0].id+claim[0].name)
       
     })
@@ -657,7 +658,7 @@ export class CreatclaimComponent implements OnInit {
 
   GenerateRuleEngineModel(bodyparam:any){
 
-    this.api.postService("http://3.109.1.145:9999/ruleengine/processRules", bodyparam).subscribe(res => {
+    this.api.postService(environment.ruleBaseUrl, bodyparam).subscribe(res => {
     console.log(res); 
     let data: any = [];
     data.push(res)
