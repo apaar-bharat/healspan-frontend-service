@@ -31,7 +31,8 @@ import { HashLocationStrategy, LocationStrategy } from '@angular/common';
     ReactiveFormsModule,
     DefaultModule,
     MatFormFieldModule,
-    HttpClientModule
+    HttpClientModule,
+  
   ],
   // { provide: LocationStrategy, useClass: HashLocationStrategy}
   providers: [ApiService,AuthenticationService],

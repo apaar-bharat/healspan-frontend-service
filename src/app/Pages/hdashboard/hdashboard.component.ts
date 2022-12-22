@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { ApiService } from 'src/app/service/api.service';
@@ -14,6 +14,7 @@ export class HdashboardComponent implements OnInit {
   pendingDataList:any;
   currentuserdata:any;
   LoggedInId:any;
+  @ViewChild('modalChoice3') modalChoice3 :any;
   constructor(private router: Router,private apiservice:ApiService,private dataservice : DataService) { }
 
   ngOnInit(): void {
@@ -49,5 +50,33 @@ export class HdashboardComponent implements OnInit {
 
       
   }
+
+  Gotoroutes(path:any){
+    const boxes = Array.from(
+      document.getElementsByClassName('modal-backdrop') as HTMLCollectionOf<HTMLElement>,
+    );
+    
+    boxes.forEach(box => {
+      box.style.visibility = 'hidden';
+      box.style.zIndex = '-999';
+    });
+    
+    this.modalChoice3.nativeElement.click();
+    // const boxes1 = Array.from(
+    //   document.getElementsByClassName('show') as HTMLCollectionOf<HTMLElement>,
+    // );
+    
+    // boxes1.forEach(box => {
+    //   box.style.display = 'none';
+    // });
+    let currentUrl = '/createclaim/'+path;
+    this.router.navigate([currentUrl]); 
+  //   this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
+  //     this.router.navigate([currentUrl]);
+  //  });
+    
+
+  }
+
 
 }
