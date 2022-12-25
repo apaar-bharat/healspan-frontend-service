@@ -9,8 +9,8 @@ export class CommonserviceService {
   constructor(private router: Router) { }
 
   redirecttoactivedashboard(){
-    let activeDashboard=localStorage.getItem("usertype");
-    if(activeDashboard=='huser'){
+    let activeDashboard =  localStorage.getItem("usertype");
+    if(activeDashboard== '2'){
       this.router.navigate(['hdashboard'])
 
     }else{

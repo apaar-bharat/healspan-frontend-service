@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import * as $ from 'jquery';
-import { FormBuilder, FormGroup, Validators, ReactiveFormsModule, FormControl, FormArray } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators, ReactiveFormsModule, FormControl, FormArray } from '@angular/forms';
 import { ApiService } from 'src/app/service/api.service';
 import { HttpHeaders, HttpClient, HttpParams, HttpEvent, HttpEventType, HttpProgressEvent, HttpResponse } from '@angular/common/http';
 import { catchError, map } from "rxjs/operators"
@@ -10,6 +10,10 @@ import { DataService } from 'src/app/service/data.service';
 import { formatDate } from '@angular/common';
 import { CommonserviceService } from 'src/app/service/commonservice.service';
 import { environment } from 'src/environments/environment';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { ModalpopupService } from 'src/app/Providers/modalpopup.service';
+import { OthercostComponent } from './othercost/othercost.component';
+import { MatDialogRef } from '@angular/material/dialog';
 
 declare function verificationForm(): any;
 //declare function phoneNoselect():any;
@@ -25,10 +29,10 @@ export class CreatclaimComponent implements OnInit {
   IsTypeOfAccident: boolean = false; IspassengerType: boolean = false; IsTypeOfVehicle: boolean = false;
   admissiondata: any; mobilenumber!: number;
 
-  ClaimForm!: FormGroup; submitted = false; submitted2 = false; submitted3 = false; isEditable = false; ailmentList: any
-  InsuaranceForm!: FormGroup;
-  medicalForm!: FormGroup;
-  DocumentsForm!: FormGroup;
+  ClaimForm!: UntypedFormGroup; submitted = false; submitted2 = false; submitted3 = false; isEditable = false; ailmentList: any
+  InsuaranceForm!: UntypedFormGroup;
+  medicalForm!: UntypedFormGroup;
+  DocumentsForm!: UntypedFormGroup;
   userId: number = 0;
   title: string = "";
   body: string = "";
@@ -53,7 +57,7 @@ export class CreatclaimComponent implements OnInit {
   doclist: any = []; doclist1: any;
   procedureDetail: any;
   GenderDetail: any;
-  OtherCosts: any;
+  OtherCosts: any = [];
   roomsDetail: any;
 
   showAge: any
@@ -70,12 +74,14 @@ export class CreatclaimComponent implements OnInit {
   chronicillnessDetail: any;
   DiagnosisDetail: any;
   claimStageMaster:any = [];
+  treatmentTypeDetails:any =[];
+  masterData :any=[];
  
   patientSave: any = {};
   medicalSave: any = {};
   InsuaranceSave: any = {};
-  othercostarray: Array<number> = [];
-  othercostheader: any;
+  // othercostarray: Array<number> = [];
+  // othercostheader: any;
   claimdata:any=[];
   currentuserdata:any;
 
@@ -83,11 +89,19 @@ export class CreatclaimComponent implements OnInit {
   patientInfoResponse:any;medicalInfoResponse:any ; insuranceInfoResponse:any ;ruleInfoResponse:any;
   questioncostheader: any =[];Questions:any=[];answerparam:any="";
   claimInfoID:any = null;claimStageId :any = null;
-  diagnosis:any="" ; treatmentType:any="";procedure:any="";duration:any="";
+  diagnosis:any="" ; treatmentType:any="";procedure:any="";duration:any="";gender:any =""
   DocumentIds:any=[];blob:any;
-  constructor(private fb: FormBuilder, private api: ApiService, private http: HttpClient,
-    private httpClient: HttpClient, private route: ActivatedRoute,
-    private dataservice : DataService,private commonservice:CommonserviceService) {
+  isChecked:boolean= false;IsSaveSequentialQue:boolean=false;
+  dialogRef!: MatDialogRef<any>;
+  Othercostlist :any=[];
+  LoggedInId:any;
+  IsHospitaluser:boolean = true;
+  othercostarray:any;Otherclist:any = [];
+
+  constructor(private fb: UntypedFormBuilder, private api: ApiService, private http: HttpClient,
+    private httpClient: HttpClient, private route: ActivatedRoute,private spinnerservice:NgxSpinnerService ,
+    private dataservice : DataService,private commonservice:CommonserviceService,
+    private modalPopupService: ModalpopupService) {
 
     this.minDateToFinish.subscribe((r: any) => {
       this.minDate = new Date(r);
@@ -98,6 +112,7 @@ export class CreatclaimComponent implements OnInit {
   ngOnInit(): void {
     let stagename = this.route.snapshot.params['stagename'];
     this.ActiveStage = stagename;
+    this.LoggedInId = localStorage.getItem("LoggedInId");
     nice_Select();
     verificationForm();
     this.DefineFormControls();
@@ -108,7 +123,16 @@ export class CreatclaimComponent implements OnInit {
     
     this.dataservice.currentuser_data.subscribe((res) =>{
       console.log("currentuserdata" + res);
-      this.currentuserdata = res
+      this.currentuserdata = res;
+      if(localStorage.getItem("hospitalMstId") == null){
+        
+        this.IsHospitaluser = false;
+      }
+     else{
+      this.ClaimForm.controls['Hospital'].setValue(localStorage.getItem("hospitalMstId"));
+      this.IsHospitaluser = true;
+    }
+      
      })
 
     this.dataservice.currentclaimdetails_data.subscribe((res:any) =>{
@@ -127,20 +151,20 @@ export class CreatclaimComponent implements OnInit {
   DefineFormControls(){
     this.ClaimForm = this.fb.group({
 
-      Fname: [null, Validators.required],
-      Mname: [null, Validators.required],
+      Fname: ['', Validators.required],
+      Mname: [''],
       Lname: ['', Validators.required],
-      MobileNo: [['', Validators.required, Validators.maxLength(10)]],
-      PHUHID: ['',],
+      MobileNo: ['',[Validators.required, Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")]],
+      PHUHID: ['',Validators.required],
       Gender: ['', Validators.required],
-      DOB: ['',],
+      DOB: ['',Validators.required],
       Age: ['', Validators.required],
       Stage: [this.ActiveStage,],
       patientprimaryInsured: [true],
       Hospital: ['', Validators.required],
-      DateOfAdmission: ['',],
-      DateOfDischarge: ['',],
-      RoomCategory: ['',],
+      DateOfAdmission: ['',Validators.required],
+      DateOfDischarge: ['',Validators.required],
+      RoomCategory: ['',Validators.required],
       CostPD: ['', Validators.required],
       totalRC: ['',],
       OtherC: ['',],
@@ -148,8 +172,8 @@ export class CreatclaimComponent implements OnInit {
       Procedure: ['',],
       InitialCE: ['',],
 
-      TotalBillAmount: ['', Validators.required],
-      ClaimAmount: ['', Validators.required],
+      // TotalBillAmount: ['', Validators.required],
+      // ClaimAmount: ['', Validators.required],
     })
 
     this.medicalForm = this.fb.group({
@@ -178,9 +202,9 @@ export class CreatclaimComponent implements OnInit {
       TPAnumber: ['', Validators.required],
       PolicyHolder: ['', Validators.required],
       RelationOPH: ['', Validators.required],
-      PolicyNumber: ['', Validators.required],
-      IsGroupPolicy: ['', Validators.required],
-      Groupcompany: ['', Validators.required],
+      PolicyNumber: [''],
+      IsGroupPolicy: [''],
+      Groupcompany: [''],
     })
 
     this.DocumentsForm = this.fb.group({
@@ -196,7 +220,7 @@ export class CreatclaimComponent implements OnInit {
   AssignFormControlValues(data:any){
     this.doclist =[];
     this.claimInfoID = data[0].claimInfo.id;
-    this.claimStageId = data[0].claimStageMst.claimStageMstId;
+    this.claimStageId = data[0].claimStageMst.id;
     //alert(this.claimInfoID + '-'+ this.claimStageId);
     console.log("qq",data[0].patientInfo)
     let patientInformationList =data[0].patientInfo;
@@ -217,33 +241,39 @@ export class CreatclaimComponent implements OnInit {
     this.ClaimForm.controls["Lname"].setValue(patientInformationList.lastname);
     this.ClaimForm.controls["RoomCategory"].setValue(patientInformationList.roomCategoryId);
     this.ClaimForm.controls["MobileNo"].setValue(patientInformationList.mobileNo);
-    this.ClaimForm.controls["PHUHID"].setValue(patientInformationList.uhidNumber);
+    this.ClaimForm.controls["PHUHID"].setValue(patientInformationList.hospitalUhid);
     this.ClaimForm.controls["Gender"].setValue(patientInformationList.genderId);
+    this.gender = patientInformationList["genderMst"].name;
     //this.ClaimForm.controls["Age"].setValue(patientInformationList.age);
     this.showAge = patientInformationList.age;
-
+    this.medicalForm.controls["Ages"].setValue(this.showAge);
     if(dateBirth !=null){
     this.ClaimForm.get("DOB")?.setValue(formatDate(dateBirth,'yyyy-MM-dd','en'));}
 
     if(AdmissionDate !=null){
-    this.ClaimForm.get("DateOfAdmission")?.setValue(formatDate(AdmissionDate,'yyyy-MM-dd','en'));}
+    //this.ClaimForm.get("DateOfAdmission")?.setValue(formatDate(AdmissionDate,'yyyy-MM-dd','en'));
+    this.ClaimForm.get("DateOfAdmission")?.setValue(AdmissionDate);}
     this.dateSent = AdmissionDate;
     // formatDate(AdmissionDate,'yyyy-MM-dd','en'
 
     if(dischargeDate !=null){
-    this.ClaimForm.get("DateOfDischarge")?.setValue(formatDate(dischargeDate,'yyyy-MM-dd','en'));}
+    //this.ClaimForm.get("DateOfDischarge")?.setValue(formatDate(dischargeDate,'yyyy-MM-dd','en'));
+    this.ClaimForm.get("DateOfDischarge")?.setValue(dischargeDate);
+   }
     
     this.ClaimForm.controls["CostPD"].setValue(patientInformationList.costPerDay);
     this.ClaimForm.controls["InitialCE"].setValue(patientInformationList.initialCostEstimate);
-    this.ClaimForm.controls["TotalBillAmount"].setValue(patientInformationList.finalBillAmount);
-    this.ClaimForm.controls["ClaimAmount"].setValue(patientInformationList.claimedAmount);
+    //this.ClaimForm.controls["TotalBillAmount"].setValue(patientInformationList.finalBillAmount);
+    //this.ClaimForm.controls["ClaimAmount"].setValue(patientInformationList.claimedAmount);
     this.ClaimForm.controls["patientprimaryInsured"].setValue(patientInformationList.primaryInsured);
     this.ClaimForm.controls["Procedure"].setValue(patientInformationList.procedureId);
+    this.procedure =patientInformationList["procedureMst"].name;
     
     this.ClaimForm.controls["totalRC"].setValue(patientInformationList.totalRoomCost);
     
     if(patientInformationList.otherCostId !=null){
-    this.ClaimForm.controls["OtherC"].setValue(patientInformationList.otherCostId);}
+    this.ClaimForm.controls["OtherC"].setValue(patientInformationList.otherCostId);
+    }
 
     this.ClaimForm.controls["OtherCE"].setValue(patientInformationList.otherCostsEstimate);
 
@@ -261,14 +291,19 @@ export class CreatclaimComponent implements OnInit {
     this.medicalForm.controls["Nameofthetreatingdoctor"].setValue(patientMedicalInfoList.doctorName);
     this.medicalForm.controls["DrResgistrationnumber"].setValue(patientMedicalInfoList.doctorRegistrationNumber);
     this.medicalForm.controls["Qualificationofthetreatingdoctor"].setValue(patientMedicalInfoList.doctorQualification);
+    
     this.medicalForm.controls["Provisionaldiagnosis"].setValue(patientMedicalInfoList.diagnosisId);
+    this.diagnosis = patientMedicalInfoList["diagnosisMst"].name;
+
     this.medicalForm.controls["Speciality"].setValue(patientMedicalInfoList.specialityId);
     this.medicalForm.controls["Pasthistoryofchronicillness"].setValue(patientMedicalInfoList.pastChronicIllness);
     
     this.medicalForm.controls["TreatmentType"].setValue(patientMedicalInfoList.treatmentTypeId);
+    this.treatmentType = patientMedicalInfoList["treatmentTypeMst"].name;
+
     this.medicalForm.controls["Dateoffirstdiagnosis"].setValue(patientMedicalInfoList.dateOfFirstDiagnosis);
    
-    this.medicalForm.controls["Ages"].setValue(this.showAge);
+    
     let dateofirstdiagDate=patientMedicalInfoList.dateOfFirstDiagnosis;
 
     if(dateofirstdiagDate !=null){
@@ -298,11 +333,62 @@ export class CreatclaimComponent implements OnInit {
   get M() { return this.medicalForm.controls; }
   get I() { return this.InsuaranceForm.controls; }
 
+  openDialog() {
+   
+    //this.othercostarray = this.OtherCosts;
+
+    this.OtherCosts.forEach((element:any) => {
+    
+    //this.Otherclist.push({ id:element.id,name: element.name,value: 0});
+    if (this.Otherclist.length ==this.OtherCosts.length) {
+      //alert('User already exists');
+     } else {
+      this.Otherclist.push({ id:element.id,name: element.name,value: 0});
+     }
+      
+    });
+
+   
+    this.dialogRef = this.modalPopupService.openPopup<OthercostComponent>(OthercostComponent,{data:this.Otherclist});
+    //this.modalPopupService.openPopup(OthercostComponent);
+   // modalRef.componentInstance.user = this.user;
+    //this.modalPopupService.openPopup<OthercostComponent>(OthercostComponent, null);
+    
+    //this.dialogRef.afterOpened().subscribe
+    
+    this.dialogRef.afterClosed().subscribe(result => {
+      //alert("dialogRef" + result);
+      this.Othercostlist = [];
+      let data = [];
+      let sum :number = 0;
+      this.dataservice.currentothercost_data.subscribe((res:any) =>{
+        data = res;
+        data.forEach((element:any) => {
+          this.Othercostlist.push({ id:element.id,amount:parseInt(element.value)});
+          sum = sum + parseInt(element.value)
+        });
+        //alert("dialogRef" + JSON.stringify(this.Othercostlist));
+
+      });
+      this.ClaimForm.controls['OtherCE'].setValue(sum)
+    });
+  }
+
   changeDate() {
     this.dateSent = new Date(this.dateSent).getFullYear() + '-' + ('0' + new Date(this.dateSent).getMonth()).slice(-2) + '-' + ('0' + new Date(this.dateSent).getDate()).slice(-2);
     this.dateReceived = this.dateSent
   }
 
+  OngrouppolicykCheck(event:any){
+    this.isChecked = !event;
+    // alert(this.isChecked);
+    // if(event){
+    //   this.InsuaranceForm.controls["IsGroupPolicy"].setValidators([Validators.required])
+    //     // [Validators.minLength(1), Validators.maxLength(30)]);
+    // }else{
+    //   this.InsuaranceForm.controls["IsGroupPolicy"].setValidators([]);
+    // }
+  }
 
   OnPatientSubmit(formData: any) {
     console.log("", formData)
@@ -311,11 +397,17 @@ export class CreatclaimComponent implements OnInit {
       //alert('form invalid');
     }
     else {
+      let otherCostDetail :any = [];
+      this.Othercostlist.forEach((res:any)=>{
+        if(res.amount != 0){
+          otherCostDetail.push({ id:res.id,amount:res.amount});
+        }
+      })
       //alert("form valid") id is claimid
       let patientbody = {
         "id": this.claimInfoID,
         "tpaClaimId" : null,
-        "userId" : 1,
+        "userId" : this.LoggedInId,
         "hospitalId" : this.ClaimForm.value.Hospital,
         "claimStageId" : this.claimStageId,
         "statusId" : 2,
@@ -333,16 +425,17 @@ export class CreatclaimComponent implements OnInit {
             "totalRoomCost" : this.ClaimForm.value.totalRC,
             "otherCostsEstimate" : this.ClaimForm.value.OtherCE,
             "initialCostEstimate" : this.ClaimForm.value.InitialCE,
-            "billNumber" : "dummy",
+            "billNumber" : "",
             "claimedAmount" : this.ClaimForm.value.ClaimAmount,
             "enhancementEstimate" : 0,
             "finalBillAmount" : this.ClaimForm.value.TotalBillAmount,
             "hospitalUhid" : this.ClaimForm.value.PHUHID,
             "hospitalId" : this.ClaimForm.value.Hospital,
-            "otherCostId" : this.ClaimForm.value.OtherC,
+            // this.ClaimForm.value.OtherC,
             "roomCategoryId" : this.ClaimForm.value.RoomCategory,
             "procedureId" : this.ClaimForm.value.Procedure,
-            "genderId" : this.ClaimForm.value.Gender
+            "genderId" : this.ClaimForm.value.Gender,
+            "otherCostDetail" : otherCostDetail
         }
       }
 
@@ -350,6 +443,7 @@ export class CreatclaimComponent implements OnInit {
         console.log("patientSave response",res);
         if(res.responseStatus == "SUCCESS"){
           this.patientInfoResponse = res;
+          this.claimInfoID = this.patientInfoResponse.claimInfoId;
         }
       })
     }
@@ -373,6 +467,7 @@ export class CreatclaimComponent implements OnInit {
         "claimStageId" : this.claimStageId,
         "doctorName" : this.medicalForm.value.Nameofthetreatingdoctor,
         "doctorQualification" : this.medicalForm.value.Qualificationofthetreatingdoctor,
+        "doctorRegistrationNumber": this.medicalForm.value.DrResgistrationnumber,
         "pastChronicIllness" : parseInt(this.medicalForm.value.Pasthistoryofchronicillness),
         "diagnosisId" : parseInt(this.medicalForm.value.Provisionaldiagnosis),
         "procedureId" : parseInt(this.medicalForm.value.Procedures),
@@ -384,33 +479,37 @@ export class CreatclaimComponent implements OnInit {
         console.log("medicalSave response",res);
         if(res.responseStatus == "SUCCESS"){
         this.medicalInfoResponse = res;       
-        
+        this.GetSequentialquestion();
+        this.IsSaveSequentialQue = true;
+        }else{
+          this.IsSaveSequentialQue = false;
         }
       })
     }
-    this.GetSequentialquestion();
+    // this.GetSequentialquestion();
+    // this.IsSaveSequentialQue = true;
   }
 
   SaveSequentialQue(){
     let ruleengineres = {
-      "medicalInfoId": this.medicalInfoResponse.medicalInfoId,
-      //46, 
-      "sequentialQuestion": [
-        {
-            "question": "Who are you ?",
-            "answer": "Sagar"
-        },
-        {
-            "question": "Are you married?",
-            "answer": "No"
-        },
-        {
-            "question": "Are you graduate?",
-            "answer": "Yes"
-        }
-    ],
+      "medicalInfoId": this.medicalInfoResponse.medicalInfoId, 
+      "sequentialQuestion": this.Questions,
       "documentList": this.doclist
     }
+  //   [
+  //     {
+  //         "question": "Who are you ?",
+  //         "answer": "Sagar"
+  //     },
+  //     {
+  //         "question": "Are you married?",
+  //         "answer": "No"
+  //     },
+  //     {
+  //         "question": "Are you graduate?",
+  //         "answer": "Yes"
+  //     }
+  // ],
     this.api.post('healspan/claim/savequestionnairesanddocument',ruleengineres).subscribe((ruleres) =>{
       console.log("ruleres",ruleres);
       this.ruleInfoResponse = ruleres;
@@ -442,7 +541,7 @@ export class CreatclaimComponent implements OnInit {
       let Insuranceparam = {
         "claimId" : this.claimInfoID,
         "claimStageId" : this.claimStageId,
-        "tpaIdNumber" : this.InsuaranceForm.value.TPAnumber,
+        "tpaNumber" : this.InsuaranceForm.value.TPAnumber,
         "policyHolderName" : this.InsuaranceForm.value.PolicyHolder,
         "policyNumber" : this.InsuaranceForm.value.PolicyNumber,
         "isGroupPolicy" : this.InsuaranceForm.value.IsGroupPolicy,
@@ -463,11 +562,23 @@ export class CreatclaimComponent implements OnInit {
     }
   }
 
+  FinalSubmit(){
+    let param ={   
+        "claimId":this.claimInfoID,
+        "stageId": this.claimStageId,
+        "statusId":3
+    
+    }
+    this.api.post('healspan/claim/updateclaimstatus',param).subscribe((res) =>{
+      console.log("updateclaimstatus response",res)
+    })
+  }
  
   //-----Start File Upload Logic ------------------------
   fileChange(event: any,i:any, docid: any) {
+    this.spinnerservice.show();
     this.currentupload = docid;
-    alert('progress_' + docid);
+    //alert('progress_' + docid);
     const fileList: FileList = event.target.files;
     //check whether file is selected or not
     if (fileList.length > 0) {
@@ -488,11 +599,13 @@ export class CreatclaimComponent implements OnInit {
         let body = new FormData();
         body.append('file', file),
         body.append('inputDocId', docid),
+        body.append('medicalInfoId', this.medicalInfoResponse.medicalInfoId),
     
         this.http.post('http://3.109.1.145:8109/healspan/claim/upload',body).subscribe((res:any) =>{
-          alert(JSON.stringify(res));
+          //alert(JSON.stringify(res));
           let input = document.getElementById('status_' + i) as HTMLInputElement | undefined;
           input!.innerText = file.name;
+          this.spinnerservice.hide();
         });
     
       } else {
@@ -553,7 +666,8 @@ export class CreatclaimComponent implements OnInit {
 
   //-----------------Bind all dropdown
   bindDropdown() {
-    this.api.getService('admin/masters/allmastertables').subscribe((data: any) => {
+    this.api.getService('healspan/claim/admin/masters').subscribe((data: any) => {
+      this.masterData = data;
       this.insuaranceCompanyDetail = data["insurance_company_mst"];
       this.roomsDetail = data["room_category_mst"];
       this.TPADetail = data["tpa_mst"];
@@ -566,7 +680,7 @@ export class CreatclaimComponent implements OnInit {
       this.RPADetail = data["relationship_mst"];
       this.GenderDetail = data["gender_mst"];
       this.claimStageMaster = data["claim_stage_mst"];
-
+      this.treatmentTypeDetails= data["treatment_type_mst"];
       let claim = this.claimStageMaster.filter((x:any) =>x.name ==  this.ActiveStage);
       this.claimStageId = claim[0].id;
       //alert(claim[0].id+claim[0].name)
@@ -587,33 +701,43 @@ export class CreatclaimComponent implements OnInit {
       const timeDiff = Math.abs(Date.now() - convertAge.getTime());
       this.showAge = Math.floor((timeDiff / (1000 * 3600 * 24)) / 365);
     }
-    let datee = this.ClaimForm.get("Age")?.value;
-    this.medicalForm.controls['Ages'].setValue(datee)
+    let age = this.ClaimForm.get("Age")?.value;
+    this.medicalForm.controls['Ages'].setValue(age)
   }
 
+  calculateDiff(){
+    let DateOfAdmission = new Date(this.ClaimForm.get("DateOfAdmission")?.value);
+    let DateOfDischarge = new Date(this.ClaimForm.get("DateOfDischarge")?.value);
+    let costperday = this.ClaimForm.get("CostPD")?.value;
+
+    let days = Math.floor((DateOfDischarge.getTime() - DateOfAdmission.getTime()) / 1000 / 60 / 60 / 24);
+    let totalcost : number = days * costperday;
+    this.ClaimForm.controls["totalRC"].setValue(totalcost);    //alert(days);
+    //return days;
+  }
 
   // Binding Values on selection to Next Form----end
 
   // --------------------------------------------------------------------------------------------------
 
-  costSelect(event: any) {
-    console.log("event1", event.value)
-    this.othercostarray = event.value.map(function (items: any) {
-      return { items }
-    })
-    this.othercostheader = [];
-    for (let i = 0; i < event.value.length; i++) {
-      const cstvar = this.OtherCosts.filter((x: any) => x.id == event.value[i]);
-      //
-      this.othercostheader.push({
-        "id": cstvar[0].id,
-        "costType": cstvar[0].costType,
-      });
+  // costSelect(event: any) {
+  //   console.log("event1", event.value)
+  //   this.othercostarray = event.value.map(function (items: any) {
+  //     return { items }
+  //   })
+  //   this.othercostheader = [];
+  //   for (let i = 0; i < event.value.length; i++) {
+  //     const cstvar = this.OtherCosts.filter((x: any) => x.id == event.value[i]);
+  //     //
+  //     this.othercostheader.push({
+  //       "id": cstvar[0].id,
+  //       "costType": cstvar[0].costType,
+  //     });
 
-    }
-    console.log("OtherCosts", this.othercostheader);
+  //   }
+  //   console.log("OtherCosts", this.othercostheader);
 
-  }
+  // }
 
 
   Ondiagnosis(event: any){
@@ -621,13 +745,17 @@ export class CreatclaimComponent implements OnInit {
   }
 
   onprocedureSelect(event: any) {
-    //this.procedure = event.target.options[event.target.options.selectedIndex].text;
+    this.procedure = event.target.options[event.target.options.selectedIndex].text;
     //let procedureee = event.target.options[event.target.options.selectedIndex].text;
     this.medicalForm.controls['Procedures'].setValue(event.target.value)
   }
 
   OntreatmentType(event:any){
     this.treatmentType = event.target.options[event.target.options.selectedIndex].text;
+  }
+
+  OnGender(event:any){
+    this.gender = event.target.options[event.target.options.selectedIndex].text;
   }
   // ng multiselect Dropdown Start
 
@@ -642,16 +770,30 @@ export class CreatclaimComponent implements OnInit {
   }
 
   GetSequentialquestion(){
-    let bodyparam ={
-      "diagnosis": "Maternity",
-      "claimStage":"Final",
-      "treatmentType":"Medical management",
-      "gender":"Female",
-      "age":"",
-      "procedure":"FTND",
-      "duration":"> 7 days",
-      "claimValue":""
-      }
+    // let bodyparam ={
+    //   "diagnosis": "Maternity",
+    //   "claimStage":"Final",
+    //   "treatmentType":"Medical management",
+    //   "gender":"Female",
+    //   "age":"",
+    //   "procedure":"FTND",
+    //   "duration":"> 7 days",
+    //   "claimValue":""
+    //   }
+
+    if(this.ActiveStage == "Initial Authorisation"){
+      this.ActiveStage = "Initial"
+    }
+      let bodyparam ={  
+      "diagnosis": this.diagnosis,
+      "claimStage": this.ActiveStage,
+      "treatmentType":this.treatmentType,
+      "gender":this.gender,
+      "age":this.ClaimForm.get("Age")?.value,
+      "procedure": this.procedure,
+      "duration":this.medicalForm.get("Duration")?.value,
+      "claimValue":this.medicalForm.get("Claim")?.value
+    }
 
     this.GenerateRuleEngineModel(bodyparam)
   }
@@ -661,8 +803,8 @@ export class CreatclaimComponent implements OnInit {
     this.api.postService(environment.ruleBaseUrl, bodyparam).subscribe(res => {
     console.log(res); 
     let data: any = [];
+    this.doclist = [];
     data.push(res)
- 
               if (data[0].operation == "Question") {
                 //console.log(this.countObectKeys(apiresponse));
                   var object: any = {};
@@ -692,12 +834,28 @@ export class CreatclaimComponent implements OnInit {
                   this.BuildRuleForm();
 
               }else{
-                  var docsubstring = data[0].document.split("|");
-                  docsubstring.forEach((element:any) => {
-                    //let optionsres = {element}
-                    this.doclist.push(element);
-                  });
-                  alert(JSON.stringify(this.doclist));
+                if(data[0].document !=  null){
+                      var docsubstring = data[0].document.split("|");
+                      docsubstring.forEach((element:any) => {
+                        //let optionsres = {element}
+                        this.doclist.push(element);
+                      });
+                 }
+                 let admission =[
+                  'Report supporting the diagnosis',
+                  'Etiology of ailment/Consultation papers',
+                  'Patient address proof (Pref. Aadhar)',
+                  'Insured PAN Card',
+                  'Claim Form (Part A)'
+
+                ];
+               
+                admission.forEach((element:any) => {
+                  //let optionsres = {element}
+                  this.doclist.push(element);
+                });
+                //alert(JSON.stringify(this.doclist));
+                  
 
               }
   
@@ -734,6 +892,9 @@ export class CreatclaimComponent implements OnInit {
     this.GenerateRuleEngineModel(bodyparam)
   }
 
+  getreceiveothercost(event:any){
+    //alert(event.target.value)
+  }
 }
 
 

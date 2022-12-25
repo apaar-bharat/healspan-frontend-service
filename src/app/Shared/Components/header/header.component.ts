@@ -11,10 +11,12 @@ import { DataService } from 'src/app/service/data.service';
 })
 export class HeaderComponent implements OnInit {
 
+  username :any=""
   constructor(private router: Router,private commonservice:CommonserviceService,
     private authservice:AuthenticationService,private dataservice:DataService) { }
 
   ngOnInit(): void {
+    this.username = localStorage.getItem("userName");
   }
 
 

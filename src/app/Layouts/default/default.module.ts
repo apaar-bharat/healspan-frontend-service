@@ -1,4 +1,4 @@
-import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SharedModule } from 'src/app/Shared/shared.module';
 import { DefaultComponent } from './default.component';
@@ -20,6 +20,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { MatSelectModule } from '@angular/material/select';
+import { OthercostComponent } from 'src/app/Pages/creatclaim/othercost/othercost.component';
+import { MatTableModule } from '@angular/material/table';
+import { MatDialogModule } from '@angular/material/dialog';
 
 
 @NgModule({
@@ -31,6 +34,7 @@ import { MatSelectModule } from '@angular/material/select';
     ViewclaimComponent,
     ResetpasswordComponent,
     ProfileComponent,
+    OthercostComponent
     
   ],
   imports: [
@@ -47,8 +51,11 @@ import { MatSelectModule } from '@angular/material/select';
     MatInputModule,
     HttpClientModule,
     MatButtonToggleModule,
+    MatTableModule ,
+    MatDialogModule,
     NgMultiSelectDropDownModule.forRoot()
   ],
-  schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
+  schemas: [ CUSTOM_ELEMENTS_SCHEMA],
+  
 })
 export class DefaultModule { }

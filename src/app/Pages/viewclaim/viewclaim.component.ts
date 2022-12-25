@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
 import { ApiService } from 'src/app/service/api.service';
+import { DataService } from 'src/app/service/data.service';
+import { environment } from 'src/environments/environment';
 @Component({
   selector: 'app-viewclaim',
   templateUrl: './viewclaim.component.html',
@@ -8,56 +10,83 @@ import { ApiService } from 'src/app/service/api.service';
 })
 export class ViewclaimComponent implements OnInit {
 
-  constructor(private api: ApiService) { }
-  claimdetailData: any; patientinfo: any; medicalData: any; InsuaranceData: any; InitialData: any; EnhancmentData: any; DischargeData: any;
+
+
+  constructor(private api: ApiService,private dataservice : DataService) { }
+  claimdetailData: any; 
+  claimInfo :any ;
+  patientinfo: any; medicalInfo: any; insuranceInfo: any; 
+  InitialDoc :any; EnhancmentDoc: any; DischargeDoc: any;FinalDoc: any;
   finalClaim: any;
   statusmaster: any;
   insuaranceCompanyDetail: any;
   RPADetail:any;
   TPADetail:any
   allmasterData:any;
+  claimdata:any;
   ngOnInit(): void {
 
-    this.api.getService("assets/data/claimdetail2.json").subscribe((data: any) => {
+    this.dataservice.currentclaimdetails_data.subscribe((res:any) =>{
+      this.claimdata = res ;
+      this.Assignclaimdata(this.claimdata);
+       
+    });
+    //this.Getdata();
+  }
 
-      this.claimdetailData = data;
-      console.log("213546", data.claimDetailsForStageList[0].patientInformationList)
-      this.patientinfo = data.claimDetailsForStageList[0].patientInformationList[0];
-      this.medicalData = data.claimDetailsForStageList[0].patientMedicalInfoList[0];
-      this.InsuaranceData = data.claimDetailsForStageList[0].patientInsuranceInfoList[0];
+  docopen(docid:any) {
+    // window.open('https://www.africau.edu/images/default/sample.pdf');
+    window.open(environment.baseUrl+'healspan/claim/download/'+docid);
 
+  }
 
-      console.log("rr", this.claimdetailData)
+  Getdata(){
+    this.api.getService("healspan/claim/retrieveclaim/"+145).subscribe((data: any) => {
+      //this.dataservice.updateclaimdetails_data(data);
+      //this.router.navigate(['viewclaim']);
+      this.claimdata = data ;
+      this.Assignclaimdata(this.claimdata);
     })
+  }
 
-    this.api.getService("assets/data/Masters.json").subscribe((data: any) => {
-      this.allmasterData=data;
-      this.statusmaster = data["status_master"];
-      this.insuaranceCompanyDetail = data["insurance_company_master"];
+  Assignclaimdata(data:any){
+    this.claimdetailData = data[0];
+    this.claimInfo = data[0].claimInfo;
+    this.patientinfo = data[0].patientInfo;
+    this.medicalInfo = data[0].medicalInfo;
+    this.insuranceInfo = data[0].insuranceInfo;
 
-      console.log("master", this.allmasterData.status_master);
-      console.log("claimData", this.claimdetailData.claimDetailsForStageList[0].statusId );
-      const StatusCt=this.allmasterData.status_master.filter((x:any)=>x.id==Number(this.claimdetailData.claimDetailsForStageList[0].statusId))
-      console.log("213546",StatusCt)
+    let claimStageMst = data[0].claimStageMst;
+       
+
+    if(claimStageMst.claimStageMstName == "Initial Authorisation"){
+      this.InitialDoc = this.medicalInfo['documentList'];
+    }else
+    if(claimStageMst.claimStageMstName == "Enhancement"){
+      this.EnhancmentDoc = this.medicalInfo['documentList'];
     }
-    )
-    this.api.getService("assets/data/claimdetail.json").subscribe((data: any) => {
-      this.InitialData = data["InitialAuthInfo"]
-      this.EnhancmentData = data["Enhancement"]
-      this.DischargeData = data["Discharge"]
-      this.finalClaim = data["FinalClaim"]
-      this.RPADetail = data["relationship_master"]
-      this.TPADetail = data["tpa_master"];
+    else
+    if(claimStageMst.claimStageMstName == "Discharge"){
+      this.DischargeDoc = this.medicalInfo['documentList'];
+    }
+    else
+    if(claimStageMst.claimStageMstName == "Final Claim"){
+      this.FinalDoc = this.medicalInfo['documentList'];
+    }
+
+  }
+
+  approveClick(){
+    let param = {
+      "claimId":this.claimInfo.id,
+      "stageId":this.claimdetailData["claimStageMst"].claimStageMstId
+    }
+    this.api.postService(environment.baseUrl+"healspan/claim/pushclaimdatatorpa",param).subscribe((data: any) => {
+      if(data){
+        alert("Claim Details Submission Status to RPA " + data);
+      }
     })
-    //  this.InitialData=data["InitialAuthInfo"]
-    //  this.EnhancmentData=data["Enhancement"]
-    //  this.DischargeData=data["Discharge"]
-    //  this.finalClaim=data["FinalClaim"]
-
   }
-
-  docopen() {
-    window.open('https://www.africau.edu/images/default/sample.pdf')
-  }
-
 }
+
+

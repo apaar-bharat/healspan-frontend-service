@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ApiService } from '../service/api.service';
 import { HttpClient } from '@angular/common/http';
@@ -10,6 +10,7 @@ import { data } from 'jquery';
 import { AuthenticationService } from '../service/authentication.service';
 import { DataService } from '../service/data.service';
 import { CommonserviceService } from '../service/commonservice.service';
+import { environment } from 'src/environments/environment';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -17,12 +18,12 @@ import { CommonserviceService } from '../service/commonservice.service';
 })
 export class LoginComponent implements OnInit {
 
-  loginForm!: FormGroup;
+  loginForm!: UntypedFormGroup;
   usermaster: any;
   displayStyle = "none";
   loginData: any;
 
-  constructor(private router: Router, private fb: FormBuilder, private api: ApiService, 
+  constructor(private router: Router, private fb: UntypedFormBuilder, private api: ApiService, 
     private http: HttpClient,private authservice:AuthenticationService,
     private dataservice:DataService,private commonservice:CommonserviceService) { }
 
@@ -49,13 +50,35 @@ export class LoginComponent implements OnInit {
 
   OnLogin() {
     console.log(this.loginForm)
-    if (this.authservice.login(this.loginForm.get('username')?.value, this.loginForm.get('password')?.value)) {  
-      this.commonservice.redirecttoactivedashboard();
-    }  
-    else  {
-      this.displayStyle = "block"; 
-    }  
-
+    
+    // if (this.authservice.login(this.loginForm.get('username')?.value, this.loginForm.get('password')?.value)) {  
+    //   this.commonservice.redirecttoactivedashboard();
+    // }  
+    // else  {
+    //   this.displayStyle = "block"; 
+    // }  
+    let body = {
+      "username":this.loginForm.get('username')?.value,
+      "password":this.loginForm.get('password')?.value
+      }
+    this.api.loginpostService(environment.baseUrl+"authentication/login",body).subscribe((userdata:any) =>{
+      if(userdata)
+      {
+        localStorage.setItem('currentUser', "loggedin"); 
+        localStorage.setItem("usertype",userdata.userRoleMstId);
+        localStorage.setItem("LoggedInId",userdata.id);
+        localStorage.setItem("jwttoken",userdata.jwt);
+        localStorage.setItem("hospitalMstId",userdata.hospitalMstId);
+        localStorage.setItem("userName",userdata.userName);
+        
+        this.dataservice.updatecurrentuser_data(userdata); 
+        this.commonservice.redirecttoactivedashboard();
+        
+      }
+      else  {
+          this.displayStyle = "block"; 
+      }  
+    })
   }
 
 

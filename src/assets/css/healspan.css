@@ -475,7 +475,7 @@ text-align:center;
   transform: rotate(20deg);
 }
 .multi_step_form #msform #progressbar {
-  margin-bottom: 30px;
+  /* margin-bottom: 30px; */
   overflow: hidden;
 }
 .multi_step_form #msform #progressbar li {
@@ -646,3 +646,7 @@ text-align:center;
 }
 
 .form-row {float:left !important;}
+
+a{
+  cursor: "pointer"
+}

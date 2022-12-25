@@ -6,7 +6,7 @@
     <div class="offcanvas-body nopadding pdrl0">
       <ul class="navbar-nav justify-content-end flex-grow-1 menutxt heallink">
               <li class="nav-item">
-                <a class="nav-link heallink active" aria-current="page" (click)="redirect()">Dashboard</a>
+                <a class="nav-link heallink active" routerLink="[]" aria-current="page" (click)="redirect()">Dashboard</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link heallink">Reports</a>
@@ -33,8 +33,8 @@
         </svg>
     </button>
 
-    <a (click)="redirect()" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none" >
-        <span class="fs-4"> Dashboard</span>
+    <a [routerLink]="[]" (click)="redirect()" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none" >
+        <span class="fs-4">Dashboard</span>
     </a>
     <div class="">
         <div class="container">
@@ -92,9 +92,40 @@
 
                     </li>
                     <li>
-                        <a (click)="logout()" class="text-white px-3">
-                            <img src="/assets/img/profile.png" />
-                        </a>
+                        
+                        <div class="flex-shrink-0 dropdown">
+                            <a href="" (click)="logout()" class="d-block link-dark text-decoration-none" data-bs-toggle="dropdown" aria-expanded="true">
+                                <img src="/assets/img/user.png" height="20" class="px-2"> {{username}}
+                                <img  src="/assets/img/turn-off.png" (click)="logout()" height="20" class="px-2">
+
+                            </a>
+
+                            <!-- turn-off -->
+                            <!-- <ul class="dropdown-menu text-small shadow mt-3">
+                              <li><a class="dropdown-item" href="#">New project...</a></li>
+                              <li><a class="dropdown-item" href="#">Settings</a></li>
+                              <li><a class="dropdown-item" href="#">Profile</a></li>
+                              <li><hr class="dropdown-divider"></li>
+                              <li><a class="dropdown-item" href="#">Sign out</a></li>
+                            </ul> -->
+                          </div>
+
+                          <!-- <div class="dropdown">
+                            <a (click)="logout()" class="d-block link-dark text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="true">
+                                <img src="/assets/img/profile.png" height="20" class="px-2"> Rahul Sawant
+                            </a>
+                             <span class="caret"></span>
+                            <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+                              <li role="presentation"><a role="menuitem" tabindex="-1" href="#">HTML</a></li>
+                              <li role="presentation"><a role="menuitem" tabindex="-1" href="#">CSS</a></li>
+                              <li role="presentation"><a role="menuitem" tabindex="-1" href="#">JavaScript</a></li>
+                              <li role="presentation" class="divider"></li>
+                              <li role="presentation"><a role="menuitem" tabindex="-1" href="#">About Us</a></li>
+                            </ul>
+
+                        </div>      -->
+                       
+                    
                     </li>
 
                 </ul>

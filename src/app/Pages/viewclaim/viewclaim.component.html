@@ -1,11 +1,11 @@
 <div class="container">
 	<div class="row mt-5 pt-3 pb-3">
 		<div class="col-md-6">
-			<h3>Claim ID: <strong>{{claimdetailData.id}}</strong></h3>
-			<span>Apollo Multi Speciality Hospital, Anna Nagar</span>
+			<h3>Claim ID: <strong>{{claimInfo.id}}</strong></h3>
+			<span>{{claimInfo["hospitalMst"].name}}</span>
 		</div>
 		<div class="col-md-6">
-			<a href="#" class="btn btn-primary btn-lg float-end mx-3">Final Claim</a>
+			<!-- <a href="#" class="btn btn-primary btn-lg float-end mx-3">Final Claim</a> -->
 		</div>
 		<div></div>
 	</div>
@@ -17,7 +17,7 @@
 					<img src="/assets/img/user.png">
 				</div>
 				<div class="p-1 mt-1"><span>Name: </span>
-					<h5 class="mt-3"><strong>{{patientinfo.firstName}}</strong></h5>
+					<h5 class="mt-3"><strong>{{patientinfo.firstName +' '+ patientinfo.middleName +' '+ patientinfo.lastname}}</strong></h5>
 				</div>
 			</div>
 		</div>
@@ -39,7 +39,7 @@
 					<img src="/assets/img/window_check.png">
 				</div>
 				<div class="p-1 mt-1"><span>Status: </span>
-					<h5 class="mt-3"><strong>{{statusmaster.id}}</strong></h5>
+					<h5 class="mt-3"><strong>{{this.claimdetailData["statusMst"].name}}</strong></h5>
 				</div>
 			</div>
 		</div>
@@ -54,7 +54,7 @@
 					<img src="/assets/img/Group.png">
 				</div>
 				<div class="p-1 mt-1"><span>Ailment: </span>
-					<h5 class="mt-3"><strong>{{claimdetailData.Ailment}}</strong></h5>
+					<h5 class="mt-3"><strong>{{medicalInfo["diagnosisMst"].name}}</strong></h5>
 				</div>
 			</div>
 		</div>
@@ -76,7 +76,7 @@
 					<img src="/assets/img/doughnut_chart.png">
 				</div>
 				<div class="p-1 mt-1"><span>Stage: </span>
-					<h5 class="mt-3"><strong>{{claimdetailData.Stage}}</strong></h5>
+					<h5 class="mt-3"><strong>{{this.claimdetailData["claimStageMst"].claimStageMstName}}</strong></h5>
 				</div>
 			</div>
 		</div>
@@ -129,6 +129,8 @@
 				<a href="" class="healtbv text-center mx-3 pt-3 pb-3">Download</a>
 			</div>
 			<div class="tab-content w-100 pe-5 ms-3" id="v-pills-tabContent">
+
+				<!---------------------------------Patient-Information--------------------------->
 				<div class="tab-pane fade show active" id="Patient-Information" role="tabpanel"
 					aria-labelledby="v-pills-home-tab">
 
@@ -158,7 +160,7 @@
 							<div class="p-2">
 
 								<div class="p-1 mt-1"><span class="cl01">Gender: </span>
-									<h5 class="mt-3 f16"><strong>{{patientinfo.gender}}</strong></h5>
+									<h5 class="mt-3 f16"><strong>{{patientinfo["genderMst"].name}}</strong></h5>
 								</div>
 							</div>
 						</div>
@@ -169,7 +171,8 @@
 
 								<div class="p-1 mt-1">
 									<h5 class="mt-3 f16 float-end"><strong
-											style="color: #00B272;">{{patientinfo.Status}}</strong>
+											style="color: #00B272;">Complete</strong>
+											<!-- {{patientinfo.Status}} -->
 									</h5>
 								</div>
 							</div>
@@ -184,7 +187,7 @@
 							<div class="p-2">
 
 								<div class="p-1 mt-1"><span class="cl01">Date of Birth: </span>
-									<h5 class="mt-3 f16"><strong>{{patientinfo.dateOfBirth | date:'shortDate'}}</strong></h5>
+									<h5 class="mt-3 f16"><strong>{{patientinfo.dateBirth | date:'shortDate'}}</strong></h5>
 								</div>
 							</div>
 						</div>
@@ -224,6 +227,9 @@
 					</div>
 
 				</div>
+
+
+				<!---------------------------------Medical-Information--------------------------->
 				<div class="tab-pane fade" id="Medical-Information" role="tabpanel"
 					aria-labelledby="v-pills-profile-tab">
 
@@ -231,8 +237,8 @@
 						<div class="col-md-3 mb-3 bg-body rounded">
 							<div class="p-2">
 
-								<div class="p-1 mt-1"><span class="cl01">Type Of Accident: </span>
-									<h5 class="mt-3 f16"><strong>{{medicalData.Typeofaccident}}</strong></h5>
+								<div class="p-1 mt-1"><span class="cl01">Procedure:</span>
+									<h5 class="mt-3 f16"><strong>{{medicalInfo["procedureMst"].name}}</strong></h5>
 								</div>
 							</div>
 						</div>
@@ -240,8 +246,8 @@
 						<div class="col-md-3 mb-3 bg-body rounded">
 							<div class="p-2">
 
-								<div class="p-1 mt-1"><span class="cl01">Treatment Type: </span>
-									<h5 class="mt-3 f16"><strong>{{medicalData.Treatmenttype}}</strong></h5>
+								<div class="p-1 mt-1"><span class="cl01">Treatment Type </span>
+									<h5 class="mt-3 f16"><strong>{{medicalInfo["treatmentTypeMst"].name}}</strong></h5>
 								</div>
 							</div>
 						</div>
@@ -251,19 +257,61 @@
 						<div class="col-md-3 mb-3 bg-body rounded">
 							<div class="p-2">
 
-								<div class="p-1 mt-1"><span class="cl01">Driver / Passenger:</span>
-									<h5 class="mt-3 f16"><strong>{{medicalData.DriverPassenger}}</strong></h5>
+								<div class="p-1 mt-1"><span class="cl01">Speciality:</span>
+									<h5 class="mt-3 f16"><strong>{{medicalInfo["specialityMst"].name}}</strong></h5>
 								</div>
 							</div>
 						</div>
-
-
 						<div class="col-md-3 mb-3 bg-body rounded">
 							<div class="p-2">
 
 								<div class="p-1 mt-1">
 									<h5 class="mt-3 f16 float-end"><strong
-											style="color: #00B272;">{{medicalData.Status}}</strong>
+											style="color: #00B272;">Complete</strong>
+											<!-- {{patientinfo.Status}} -->
+									</h5>
+								</div>
+							</div>
+						</div>
+
+						
+						<div class="col-md-3 mb-3 bg-body rounded">
+							<div class="p-2">
+
+								<div class="p-1 mt-1"><span class="cl01">DateOfFirstDiagnosis:</span>
+									<h5 class="mt-3 f16"><strong>{{medicalInfo.dateOfFirstDiagnosis | date:'shortDate'}}</strong></h5>
+								</div>
+							</div>
+						</div>
+
+						<div class="col-md-3 mb-3 bg-body rounded">
+							<div class="p-2">
+								<div class="p-1 mt-1"><span class="cl01">DoctorName:</span>
+									<h5 class="mt-3 f16"><strong>{{medicalInfo.doctorName}}</strong></h5>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-3 mb-3 bg-body rounded">
+							<div class="p-2">
+								<div class="p-1 mt-1"><span class="cl01">DoctorRegistrationNumber:</span>
+									<h5 class="mt-3 f16"><strong>{{medicalInfo.doctorRegistrationNumber}}</strong></h5>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-3 mb-3 bg-body rounded">
+							<div class="p-2">
+								<div class="p-1 mt-1"><span class="cl01">DoctorQualification:</span>
+									<h5 class="mt-3 f16"><strong>{{medicalInfo.doctorQualification}}</strong></h5>
+								</div>
+							</div>
+						</div>
+
+
+						<div class="col-md-3 mb-3 bg-body rounded">
+							<div class="p-2">
+								<div class="p-1 mt-1">
+									<h5 class="mt-3 f16 float-end"><strong
+											style="color: #00B272;">{{medicalInfo.Status}}</strong>
 									</h5>
 								</div>
 							</div>
@@ -277,20 +325,20 @@
 						<div class="col-md-3 mb-3 bg-body rounded">
 							<div class="p-2">
 
-								<div class="p-1 mt-1"><span class="cl01">Type Of Vehicle: </span>
-									<h5 class="mt-3 f16"><strong>{{medicalData.Typeofvehicle}}</strong></h5>
+								<div class="p-1 mt-1"><span class="cl01">questionAnswersList</span>
+									<!-- <h5 class="mt-3 f16"><strong>{{medicalInfo.Typeofvehicle}}</strong></h5> -->
 								</div>
 							</div>
 						</div>
 
-						<div class="col-md-3 mb-3 bg-body rounded">
+						<!-- <div class="col-md-3 mb-3 bg-body rounded">
 							<div class="p-2">
 
 								<div class="p-1 mt-1"><span class="cl01"> </span>
-									<h5 class="mt-3 f16"><strong></strong></h5>
+									<h5 class="mt-3 f16"><strong>Complete</strong></h5>
 								</div>
 							</div>
-						</div>
+						</div> -->
 
 
 
@@ -318,6 +366,7 @@
 					</div>
 
 				</div>
+				<!------------------Insurance-Information---------------------------- -->
 				<div class="tab-pane fade" id="Insurance-Information" role="tabpanel"
 					aria-labelledby="v-pills-messages-tab">
 
@@ -326,7 +375,7 @@
 							<div class="p-2">
 
 								<div class="p-1 mt-1"><span class="cl01">Insurance Company: </span>
-									<h5 class="mt-3 f16"><strong>{{InsuaranceData.Insurancecompany}}</strong></h5>
+									<h5 class="mt-3 f16"><strong>{{insuranceInfo["insuranceCompanyMst"].name}}</strong></h5>
 								</div>
 							</div>
 						</div>
@@ -335,7 +384,7 @@
 							<div class="p-2">
 
 								<div class="p-1 mt-1"><span class="cl01">TPA: </span>
-									<h5 class="mt-3 f16"><strong>{{InsuaranceData.Tpa}}</strong></h5>
+									<h5 class="mt-3 f16"><strong>{{insuranceInfo.Tpa}}</strong></h5>
 								</div>
 							</div>
 						</div>
@@ -346,7 +395,7 @@
 							<div class="p-2">
 
 								<div class="p-1 mt-1"><span class="cl01">TPA ID:</span>
-									<h5 class="mt-3 f16"><strong>{{InsuaranceData.tpaClaimId}}</strong></h5>
+									<h5 class="mt-3 f16"><strong>{{insuranceInfo.tpaClaimId}}</strong></h5>
 								</div>
 							</div>
 						</div>
@@ -357,7 +406,7 @@
 
 								<div class="p-1 mt-1">
 									<h5 class="mt-3 f16 float-end"><strong
-											style="color: #00B272;">{{InsuaranceData.Status}}</strong>
+											style="color: #00B272;">{{insuranceInfo.Status}}</strong>
 									</h5>
 								</div>
 							</div>
@@ -373,7 +422,7 @@
 							<div class="p-2">
 
 								<div class="p-1 mt-1"><span class="cl01">Company / Corporate / Group : </span>
-									<h5 class="mt-3 f16"><strong>{{InsuaranceData.groupCompanyName}}</strong></h5>
+									<h5 class="mt-3 f16"><strong>{{insuranceInfo.groupCompany}}</strong></h5>
 								</div>
 							</div>
 						</div>
@@ -382,7 +431,7 @@
 							<div class="p-2">
 
 								<div class="p-1 mt-1"><span class="cl01">Relation: </span>
-									<h5 class="mt-3 f16"><strong>{{InsuaranceData.Relation}}</strong></h5>
+									<h5 class="mt-3 f16"><strong>{{insuranceInfo["relationshipMst"].name}}</strong></h5>
 								</div>
 							</div>
 						</div>
@@ -393,7 +442,7 @@
 							<div class="p-2">
 
 								<div class="p-1 mt-1"><span class="cl01">Policy Holder:</span>
-									<h5 class="mt-3 f16"><strong>{{InsuaranceData.policyHolderName}}</strong></h5>
+									<h5 class="mt-3 f16"><strong>{{insuranceInfo.policyHolderName}}</strong></h5>
 								</div>
 							</div>
 						</div>
@@ -414,6 +463,9 @@
 
 
 				</div>
+
+
+	<!-----------------------------------Initial-Authorization-------------------------- -->
 				<div class="tab-pane fade" id="Initial-Authorization" role="tabpanel"
 					aria-labelledby="v-pills-home-tab">
 					<div class="row mt-1 pt-3">
@@ -421,7 +473,7 @@
 							<div class="px-2">
 
 								<div class="p-1 mt-1">Created Date: <span
-										class="cl01"><strong>{{InitialData.CreatedOn}}</strong>
+										class="cl01"><strong></strong>
 									</span>
 									<h5 class="mt-3 f16"><strong></strong></h5>
 								</div>
@@ -454,88 +506,82 @@
 
 								<div class="p-1 mt-1">
 									<h5 class="mt-3 f16 float-end"><strong
-											style="color: #00B272;">{{InitialData.Status}}</strong>
+											style="color: #00B272;"></strong>
+											<!-- {{InitialData.Status}} -->
 									</h5>
 								</div>
 							</div>
 						</div>
-
-
-
 					</div>
 
 					<div class="row mt-1">
 
 						<div class="col-md-6">
 							<div class="row mb-3 bg-body rounded"
-								*ngFor="let h of InitialData['doclist'] ,let i = index ">
+								*ngFor="let h of InitialDoc ,let i = index ">
 
 								<div class="col-md-6">
 									<div class="px-3">
 										<h5 class="mt-3 f16"><strong>Document {{i+1}}:</strong></h5>
-										<h5 class="mt-3 f16"><a class="doc" (click)="docopen()">{{h.DocName}}</a></h5>
+										<h5 class="mt-3 f16"><a class="doc" (click)="docopen(h.id)">{{h.documentType}}</a></h5>
 
 
 									</div>
-
+									
 								</div>
-
-								<div class="col-md-6">
-
-
-
+								<div  *ngIf="h.documentPath == null" class="col-md-6">
 									<a href="" class="btn btn-primary btn-sm px-3 mt-5 healshadow"> Upload <img
 											src="/assets/img/Arrow-54w.png"> </a>
 								</div>
+								<div  *ngIf="h.documentPath != null"  class="col-md-6">
+								
+									<a  style="background-color: #E2E5E5 !important;"  class="btn btn-primary btn-sm px-3 mt-5 healshadow"> Upload <img
+										 	src="/assets/img/Arrow-54w.png"> </a>
+						
+								</div>
+
 
 							</div>
 						</div>
-
-
-
-
-
 						<div class="col-md-2 mb-3 bg-body rounded">
 							<div class="px-2">
 
 								<div class="p-1 mt-1"><span class="cl01">Estimated Cost: </span>
-									<h5 class="mt-3 f16"><strong>INR 40,000</strong></h5>
+									<h5 class="mt-3 f16"><strong>INR {{patientinfo.initialCostEstimate}}</strong></h5>
 								</div>
 								<div class="p-1 mt-1"><span class="cl01">Approval Cost: </span>
-									<h5 class="mt-3 f16"><strong>INR 40,000</strong></h5>
+									<h5 class="mt-3 f16"><strong>INR 0</strong></h5>
 								</div>
 							</div>
 						</div>
 
 					</div>
-					
-
-				</div>
-				<div class="tab-pane fade" id="Enhancement" role="tabpanel" aria-labelledby="v-pills-profile-tab">
 				
+				</div>
 
+				<div class="tab-pane fade" id="Enhancement" role="tabpanel" aria-labelledby="v-pills-profile-tab">
+			
 					<div class="row mt-1">
-
 						<div class="col-md-6">
 							<div class="row mb-3 bg-body rounded"
-								*ngFor="let h of EnhancmentData['doclist'] ,let i = index ">
+								*ngFor="let h of EnhancmentDoc ,let i = index ">
 
 								<div class="col-md-6">
 									<div class="px-3">
 										<h5 class="mt-3 f16"><strong>Document {{i+1}}:</strong></h5>
-										<h5 class="mt-3 f16"><a class="doc" (click)="docopen()">{{h.DocName}}</a></h5>
-
-
+										<h5 class="mt-3 f16"><a class="doc" routerLink="[]" (click)="docopen(h.id)">{{h.documentType}}</a></h5>
 									</div>
-
 								</div>
-
-								<div class="col-md-6">
-
-
-
+								<!-- {{h.documentPath}} -->
+								<div  *ngIf="h.documentPath == null" class="col-md-6">
 									<a href="" class="btn btn-primary btn-sm px-3 mt-5 healshadow"> Upload <img
 											src="/assets/img/Arrow-54w.png"> </a>
+								</div>
+								<div  *ngIf="h.documentPath != null"  class="col-md-6">
+								
+									<a  style="background-color: #E2E5E5 !important;"  class="btn btn-primary btn-sm px-3 mt-5 healshadow"> Upload <img
+										 	src="/assets/img/Arrow-54w.png"> </a>
+						
 								</div>
 
 							</div>
@@ -549,10 +595,10 @@
 							<div class="px-2">
 
 								<div class="p-1 mt-1"><span class="cl01">Estimated Cost: </span>
-									<h5 class="mt-3 f16"><strong>INR 40,000</strong></h5>
+									<h5 class="mt-3 f16"><strong>INR {{patientinfo.initialCostEstimate}}</strong></h5>
 								</div>
 								<div class="p-1 mt-1"><span class="cl01">Approval Cost: </span>
-									<h5 class="mt-3 f16"><strong>INR 40,000</strong></h5>
+									<h5 class="mt-3 f16"><strong>INR 0</strong></h5>
 								</div>
 							</div>
 						</div>
@@ -566,44 +612,42 @@
 				<div class="tab-pane fade" id="Discharge" role="tabpanel" aria-labelledby="v-pills-messages-tab">
 
 					<div class="row mt-1">
-
 						<div class="col-md-6">
 							<div class="row mb-3 bg-body rounded"
-								*ngFor="let h of DischargeData['doclist'] ,let i = index ">
+							*ngFor="let h of DischargeDoc ,let i = index ">
 
-								<div class="col-md-6">
-									<div class="px-3">
-										<h5 class="mt-3 f16"><strong>Document {{i+1}}:</strong></h5>
-										<h5 class="mt-3 f16"><a class="doc" (click)="docopen()">{{h.DocName}}</a></h5>
-
-
-									</div>
-
-								</div>
-
-								<div class="col-md-6">
+							<div class="col-md-6">
+								<div class="px-3">
+									<h5 class="mt-3 f16"><strong>Document {{i+1}}:</strong></h5>
+									<h5 class="mt-3 f16"><a class="doc" (click)="docopen(h.id)">{{h.documentType}}</a></h5>
 
 
-
-									<a href="" class="btn btn-primary btn-sm px-3 mt-5 healshadow"> Upload <img
-											src="/assets/img/Arrow-54w.png"> </a>
 								</div>
 
 							</div>
+
+							<div  *ngIf="h.documentPath == null" class="col-md-6">
+								<a href="" class="btn btn-primary btn-sm px-3 mt-5 healshadow"> Upload <img
+										src="/assets/img/Arrow-54w.png"> </a>
+							</div>
+							<div  *ngIf="h.documentPath != null"  class="col-md-6">
+							
+								<a  style="background-color: #E2E5E5 !important;"  class="btn btn-primary btn-sm px-3 mt-5 healshadow"> Upload <img
+										 src="/assets/img/Arrow-54w.png"> </a>
+					
+							</div>
+
+
 						</div>
-
-
-
-
-
+						</div>
 						<div class="col-md-2 mb-3 bg-body rounded">
 							<div class="px-2">
 
 								<div class="p-1 mt-1"><span class="cl01">Estimated Cost: </span>
-									<h5 class="mt-3 f16"><strong>INR 40,000</strong></h5>
+									<h5 class="mt-3 f16"><strong>INR {{patientinfo.initialCostEstimate}}</strong></h5>
 								</div>
 								<div class="p-1 mt-1"><span class="cl01">Approval Cost: </span>
-									<h5 class="mt-3 f16"><strong>INR 40,000</strong></h5>
+									<h5 class="mt-3 f16"><strong>INR 0</strong></h5>
 								</div>
 							</div>
 						</div>
@@ -613,30 +657,28 @@
 
 
 				<div class="tab-pane fade" id="Final-Claim" role="tabpanel" aria-labelledby="v-pills-messages-tab">
-	
 					<div class="row mt-1">
-
 						<div class="col-md-6">
 							<div class="row mb-3 bg-body rounded"
-								*ngFor="let h of finalClaim['doclist'] ,let i = index ">
-
+								*ngFor="let h of FinalDoc ,let i = index ">
 								<div class="col-md-6">
 									<div class="px-3">
 										<h5 class="mt-3 f16"><strong>Document {{i+1}}:</strong></h5>
-										<h5 class="mt-3 f16"><a class="doc" (click)="docopen()">{{h.DocName}}</a></h5>
-
-
+										<h5 class="mt-3 f16"><a class="doc" (click)="docopen(h.id)">{{h.documentType}}</a></h5>
 									</div>
-
 								</div>
 
-								<div class="col-md-6">
-
-
-
+								<div  *ngIf="h.documentPath == null" class="col-md-6">
 									<a href="" class="btn btn-primary btn-sm px-3 mt-5 healshadow"> Upload <img
 											src="/assets/img/Arrow-54w.png"> </a>
 								</div>
+								<div  *ngIf="h.documentPath != null"  class="col-md-6">
+								
+									<a  style="background-color: #E2E5E5 !important;"  class="btn btn-primary btn-sm px-3 mt-5 healshadow"> Upload <img
+										 	src="/assets/img/Arrow-54w.png"> </a>
+						
+								</div>
+
 
 							</div>
 						</div>
@@ -649,10 +691,10 @@
 							<div class="px-2">
 
 								<div class="p-1 mt-1"><span class="cl01">Estimated Cost: </span>
-									<h5 class="mt-3 f16"><strong>INR 40,000</strong></h5>
+									<h5 class="mt-3 f16"><strong>INR {{patientinfo.initialCostEstimate}}</strong></h5>
 								</div>
 								<div class="p-1 mt-1"><span class="cl01">Approval Cost: </span>
-									<h5 class="mt-3 f16"><strong>INR 40,000</strong></h5>
+									<h5 class="mt-3 f16"><strong>INR 0</strong></h5>
 								</div>
 							</div>
 						</div>
@@ -670,3 +712,9 @@
 			</div>
 		</div>
 	</div>
+
+	<button type="button" class="previous_button btn btn-primary btn-sm px-5 float-start mt-3 mx-2">Query & Rejection</button>
+
+	<button class="btn btn-primary btn-sm px-5 float-end mt-3 mx-2"  (click)="approveClick()"
+	  >Approve</button> 
+</div>

@@ -4,15 +4,15 @@
     </div>
     <div class="offcanvas-body nopadding pdrl0">
       <ul class="navbar-nav justify-content-end flex-grow-1 menutxt heallink">
-              <li class="nav-item">
-                <a class="nav-link heallink active" aria-current="page" (click)="redirect()">Dashboard</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link heallink">Reports</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link heallink" [routerLink]="['/profile']">Network</a>
-              </li>           
+          <li class="nav-item">
+            <a class="nav-link heallink active" aria-current="page" href='{{activeurl}}' (click)="redirect()">Dashboard</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link heallink">Reports</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link heallink" href="/profile">Network</a>
+          </li>           
       </ul>
     </div>
   </div>

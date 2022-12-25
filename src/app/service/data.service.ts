@@ -10,7 +10,11 @@ export class DataService {
   currentclaimdetails_data = this.claimdetails_data.asObservable();
 
   private user_data = new BehaviorSubject([]);
-  currentuser_data = this.claimdetails_data.asObservable();
+  currentuser_data = this.user_data.asObservable();
+
+  private othercostdata = new BehaviorSubject([]);
+  currentothercost_data = this.othercostdata.asObservable();
+
   constructor() { }
 
   updateclaimdetails_data(data: any) {
@@ -20,4 +24,9 @@ export class DataService {
   updatecurrentuser_data(data: any) {
     this.user_data.next(data)
   }
+
+  updateothercostd_data(data: any) {
+    this.othercostdata.next(data)
+  }
+
 }

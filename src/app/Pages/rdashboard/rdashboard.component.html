@@ -5,36 +5,52 @@
 		<h3>New Requests</h3>
 	</div>
 	<div class="col-md-6">
-		<!-- <a href="#" data-bs-toggle="modal" data-bs-target="#modalChoice3"
-			class="btn btn-primary btn-lg float-end mx-3">Create</a> -->
-
-		<div class="modal" role="dialog" id="modalChoice3">
-			<div class="modal-dialog healm" role="document">
-				<ul class="healmenulist">
-					<a href="#">
-						<li class="healmenu">Inital Authorization</li>
-					</a>
-					<a href="#">
-						<li class="healmenu">Enhance</li>
-					</a>
-					<a href="#">
-						<li class="healmenu">Discharge</li>
-					</a>
-					<a href="claim-form.html">
-						<li class="healmenu">Final Claim</li>
-					</a>
-				</ul>
+		<a href="#" data-bs-toggle="modal" data-bs-target="#modalChoice3"
+				class="btn btn-primary btn-lg float-end mx-3">Create</a>
+			<div class="modal" role="dialog" id="modalChoice3">
+				<div class="modal-dialog healm" role="document">
+					<ul class="healmenulist">
+						<a href="/createclaim/Initial Authorisation'">
+							<li class="healmenu">Initial Authorisation</li> 
+							<!-- [routerLink]="['/createclaim/Initial Authorisation']" -->
+						</a>
+						<a href="/createclaim/Enhancement">
+							<li class="healmenu">Enhance</li>
+						</a>
+						<a href="/createclaim/Discharge">
+							<li class="healmenu">Discharge</li>
+						</a>
+						<a href="/createclaim/Final Claim">
+							<li class="healmenu">Final Claim</li>
+						</a>
+					</ul>
+				</div>
 			</div>
-		</div>
 
 	</div>
 
 </div>
 <div class="row mb-3 mt-2 text-center">
-
-	<a href="" class="col-md-2 healbox hlbx1" *ngFor="let a of spaData" routerLink="/slastatus" >
-		<p>{{a.Name}}</p>
-		<h2>{{a.Count}}</h2>
+	<!-- *ngFor="let a of spaData" -->
+	<a href="" class="col-md-2 healbox hlbx1"  routerLink="/slastatus" >
+		<p>SLA < 25%</p>
+		<h2>{{spaData.green}}</h2>
+	</a>
+	<a href="" class="col-md-2 healbox hlbx1" routerLink="/slastatus" >
+		<p>SLA 25%-50%</p>
+		<h2>{{spaData.yellow}}</h2>
+	</a>
+	<a href="" class="col-md-2 healbox hlbx1" routerLink="/slastatus" >
+		<p>SLA 50%-75%</p>
+		<h2>{{spaData.orange}}</h2>
+	</a>
+	<a href="" class="col-md-2 healbox hlbx1" routerLink="/slastatus" >
+		<p>SLA 75%-100%</p>
+		<h2>{{spaData.red}}</h2>
+	</a>
+	<a href="" class="col-md-2 healbox hlbx1" routerLink="/slastatus" >
+		<p>SLA > 100%</p>
+		<h2>{{spaData.doubleRed}}</h2>
 	</a>
 
 	
@@ -76,7 +92,6 @@
 					<th>Claim ID</th>
 					<th>Name</th>
 					<th>Ailment</th>
-					<th>SLA</th>
 					<th>P-TAT</th>
 					<th>Stage</th>
 					<th>Status</th>
@@ -85,15 +100,14 @@
 				</thead>
 				<tbody>
 					<tr *ngFor="let h of healspandata">
-						<!-- <td><a href="claim-form2.html" class="tblink">12345678</a></td> -->
-						<td><a routerLink="/viewclaim" class="tblink">{{h.ClaimID}}</a></td>
-						<td>{{h.Name}}</td>
-						<td>{{h.Ailment}}</td>
-						<td>{{h.SLA}}</td>
-						<td>{{h.PTAT}}</td>
-						<td>{{h.Stage}}</td>
-						<td>{{h.Status}}</td>
-						<td>{{h.ApprovedAmount}}</td>
+						<!-- <td><a href="claim-form2.html" class="tblink">12345678</a>routerLink="/viewclaim"</td> -->
+						<td><a (click)="GotoClaim(h.claimID)" [routerLink]="[]" class="tblink">{{h.claimID}}</a></td>
+						<td>{{h.name}}</td>
+						<td>{{h.ailment}}</td>
+						<td>{{h.ptat}}</td>
+						<td>{{h.stage}}</td>
+						<td>{{h.status}}</td>
+						<td>{{h.approvedAmount}}</td>
 						<td>{{h.Hospital}}</td>
 					</tr>
 					
@@ -107,7 +121,6 @@
 					<th>Claim ID</th>
 					<th>Name</th>
 					<th>Ailment</th>
-					<th>SLA</th>
 					<th>P-TAT</th>
 					<th>Stage</th>
 					<th>Status</th>
@@ -119,7 +132,6 @@
 						<td><a routerLink="/viewclaim" class="tblink">{{b.ClaimID}}</a></td>
 						<td>{{b.Name}}</td>
 						<td>{{b.Ailment}}</td>
-						<td>{{b.SLA}}</td>
 						<td>{{b.PTAT}}</td>
 						<td>{{b.Stage}}</td>
 						<td>{{b.Status}}</td>
@@ -136,7 +148,6 @@
 					<th>Claim ID</th>
 					<th>Name</th>
 					<th>Ailment</th>
-					<th>SLA</th>
 					<th>P-TAT</th>
 					<th>Stage</th>
 					<th>Status</th>
@@ -148,7 +159,6 @@
 						<td><a routerLink="/viewclaim" class="tblink">{{c.ClaimID}}</a></td>
 						<td>{{c.Name}}</td>
 						<td>{{c.Ailment}}</td>
-						<td>{{c.SLA}}</td>
 						<td>{{c.PTAT}}</td>
 						<td>{{c.Stage}}</td>
 						<td>{{c.Status}}</td>

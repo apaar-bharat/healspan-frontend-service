@@ -6,6 +6,9 @@ import { environment } from 'src/environments/environment';
 const httpOptions= {
   headers: new HttpHeaders({
  'Content-Type':'application/json',
+//  'Access-Control-Allow-Origin': '*',
+  // 'Authorization': `Bearer ${localStorage.getItem("jwttoken")}`
+  // 'Authorization': 'Bearer ' + localStorage.getItem("token")
  })
 };
 
@@ -19,17 +22,16 @@ export class ApiService {
     return  throwError(() => error);
   }
 
+
   constructor(private http: HttpClient) { }
-
-
-
+  
   get(path: string, params: HttpParams = new HttpParams()): Observable<any> {
     return this.http.get(`${environment.baseUrl}${path}`, { params })
   }
   
   getService(path: string):Observable<any> {
     // console.log('service call----->',path);
-    return this.http.get(`${environment.baseUrl}${path}`, httpOptions).pipe(timeout(150000));;
+    return this.http.get(`${environment.baseUrl}${path}`, httpOptions).pipe(timeout(150000));
   }
 
   put(path: string, body: Object = {},params: HttpParams = new HttpParams()): Observable<any> {
@@ -47,7 +49,18 @@ export class ApiService {
   }
 
   postService(url: string, request: any){
+    
     return this.http.post(url,request,httpOptions).pipe(timeout(150000));
+  }
+
+  loginpostService(url: string, request: any){
+    const loginhttpOptions= {
+      headers: new HttpHeaders({
+     'Content-Type':'application/json'
+     })
+    };
+    
+    return this.http.post(url,request,loginhttpOptions).pipe(timeout(150000));
   }
 
  

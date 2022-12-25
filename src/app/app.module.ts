@@ -1,4 +1,4 @@
-import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
@@ -14,6 +14,8 @@ import { ApiService } from './service/api.service';
 import { SlaStatusComponent } from './Pages/sla-status/sla-status.component';
 import { AuthenticationService } from './service/authentication.service';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+import { NgxSpinnerModule } from 'ngx-spinner';
+import { ModalpopupService } from './Providers/modalpopup.service';
 
 
 
@@ -32,12 +34,17 @@ import { HashLocationStrategy, LocationStrategy } from '@angular/common';
     DefaultModule,
     MatFormFieldModule,
     HttpClientModule,
+    NgxSpinnerModule
+        // MatDialogModule,
+    // MatTableModule ,
+    // CdkTableModule
+    // MatTable
   
   ],
   // { provide: LocationStrategy, useClass: HashLocationStrategy}
-  providers: [ApiService,AuthenticationService],
+  providers: [ApiService,AuthenticationService,ModalpopupService],
   bootstrap: [AppComponent],
-  schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
+  schemas: [ CUSTOM_ELEMENTS_SCHEMA],
 })
 export class AppModule { }
 
