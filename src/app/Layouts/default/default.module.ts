@@ -23,6 +23,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { OthercostComponent } from 'src/app/Pages/creatclaim/othercost/othercost.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatDialogModule } from '@angular/material/dialog';
+import { FilterPipe } from 'src/app/Shared/Pipes/filter.pipe';
 
 
 @NgModule({
@@ -34,7 +35,8 @@ import { MatDialogModule } from '@angular/material/dialog';
     ViewclaimComponent,
     ResetpasswordComponent,
     ProfileComponent,
-    OthercostComponent
+    OthercostComponent,
+    FilterPipe
     
   ],
   imports: [

@@ -85,7 +85,7 @@
                                 <div class="form-group col-md-3 mt-3">
                                     <label for="" class="form-label float-start">Age*</label>
                                     <input type="text" class="form-control" formControlName="Age" [ngModel]="showAge"
-                                        readonly>
+                                    [attr.disabled]="false">
                                 </div>
 
                             </div>
@@ -131,7 +131,7 @@
                                     <label for="" class="form-label float-start">Date Of Admission</label>
 
                                     <input type="datetime-local" class="form-control" formControlName="DateOfAdmission"
-                                        placeholder="Choose a date"  [max]="todaysdate"
+                                        placeholder="Choose a date"
                                         (input)="changeDate()" required>
                                         <!-- [(ngModel)]="dateSent" [max]="todaysdate" | date:'HH:mm' -->
                                     
@@ -142,11 +142,12 @@
                                 </div>
 
                                 <div class="form-group col-md-3 mt-3">
-
-                                    <label for="" class="form-label float-start">Estimated date of discharge</label>
+                                    <label  *ngIf="ActiveStage == 'Discharge' || ActiveStage == 'Final Claim'" for="" class="form-label float-start">Date of discharge</label>
+                                    <label  *ngIf="ActiveStage == 'Initial Authorisation' || ActiveStage == 'Enhancement'" for="" class="form-label float-start">Estimated date of discharge</label>
                                     <input type="datetime-local" class="form-control" formControlName="DateOfDischarge"
-                                        placeholder="Choose a date" [disabled]="!dateSent" [min]="dateSent"
-                                        [max]="todaysdate" [value]="dateReceived" required>
+                                        placeholder="Choose a date" [min]="minDate" (change)="calculateDiffHours()"
+                                       required>
+                                       <!-- [value]="dateReceived"  -->
 
 
                                 </div>
@@ -213,14 +214,13 @@
 
                                 <div class="form-group col-md-3 mt-3">
                                     <label for="" class="form-label float-start">Inital cost estimate</label>
-                                    <input type="text" class="form-control" formControlName="InitialCE" required>
+                                    <input type="text" class="form-control"  (change)="InitialCeCalculate()" formControlName="InitialCE" required>
 
                                 </div>
-                                <!-- <div class="form-group col-md-3 mt-3">
-                                    <label for="" class="form-label float-start">Total Bill Amount</label>
-                                    <input type="text" class="form-control" formControlName="TotalBillAmount" required>
-
-                                </div> -->
+                                <div *ngIf="ActiveStage == 'Enhancement' || ActiveStage == 'Discharge' || ActiveStage == 'Final Claim'" class="form-group col-md-3 mt-3">
+                                    <label for="" class="form-label float-start">Enhancement Estimate</label>
+                                    <input type="text" class="form-control" formControlName="Enhancementestimate">
+                                </div>
                             </div>
                             <!-- <div class="form-row w-100">
                                 <div class="form-group col-md-3 mt-3">
@@ -228,6 +228,25 @@
                                     <input type="text" class="form-control" formControlName="ClaimAmount" required>
                                 </div>
                              </div> -->
+                             <div class="form-row w-100">
+                                <div *ngIf="ActiveStage == 'Discharge' || ActiveStage == 'Final Claim'" class="form-group col-md-3 mt-3" >
+                                    <label for="" class="form-label float-start">Final BillAmount*</label>
+                                    <input type="number" class="form-control" formControlName="FinalbillAmount">
+                                </div>
+
+                                <div *ngIf="ActiveStage == 'Discharge' || ActiveStage == 'Final Claim'" class="form-group col-md-3 mt-3">
+                                    <label for="" class="form-label float-start">Claimed Amount*</label>
+                                    <input type="text" class="form-control" formControlName="ClaimedAmount">
+
+                                </div>
+
+                                <div *ngIf="ActiveStage == 'Final Claim'" class="form-group col-md-3 mt-3">
+                                    <label for="" class="form-label float-start">Bill Number</label>
+                                    <input type="text" class="form-control" formControlName="BillNumber">
+
+                                </div>
+                              
+                            </div>
                         </div>
 
                     </form>
@@ -251,6 +270,45 @@
                             </div>
                         </div>
                         <div class="form-row w-100">
+                            
+                            <div class="form-group col-md-3 ">
+                                <label for="" class="form-label float-start">Provisional diagnosis*</label>
+                                <select class="form-control form-select" (change)="Ondiagnosis($event)" formControlName="Provisionaldiagnosis"
+                                    [class.is-invalid]="M['Provisionaldiagnosis'].invalid && (M['Provisionaldiagnosis'].dirty || M['Provisionaldiagnosis'].touched)"
+                                    id="Provisionaldiagnosis" required>
+                                    <option value="">Choose...</option>
+                                    <option *ngFor="let p of DiagnosisDetail" value={{p.id}}>
+                                        {{p.name}}</option>
+
+
+                                </select>
+
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label for="" class="form-label float-start">Treatment Type*</label>
+                                <select class="form-control form-select" formControlName="TreatmentType" (change)="OntreatmentType($event)"
+                                    [class.is-invalid]="M['TreatmentType'].invalid && (M['TreatmentType'].dirty || M['TreatmentType'].touched)"
+                                    id="TreatmentType" required>
+                                    <option value="">Choose...</option>
+                                    <option *ngFor="let p of masterData['treatment_type_mst']" value={{p.id}}>
+                                        {{p.name}}</option>
+                                </select>
+
+                            </div>
+                            
+                            <div class="form-group col-md-3  ">
+                                <label for="" class="form-label float-start">Speciality*</label>
+                                <select class="form-control form-select" formControlName="Speciality"
+                                    [class.is-invalid]="M['Speciality'].invalid && (M['Speciality'].dirty || M['Speciality'].touched)"
+                                    id="Speciality" required>
+
+                                    <option value="">Choose...</option>
+                                    <option *ngFor="let p of specialityDetail" value={{p.id}}>
+                                        {{p.name}}</option>
+
+                                </select>
+
+                            </div>
                             <div class="form-group col-md-3">
                                 <label for="" class="form-label float-start">Procedure*</label>
                                 <!-- <input type="text" class="form-control" formControlName="Procedures" required readonly> -->
@@ -265,51 +323,13 @@
                                 </select>
                             </div>
 
-                            <div class="form-group col-md-3">
-                                <label for="" class="form-label float-start">Treatment Type*</label>
-                                <select class="form-control form-select" formControlName="TreatmentType" (change)="OntreatmentType($event)"
-                                    [class.is-invalid]="M['TreatmentType'].invalid && (M['TreatmentType'].dirty || M['TreatmentType'].touched)"
-                                    id="TreatmentType" required>
-                                    <option value="">Choose...</option>
-                                    <option *ngFor="let p of masterData['treatment_type_mst']" value={{p.id}}>
-                                        {{p.name}}</option>
-                                </select>
-
-                            </div>
-                            <div class="form-group col-md-3 ">
-                                <label for="" class="form-label float-start">Provisional diagnosis*</label>
-                                <select class="form-control form-select" (change)="Ondiagnosis($event)" formControlName="Provisionaldiagnosis"
-                                    [class.is-invalid]="M['Provisionaldiagnosis'].invalid && (M['Provisionaldiagnosis'].dirty || M['Provisionaldiagnosis'].touched)"
-                                    id="Provisionaldiagnosis" required>
-                                    <option value="">Choose...</option>
-                                    <option *ngFor="let p of DiagnosisDetail" value={{p.id}}>
-                                        {{p.name}}</option>
-
-
-                                </select>
-
-                            </div>
-                            <div class="form-group col-md-3  ">
-                                <label for="" class="form-label float-start">Speciality*</label>
-                                <select class="form-control form-select" formControlName="Speciality"
-                                    [class.is-invalid]="M['Speciality'].invalid && (M['Speciality'].dirty || M['Speciality'].touched)"
-                                    id="Speciality" required>
-
-                                    <option value="">Choose...</option>
-                                    <option *ngFor="let p of specialityDetail" value={{p.id}}>
-                                        {{p.name}}</option>
-
-                                </select>
-
-                            </div>
-
                         </div>
                         <div class="form-row w-100">
 
                             <div class="form-group col-md-3 mt-3">
                                 <label for="" class="form-label float-start">Date of first diagnosis*</label>
                                 <input type="date" class="form-control" formControlName="Dateoffirstdiagnosis"
-                                    placeholder="Choose a date" id="Dateoffirstdiagnosis" [max]="date" required>
+                                    placeholder="Choose a date" id="Dateoffirstdiagnosis" required>
                             </div>
 
                             <div class="form-group col-md-3  mt-3">
@@ -320,8 +340,14 @@
                                     <option value="">Choose...</option>
                                     <option *ngFor="let p of chronicillnessDetail" value={{p.id}}>
                                         {{p.name}}</option>
-                                        <!-- {{p.id}} -->
                                 </select>
+
+                                <!-- <mat-form-field>              
+                                    <mat-select [class.is-invalid]="M['Pasthistoryofchronicillness'].invalid && (M['Pasthistoryofchronicillness'].dirty || M['Pasthistoryofchronicillness'].touched)"
+                                        id="Pasthistoryofchronicillness" required class="form-control p-0 m-0" formControlName="Pasthistoryofchronicillness" (selectionChange)="chronicillnessSelect($event)" multiple>
+                                        <mat-option *ngFor="let p of chronicillnessDetail" value={{p.id}}>{{p.name}}</mat-option>
+                                      </mat-select>
+                                </mat-form-field> -->
 
                             </div>
                             <div class="form-group col-md-3  mt-3">
@@ -364,7 +390,9 @@
                             </div>
                             <div class="form-group col-md-3  mt-3">
                                 <label for="" class="form-label float-start">Duration</label>
-                                <select class="form-control form-select" formControlName="Duration" id="Duration"
+                                <input type="text" class="form-control" formControlName="Duration" [attr.disabled]="false">
+
+                                <!-- <select class="form-control form-select" formControlName="Duration" id="Duration"
                                     >
                                     <option value="">Choose...</option>
                                     <option value="<24 hours"><24 hours</option>
@@ -372,20 +400,21 @@
                                     <option value=">24 hours">>24 hours</option>
                                     <option value="> 7 days">> 7 days</option>
                                     <option value="<= 7 days"><= 7 days</option>
-                                </select>
+                                </select> -->
                             </div>
                         </div>
                         <div class="form-row w-100">
                             <div class="form-group col-md-3  mt-3">
                                 <label for="" class="form-label float-start">Claim</label>
                                 <!--(change)="OnClaimSelect()" -->
-                                <select class="form-control form-select"
+                                <input type="text" class="form-control" formControlName="Claim" [attr.disabled]="false">
+                                <!-- <select class="form-control form-select"
                                     formControlName="Claim" id="Claim">
                                     <option value="">Choose...</option>
                                     <option value="< 1 lac">< 1 lac</option>
                                     <option value=">1 Lac">>1 Lac</option>
                                     <option value="<=1 Lac"><=1 Lac</option>
-                                </select>
+                                </select> -->
                             </div>
                             <div class="form-group col-md-9  mt-3">
                                 <!-- <button type="submit"   class="action-button btn-primary btn-sm px-5 float-end mt-3" form="medform">
@@ -409,7 +438,7 @@
                     <div *ngFor="let q of questioncostheader" class="form-group col-md-3 mt-3" >
                         <label for="" class="form-label float-start">{{q.label}}</label>
                         <select class="form-control form-select"
-                        formControlName="q.label" (change)="OnQuestionSelect($event)">
+                        formControlName="q.label" (change)="OnQuestionSelect($event,q.label)">
                         <option value="">Choose...</option>
                         <option *ngFor="let p of q.options" value={{p.value}}>
                             {{p.label}}</option>
@@ -417,6 +446,14 @@
                     </div>
         
                     </div>
+                    <!------------List------------------------------------------- -->
+                    <!-- {{patientMedicalInfoList['questionAnswersList']}}
+                    <div *ngIf="patientMedicalInfoList['questionAnswersList'].length > 0" class="form-row w-100 card mt-3 mx-2" style="min-height: 200px;">
+                        <p class="text-center mt-3">List of Submitted Question</p>
+                        <div *ngFor="let q of patientMedicalInfoList['questionAnswersList']">
+                            <ul><li>{{q.question}}</li><li>{{q.answer}}</li></ul>
+                        </div>
+                    </div> -->
                     <button type="button" class="previous previous_button btn btn-sm px-5 float-start mt-3 mx-2">Back</button>
                     <button class="next btn btn-primary btn-sm px-5 float-end mt-3 mx-2" (click)="SaveSequentialQue()" 
                     [disabled]="!IsSaveSequentialQue"  >Continue</button>
@@ -496,7 +533,7 @@
                         </div>
                         <div class="form-row w-100">
                             <div class="form-group col-md-6 mt-3">
-                                <input type="checkbox" formControlName="IsGroupPolicy" [(ngModel)]="isChecked" (click)="OngrouppolicykCheck(isChecked)"
+                                <input type="checkbox" formControlName="IsGroupPolicy"  (click)="OngrouppolicykCheck($event)"
                                     class="form-check-input float-start" id="same-address">
                                 <label class="form-check-label  float-start" for="same-address">&nbsp; Group
                                     Policy</label>
@@ -507,7 +544,7 @@
                                     Policy</label>
                             </div> -->
                         </div>
-                        <div class="form-row w-100">
+                        <div class="form-row w-100"  [hidden]="!IsGroups">
                             <div class="form-group col-md-6 mt-3">
                                 <label for="" class="form-label float-start">Company / Corporate / Group*</label>
                                 <input type="text"  formControlName="Groupcompany" class="form-control">
@@ -540,7 +577,7 @@
                                 <h2 class="float-start">Documents Upload</h2>
                             </div>
                             <div class="col-md-2">
-                                <h5 class="float-start"><a href="" class="nolink"><img src="assets/img/add.png"> Add
+                                <h5 class="float-start"><a class="nolink"><img src="assets/img/add.png"> Add
                                         File</a>
                                 </h5>
                             </div>

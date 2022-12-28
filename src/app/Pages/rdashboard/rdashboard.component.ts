@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -31,6 +32,9 @@ export class RdashboardComponent implements OnInit {
       //alert(this.spaData.green)
       //this.aprrovalDataList = data["loggedInUserClaimData"].filter((x:any)=>x.status == "Approved");
       //this.pendingDataList = data["loggedInUserClaimData"].filter((x:any)=>x.status != "Approved"); 
+    },(err: HttpErrorResponse) => {
+      console.log("HttpErrorResponse" + err.status);
+      alert("Something Went Wrong -" + err.status)       
     })
 
   
@@ -41,7 +45,10 @@ export class RdashboardComponent implements OnInit {
     this.apiservice.getService("healspan/claim/retrieveclaim/"+claimID).subscribe((data: any) => {
       this.dataservice.updateclaimdetails_data(data);
       this.router.navigate(['viewclaim']);
-    })
+    },(err: HttpErrorResponse) => {
+      console.log("HttpErrorResponse" + err.status);
+      alert("Something Went Wrong -" + err.status)       
+    });
 }
 
 

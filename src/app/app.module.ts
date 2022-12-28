@@ -9,11 +9,9 @@ import { ReactiveFormsModule }   from '@angular/forms';
 import { DefaultModule } from './Layouts/default/default.module';
 import { LoginComponent } from './login/login.component';
 import {MatFormFieldModule} from '@angular/material/form-field';
-import { environment } from 'src/environments/environment';
 import { ApiService } from './service/api.service';
 import { SlaStatusComponent } from './Pages/sla-status/sla-status.component';
 import { AuthenticationService } from './service/authentication.service';
-import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { ModalpopupService } from './Providers/modalpopup.service';
 

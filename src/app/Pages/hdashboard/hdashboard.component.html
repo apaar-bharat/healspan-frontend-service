@@ -29,7 +29,7 @@
 	</div>
 	
 	<div class="row mb-3 mt-2 mx-3 text-center">
-		<a  class="col-md-3 ps-0 text-decoration-none">
+		<a  class="col-md-3 text-decoration-none">
 			<div class="healboxx healshadow1" >
 				<p><strong>Initial Authorisation</strong></p>
 				<h2 class="bxt"><strong>{{statusDetail.initialAuthorizationCount}}</strong></h2>
@@ -37,7 +37,7 @@
 				<p class="bxtt">Pending</p>
 			</div>
 		</a>
-		<a class="col-md-3 ps-0 text-decoration-none">
+		<a class="col-md-3 text-decoration-none">
 			<div class="healboxx healshadow1" >		
 				<p><strong>Discharge</strong></p>
 				<h2 class="bxt"><strong>{{statusDetail.dischargeCount}}</strong></h2>
@@ -89,6 +89,10 @@
 			
 		</ul>
 		<div class="tab-content" id="myTabContent">
+			<div class="search-hero w-100">
+				<input class="form-control" type="text" name="filter" [(ngModel)]="searchText" autocomplete="off"
+					placeholder="&#61442; Search Here" />
+			</div>
 			<div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0" style="height: 250px; overflow: auto">
 				<table class="table tstriped table-borderless mt-3 healshadow1">
 					<thead style="position: sticky !important; top:0px !important;">
@@ -103,7 +107,7 @@
 						<th>ApprovedAmount</th>
 					</thead>
 					<tbody>
-						<tr *ngFor="let p of aprrovalDataList">
+						<tr *ngFor="let p of aprrovalDataList | filter: searchText">
 							<td><a [routerLink]="[]" (click)="GotoClaim(p.stage,p.claimID)" class="tblink">{{p.claimID}}</a></td>
 							<td>{{p.name}}</td>
 							<td>{{p.ailment}}</td>
@@ -133,7 +137,7 @@
 						<th>ApprovedAmount</th>
 					</thead>
 					<tbody>
-						<tr *ngFor="let a of pendingDataList">
+						<tr *ngFor="let a of pendingDataList | filter: searchText">
 							<td ><a [routerLink]="[]" (click)="GotoClaim(a.stage,a.claimID)"  class="tblink">{{a.claimID}}</a></td>
 							<td>{{a.name}}</td>
 							<td>{{a.ailment}}</td>

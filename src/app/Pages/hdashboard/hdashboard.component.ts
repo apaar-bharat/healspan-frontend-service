@@ -1,8 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { ApiService } from 'src/app/service/api.service';
 import { DataService } from 'src/app/service/data.service';
+import { FilterPipe } from 'src/app/Shared/Pipes/filter.pipe';
 @Component({
   selector: 'app-hdashboard',
   templateUrl: './hdashboard.component.html',
@@ -15,8 +16,9 @@ export class HdashboardComponent implements OnInit {
   currentuserdata:any;
   LoggedInId:any;
   @ViewChild('modalChoice3') modalChoice3 :any;
-  
-  constructor(private router: Router,private apiservice:ApiService,private dataservice : DataService) { }
+  searchText:any="";
+  constructor(private router: Router,private apiservice:ApiService,
+    private dataservice : DataService) { }
 
   ngOnInit(): void {
 
@@ -29,11 +31,16 @@ export class HdashboardComponent implements OnInit {
    
   //healspan/claim/retrieveallclaimsofloggedinuser/"+ this.currentuserdata[0].id
   this.apiservice.getService("healspan/claim/retrieveallclaimsofloggedinuser/"+LoggedInId).subscribe((data:any) =>{
+    
+    if(data["loggedInUserClaimData"]!= null){
     this.statusDetail = data["claimStageCount"];
     this.aprrovalDataList = data["loggedInUserClaimData"].filter((x:any)=>x.status == "Approved");
     this.pendingDataList = data["loggedInUserClaimData"].filter((x:any)=>x.status != "Approved");
-
+    }
     
+  },(err: HttpErrorResponse) => {
+    console.log("HttpErrorResponse" + err.status);
+    alert("Something Went Wrong -" + err.status)       
   })
 
     // this.dataservice.currentclaimdetails_data.subscribe((res:any) =>
@@ -47,9 +54,10 @@ export class HdashboardComponent implements OnInit {
       this.apiservice.getService("healspan/claim/retrieveclaim/"+claimID).subscribe((data: any) => {
         this.dataservice.updateclaimdetails_data(data);
         this.router.navigate([url]);
+      },(err: HttpErrorResponse) => {
+        console.log("HttpErrorResponse" + err.status);
+        alert("Something Went Wrong -" + err.status)       
       })
-
-      
   }
 
   Gotoroutes(path:any){

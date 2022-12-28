@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ApiService } from '../service/api.service';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
 import { Observable, throwError } from 'rxjs';
 import { Modal } from 'src/assets/js/bootstrap.bundle';
@@ -62,7 +62,7 @@ export class LoginComponent implements OnInit {
       "password":this.loginForm.get('password')?.value
       }
     this.api.loginpostService(environment.baseUrl+"authentication/login",body).subscribe((userdata:any) =>{
-      if(userdata)
+    if(userdata)
       {
         localStorage.setItem('currentUser', "loggedin"); 
         localStorage.setItem("usertype",userdata.userRoleMstId);
@@ -78,6 +78,10 @@ export class LoginComponent implements OnInit {
       else  {
           this.displayStyle = "block"; 
       }  
+    },(err: HttpErrorResponse) => {
+      console.log("HttpErrorResponse" + err.status);
+      this.displayStyle = "block"; 
+     
     })
   }
 

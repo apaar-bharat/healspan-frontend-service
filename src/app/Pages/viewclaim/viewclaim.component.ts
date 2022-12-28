@@ -1,4 +1,6 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { ApiService } from 'src/app/service/api.service';
 import { DataService } from 'src/app/service/data.service';
@@ -12,7 +14,7 @@ export class ViewclaimComponent implements OnInit {
 
 
 
-  constructor(private api: ApiService,private dataservice : DataService) { }
+  constructor(private api: ApiService,private dataservice : DataService,private router:Router) { }
   claimdetailData: any; 
   claimInfo :any ;
   patientinfo: any; medicalInfo: any; insuranceInfo: any; 
@@ -24,6 +26,7 @@ export class ViewclaimComponent implements OnInit {
   TPADetail:any
   allmasterData:any;
   claimdata:any;
+  IsEdit:boolean = false;
   ngOnInit(): void {
 
     this.dataservice.currentclaimdetails_data.subscribe((res:any) =>{
@@ -73,8 +76,20 @@ export class ViewclaimComponent implements OnInit {
     if(claimStageMst.claimStageMstName == "Final Claim"){
       this.FinalDoc = this.medicalInfo['documentList'];
     }
-
+    let LoggedInId = localStorage.getItem("LoggedInId");
+    if(this.claimInfo.userId == LoggedInId){
+      this.IsEdit = true;
+    }
   }
+
+  GotoClaim(claimID:number){
+    let stage = this.claimdetailData["claimStageMst"].claimStageMstName;
+    let url = '/createclaim/'+stage;
+    this.api.getService("healspan/claim/retrieveclaim/"+claimID).subscribe((data: any) => {
+      this.dataservice.updateclaimdetails_data(data);
+      this.router.navigate([url]);
+    })
+  } 
 
   approveClick(){
     let param = {

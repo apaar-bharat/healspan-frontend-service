@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-// import { FlexLayoutModule } from '@angular/flex-layout';
 import { RouterModule } from '@angular/router';
 import { HeaderComponent } from './Components/header/header.component';
 import { FooterComponent } from './Components/footer/footer.component';
 import { SidebarComponent } from './Components/sidebar/sidebar.component';
+import { DatePipe } from './Pipes/date.pipe';
+// import { FilterPipe } from './Pipes/filter.pipe';
 
 
 @NgModule({
@@ -12,8 +13,8 @@ import { SidebarComponent } from './Components/sidebar/sidebar.component';
     HeaderComponent,
     FooterComponent,
     SidebarComponent,
-
-   
+    DatePipe,
+    // FilterPipe,
   ],
   imports: [
     CommonModule,

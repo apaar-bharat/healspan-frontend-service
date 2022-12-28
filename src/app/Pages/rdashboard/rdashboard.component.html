@@ -10,7 +10,7 @@
 			<div class="modal" role="dialog" id="modalChoice3">
 				<div class="modal-dialog healm" role="document">
 					<ul class="healmenulist">
-						<a href="/createclaim/Initial Authorisation'">
+						<a href="/createclaim/Initial Authorisation">
 							<li class="healmenu">Initial Authorisation</li> 
 							<!-- [routerLink]="['/createclaim/Initial Authorisation']" -->
 						</a>
@@ -32,23 +32,23 @@
 </div>
 <div class="row mb-3 mt-2 text-center">
 	<!-- *ngFor="let a of spaData" -->
-	<a href="" class="col-md-2 healbox hlbx1"  routerLink="/slastatus" >
+	<a href="" class="col-md-2 healbox hlbx1 me-2 ms-4"  routerLink="/slastatus" >
 		<p>SLA < 25%</p>
 		<h2>{{spaData.green}}</h2>
 	</a>
-	<a href="" class="col-md-2 healbox hlbx1" routerLink="/slastatus" >
+	<a href="" class="col-md-2 healbox hlbx1 me-2" routerLink="/slastatus" >
 		<p>SLA 25%-50%</p>
 		<h2>{{spaData.yellow}}</h2>
 	</a>
-	<a href="" class="col-md-2 healbox hlbx1" routerLink="/slastatus" >
+	<a href="" class="col-md-2 healbox hlbx1 me-2" routerLink="/slastatus" >
 		<p>SLA 50%-75%</p>
 		<h2>{{spaData.orange}}</h2>
 	</a>
-	<a href="" class="col-md-2 healbox hlbx1" routerLink="/slastatus" >
+	<a href="" class="col-md-2 healbox hlbx1 me-2" routerLink="/slastatus" >
 		<p>SLA 75%-100%</p>
 		<h2>{{spaData.red}}</h2>
 	</a>
-	<a href="" class="col-md-2 healbox hlbx1" routerLink="/slastatus" >
+	<a href="" class="col-md-2 healbox hlbx1 me-2" routerLink="/slastatus" >
 		<p>SLA > 100%</p>
 		<h2>{{spaData.doubleRed}}</h2>
 	</a>
@@ -56,7 +56,7 @@
 	
 </div>
 
-<div class="row mt-5 pt-3 pb-3">
+<div class="row mt-3">
 	<div class="col-md-6">
 		<h3>Recent Updates</h3>
 	</div>
