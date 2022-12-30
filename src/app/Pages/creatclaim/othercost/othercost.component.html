@@ -1,10 +1,13 @@
-<p>ADD OtherCost Data</p>
+<span>ADD OtherCost Data</span>
 <!-- <button style="text-align: right;" tabindex="-1" mat-flat-button class="btn-margin" (click)="onClose(false)" color="primary">Cancel</button> -->
 
 
-<div mat-dialog-title style="float: right; font-weight: 700; cursor: pointer;" (click)="onClose(false)">X</div>
-
-<div>
+<!-- <div mat-dialog-title style="float: right; font-weight: 700; cursor: pointer;" (click)="onClose(false)">X</div> -->
+<button  class="btn btn-primary float-end" (click)="onClose(false)">
+  Save & Close
+</button>
+<div class="row mt-3">
+  <div class="col-md-12">
     <mat-table #table [dataSource]="dataSource">
       <!-- <ng-container matColumnDef="id">
         <mat-header-cell *matHeaderCellDef> id </mat-header-cell>
@@ -31,6 +34,14 @@
     <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
 
 	</mat-table>
+</div>
+  <!-- <div class="row">
+    <div class="col-md-12">
+    <button class="btn btn-primary float-end mt-3" (click)="onClose(false)">
+      Save & Close
+    </button>
+    </div>
+  </div> -->
 </div>
 
 <!-- <div class="container">

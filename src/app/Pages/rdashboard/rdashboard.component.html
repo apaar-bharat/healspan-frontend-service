@@ -85,22 +85,26 @@
 
 	</ul>
 	<div class="tab-content" id="myTabContent" >
+		<div class="search-hero w-100">
+			<input class="form-control mt-3" type="text" name="filter" [(ngModel)]="searchText" autocomplete="off"
+				placeholder="Search Here" />
+		</div>
 		<div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" style="height: 250px; overflow: auto"
 			tabindex="0">
-			<table class="table tstriped table-borderless mt-3 healshadow1"  style="height: 800px">
-				<thead>
-					<th>Claim ID</th>
-					<th>Name</th>
-					<th>Ailment</th>
-					<th>P-TAT</th>
-					<th>Stage</th>
-					<th>Status</th>
-					<th>Approved Amount</th>
-					<th>Hospital</th>
+			<table class="table tstriped table-borderless mt-3 healshadow1">
+				<thead style="position: sticky !important; top:0px !important;">
+					<th [appSort]="healspandata" data-order="desc" data-name="claimID">Claim ID
+						<i class="fas fa-sort p-0"></i></th>
+					<th [appSort]="healspandata" data-order="desc" data-name="name">Name<i class="fas fa-sort p-0"></i></th>
+					<th [appSort]="healspandata" data-order="desc" data-name="ailment">Ailment<i class="fas fa-sort p-0"></i></th>
+					<th [appSort]="healspandata" data-order="desc" data-name="ptat">P-TAT<i class="fas fa-sort p-0"></i></th>
+					<th [appSort]="healspandata" data-order="desc" data-name="stage">Stage<i class="fas fa-sort p-0"></i></th>
+					<th [appSort]="healspandata" data-order="desc" data-name="status">Status<i class="fas fa-sort p-0"></i></th>
+					<th [appSort]="healspandata" data-order="desc" data-name="approvedAmount">Approved Amount<i class="fas fa-sort p-0"></i></th>
+					<th [appSort]="healspandata" data-order="desc" data-name="Hospital">Hospital<i class="fas fa-sort p-0"></i></th>
 				</thead>
 				<tbody>
-					<tr *ngFor="let h of healspandata">
-						<!-- <td><a href="claim-form2.html" class="tblink">12345678</a>routerLink="/viewclaim"</td> -->
+					<tr *ngFor="let h of healspandata | filter: searchText">
 						<td><a (click)="GotoClaim(h.claimID)" [routerLink]="[]" class="tblink">{{h.claimID}}</a></td>
 						<td>{{h.name}}</td>
 						<td>{{h.ailment}}</td>
@@ -116,19 +120,22 @@
 		</div>
 
 		<div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0" style="height: 150px; overflow: auto">
-			<table class="table tstriped table-borderless mt-3 healshadow1" style="height: 800px">
-				<thead>
-					<th>Claim ID</th>
-					<th>Name</th>
-					<th>Ailment</th>
-					<th>P-TAT</th>
-					<th>Stage</th>
-					<th>Status</th>
-					<th>Approved Amount</th>
-					<th>Hospital</th>
+			<table class="table tstriped table-borderless mt-3 healshadow1">
+				<thead style="position: sticky !important; top:0px !important;">
+					<!-- <th>Claim ID</th> -->
+					<th [appSort]="hospitalData" data-order="desc" data-name="claimID">Claim ID
+						<i class="fas fa-sort p-0"></i></th>
+					<th [appSort]="hospitalData" data-order="desc" data-name="name">Name<i class="fas fa-sort p-0"></i></th>
+					<th [appSort]="hospitalData" data-order="desc" data-name="ailment">Ailment<i class="fas fa-sort p-0"></i></th>
+					<th [appSort]="hospitalData" data-order="desc" data-name="ptat">P-TAT<i class="fas fa-sort p-0"></i></th>
+					<th [appSort]="hospitalData" data-order="desc" data-name="stage">Stage<i class="fas fa-sort p-0"></i></th>
+					<th [appSort]="hospitalData" data-order="desc" data-name="status">Status<i class="fas fa-sort p-0"></i></th>
+					<th [appSort]="hospitalData" data-order="desc" data-name="approvedAmount">Approved Amount<i class="fas fa-sort p-0"></i></th>
+					<th [appSort]="hospitalData" data-order="desc" data-name="Hospital">Hospital<i class="fas fa-sort p-0"></i></th>
+				
 				</thead>
 				<tbody>
-					<tr *ngFor="let b of hospitalData">
+					<tr *ngFor="let b of hospitalData | filter: searchText">
 						<td><a routerLink="/viewclaim" class="tblink">{{b.ClaimID}}</a></td>
 						<td>{{b.Name}}</td>
 						<td>{{b.Ailment}}</td>
@@ -142,20 +149,22 @@
 				</tbody>
 			</table>
 		</div>
+
 		<div class="tab-pane fade" id="contact-tab-pane" role="tabpanel" aria-labelledby="contact-tab" tabindex="0" style="height: 150px; overflow: auto" >
 			<table class="table tstriped table-borderless mt-3 healshadow1">
-				<thead>
-					<th>Claim ID</th>
-					<th>Name</th>
-					<th>Ailment</th>
-					<th>P-TAT</th>
-					<th>Stage</th>
-					<th>Status</th>
-					<th>Approved Amount</th>
-					<th>Hospital</th>
+				<thead style="position: sticky !important; top:0px !important;">
+					<th [appSort]="ClosedData" data-order="desc" data-name="claimID">Claim ID
+						<i class="fas fa-sort p-0"></i></th>
+					<th [appSort]="ClosedData" data-order="desc" data-name="name">Name<i class="fas fa-sort p-0"></i></th>
+					<th [appSort]="ClosedData" data-order="desc" data-name="ailment">Ailment<i class="fas fa-sort p-0"></i></th>
+					<th [appSort]="ClosedData" data-order="desc" data-name="ptat">P-TAT<i class="fas fa-sort p-0"></i></th>
+					<th [appSort]="ClosedData" data-order="desc" data-name="stage">Stage<i class="fas fa-sort p-0"></i></th>
+					<th [appSort]="ClosedData" data-order="desc" data-name="status">Status<i class="fas fa-sort p-0"></i></th>
+					<th [appSort]="ClosedData" data-order="desc" data-name="approvedAmount">Approved Amount<i class="fas fa-sort p-0"></i></th>
+					<th [appSort]="ClosedData" data-order="desc" data-name="Hospital">Hospital<i class="fas fa-sort p-0"></i></th>
 				</thead>
 				<tbody>
-					<tr *ngFor="let c of ClosedData">
+					<tr *ngFor="let c of ClosedData | filter: searchText">
 						<td><a routerLink="/viewclaim" class="tblink">{{c.ClaimID}}</a></td>
 						<td>{{c.Name}}</td>
 						<td>{{c.Ailment}}</td>

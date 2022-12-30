@@ -103,6 +103,11 @@ export class CreatclaimComponent implements OnInit {
   patientMedicalInfoList:any=[];medicalAndChronicIllnessLink:any=[];
   mindate:any;
   
+
+  //New VARIBALES
+  claimStageLinkId:any = null ;patientInfoId:any = null ;medicalInfoId:any =null ;insuranceInfoId:any=null;
+  docbutton:boolean = false;
+  
   constructor(private fb: UntypedFormBuilder, private api: ApiService, private http: HttpClient,
     private httpClient: HttpClient, private route: ActivatedRoute,private spinnerservice:NgxSpinnerService ,
     private dataservice : DataService,private commonservice:CommonserviceService,
@@ -133,10 +138,12 @@ export class CreatclaimComponent implements OnInit {
           let hospitalMstId = localStorage.getItem("hospitalMstId");
           if( hospitalMstId != "null"){
           this.ClaimForm.controls['Hospital'].setValue(localStorage.getItem("hospitalMstId"));
-          //this.IsHospitaluser = true;
+          this.IsHospitaluser = true;
           //this.ClaimForm.controls['Hospital'].disable();
 
           }else{
+            this.IsHospitaluser = false;
+
             //this.ClaimForm.controls['Hospital'].enable();
 
           }
@@ -177,7 +184,7 @@ export class CreatclaimComponent implements OnInit {
       OtherC: ['',],
       OtherCE: ['',],
       Procedure: ['',],
-      InitialCE: ['',],
+      InitialCE: ['', Validators.required],
 
       //enhance stage
       Enhancementestimate :['',],
@@ -233,12 +240,25 @@ export class CreatclaimComponent implements OnInit {
 
   AssignFormControlValues(data:any){
     this.doclist =[];
+    this.claimStageLinkId = data[0].id;
     this.claimInfoID = data[0].claimInfo.id;
     this.claimStageId = data[0].claimStageMst.id;
-    let patientInformationList =data[0].patientInfo;
-    this.patientMedicalInfoList = data[0].medicalInfo;
-    let patientInsuranceInfoList = data[0].insuranceInfo;
 
+
+    let patientInformationList =data[0].patientInfo;
+    if(patientInformationList != null){
+      this.patientInfoId = data[0].patientInfo.id;
+    }
+
+    this.patientMedicalInfoList = data[0].medicalInfo;
+    if(this.patientMedicalInfoList != null){
+      this.medicalInfoId = data[0].medicalInfo.id;
+    }
+
+    let patientInsuranceInfoList = data[0].insuranceInfo;
+    if(patientInsuranceInfoList != null){
+      this.insuranceInfoId = data[0].insuranceInfo.id;
+    }
   
     //alert(JSON.stringify(claimDetailsForStageList));
 
@@ -289,8 +309,9 @@ export class CreatclaimComponent implements OnInit {
     
     this.ClaimForm.controls["totalRC"].setValue(patientInformationList.totalRoomCost);
     
-    if(patientInformationList.otherCostId !=null){
-    this.ClaimForm.controls["OtherC"].setValue(patientInformationList.otherCostId);
+    if(patientInformationList.patientAndOtherCostLink.length > 0){
+      //this.ClaimForm.controls["OtherC"].setValue(patientInformationList.otherCostId);
+      this.OtherCosts = patientInformationList.patientAndOtherCostLink.otherCostsMst;
     }
 
     this.ClaimForm.controls["OtherCE"].setValue(patientInformationList.otherCostsEstimate);
@@ -438,14 +459,18 @@ export class CreatclaimComponent implements OnInit {
           otherCostDetail.push({ id:res.id,amount:res.amount});
         }
       })
+
       let patientbody = {
         "id": this.claimInfoID,
+        "claimStageLinkId": this.claimStageLinkId,
         "tpaClaimId" : null,
         "userId" : this.LoggedInId,
         "hospitalId" : this.ClaimForm.value.Hospital,
         "claimStageId" : this.claimStageId,
         "statusId" : 2,
         "patientInfoDto" : {
+            "id": this.patientInfoId,
+            "claimStageLinkId": this.claimStageLinkId,
             "firstName" : this.ClaimForm.value.Fname,
             "middleName" : this.ClaimForm.value.Mname,
             "lastname" : this.ClaimForm.value.Lname,
@@ -469,7 +494,7 @@ export class CreatclaimComponent implements OnInit {
             "roomCategoryId" : this.ClaimForm.value.RoomCategory,
             "procedureId" : this.ClaimForm.value.Procedure,
             "genderId" : this.ClaimForm.value.Gender,
-            "otherCostDetail" : otherCostDetail
+            "patientAndOtherCostLink" : otherCostDetail
         }
       }
 
@@ -478,10 +503,12 @@ export class CreatclaimComponent implements OnInit {
         if(res.responseStatus == "SUCCESS"){
           this.patientInfoResponse = res;
           this.claimInfoID = this.patientInfoResponse.claimInfoId;
+          this.patientInfoId = this.patientInfoResponse.patientInfoId;
+          this.claimStageLinkId = this.patientInfoResponse.claimStageLinkId;
         }
+
       },(err: HttpErrorResponse) => {
         console.log("HttpErrorResponse" + err.status);
-        alert("Something Went Wrong -" + err.status)       
       })
     }
   }
@@ -499,16 +526,14 @@ export class CreatclaimComponent implements OnInit {
       this.claimInfoID = this.patientInfoResponse.claimInfoId;
      }
       let medicalparam = {
-        "claimId" : this.claimInfoID,
+        "id": this.medicalInfoId,
+        "claimStageLinkId": this.claimStageLinkId,
         "dateOfFirstDiagnosis" : this.medicalForm.value.Dateoffirstdiagnosis,
         "claimStageId" : this.claimStageId,
         "doctorName" : this.medicalForm.value.Nameofthetreatingdoctor,
         "doctorQualification" : this.medicalForm.value.Qualificationofthetreatingdoctor,
         "doctorRegistrationNumber": this.medicalForm.value.DrResgistrationnumber,
-        "pastChronicIllness" : parseInt(this.medicalForm.value.Pasthistoryofchronicillness),
-        //this.medicalAndChronicIllnessLink,
-        //parseInt(this.medicalForm.value.Pasthistoryofchronicillness),
-        //medicalAndChronicIllnessLink
+        "medicalAndChronicIllnessLink" : this.medicalAndChronicIllnessLink,
         "diagnosisId" : parseInt(this.medicalForm.value.Provisionaldiagnosis),
         "procedureId" : parseInt(this.medicalForm.value.Procedures),
         "specialityId" : parseInt(this.medicalForm.value.Speciality),
@@ -518,15 +543,17 @@ export class CreatclaimComponent implements OnInit {
       this.api.post('healspan/claim/createorupdatemedicalinfo',medicalparam).subscribe((res) =>{
         console.log("medicalSave response",res);
         if(res.responseStatus == "SUCCESS"){
-        this.medicalInfoResponse = res;       
-        this.GetSequentialquestion();
-        this.IsSaveSequentialQue = true;
+            this.medicalInfoResponse = res;  
+            this.medicalInfoId = this.medicalInfoResponse.medicalInfoId;
+
+            this.GetSequentialquestion();
+            this.IsSaveSequentialQue = true;
         }else{
           this.IsSaveSequentialQue = false;
         }
       },(err: HttpErrorResponse) => {
         console.log("HttpErrorResponse" + err.status);
-        alert("Something Went Wrong -" + err.status)       
+        //alert("Something Went Wrong -" + err.status)       
       })
     }
     // this.GetSequentialquestion();
@@ -541,7 +568,8 @@ export class CreatclaimComponent implements OnInit {
    });
 
     let ruleengineres = {
-      "medicalInfoId": this.medicalInfoResponse.medicalInfoId, 
+      "medicalInfoId": this.medicalInfoId,
+      //this.medicalInfoResponse.medicalInfoId, 
       "sequentialQuestion": questionlist,
       "documentList": this.doclist
     }
@@ -559,6 +587,7 @@ export class CreatclaimComponent implements OnInit {
   //         "answer": "Yes"
   //     }
   // ],
+    
     this.api.post('healspan/claim/savequestionnairesanddocument',ruleengineres).subscribe((ruleres) =>{
       console.log("ruleres",ruleres);
       this.ruleInfoResponse = ruleres;
@@ -573,7 +602,7 @@ export class CreatclaimComponent implements OnInit {
       console.log("DocumentIds",this.doclist);
     },(err: HttpErrorResponse) => {
       console.log("HttpErrorResponse" + err.status);
-      alert("Something Went Wrong -" + err.status)       
+      //alert("Something Went Wrong -" + err.status)       
     })
   }
 
@@ -591,7 +620,8 @@ export class CreatclaimComponent implements OnInit {
         this.claimInfoID = this.patientInfoResponse.claimInfoId;
        }
       let Insuranceparam = {
-        "claimId" : this.claimInfoID,
+        "id": this.insuranceInfoId,
+        "claimStageLinkId": this.claimStageLinkId,
         "claimStageId" : this.claimStageId,
         "tpaNumber" : this.InsuaranceForm.value.TPAnumber,
         "policyHolderName" : this.InsuaranceForm.value.PolicyHolder,
@@ -612,7 +642,7 @@ export class CreatclaimComponent implements OnInit {
 
       },(err: HttpErrorResponse) => {
         console.log("HttpErrorResponse" + err.status);
-        alert("Something Went Wrong -" + err.status)       
+        //alert("Something Went Wrong -" + err.status)       
       })
 
     }
@@ -629,7 +659,7 @@ export class CreatclaimComponent implements OnInit {
       console.log("updateclaimstatus response",res)
     },(err: HttpErrorResponse) => {
         console.log("HttpErrorResponse" + err.status);
-        alert("Something Went Wrong -" + err.status)       
+        //alert("Something Went Wrong -" + err.status)       
       })
   }
  
@@ -665,9 +695,10 @@ export class CreatclaimComponent implements OnInit {
           let input = document.getElementById('status_' + i) as HTMLInputElement | undefined;
           input!.innerText = file.name;
           this.spinnerservice.hide();
+          this.doclistvalidation();
         },(err: HttpErrorResponse) => {
           console.log("HttpErrorResponse" + err.status);
-          alert("Something Went Wrong -" + err.status)       
+          //alert("Something Went Wrong -" + err.status)       
         });
     
       } else {
@@ -735,6 +766,7 @@ export class CreatclaimComponent implements OnInit {
       this.TPADetail = data["tpa_mst"];
       this.OtherCosts = data["other_costs_mst"];
       this.procedureDetail = data["procedure_mst"];
+      
       this.specialityDetail = data["speciality_mst"];
       this.hospitalDetail = data["hospital_mst"];
       this.chronicillnessDetail = data["chronic_illness_mst"];
@@ -747,9 +779,6 @@ export class CreatclaimComponent implements OnInit {
       this.claimStageId = claim[0].id;
       //alert(claim[0].id+claim[0].name)
       
-    },(err: HttpErrorResponse) => {
-      console.log("HttpErrorResponse" + err.status);
-      alert("Something Went Wrong -" + err.status)       
     })
   }
 
@@ -767,7 +796,7 @@ export class CreatclaimComponent implements OnInit {
       this.showAge = Math.floor((timeDiff / (1000 * 3600 * 24)) / 365);
     }
     let age = this.ClaimForm.get("Age")?.value;
-    this.medicalForm.controls['Ages'].setValue(age)
+    this.medicalForm.controls['Ages'].setValue(this.showAge)
   }
 
   calculateDiff(){
@@ -813,7 +842,7 @@ export class CreatclaimComponent implements OnInit {
           });
     
     }
-    alert(JSON.stringify(this.medicalAndChronicIllnessLink));
+    //alert(JSON.stringify(this.medicalAndChronicIllnessLink));
   }
 
   Ondiagnosis(event: any){
@@ -947,7 +976,7 @@ export class CreatclaimComponent implements OnInit {
       type: "select",
       options:this.Questions[0].roptions,
     });
-    console.log("OtherCosts", this.questioncostheader);
+    console.log("questioncostheader", this.questioncostheader);
   }
 
   OnQuestionSelect(event:any,question:any){
@@ -1012,6 +1041,8 @@ export class CreatclaimComponent implements OnInit {
     }
   
   }
+
+
   InitialCeCalculate(){
 
     let value1="< 1 lac"
@@ -1027,7 +1058,34 @@ export class CreatclaimComponent implements OnInit {
       }else{
         this.medicalForm.controls["Claim"].setValue(value3);
       }
-     }
+  }
+
+
+  doclistvalidation() {
+    if (this.claimInfoID != null) {
+      this.claimInfoID = this.patientInfoResponse.claimInfoId;
+      this.api.getService("healspan/claim/retrieveclaim/" + this.claimInfoID).subscribe({
+        next: (data: any) => {
+          console.log("hello", data[0]["medicalInfo"].documentList)
+          let docdata :any =[];
+          docdata = data[0]["medicalInfo"].documentList;
+          docdata.forEach((element: any) => {
+            if (element.documentPath == null) {
+              this.docbutton = false;
+            }
+            else {
+              this.docbutton = true;
+            }
+          })
+        },
+        // error: (err: HttpErrorResponse) => {
+        //   console.log("HttpErrorResponse" + err.status);
+        //   alert("Something Went Wrong -" + err.status)
+        // },
+      }
+      )
+    }
+  }
 }
 
 

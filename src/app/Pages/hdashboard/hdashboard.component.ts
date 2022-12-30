@@ -40,7 +40,7 @@ export class HdashboardComponent implements OnInit {
     
   },(err: HttpErrorResponse) => {
     console.log("HttpErrorResponse" + err.status);
-    alert("Something Went Wrong -" + err.status)       
+    //alert("Something Went Wrong -" + err.status)       
   })
 
     // this.dataservice.currentclaimdetails_data.subscribe((res:any) =>
@@ -56,7 +56,7 @@ export class HdashboardComponent implements OnInit {
         this.router.navigate([url]);
       },(err: HttpErrorResponse) => {
         console.log("HttpErrorResponse" + err.status);
-        alert("Something Went Wrong -" + err.status)       
+        //alert("Something Went Wrong -" + err.status)       
       })
   }
 

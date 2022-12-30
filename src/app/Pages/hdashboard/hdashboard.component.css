@@ -1,7 +1,9 @@
 thead th {
     font-size: 15px;
-    padding: 10px !important;
+    padding: 10px 5px !important;
+    /* padding-bottom: 10px !important;
+    padding-top: 10px !important;
+    padding-right: 5px !important; */
+
     height: 50px;
   }
-
-  

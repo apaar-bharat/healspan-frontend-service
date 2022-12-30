@@ -14,6 +14,7 @@ export class RdashboardComponent implements OnInit {
   healspandata:any;
   hospitalData:any;
   ClosedData:any;
+  searchText:any="";
   constructor(private apiservice:ApiService,private router: Router,private dataservice : DataService) { }
 
   ngOnInit(): void {
@@ -34,7 +35,7 @@ export class RdashboardComponent implements OnInit {
       //this.pendingDataList = data["loggedInUserClaimData"].filter((x:any)=>x.status != "Approved"); 
     },(err: HttpErrorResponse) => {
       console.log("HttpErrorResponse" + err.status);
-      alert("Something Went Wrong -" + err.status)       
+      //alert("Something Went Wrong -" + err.status)       
     })
 
   
@@ -47,7 +48,7 @@ export class RdashboardComponent implements OnInit {
       this.router.navigate(['viewclaim']);
     },(err: HttpErrorResponse) => {
       console.log("HttpErrorResponse" + err.status);
-      alert("Something Went Wrong -" + err.status)       
+      //alert("Something Went Wrong -" + err.status)       
     });
 }
 

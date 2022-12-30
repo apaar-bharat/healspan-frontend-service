@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpHeaders, HttpClient, HttpParams } from '@angular/common/http';
+import { HttpHeaders, HttpClient, HttpParams, HttpErrorResponse } from '@angular/common/http';
 import { Observable ,  throwError } from 'rxjs';
 import { catchError, timeout } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
@@ -25,12 +25,9 @@ export class ApiService {
 
   constructor(private http: HttpClient) { }
   
-  get(path: string, params: HttpParams = new HttpParams()): Observable<any> {
-    return this.http.get(`${environment.baseUrl}${path}`, { params })
-  }
+
   
   getService(path: string):Observable<any> {
-    // console.log('service call----->',path);
     return this.http.get(`${environment.baseUrl}${path}`, httpOptions).pipe(timeout(150000));
   }
 
@@ -49,7 +46,6 @@ export class ApiService {
   }
 
   postService(url: string, request: any){
-    
     return this.http.post(url,request,httpOptions).pipe(timeout(150000));
   }
 
@@ -61,20 +57,44 @@ export class ApiService {
     };
     
     return this.http.post(url,request,loginhttpOptions).pipe(timeout(150000));
+    // return this.http.post(url,request,loginhttpOptions).pipe(
+    //   catchError(error => {
+    //       let errorMsg: string;
+    //       if (error.error instanceof ErrorEvent) {
+    //           //this.errorMsg = `Error: ${error.error.message}`;
+    //       } else {
+    //           //this.errorMsg = this.getServerErrorMessage(error);
+    //       }
+
+    //       return throwError(()=>errorMsg);
+    //   })
+    // );
   }
 
- 
-
-  // post(path: string, body: Object = {},params: HttpParams = new HttpParams()): Observable<any> {
-  //   return this.http.post(
-  //     `${environment.baseUrl}${path}`,
-  //     JSON.stringify(body),{params}
-  //   ).pipe(catchError(this.formatErrors));
-  // }
 
   delete(path:string,params: HttpParams = new HttpParams()): Observable<any> {
     return this.http.delete(
       `${environment.baseUrl}${path}`,{params}
     ).pipe(catchError(this.formatErrors));
   }
+
+
+
+  getServerErrorMessage(error: HttpErrorResponse): string {
+    switch (error.status) {
+        case 404: {
+            return `Not Found: ${error.message}`;
+        }
+        case 403: {
+            return `Access Denied: ${error.message}`;
+        }
+        case 500: {
+            return `Internal Server Error: ${error.message}`;
+        }
+        default: {
+            return `Unknown Server Error: ${error.message}`;
+        }
+
+    }
+}
 }

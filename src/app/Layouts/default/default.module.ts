@@ -24,6 +24,9 @@ import { OthercostComponent } from 'src/app/Pages/creatclaim/othercost/othercost
 import { MatTableModule } from '@angular/material/table';
 import { MatDialogModule } from '@angular/material/dialog';
 import { FilterPipe } from 'src/app/Shared/Pipes/filter.pipe';
+import { SortDirective } from 'src/app/Shared/Directives/sort.directive';
+import { OrderbyPipe } from 'src/app/Shared/Pipes/orderby.pipe';
+
 
 
 @NgModule({
@@ -36,7 +39,9 @@ import { FilterPipe } from 'src/app/Shared/Pipes/filter.pipe';
     ResetpasswordComponent,
     ProfileComponent,
     OthercostComponent,
-    FilterPipe
+    FilterPipe,
+    OrderbyPipe,
+    SortDirective
     
   ],
   imports: [

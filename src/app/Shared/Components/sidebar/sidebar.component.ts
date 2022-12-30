@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { CommonserviceService } from 'src/app/service/commonservice.service';
 
 @Component({
@@ -9,15 +10,15 @@ import { CommonserviceService } from 'src/app/service/commonservice.service';
 export class SidebarComponent implements OnInit {
 
   activeurl:string ="";
-  constructor(private commonservice:CommonserviceService) { }
+  constructor(private commonservice:CommonserviceService,private router:Router) { }
 
   ngOnInit(): void {
   }
 
+ 
   redirect(){
-    //this.commonservice.redirecttoactivedashboard();
-    let activeDashboard=localStorage.getItem("usertype");
-    if(activeDashboard=='huser'){
+    let activeDashboard =  localStorage.getItem("usertype");
+    if(activeDashboard== '2'){
       this.activeurl ='/hdashboard';
       //this.router.navigate(['hdashboard'])
 
@@ -26,5 +27,4 @@ export class SidebarComponent implements OnInit {
       //this.router.navigate(['rdashboard'])
     }
   }
-
 }

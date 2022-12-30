@@ -5,6 +5,8 @@ import { HeaderComponent } from './Components/header/header.component';
 import { FooterComponent } from './Components/footer/footer.component';
 import { SidebarComponent } from './Components/sidebar/sidebar.component';
 import { DatePipe } from './Pipes/date.pipe';
+import { SortPipe } from './Pipes/sort.pipe';
+import { OrderbyPipe } from './Pipes/orderby.pipe';
 // import { FilterPipe } from './Pipes/filter.pipe';
 
 
@@ -14,6 +16,8 @@ import { DatePipe } from './Pipes/date.pipe';
     FooterComponent,
     SidebarComponent,
     DatePipe,
+    //SortPipe,
+    //OrderbyPipe,
     // FilterPipe,
   ],
   imports: [

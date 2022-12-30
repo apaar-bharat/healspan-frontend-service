@@ -25,7 +25,7 @@
      
           </div>
 
-          <div class="form-floating mb-3">
+          <!-- <div class="form-floating mb-3">
           
               <input type="password" class="form-control form-control-sm" id="floatingPassword"
                 formControlName="password" placeholder="Password">
@@ -33,6 +33,20 @@
               <span style="color:red;" *ngIf="password && password.invalid && password.touched">Password Input
                 Field Is Not Valid </span>
        
+          </div> -->
+
+          <div class="form-floating mb-3">
+            <input class="form-control form-control-sm left-addon" id="floatingInput" formControlName="password"
+              [type]="showPasswordOnPress ? 'text' : 'password'" id="password-field" placeholder="Password">
+            <label for="floatingInput">Password</label>
+            <div (mousedown)="showPasswordOnPress = !showPasswordOnPress"
+              (mouseup)="showPasswordOnPress = !showPasswordOnPress">
+              <i alt="show" class="fas fa-eye eye-show eye" [class.hide]="showPasswordOnPress"></i>
+              <i alt="hide" class="fas fa-eye-slash eye-hide eye" [class.hide]="!showPasswordOnPress"></i>
+            </div>
+            <span style="color:red;" *ngIf="password && password.invalid && password.touched">User Input Field Is
+              Not Valid
+            </span>
           </div>
 
           <div class="checkbox mb-3 text-end passtext">

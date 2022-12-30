@@ -22,7 +22,9 @@ export class LoginComponent implements OnInit {
   usermaster: any;
   displayStyle = "none";
   loginData: any;
-
+  public showPassword: boolean | undefined;
+  public showPasswordOnPress: boolean | undefined;
+  
   constructor(private router: Router, private fb: UntypedFormBuilder, private api: ApiService, 
     private http: HttpClient,private authservice:AuthenticationService,
     private dataservice:DataService,private commonservice:CommonserviceService) { }
@@ -43,46 +45,43 @@ export class LoginComponent implements OnInit {
   get password() {
     return this.loginForm.get('password');
   }
-  
-  private formatErrors(error: any) {
-    return throwError(() => error);
-  }
 
   OnLogin() {
     console.log(this.loginForm)
-    
-    // if (this.authservice.login(this.loginForm.get('username')?.value, this.loginForm.get('password')?.value)) {  
-    //   this.commonservice.redirecttoactivedashboard();
-    // }  
-    // else  {
-    //   this.displayStyle = "block"; 
-    // }  
     let body = {
       "username":this.loginForm.get('username')?.value,
       "password":this.loginForm.get('password')?.value
       }
-    this.api.loginpostService(environment.baseUrl+"authentication/login",body).subscribe((userdata:any) =>{
+    this.api.loginpostService(environment.baseUrl+"authentication/login",body).subscribe({
+      next: this.handleUpdateResponse.bind(this),
+      error: error => {
+        //alert(error);
+        //let errorMessage = this.api.getServerErrorMessage(error);
+        //console.error('There was an error!',errorMessage);
+        this.displayStyle = "block"; 
+       }
+     })
+    }
+
+
+
+  handleUpdateResponse(userdata:any){
     if(userdata)
-      {
-        localStorage.setItem('currentUser', "loggedin"); 
-        localStorage.setItem("usertype",userdata.userRoleMstId);
-        localStorage.setItem("LoggedInId",userdata.id);
-        localStorage.setItem("jwttoken",userdata.jwt);
-        localStorage.setItem("hospitalMstId",userdata.hospitalMstId);
-        localStorage.setItem("userName",userdata.userName);
-        
-        this.dataservice.updatecurrentuser_data(userdata); 
-        this.commonservice.redirecttoactivedashboard();
-        
-      }
-      else  {
-          this.displayStyle = "block"; 
-      }  
-    },(err: HttpErrorResponse) => {
-      console.log("HttpErrorResponse" + err.status);
-      this.displayStyle = "block"; 
-     
-    })
+    {
+      localStorage.setItem('currentUser', "loggedin"); 
+      localStorage.setItem("usertype",userdata.userRoleMstId);
+      localStorage.setItem("LoggedInId",userdata.id);
+      localStorage.setItem("jwttoken",userdata.jwt);
+      localStorage.setItem("hospitalMstId",userdata.hospitalMstId);
+      localStorage.setItem("userName",userdata.userName);
+      
+      this.dataservice.updatecurrentuser_data(userdata); 
+      this.commonservice.redirecttoactivedashboard();
+      
+    }
+    else  {
+        this.displayStyle = "block"; 
+    }  
   }
 
 
