@@ -22,4 +22,10 @@ describe('HdashboardComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it("should create a hospitaluser list in an array", () => {
+    //const qouteText = "This is my first post";
+    component.GetData();
+    expect(component.aprrovalDataList.length).toBeGreaterThanOrEqual(1);
+  });
 });

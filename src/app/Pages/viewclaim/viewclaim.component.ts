@@ -27,6 +27,8 @@ export class ViewclaimComponent implements OnInit {
   allmasterData:any;
   claimdata:any;
   IsEdit:boolean = false;
+  claimStageId:any;
+  claimStageLinkId:any;
   ngOnInit(): void {
 
     this.dataservice.currentclaimdetails_data.subscribe((res:any) =>{
@@ -35,6 +37,8 @@ export class ViewclaimComponent implements OnInit {
        
     });
     //this.Getdata();
+
+    //this.claimStageId = localStorage.getItem("claimStageId");
   }
 
   docopen(docid:any) {
@@ -53,32 +57,47 @@ export class ViewclaimComponent implements OnInit {
   }
 
   Assignclaimdata(data:any){
+    console.log("hello",data)
+    let activeusertype =  localStorage.getItem("usertype");
+   
+   
+
     this.claimdetailData = data[0];
+    this.claimStageLinkId = data[0].id;
     this.claimInfo = data[0].claimInfo;
     this.patientinfo = data[0].patientInfo;
+    console.log("hi",this.patientinfo)
     this.medicalInfo = data[0].medicalInfo;
     this.insuranceInfo = data[0].insuranceInfo;
 
     let claimStageMst = data[0].claimStageMst;
-       
+    this.claimStageId =   claimStageMst.claimStageMstId; 
 
     if(claimStageMst.claimStageMstName == "Initial Authorisation"){
-      this.InitialDoc = this.medicalInfo['documentList'];
-    }else
-    if(claimStageMst.claimStageMstName == "Enhancement"){
-      this.EnhancmentDoc = this.medicalInfo['documentList'];
+      if(this.medicalInfo != null){
+      this.InitialDoc = this.medicalInfo['documentList'];}
+    }else if(claimStageMst.claimStageMstName == "Enhancement"){
+      if(this.medicalInfo != null){
+      this.EnhancmentDoc = this.medicalInfo['documentList'];}
     }
-    else
-    if(claimStageMst.claimStageMstName == "Discharge"){
-      this.DischargeDoc = this.medicalInfo['documentList'];
+    else if(claimStageMst.claimStageMstName == "Discharge"){
+      if(this.medicalInfo != null){
+      this.DischargeDoc = this.medicalInfo['documentList'];}
+
     }
-    else
-    if(claimStageMst.claimStageMstName == "Final Claim"){
-      this.FinalDoc = this.medicalInfo['documentList'];
+    else if(claimStageMst.claimStageMstName == "Final Claim"){
+      if(this.medicalInfo != null){
+      this.FinalDoc = this.medicalInfo['documentList'];}
     }
-    let LoggedInId = localStorage.getItem("LoggedInId");
-    if(this.claimInfo.userId == LoggedInId){
+    
+
+    if(activeusertype== '2'){
       this.IsEdit = true;
+    }else{
+      let LoggedInId = localStorage.getItem("LoggedInId");
+      if(this.claimInfo.userId == LoggedInId){
+        this.IsEdit = true;
+      }
     }
   }
 
@@ -102,6 +121,27 @@ export class ViewclaimComponent implements OnInit {
       }
     })
   }
+
+  GotoNextStage(claimstageId:any){
+    let userId = localStorage.getItem("LoggedInId");
+    let param ={   
+      "claimStageLinkId": this.claimStageLinkId,
+      "claimStageId":claimstageId,
+      "statusId": 1,
+      "userId": userId
+    }
+    // let param ={
+    //   "claimStageLinkId": 65,
+    //   "claimStageId": 2,
+    //   "statusId": 1,
+    //   "userId": 2
+    // }
+    this.api.post('healspan/claim/updatestage',param).subscribe((res) =>{
+      console.log("updatestage response",res)
+    },(err: HttpErrorResponse) => {
+        console.log("HttpErrorResponse" + err.status);
+      })
+    }
 }
 
 

@@ -14,6 +14,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { ModalpopupService } from 'src/app/Providers/modalpopup.service';
 import { OthercostComponent } from './othercost/othercost.component';
 import { MatDialogRef } from '@angular/material/dialog';
+import { claimService } from './claimservice';
 
 declare function verificationForm(): any;
 //declare function phoneNoselect():any;
@@ -107,11 +108,14 @@ export class CreatclaimComponent implements OnInit {
   //New VARIBALES
   claimStageLinkId:any = null ;patientInfoId:any = null ;medicalInfoId:any =null ;insuranceInfoId:any=null;
   docbutton:boolean = false;
-  
+
+  //Stage wise Mandatory Documents;
+  initialDoc:any =[] ; enhanceDoc:any=[]; dischargeDoc:any=[]; finalDoc:any=[];
+  patientAndOtherCostLink:any=[];
   constructor(private fb: UntypedFormBuilder, private api: ApiService, private http: HttpClient,
     private httpClient: HttpClient, private route: ActivatedRoute,private spinnerservice:NgxSpinnerService ,
     private dataservice : DataService,private commonservice:CommonserviceService,
-    private modalPopupService: ModalpopupService) {
+    private modalPopupService: ModalpopupService,private claimService:claimService) {
 
     this.minDateToFinish.subscribe((r: any) => {
       this.minDate = new Date(r);
@@ -159,6 +163,8 @@ export class CreatclaimComponent implements OnInit {
 
     this.SetExtraFormValidation();
   }
+
+
   redirect(){
     this.commonservice.redirecttoactivedashboard();
   }
@@ -244,6 +250,8 @@ export class CreatclaimComponent implements OnInit {
     this.claimInfoID = data[0].claimInfo.id;
     this.claimStageId = data[0].claimStageMst.id;
 
+    localStorage.setItem("claimStageId",this.claimStageId)
+
 
     let patientInformationList =data[0].patientInfo;
     if(patientInformationList != null){
@@ -311,7 +319,9 @@ export class CreatclaimComponent implements OnInit {
     
     if(patientInformationList.patientAndOtherCostLink.length > 0){
       //this.ClaimForm.controls["OtherC"].setValue(patientInformationList.otherCostId);
-      this.OtherCosts = patientInformationList.patientAndOtherCostLink.otherCostsMst;
+      this.OtherCosts = patientInformationList.patientAndOtherCostLink;
+      this.patientAndOtherCostLink = patientInformationList.patientAndOtherCostLink;
+      //sessionStorage.setItem("patientAndOtherCostLink",patientInformationList.patientAndOtherCostLink)
     }
 
     this.ClaimForm.controls["OtherCE"].setValue(patientInformationList.otherCostsEstimate);
@@ -348,7 +358,7 @@ export class CreatclaimComponent implements OnInit {
     let dateofirstdiagDate = this.patientMedicalInfoList.dateOfFirstDiagnosis;
 
     if(dateofirstdiagDate !=null){
-       this.ClaimForm.get("Dateoffirstdiagnosis")?.setValue(formatDate(dateofirstdiagDate,'yyyy-MM-dd','en'));}
+       this.medicalForm.get("Dateoffirstdiagnosis")?.setValue(formatDate(dateofirstdiagDate,'yyyy-MM-dd','en'));}
     }
   
     if(patientInsuranceInfoList != null){
@@ -385,30 +395,32 @@ export class CreatclaimComponent implements OnInit {
   }
 
   openDialog() {
-   
-    //this.othercostarray = this.OtherCosts;
 
-    this.OtherCosts.forEach((element:any) => {
-    
-    //this.Otherclist.push({ id:element.id,name: element.name,value: 0});
-    if (this.Otherclist.length ==this.OtherCosts.length) {
-      //alert('User already exists');
-     } else {
-      this.Otherclist.push({ id:element.id,name: element.name,value: 0});
-     }
-      
-    });
+    if(this.claimInfoID ==null){
+        this.OtherCosts.forEach((element:any) => {   
+        if (this.Otherclist.length != this.OtherCosts.length) {
+          this.Otherclist.push({ id:element.id,name: element.name,value: 0});
+        }});
 
-   
+    } else{
+       this.patientAndOtherCostLink.forEach((element:any) => {
+        if (this.Otherclist.length != this.OtherCosts.length) {
+          this.Otherclist.push({ id:element.otherCostsMst.id,name: element.otherCostsMst.name,value:element.amount});
+
+        }});
+
+      this.OtherCosts.forEach((element:any) => {
+        
+        const data = this.Otherclist.find((x:any) => x.id === element.id)
+        if (!data) {
+        this.Otherclist.push({ id:element.id,name: element.name,value: 0});
+        }        
+        });
+
+    }
+
     this.dialogRef = this.modalPopupService.openPopup<OthercostComponent>(OthercostComponent,{data:this.Otherclist});
-    //this.modalPopupService.openPopup(OthercostComponent);
-   // modalRef.componentInstance.user = this.user;
-    //this.modalPopupService.openPopup<OthercostComponent>(OthercostComponent, null);
-    
-    //this.dialogRef.afterOpened().subscribe
-    
     this.dialogRef.afterClosed().subscribe(result => {
-      //alert("dialogRef" + result);
       this.Othercostlist = [];
       let data = [];
       let sum :number = 0;
@@ -418,8 +430,6 @@ export class CreatclaimComponent implements OnInit {
           this.Othercostlist.push({ id:element.id,amount:parseInt(element.value)});
           sum = sum + parseInt(element.value)
         });
-        //alert("dialogRef" + JSON.stringify(this.Othercostlist));
-
       });
       this.ClaimForm.controls['OtherCE'].setValue(sum)
     });
@@ -449,56 +459,70 @@ export class CreatclaimComponent implements OnInit {
   OnPatientSubmit(formData: any) {
     console.log("", formData)
     this.submitted = true;
-    if (this.ClaimForm.invalid) {
-      //alert('form invalid');
-    }
-    else {
-      let otherCostDetail :any = [];
-      this.Othercostlist.forEach((res:any)=>{
-        if(res.amount != 0){
-          otherCostDetail.push({ id:res.id,amount:res.amount});
-        }
-      })
-
-      let patientbody = {
-        "id": this.claimInfoID,
-        "claimStageLinkId": this.claimStageLinkId,
-        "tpaClaimId" : null,
-        "userId" : this.LoggedInId,
-        "hospitalId" : this.ClaimForm.value.Hospital,
-        "claimStageId" : this.claimStageId,
-        "statusId" : 2,
-        "patientInfoDto" : {
-            "id": this.patientInfoId,
-            "claimStageLinkId": this.claimStageLinkId,
-            "firstName" : this.ClaimForm.value.Fname,
-            "middleName" : this.ClaimForm.value.Mname,
-            "lastname" : this.ClaimForm.value.Lname,
-            "mobileNo" : this.ClaimForm.value.MobileNo,
-            "dateBirth" : this.ClaimForm.value.DOB,
-            "age" : this.ClaimForm.value.Age,
-            "isPrimaryInsured": this.ClaimForm.value.patientprimaryInsured,
-            "dateOfAdmission" : this.ClaimForm.value.DateOfAdmission,
-            "estimatedDateOfDischarge" : this.ClaimForm.value.DateOfDischarge,
-            "dateOfDischarge" : this.ClaimForm.value.DateOfDischarge,
-            "costPerDay" : this.ClaimForm.value.CostPD,
-            "totalRoomCost" : this.ClaimForm.value.totalRC,
-            "otherCostsEstimate" : this.ClaimForm.value.OtherCE,
-            "initialCostEstimate" : this.ClaimForm.value.InitialCE,
-            "billNumber" : this.ClaimForm.value.BillNumber,
-            "claimedAmount" : this.ClaimForm.value.ClaimedAmount,
-            "enhancementEstimate" : this.ClaimForm.value.Enhancementestimate,
-            "finalBillAmount" : this.ClaimForm.value.FinalbillAmount,
-            "hospitalUhid" : this.ClaimForm.value.PHUHID,
-            "hospitalId" : this.ClaimForm.value.Hospital,
-            "roomCategoryId" : this.ClaimForm.value.RoomCategory,
-            "procedureId" : this.ClaimForm.value.Procedure,
-            "genderId" : this.ClaimForm.value.Gender,
-            "patientAndOtherCostLink" : otherCostDetail
-        }
+    
+    if(this.ClaimForm.valid){
+    let otherCostDetail :any = [];
+    this.Othercostlist.forEach((res:any)=>{
+      if(res.amount != 0){
+        otherCostDetail.push({ id:res.id,amount:res.amount});
       }
+    })
 
-      this.api.post('healspan/claim/createorupdateclaimandpatientinfo',patientbody).subscribe((res) =>{
+    //   let patientbody = {
+    //     "id": this.claimInfoID,
+    //     "claimStageLinkId": this.claimStageLinkId,
+    //     "tpaClaimId" : null,
+    //     "userId" : this.LoggedInId,
+    //     "hospitalId" : this.ClaimForm.value.Hospital,
+    //     "claimStageId" : this.claimStageId,
+    //     "statusId" : 2,
+    //     "patientInfoDto" : {
+    //         "id": this.patientInfoId,
+    //         "claimStageLinkId": this.claimStageLinkId,
+    //         "firstName" : this.ClaimForm.value.Fname,
+    //         "middleName" : this.ClaimForm.value.Mname,
+    //         "lastname" : this.ClaimForm.value.Lname,
+    //         "mobileNo" : this.ClaimForm.value.MobileNo,
+    //         "dateBirth" : this.ClaimForm.value.DOB,
+    //         "age" : this.ClaimForm.value.Age,
+    //         "isPrimaryInsured": this.ClaimForm.value.patientprimaryInsured,
+    //         "dateOfAdmission" : this.ClaimForm.value.DateOfAdmission,
+    //         "estimatedDateOfDischarge" : this.ClaimForm.value.DateOfDischarge,
+    //         "dateOfDischarge" : this.ClaimForm.value.DateOfDischarge,
+    //         "costPerDay" : this.ClaimForm.value.CostPD,
+    //         "totalRoomCost" : this.ClaimForm.value.totalRC,
+    //         "otherCostsEstimate" : this.ClaimForm.value.OtherCE,
+    //         "initialCostEstimate" : this.ClaimForm.value.InitialCE,
+    //         "billNumber" : this.ClaimForm.value.BillNumber,
+    //         "claimedAmount" : this.ClaimForm.value.ClaimedAmount,
+    //         "enhancementEstimate" : this.ClaimForm.value.Enhancementestimate,
+    //         "finalBillAmount" : this.ClaimForm.value.FinalbillAmount,
+    //         "hospitalUhid" : this.ClaimForm.value.PHUHID,
+    //         "hospitalId" : this.ClaimForm.value.Hospital,
+    //         "roomCategoryId" : this.ClaimForm.value.RoomCategory,
+    //         "procedureId" : this.ClaimForm.value.Procedure,
+    //         "genderId" : this.ClaimForm.value.Gender,
+    //         "patientAndOtherCostLink" : otherCostDetail
+    //     }
+    //   }
+
+    //   this.api.post('healspan/claim/createorupdateclaimandpatientinfo',patientbody).subscribe((res) =>{
+    //     console.log("patientSave response",res);
+    //     if(res.responseStatus == "SUCCESS"){
+    //       this.patientInfoResponse = res;
+    //       this.claimInfoID = this.patientInfoResponse.claimInfoId;
+    //       this.patientInfoId = this.patientInfoResponse.patientInfoId;
+    //       this.claimStageLinkId = this.patientInfoResponse.claimStageLinkId;
+    //     }
+
+    //   },(err: HttpErrorResponse) => {
+    //     console.log("HttpErrorResponse" + err.status);
+    //   })
+
+  
+    this.claimService.savePatientInfo(this.claimStageId,this.claimInfoID,this.claimStageLinkId,this.patientInfoId,this.ClaimForm,otherCostDetail)
+    .subscribe({
+      next:(res)=>{
         console.log("patientSave response",res);
         if(res.responseStatus == "SUCCESS"){
           this.patientInfoResponse = res;
@@ -506,10 +530,13 @@ export class CreatclaimComponent implements OnInit {
           this.patientInfoId = this.patientInfoResponse.patientInfoId;
           this.claimStageLinkId = this.patientInfoResponse.claimStageLinkId;
         }
-
-      },(err: HttpErrorResponse) => {
+      },
+      error: (err: HttpErrorResponse) =>{
         console.log("HttpErrorResponse" + err.status);
-      })
+        alert("Something Went Wrong!")
+      }
+    })
+
     }
   }
 
@@ -650,10 +677,9 @@ export class CreatclaimComponent implements OnInit {
 
   FinalSubmit(){
     let param ={   
-        "claimId":this.claimInfoID,
-        "stageId": this.claimStageId,
-        "statusId":3
-    
+         "claimId":this.claimInfoID,
+         "stageId": this.claimStageId,
+         "statusId":3
     }
     this.api.post('healspan/claim/updateclaimstatus',param).subscribe((res) =>{
       console.log("updateclaimstatus response",res)
@@ -662,9 +688,12 @@ export class CreatclaimComponent implements OnInit {
         //alert("Something Went Wrong -" + err.status)       
       })
   }
+  
+  
  
   //-----Start File Upload Logic ------------------------
   fileChange(event: any,i:any, docid: any) {
+    this.docbutton = false
     this.spinnerservice.show();
     this.currentupload = docid;
     //alert('progress_' + docid);
@@ -695,11 +724,14 @@ export class CreatclaimComponent implements OnInit {
           let input = document.getElementById('status_' + i) as HTMLInputElement | undefined;
           input!.innerText = file.name;
           this.spinnerservice.hide();
-          this.doclistvalidation();
+          //this.doclistvalidation();
         },(err: HttpErrorResponse) => {
           console.log("HttpErrorResponse" + err.status);
           //alert("Something Went Wrong -" + err.status)       
         });
+
+
+        this.doclistvalidation();
     
       } else {
         //this.snackBar.open('File size exceeds 4 MB. Please choose less than 4 MB','',{duration: 2000});
@@ -707,56 +739,16 @@ export class CreatclaimComponent implements OnInit {
 
     }
 
+    this.docbutton = true
+
+
   }
 
   OnDownload(docid:any){
     window.open(environment.baseUrl+'healspan/claim/download/'+docid);
   }
 
-  //currently not using this method
-  uploadAndProgressSingle(id: any,file:any) {
-    this.progress = 1;
-    let inputDocId = 113;
-    // healspan/claim/upload
-    let body = new FormData();
-    body.append('file', file),
-    body.append('inputDocId', '113'),
-
-    this.http.post('http://3.109.1.145:8109/healspan/claim/upload', body).subscribe((res:any) =>{
-      alert(JSON.stringify(res));
-    });
-
-    this.http
-      .post("https://file.io", this.file_data, {
-        reportProgress: true,
-        observe: "events"
-      })
-    //this.http.post('http://3.109.1.145:8109/healspan/claim/upload', body)
-      .pipe(
-        map((event: any) => {
-          if (event.type == HttpEventType.UploadProgress) {
-            this.progress = Math.round((100 / event.total) * event.loaded);
-
-          } else if (event.type == HttpEventType.Response) {
-            console.log(event.body)
-            this.progress = null;
-            this.filestatus = "uploaded succesfully";
-            let input = document.getElementById('status_' + id) as HTMLInputElement | undefined;
-            input!.innerText = event.body.name;
-          }
-        }),
-        catchError((err: any) => {
-          this.progress = null;
-          this.filestatus = "";
-          alert(err.message);
-          return throwError(err.message);
-        })
-      )
-      .toPromise();
-  }
-  //-----End File Upload Logic --------------------------
-
-
+  
   //-----------------Bind all dropdown
   bindDropdown() {
     this.api.getService('healspan/claim/admin/masters').subscribe((data: any) => {
@@ -778,6 +770,8 @@ export class CreatclaimComponent implements OnInit {
       let claim = this.claimStageMaster.filter((x:any) =>x.name ==  this.ActiveStage);
       this.claimStageId = claim[0].id;
       //alert(claim[0].id+claim[0].name)
+
+
       
     })
   }
@@ -946,25 +940,30 @@ export class CreatclaimComponent implements OnInit {
                         this.doclist.push(element);
                       });
                  }
-                 let admission =[
+                let mandatorydoc :any= [];
+                mandatorydoc.push([
                   'Report supporting the diagnosis',
                   'Etiology of ailment/Consultation papers',
                   'Patient address proof (Pref. Aadhar)',
                   'Insured PAN Card',
                   'Claim Form (Part A)'
 
-                ];
+                ]);
+
+                // if(this.ActiveStage == "Initial Authorisation"){
+                //   mandatorydoc.push(this.initialDoc)
+                // }else if(this.ActiveStage == "Enhance"){
+                //   mandatorydoc.push(this.enhanceDoc)
+                // }else if(this.ActiveStage == "Discharge"){
+                //   mandatorydoc.push(this.dischargeDoc)
+                // }else if(this.ActiveStage == "Final Claim"){
+                //   mandatorydoc.push(this.finalDoc)
+                // }
                
-                admission.forEach((element:any) => {
-                  //let optionsres = {element}
+                mandatorydoc.forEach((element:any) => {
                   this.doclist.push(element);
                 });
-                //alert(JSON.stringify(this.doclist));
-                  
-
-              }
-  
-      
+              }    
     })
   }
  

@@ -27,25 +27,25 @@ export class HdashboardComponent implements OnInit {
     this.currentuserdata = res
    })
 
-  let LoggedInId = localStorage.getItem("LoggedInId");
-   
-  //healspan/claim/retrieveallclaimsofloggedinuser/"+ this.currentuserdata[0].id
-  this.apiservice.getService("healspan/claim/retrieveallclaimsofloggedinuser/"+LoggedInId).subscribe((data:any) =>{
-    
-    if(data["loggedInUserClaimData"]!= null){
-    this.statusDetail = data["claimStageCount"];
-    this.aprrovalDataList = data["loggedInUserClaimData"].filter((x:any)=>x.status == "Approved");
-    this.pendingDataList = data["loggedInUserClaimData"].filter((x:any)=>x.status != "Approved");
-    }
-    
-  },(err: HttpErrorResponse) => {
-    console.log("HttpErrorResponse" + err.status);
-    //alert("Something Went Wrong -" + err.status)       
-  })
+  this.GetData();
+ 
+  }
 
-    // this.dataservice.currentclaimdetails_data.subscribe((res:any) =>
-    //    console.log("currentclaimdetails_data" ,res)
-    //  );
+
+  GetData(){
+    let LoggedInId = localStorage.getItem("LoggedInId");
+    this.apiservice.getService("healspan/claim/retrieveallclaimsofloggedinuser/"+LoggedInId).subscribe((data:any) =>{
+    
+      if(data["loggedInUserClaimData"]!= null){
+      this.statusDetail = data["claimStageCount"];
+      this.aprrovalDataList = data["loggedInUserClaimData"].filter((x:any)=>x.status == "Approved");
+      this.pendingDataList = data["loggedInUserClaimData"].filter((x:any)=>x.status != "Approved");
+      }
+      
+    },(err: HttpErrorResponse) => {
+      console.log("HttpErrorResponse" + err.status);
+      //alert("Something Went Wrong -" + err.status)       
+    })
   }
 
 
@@ -54,6 +54,8 @@ export class HdashboardComponent implements OnInit {
       this.apiservice.getService("healspan/claim/retrieveclaim/"+claimID).subscribe((data: any) => {
         this.dataservice.updateclaimdetails_data(data);
         this.router.navigate([url]);
+        //this.router.navigate(['viewclaim']);
+
       },(err: HttpErrorResponse) => {
         console.log("HttpErrorResponse" + err.status);
         //alert("Something Went Wrong -" + err.status)       
