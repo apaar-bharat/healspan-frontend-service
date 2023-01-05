@@ -6,7 +6,7 @@
 		</div>
 		<div class="col-md-6">
 			<!-- <a href="#" class="btn btn-primary btn-lg float-end mx-3">Final Claim</a> -->
-			<a *ngIf="IsEdit" class="btn btn-primary btn-md px-5 float-end mt-3 mx-2"  (click)="GotoClaim(claimInfo.id)"
+			<a *ngIf="IsEdit" class="btn btn-primary btn-md px-5 float-end mt-3 mx-2"  (click)="GotoClaim(this.claimStageLinkId)"
 	         >Edit Claim</a> 
 
 			 <a *ngIf="claimStageId == '1'" class="btn btn-primary btn-md px-5 float-end mt-3 mx-2"  (click)="GotoNextStage(2)"
@@ -65,7 +65,7 @@
 					<img src="/assets/img/Group.png">
 				</div>
 				<div class="p-1 mt-1"><span>Ailment: </span>
-					<h5 class="mt-2"><strong>{{medicalInfo["diagnosisMst"].name}}</strong></h5>
+					<h5 *ngIf="medicalInfo['diagnosisMst'] != null" class="mt-2"><strong>{{medicalInfo["diagnosisMst"].name}}</strong></h5>
 				</div>
 			</div>
 		</div>

@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  baseUrl: 'http://13.235.113.71:8109/',
+  baseUrl: 'http://192.168.15.109:8109/',
   ruleBaseUrl : 'http://13.235.113.71:9999/ruleengine/processRules',
 };
 

@@ -49,12 +49,13 @@ export class HdashboardComponent implements OnInit {
   }
 
 
-  GotoClaim(stage:any,claimID:number){
+  GotoClaim(stage:any,claimStageLinkId:number){
+     //claimID:number new chnages use claimstagelinkid instad
       let url = '/createclaim/'+stage;
-      this.apiservice.getService("healspan/claim/retrieveclaim/"+claimID).subscribe((data: any) => {
+      this.apiservice.getService("healspan/claim/retrieveclaim/"+claimStageLinkId).subscribe((data: any) => {
         this.dataservice.updateclaimdetails_data(data);
-        this.router.navigate([url]);
-        //this.router.navigate(['viewclaim']);
+        //this.router.navigate([url]);
+        this.router.navigate(['viewclaim']);
 
       },(err: HttpErrorResponse) => {
         console.log("HttpErrorResponse" + err.status);

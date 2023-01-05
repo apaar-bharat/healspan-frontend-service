@@ -12,9 +12,6 @@ import { environment } from 'src/environments/environment';
 })
 export class ViewclaimComponent implements OnInit {
 
-
-
-  constructor(private api: ApiService,private dataservice : DataService,private router:Router) { }
   claimdetailData: any; 
   claimInfo :any ;
   patientinfo: any; medicalInfo: any; insuranceInfo: any; 
@@ -29,6 +26,9 @@ export class ViewclaimComponent implements OnInit {
   IsEdit:boolean = false;
   claimStageId:any;
   claimStageLinkId:any;
+ 
+  path:any;
+  constructor(private api: ApiService,private dataservice : DataService,private router:Router) { }
   ngOnInit(): void {
 
     this.dataservice.currentclaimdetails_data.subscribe((res:any) =>{
@@ -62,15 +62,15 @@ export class ViewclaimComponent implements OnInit {
    
    
 
-    this.claimdetailData = data[0];
-    this.claimStageLinkId = data[0].id;
-    this.claimInfo = data[0].claimInfo;
-    this.patientinfo = data[0].patientInfo;
+    this.claimdetailData = data;
+    this.claimStageLinkId = data.id;
+    this.claimInfo = data.claimInfo;
+    this.patientinfo = data.patientInfo;
     console.log("hi",this.patientinfo)
-    this.medicalInfo = data[0].medicalInfo;
-    this.insuranceInfo = data[0].insuranceInfo;
+    this.medicalInfo = data.medicalInfo;
+    this.insuranceInfo = data.insuranceInfo;
 
-    let claimStageMst = data[0].claimStageMst;
+    let claimStageMst = data.claimStageMst;
     this.claimStageId =   claimStageMst.claimStageMstId; 
 
     if(claimStageMst.claimStageMstName == "Initial Authorisation"){
@@ -101,13 +101,16 @@ export class ViewclaimComponent implements OnInit {
     }
   }
 
-  GotoClaim(claimID:number){
+  GotoClaim(claimStageLinkId:number){
     let stage = this.claimdetailData["claimStageMst"].claimStageMstName;
     let url = '/createclaim/'+stage;
-    this.api.getService("healspan/claim/retrieveclaim/"+claimID).subscribe((data: any) => {
-      this.dataservice.updateclaimdetails_data(data);
-      this.router.navigate([url]);
-    })
+    // this.api.getService("healspan/claim/retrieveclaim/"+claimStageLinkId).subscribe((data: any) => {
+    //   this.dataservice.updateclaimdetails_data(data);
+    //   this.router.navigate([url]);
+    // })
+
+    this.dataservice.updateclaimdetails_data(this.claimdata);
+    this.router.navigate([url]);
   } 
 
   approveClick(){
@@ -122,26 +125,40 @@ export class ViewclaimComponent implements OnInit {
     })
   }
 
-  GotoNextStage(claimstageId:any){
+  GotoNextStage(claimstageId: any) {
     let userId = localStorage.getItem("LoggedInId");
-    let param ={   
+    if (claimstageId == 2) {
+      this.path = "Enhancement"
+    }
+    else if (claimstageId == 3) {
+      this.path = "Discharge"
+    }
+    else if (claimstageId == 4) {
+      this.path = "FinalClaim"
+    }
+    let param = {
       "claimStageLinkId": this.claimStageLinkId,
-      "claimStageId":claimstageId,
+      "claimStageId": claimstageId,
       "statusId": 1,
       "userId": userId
     }
-    // let param ={
+    // let param = {
     //   "claimStageLinkId": 65,
     //   "claimStageId": 2,
     //   "statusId": 1,
     //   "userId": 2
     // }
-    this.api.post('healspan/claim/updatestage',param).subscribe((res) =>{
-      console.log("updatestage response",res)
-    },(err: HttpErrorResponse) => {
-        console.log("HttpErrorResponse" + err.status);
-      })
-    }
+    this.api.post('healspan/claim/updatestage', param).subscribe((res) => {
+      console.log("updatestage response", res)
+      if (res == "SUCCESS") {
+        let currentUrl = '/createclaim/' + this.path;
+        this.router.navigate([currentUrl]);
+      }
+    }, (err: HttpErrorResponse) => {
+      console.log("HttpErrorResponse" + err.status);
+    })
+  }
+
 }
 
 

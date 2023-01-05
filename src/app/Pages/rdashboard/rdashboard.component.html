@@ -106,7 +106,7 @@
 				</thead>
 				<tbody>
 					<tr *ngFor="let h of healspandata | filter: searchText">
-						<td><a (click)="GotoClaim(h.claimID)" [routerLink]="[]" class="tblink">{{h.claimID}}</a></td>
+						<td><a (click)="GotoClaim(h.claimStageLinkId)" [routerLink]="[]" class="tblink">{{h.claimID}}</a></td>
 						<td>{{h.name}}</td>
 						<td>{{h.ailment}}</td>
 						<td>{{h.ptat}}</td>
@@ -137,7 +137,7 @@
 				</thead>
 				<tbody>
 					<tr *ngFor="let b of hospitalData | filter: searchText">
-						<td><a routerLink="/viewclaim" class="tblink">{{b.ClaimID}}</a></td>
+						<td><a (click)="GotoClaim(b.claimStageLinkId)" [routerLink]="[]" class="tblink">{{b.ClaimID}}</a></td>
 						<td>{{b.Name}}</td>
 						<td>{{b.Ailment}}</td>
 						<td>{{b.PTAT}}</td>
@@ -166,7 +166,7 @@
 				</thead>
 				<tbody>
 					<tr *ngFor="let c of ClosedData | filter: searchText">
-						<td><a routerLink="/viewclaim" class="tblink">{{c.ClaimID}}</a></td>
+						<td><a (click)="GotoClaim(c.claimStageLinkId)" [routerLink]="[]" class="tblink">{{c.ClaimID}}</a></td>
 						<td>{{c.Name}}</td>
 						<td>{{c.Ailment}}</td>
 						<td>{{c.PTAT}}</td>

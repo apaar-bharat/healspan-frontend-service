@@ -118,7 +118,7 @@
 						</thead>
 					<tbody>
 						<tr *ngFor="let p of aprrovalDataList | filter: searchText">
-							<td><a scope="col" [routerLink]="[]" (click)="GotoClaim(p.stage,p.claimID)" class="tblink">{{p.claimID}}</a></td>
+							<td><a scope="col" [routerLink]="[]" (click)="GotoClaim(p.stage,p.claimStageLinkId)" class="tblink">{{p.claimID}}</a></td>
 							<td>{{p.name}}</td>
 							<td>{{p.ailment}}</td>
 							<td>{{p.stage}}</td>
@@ -163,12 +163,12 @@
 					</thead>
 					<tbody>
 						<tr *ngFor="let a of pendingDataList | filter: searchText">
-							<td ><a [routerLink]="[]" (click)="GotoClaim(a.stage,a.claimID)"  class="tblink">{{a.claimID}}</a></td>
+							<td ><a [routerLink]="[]" (click)="GotoClaim(a.stage,a.claimStageLinkId)"  class="tblink">{{a.claimID}}</a></td>
 							<td>{{a.name}}</td>
 							<td>{{a.ailment}}</td>
 							<td>{{a.stage}}</td>
 							<td>{{a.status}}</td>
-							<td>{{a.admissionDate  | date:'short'}}</td>
+							<td>{{a.admissionDate  | date:'dd-MM-YYYY hh:mm'}}</td>
 							<td>{{a.dischargeDate  | date:'short'}}</td>
 							<td>{{a.ageing}}</td>
 							<td>{{a.approvedAmount}}</td>

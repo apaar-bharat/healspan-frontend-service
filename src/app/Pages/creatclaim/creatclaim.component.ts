@@ -112,6 +112,7 @@ export class CreatclaimComponent implements OnInit {
   //Stage wise Mandatory Documents;
   initialDoc:any =[] ; enhanceDoc:any=[]; dischargeDoc:any=[]; finalDoc:any=[];
   patientAndOtherCostLink:any=[];
+  alredyUploaddoc:any =[];selectedObjectsFromArray:any=[]
   constructor(private fb: UntypedFormBuilder, private api: ApiService, private http: HttpClient,
     private httpClient: HttpClient, private route: ActivatedRoute,private spinnerservice:NgxSpinnerService ,
     private dataservice : DataService,private commonservice:CommonserviceService,
@@ -246,26 +247,26 @@ export class CreatclaimComponent implements OnInit {
 
   AssignFormControlValues(data:any){
     this.doclist =[];
-    this.claimStageLinkId = data[0].id;
-    this.claimInfoID = data[0].claimInfo.id;
-    this.claimStageId = data[0].claimStageMst.id;
+    this.claimStageLinkId = data.id;
+    this.claimInfoID = data.claimInfo.id;
+    this.claimStageId = data.claimStageMst.id;
 
     localStorage.setItem("claimStageId",this.claimStageId)
 
 
-    let patientInformationList =data[0].patientInfo;
+    let patientInformationList =data.patientInfo;
     if(patientInformationList != null){
-      this.patientInfoId = data[0].patientInfo.id;
+      this.patientInfoId = data.patientInfo.id;
     }
 
-    this.patientMedicalInfoList = data[0].medicalInfo;
+    this.patientMedicalInfoList = data.medicalInfo;
     if(this.patientMedicalInfoList != null){
-      this.medicalInfoId = data[0].medicalInfo.id;
+      this.medicalInfoId = data.medicalInfo.id;
     }
 
-    let patientInsuranceInfoList = data[0].insuranceInfo;
+    let patientInsuranceInfoList = data.insuranceInfo;
     if(patientInsuranceInfoList != null){
-      this.insuranceInfoId = data[0].insuranceInfo.id;
+      this.insuranceInfoId = data.insuranceInfo.id;
     }
   
     //alert(JSON.stringify(claimDetailsForStageList));
@@ -334,7 +335,8 @@ export class CreatclaimComponent implements OnInit {
     this.medicalForm.controls["Genders"].setValue(patientInformationList.genderId);
     this.medicalForm.controls["Procedures"].setValue(patientInformationList.procedureId);
 
-    this.calculateDiffHours();this.InitialCeCalculate();
+    this.calculateDiffHours();
+    this.InitialCeCalculate();
 
     }
   
@@ -347,7 +349,22 @@ export class CreatclaimComponent implements OnInit {
     this.diagnosis = this.patientMedicalInfoList["diagnosisMst"].name;
 
     this.medicalForm.controls["Speciality"].setValue(this.patientMedicalInfoList.specialityId);
-    this.medicalForm.controls["Pasthistoryofchronicillness"].setValue(this.patientMedicalInfoList.pastChronicIllness);
+
+    //code for chronic illness setvalue
+
+
+    let diseases:any=[];let diseaseinfo:any;
+    diseases.push(this.chronicillnessDetail);
+    for(const element of data.medicalInfo.medicalAndChronicIllnessLink){
+      diseaseinfo =element.chronicIllnessMst;
+      this.selectedObjectsFromArray.push(diseaseinfo.name)
+      //const toSelect = diseases[0].find((c:any) => c.id == 1);
+      //this.medicalForm.controls["Pasthistoryofchronicillness"].setValue(diseaseinfo.name);
+    }
+
+
+
+    //this.medicalForm.controls["Pasthistoryofchronicillness"].setValue(this.patientMedicalInfoList.pastChronicIllness);
     
     this.medicalForm.controls["TreatmentType"].setValue(this.patientMedicalInfoList.treatmentTypeId);
     this.treatmentType = this.patientMedicalInfoList["treatmentTypeMst"].name;
@@ -356,6 +373,22 @@ export class CreatclaimComponent implements OnInit {
    
     
     let dateofirstdiagDate = this.patientMedicalInfoList.dateOfFirstDiagnosis;
+
+    if(this.claimStageLinkId != null){
+
+      let uploaddoc :any = [];
+      this.alredyUploaddoc = [];
+      uploaddoc = this.patientMedicalInfoList["documentList"];
+
+      uploaddoc.forEach((element:any)=>{
+          this.alredyUploaddoc.push(element.documentType)
+      })
+
+
+      //alert(JSON.stringify(this.alredyUploaddoc))
+
+      
+    }
 
     if(dateofirstdiagDate !=null){
        this.medicalForm.get("Dateoffirstdiagnosis")?.setValue(formatDate(dateofirstdiagDate,'yyyy-MM-dd','en'));}
@@ -467,59 +500,8 @@ export class CreatclaimComponent implements OnInit {
         otherCostDetail.push({ id:res.id,amount:res.amount});
       }
     })
-
-    //   let patientbody = {
-    //     "id": this.claimInfoID,
-    //     "claimStageLinkId": this.claimStageLinkId,
-    //     "tpaClaimId" : null,
-    //     "userId" : this.LoggedInId,
-    //     "hospitalId" : this.ClaimForm.value.Hospital,
-    //     "claimStageId" : this.claimStageId,
-    //     "statusId" : 2,
-    //     "patientInfoDto" : {
-    //         "id": this.patientInfoId,
-    //         "claimStageLinkId": this.claimStageLinkId,
-    //         "firstName" : this.ClaimForm.value.Fname,
-    //         "middleName" : this.ClaimForm.value.Mname,
-    //         "lastname" : this.ClaimForm.value.Lname,
-    //         "mobileNo" : this.ClaimForm.value.MobileNo,
-    //         "dateBirth" : this.ClaimForm.value.DOB,
-    //         "age" : this.ClaimForm.value.Age,
-    //         "isPrimaryInsured": this.ClaimForm.value.patientprimaryInsured,
-    //         "dateOfAdmission" : this.ClaimForm.value.DateOfAdmission,
-    //         "estimatedDateOfDischarge" : this.ClaimForm.value.DateOfDischarge,
-    //         "dateOfDischarge" : this.ClaimForm.value.DateOfDischarge,
-    //         "costPerDay" : this.ClaimForm.value.CostPD,
-    //         "totalRoomCost" : this.ClaimForm.value.totalRC,
-    //         "otherCostsEstimate" : this.ClaimForm.value.OtherCE,
-    //         "initialCostEstimate" : this.ClaimForm.value.InitialCE,
-    //         "billNumber" : this.ClaimForm.value.BillNumber,
-    //         "claimedAmount" : this.ClaimForm.value.ClaimedAmount,
-    //         "enhancementEstimate" : this.ClaimForm.value.Enhancementestimate,
-    //         "finalBillAmount" : this.ClaimForm.value.FinalbillAmount,
-    //         "hospitalUhid" : this.ClaimForm.value.PHUHID,
-    //         "hospitalId" : this.ClaimForm.value.Hospital,
-    //         "roomCategoryId" : this.ClaimForm.value.RoomCategory,
-    //         "procedureId" : this.ClaimForm.value.Procedure,
-    //         "genderId" : this.ClaimForm.value.Gender,
-    //         "patientAndOtherCostLink" : otherCostDetail
-    //     }
-    //   }
-
-    //   this.api.post('healspan/claim/createorupdateclaimandpatientinfo',patientbody).subscribe((res) =>{
-    //     console.log("patientSave response",res);
-    //     if(res.responseStatus == "SUCCESS"){
-    //       this.patientInfoResponse = res;
-    //       this.claimInfoID = this.patientInfoResponse.claimInfoId;
-    //       this.patientInfoId = this.patientInfoResponse.patientInfoId;
-    //       this.claimStageLinkId = this.patientInfoResponse.claimStageLinkId;
-    //     }
-
-    //   },(err: HttpErrorResponse) => {
-    //     console.log("HttpErrorResponse" + err.status);
-    //   })
-
-  
+    
+    //Call to savePatientInfo service
     this.claimService.savePatientInfo(this.claimStageId,this.claimInfoID,this.claimStageLinkId,this.patientInfoId,this.ClaimForm,otherCostDetail)
     .subscribe({
       next:(res)=>{
@@ -543,48 +525,30 @@ export class CreatclaimComponent implements OnInit {
   onMedformSubmit(formData: any) {
     console.log("dfhbd", formData)
     this.submitted2 = true;
-    if (this.medicalForm.invalid) {
-      //alert('form invalid');
-      console.log(this.medicalForm.value);
-    }
-    else {
-      //alert("form valid and submitted")
+   
+    if(this.medicalForm.valid)  {
      if(this.claimInfoID != null){
       this.claimInfoID = this.patientInfoResponse.claimInfoId;
      }
-      let medicalparam = {
-        "id": this.medicalInfoId,
-        "claimStageLinkId": this.claimStageLinkId,
-        "dateOfFirstDiagnosis" : this.medicalForm.value.Dateoffirstdiagnosis,
-        "claimStageId" : this.claimStageId,
-        "doctorName" : this.medicalForm.value.Nameofthetreatingdoctor,
-        "doctorQualification" : this.medicalForm.value.Qualificationofthetreatingdoctor,
-        "doctorRegistrationNumber": this.medicalForm.value.DrResgistrationnumber,
-        "medicalAndChronicIllnessLink" : this.medicalAndChronicIllnessLink,
-        "diagnosisId" : parseInt(this.medicalForm.value.Provisionaldiagnosis),
-        "procedureId" : parseInt(this.medicalForm.value.Procedures),
-        "specialityId" : parseInt(this.medicalForm.value.Speciality),
-        "treatmentTypeId" : parseInt(this.medicalForm.value.TreatmentType)
-      }
- 
-      this.api.post('healspan/claim/createorupdatemedicalinfo',medicalparam).subscribe((res) =>{
-        console.log("medicalSave response",res);
+  
+    this.claimService.saveMedicalInfo(this.claimStageId,this.claimStageLinkId,this.medicalInfoId,this.medicalForm,this.medicalAndChronicIllnessLink)
+    .subscribe({
+      next:(res)=>{
+        console.log("saveMedicalInfo response",res);
         if(res.responseStatus == "SUCCESS"){
             this.medicalInfoResponse = res;  
             this.medicalInfoId = this.medicalInfoResponse.medicalInfoId;
-
             this.GetSequentialquestion();
             this.IsSaveSequentialQue = true;
-        }else{
-          this.IsSaveSequentialQue = false;
         }
-      },(err: HttpErrorResponse) => {
-        console.log("HttpErrorResponse" + err.status);
-        //alert("Something Went Wrong -" + err.status)       
+      },
+        error: (err: HttpErrorResponse) =>{
+          console.log("HttpErrorResponse" + err.status);
+          alert("Something Went Wrong!")
+        }
       })
     }
-    // this.GetSequentialquestion();
-    // this.IsSaveSequentialQue = true;
+
   }
 
   SaveSequentialQue(){
@@ -594,83 +558,71 @@ export class CreatclaimComponent implements OnInit {
     questionlist.push({"question": element.label,"answer": element.value})
    });
 
-    let ruleengineres = {
-      "medicalInfoId": this.medicalInfoId,
-      //this.medicalInfoResponse.medicalInfoId, 
-      "sequentialQuestion": questionlist,
-      "documentList": this.doclist
-    }
-  //   [
-  //     {
-  //         "question": "Who are you ?",
-  //         "answer": "Sagar"
-  //     },
-  //     {
-  //         "question": "Are you married?",
-  //         "answer": "No"
-  //     },
-  //     {
-  //         "question": "Are you graduate?",
-  //         "answer": "Yes"
-  //     }
-  // ],
-    
-    this.api.post('healspan/claim/savequestionnairesanddocument',ruleengineres).subscribe((ruleres) =>{
-      console.log("ruleres",ruleres);
-      this.ruleInfoResponse = ruleres;
-      this.doclist =[];
-      for (var obj in ruleres.documentId) {
-        if (ruleres.documentId.hasOwnProperty(obj)) {  
-          //----loop--------------------
-            let element  ={"docid": ruleres.documentId[obj],"docname" : obj}
-            this.doclist.push(element);
+   //remove alredy existing documents
+   this.alredyUploaddoc.forEach((element:any) => {
+      this.doclist.forEach( (item:any, index:any) => {
+        if(item === element) this.doclist.splice(index,1);
+      });
+   }) 
+ 
+    this.claimService.saveSequentialQue(this.medicalInfoId,questionlist,this.doclist)
+    .subscribe({
+      next:(ruleres)=>{
+        console.log("saveSequentialQue response",ruleres);
+        //if(ruleres.responseStatus == "SUCCESS"){
+          this.ruleInfoResponse = ruleres;
+          this.doclist =[];
+          for (var obj in ruleres.documentId) {
+            if (ruleres.documentId.hasOwnProperty(obj)) {  
+              //----loop--------------------
+
+
+              //display alredy existing documents  with status
+                const alredyUploadedStatus = this.alredyUploaddoc.find((x:any) => x === obj)
+                if (alredyUploadedStatus) {
+                  let element  ={"docid": ruleres.documentId[obj],"docname" : obj,"docstatus" : true}
+                  this.doclist.push(element);
+                 } else {
+                  let element  ={"docid": ruleres.documentId[obj],"docname" : obj,"docstatus" : false}
+                  this.doclist.push(element);
+                 }
+              
+
+            }
+          }
+        //}
+      },
+        error: (err: HttpErrorResponse) =>{
+          console.log("HttpErrorResponse" + err.status);
+          alert("Something Went Wrong!")
         }
-      }
-      console.log("DocumentIds",this.doclist);
-    },(err: HttpErrorResponse) => {
-      console.log("HttpErrorResponse" + err.status);
-      //alert("Something Went Wrong -" + err.status)       
-    })
+      })
   }
 
   OnInsuarancecontinue(formData: any) {
     console.log("dwefw", formData)
     this.submitted3 = true;
-    if (this.InsuaranceForm.invalid) {
-     // alert('Form invalid');
-      console.log(this.InsuaranceForm.value);
-    }
 
-    else {
-      //alert("form valid")
+    if (this.InsuaranceForm.valid) {
       if(this.claimInfoID != null){
         this.claimInfoID = this.patientInfoResponse.claimInfoId;
-       }
-      let Insuranceparam = {
-        "id": this.insuranceInfoId,
-        "claimStageLinkId": this.claimStageLinkId,
-        "claimStageId" : this.claimStageId,
-        "tpaNumber" : this.InsuaranceForm.value.TPAnumber,
-        "policyHolderName" : this.InsuaranceForm.value.PolicyHolder,
-        "policyNumber" : this.InsuaranceForm.value.PolicyNumber,
-        "isGroupPolicy" : this.InsuaranceForm.value.IsGroupPolicy,
-        "groupCompany" : this.InsuaranceForm.value.Groupcompany,
-        "claimIDPreAuthNumber" : null,
-        "initialApprovalAmount" : null,
-        "approvedEnhancementsAmount" : null,
-        "approvedAmountAtDischarge" : null,
-        "tpaId" : this.InsuaranceForm.value.TPAID,
-        "insuranceCompanyId" : this.InsuaranceForm.value.InsuranceCompany,
-        "relationshipId" : this.InsuaranceForm.value.RelationOPH
-      }
+    }
 
-      this.api.post('healspan/claim/createorupdateinsuranceinfo',Insuranceparam).subscribe((res) =>{
-        console.log("InsuranceSave response",res);
 
-      },(err: HttpErrorResponse) => {
-        console.log("HttpErrorResponse" + err.status);
-        //alert("Something Went Wrong -" + err.status)       
-      })
+      this.claimService.saveInsuranceInfo(this.claimStageId,this.claimStageLinkId,this.insuranceInfoId,this.InsuaranceForm)
+      .subscribe({
+        next:(res)=>{
+          console.log("saveInsuranceInfo response",res);
+          if(res.responseStatus == "SUCCESS"){
+            
+          }
+        },
+          error: (err: HttpErrorResponse) =>{
+            console.log("HttpErrorResponse" + err.status);
+            alert("Something Went Wrong!")
+          }
+        })
+    
 
     }
   }
@@ -714,10 +666,20 @@ export class CreatclaimComponent implements OnInit {
         // console.log(this.file_data);
         //this.uploadAndProgressSingle(id,file);
         // ----EndCooment----------
+
         let body = new FormData();
         body.append('file', file),
         body.append('inputDocId', docid),
         body.append('medicalInfoId', this.medicalInfoResponse.medicalInfoId),
+        body.append('claimInfoID', this.patientInfoResponse.claimInfoID),
+
+
+        // let body ={
+        //   "inputDocId": docid,
+        //   "medicalInfoId":this.medicalInfoResponse.medicalInfoId,
+        //   "claimInfoID": this.patientInfoResponse.claimInfoID,
+        //   "file":file,
+        // }
     
         this.http.post(environment.baseUrl+'healspan/claim/upload',body).subscribe((res:any) =>{
           //alert(JSON.stringify(res));
@@ -772,6 +734,11 @@ export class CreatclaimComponent implements OnInit {
       //alert(claim[0].id+claim[0].name)
 
 
+      this.initialDoc = data["initial_stage"];
+      this.enhanceDoc = data["enhancement_stage"];
+      this.dischargeDoc = data["discharge_stage"];
+      this.finalDoc = data["final_stage"]
+
       
     })
   }
@@ -798,10 +765,31 @@ export class CreatclaimComponent implements OnInit {
     let DateOfDischarge = new Date(this.ClaimForm.get("DateOfDischarge")?.value);
     let costperday = this.ClaimForm.get("CostPD")?.value;
 
-    let days = Math.floor((DateOfDischarge.getTime() - DateOfAdmission.getTime()) / 1000 / 60 / 60 / 24);
+    let days = Math.ceil((DateOfDischarge.getTime() - DateOfAdmission.getTime()) / 1000 / 60 / 60 / 24);
+    //let days = Math.floor((DateOfDischarge.getTime() - DateOfAdmission.getTime()) / (1000 * 3600 * 24));
+
     let totalcost : number = days * costperday;
     this.ClaimForm.controls["totalRC"].setValue(totalcost);    //alert(days);
     //return days;
+
+  
+
+    let hours = Math.abs(DateOfDischarge.getTime() - DateOfAdmission.getTime()) / 3600000;
+   
+    let value1 = ">24 hours";
+    let value2 = "<24 hours";
+    let value3 = "> 7 days";
+  
+    if (hours > 24 && hours<168 ) {
+      this.medicalForm.controls["Duration"].setValue(value1);
+
+    }
+    else if (hours <=24 ) {
+      this.medicalForm.controls["Duration"].setValue(value2);
+    }
+    else if (hours >=168) {
+      this.medicalForm.controls["Duration"].setValue(value3);
+    }
   }
 
   // Binding Values on selection to Next Form----end
@@ -830,7 +818,7 @@ export class CreatclaimComponent implements OnInit {
   chronicillnessSelect(event: any){
     this.medicalAndChronicIllnessLink = [];
     for (let i = 0; i < event.value.length; i++) {
-          const dvar = this.chronicillnessDetail.filter((x: any) => x.id == event.value[i]);
+          const dvar = this.chronicillnessDetail.filter((x: any) => x.name == event.value[i]);
           this.medicalAndChronicIllnessLink.push({
             "id": dvar[0].id,
           });
@@ -940,28 +928,29 @@ export class CreatclaimComponent implements OnInit {
                         this.doclist.push(element);
                       });
                  }
-                let mandatorydoc :any= [];
-                mandatorydoc.push([
-                  'Report supporting the diagnosis',
-                  'Etiology of ailment/Consultation papers',
-                  'Patient address proof (Pref. Aadhar)',
-                  'Insured PAN Card',
-                  'Claim Form (Part A)'
+                let mandatorydoc :any =[];
+                // mandatorydoc.push([
+                //   'Report supporting the diagnosis',
+                //   'Etiology of ailment/Consultation papers',
+                //   'Patient address proof (Pref. Aadhar)',
+                //   'Insured PAN Card',
+                //   'Claim Form (Part A)'
 
-                ]);
+                // ]);
 
-                // if(this.ActiveStage == "Initial Authorisation"){
-                //   mandatorydoc.push(this.initialDoc)
-                // }else if(this.ActiveStage == "Enhance"){
-                //   mandatorydoc.push(this.enhanceDoc)
-                // }else if(this.ActiveStage == "Discharge"){
-                //   mandatorydoc.push(this.dischargeDoc)
-                // }else if(this.ActiveStage == "Final Claim"){
-                //   mandatorydoc.push(this.finalDoc)
-                // }
+                if(this.ActiveStage == "Initial"){
+                  mandatorydoc = this.initialDoc
+                }else if(this.ActiveStage == "Enhancement"){
+                  mandatorydoc = this.enhanceDoc
+                }else if(this.ActiveStage == "Discharge"){
+                  mandatorydoc = this.dischargeDoc
+                }else if(this.ActiveStage == "Final Claim"){
+                  mandatorydoc =this.finalDoc
+                }
                
                 mandatorydoc.forEach((element:any) => {
-                  this.doclist.push(element);
+                  //let val ={"docname" : element.name}
+                  this.doclist.push(element.name);
                 });
               }    
     })
@@ -1023,7 +1012,6 @@ export class CreatclaimComponent implements OnInit {
 
     let hours = Math.abs(DateOfDischarge.getTime() - DateOfAdmission.getTime()) / 3600000;
    
-     console.log(hours)
     let value1 = ">24 hours";
     let value2 = "<24 hours";
     let value3 = "> 7 days";
@@ -1084,6 +1072,14 @@ export class CreatclaimComponent implements OnInit {
       }
       )
     }
+  }
+
+  numericOnly(event:any){
+    const charCode = (event.which) ? event.which : event.keyCode;
+    if (charCode == 101 || charCode == 69 || charCode == 45 || charCode == 43) {
+      return false;
+    }
+    return true;
   }
 }
 
