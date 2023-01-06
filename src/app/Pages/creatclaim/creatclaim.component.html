@@ -6,7 +6,11 @@
         <section class="multi_step_form px-0">
             <form id="msform">
                 <!-- Tittle -->
-
+                     <!-- <mat-form-field class="form-control date">
+                                        <input matInput [matDatepicker]="picker" class="form-label float-start">
+                                        <mat-datepicker-toggle matIconSuffix [for]="picker">gg</mat-datepicker-toggle>
+                                        <mat-datepicker #picker>xf</mat-datepicker>
+                                    </mat-form-field> -->
                 <!-- progressbar -->
                 <ul id="progressbar" style="margin-bottom: 0px !important;">
                     <li class="active">Patient</li>
@@ -81,7 +85,13 @@
                                     <label for="" class="form-label float-start">Date Of Birth*</label>
                                     <input type="date" class="form-control" formControlName="DOB"
                                         (change)="ageCalculator()" id="dob" [max]="date" required>
-                                        
+                                
+                                    <!-- <mat-form-field class="form-control date">
+                                        <input matInput [matDatepicker]="picker" class="form-label float-start">
+                                        <mat-datepicker-toggle matIconSuffix [for]="picker">gg</mat-datepicker-toggle>
+                                        <mat-datepicker #picker>xf</mat-datepicker>
+                                    </mat-form-field> -->
+                                          
                                         
                                 </div>
                                 <div class="form-group col-md-3 mt-3">
@@ -633,11 +643,14 @@
                
                     <button type="button" class="previous previous_button btn btn-sm px-5 float-start mt-3 mx-2">Back</button>
 
-                    <!-- <button *ngIf="!docbutton" [attr.disabled]="false" class="next btn btn-primary btn-sm px-5 float-end mt-3 mx-2" (click)="FinalSubmit()"
-                      >Submit</button>  -->
+                    <button class="btn btn-primary btn-sm px-5 float-end mt-3 mx-2" (click)="FinalSubmit()"
+                      >Submit</button>
+                      
+                      <button  id="btnsubmit" class="next btn btn-primary btn-sm px-5 float-end mt-3 mx-2"
+                      >gotofinal</button> 
 
-                    <button class="next btn btn-primary btn-sm px-5 float-end mt-3 mx-2" (click)="FinalSubmit()"
-                      >Submit</button> 
+                    <!-- <button id="btnsubmit" class="btn btn-primary btn-sm px-5 float-end mt-3 mx-2" (click)="FinalSubmit()"
+                      >Submit</button>  -->
                       <!-- form="DocumentsForm" -->
                 </fieldset>
 <!--DocumentInfo End -->

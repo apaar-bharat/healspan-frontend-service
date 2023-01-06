@@ -15,6 +15,7 @@ import { AuthenticationService } from './service/authentication.service';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { ModalpopupService } from './Providers/modalpopup.service';
 import { ErrorIntercept } from './service/error.interceptor';
+import { MatDatepicker, MatDatepickerModule } from '@angular/material/datepicker';
 
 
 
@@ -32,6 +33,7 @@ import { ErrorIntercept } from './service/error.interceptor';
     ReactiveFormsModule,
     DefaultModule,
     MatFormFieldModule,
+    MatDatepickerModule,
     HttpClientModule,
     NgxSpinnerModule
         // MatDialogModule,

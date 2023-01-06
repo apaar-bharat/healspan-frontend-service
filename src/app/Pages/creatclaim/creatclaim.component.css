@@ -150,6 +150,5 @@ input::-webkit-inner-spin-button {
    border-radius: 0px 0px 5px 5px !important;}
   .multi_step_form #msform fieldset h6 {padding: 0px 10px 0px 10px  !important; }
 
-
-
-  
+  .mat-datepicker-toggle {color:#434343 !important;}
+  .date {text-align: right !important;}

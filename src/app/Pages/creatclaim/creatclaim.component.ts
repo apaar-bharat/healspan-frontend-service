@@ -381,7 +381,8 @@ export class CreatclaimComponent implements OnInit {
       uploaddoc = this.patientMedicalInfoList["documentList"];
 
       uploaddoc.forEach((element:any)=>{
-          this.alredyUploaddoc.push(element.documentType)
+        if(element.documentPath != null){
+          this.alredyUploaddoc.push(element.documentType)}
       })
 
 
@@ -628,17 +629,18 @@ export class CreatclaimComponent implements OnInit {
   }
 
   FinalSubmit(){
+    this.doclistvalidation();
     let param ={   
          "claimId":this.claimInfoID,
          "stageId": this.claimStageId,
          "statusId":3
     }
-    this.api.post('healspan/claim/updateclaimstatus',param).subscribe((res) =>{
-      console.log("updateclaimstatus response",res)
-    },(err: HttpErrorResponse) => {
-        console.log("HttpErrorResponse" + err.status);
-        //alert("Something Went Wrong -" + err.status)       
-      })
+    // this.api.post('healspan/claim/updateclaimstatus',param).subscribe((res) =>{
+    //   console.log("updateclaimstatus response",res)
+    // },(err: HttpErrorResponse) => {
+    //     console.log("HttpErrorResponse" + err.status);
+    //     //alert("Something Went Wrong -" + err.status)       
+    //   })
   }
   
   
@@ -671,7 +673,7 @@ export class CreatclaimComponent implements OnInit {
         body.append('file', file),
         body.append('inputDocId', docid),
         body.append('medicalInfoId', this.medicalInfoResponse.medicalInfoId),
-        body.append('claimInfoID', this.patientInfoResponse.claimInfoID),
+        body.append('claimInfoId', this.claimInfoID),
 
 
         // let body ={
@@ -689,11 +691,10 @@ export class CreatclaimComponent implements OnInit {
           //this.doclistvalidation();
         },(err: HttpErrorResponse) => {
           console.log("HttpErrorResponse" + err.status);
-          //alert("Something Went Wrong -" + err.status)       
         });
 
 
-        this.doclistvalidation();
+       
     
       } else {
         //this.snackBar.open('File size exceeds 4 MB. Please choose less than 4 MB','',{duration: 2000});
@@ -1051,17 +1052,21 @@ export class CreatclaimComponent implements OnInit {
   doclistvalidation() {
     if (this.claimInfoID != null) {
       this.claimInfoID = this.patientInfoResponse.claimInfoId;
-      this.api.getService("healspan/claim/retrieveclaim/" + this.claimInfoID).subscribe({
+      this.api.getService("healspan/claim/retrieveclaim/" + this.claimStageLinkId).subscribe({
         next: (data: any) => {
-          console.log("hello", data[0]["medicalInfo"].documentList)
+          console.log("hello", data["medicalInfo"].documentList)
           let docdata :any =[];
-          docdata = data[0]["medicalInfo"].documentList;
+          docdata = data["medicalInfo"].documentList;
           docdata.forEach((element: any) => {
             if (element.documentPath == null) {
               this.docbutton = false;
+              alert("pleaseuploadall doc")
             }
             else {
               this.docbutton = true;
+              document.getElementById("btnsubmit")?.click();
+              alert("succeess")
+
             }
           })
         },
@@ -1072,6 +1077,12 @@ export class CreatclaimComponent implements OnInit {
       }
       )
     }
+    //next 
+   
+  
+    //this.
+    //element(document.querySelector("btnsubmit")).addClass('.some-class');  
+  
   }
 
   numericOnly(event:any){

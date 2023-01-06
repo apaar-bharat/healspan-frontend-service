@@ -88,13 +88,14 @@
 			</li>
 			
 		</ul>
-		<div class="tab-content" id="myTabContent">
-			<div class="search-hero w-100">
+		<div class="tab-content pt-3 px-0" id="myTabContent">
+			<!-- <div class="search-hero w-100">
 				<input class="form-control mt-3" type="text" name="filter" [(ngModel)]="searchText" autocomplete="off"
 					placeholder="Search Here" />
-			</div>
-			<div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0" style="height: 250px; overflow: auto">
-				<table class="table tstriped table-borderless mt-3 healshadow1">
+			</div> -->
+			<div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
+				<div class="table table-responsive fixTableHead">
+					<table class="table tstriped table-borderless healshadow1">
 						<thead style="position: sticky !important; top:0px !important;">
 							<th style="width: 135px;"  [appSort]="aprrovalDataList" data-order="desc" data-name="claimID">Claim ID
 								<i class="fas fa-sort p-0"></i>							</th>
@@ -116,6 +117,7 @@
 							<th [appSort]="aprrovalDataList" data-order="desc" data-name="approvedAmount">ApprovedAmount
 								<i class="fas fa-sort p-0"></i>							</th>
 						</thead>
+					
 					<tbody>
 						<tr *ngFor="let p of aprrovalDataList | filter: searchText">
 							<td><a scope="col" [routerLink]="[]" (click)="GotoClaim(p.stage,p.claimStageLinkId)" class="tblink">{{p.claimID}}</a></td>
@@ -132,34 +134,45 @@
 					</tbody>
 				</table>
 			</div>
+			</div>
 
-			<div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" style="height: 250px; overflow: auto"
+			<div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab"
 				tabindex="0">
-				<div class="table table-responsive">
-				<table id="example" class="table tstriped table-borderless mt-3 healshadow1">
-					<thead style="position: sticky !important; top:0px !important;">
+				<div class="table table-responsive fixTableHead">
+				<table class="table tstriped table-borderless healshadow1">
+					<thead>
+						<tr>
 						<th [appSort]="pendingDataList" data-order="desc" data-name="claimID" class="p-1">Claim ID
 							<i class="fas fa-sort p-0"></i>
 						</th>
 						<th [appSort]="pendingDataList" data-order="desc" data-name="name">Name <i class="fas fa-sort p-0"></i></th>
-						<th [appSort]="pendingDataList" data-order="desc" data-name="ailment">Ailment <i class="fas fa-sort p-0"></i></th>
+						<th [appSort]="pendingDataList" data-order="desc" data-name="ailment" width="300">Ailment <i class="fas fa-sort p-0"></i></th>
 					
 						<th [appSort]="pendingDataList" data-order="desc" data-name="stage">Stage <i class="fas fa-sort p-0"></i></th>
 						<th [appSort]="pendingDataList" data-order="desc" data-name="status">Status <i class="fas fa-sort p-0"></i>
-							<!-- <a><img style="height: 16px;" src="/assets/img/sort.png"></a> -->
 						</th>
 						<th [appSort]="pendingDataList" data-order="desc" data-name="admissionDate">Admission Date <i class="fas fa-sort p-0"></i>
-							<!-- <a><img style="height: 16px;" src="/assets/img/sort.png"></a> -->
 						</th>
 						<th [appSort]="pendingDataList" data-order="desc" data-name="dischargeDate">Discharge Date <i class="fas fa-sort p-0"></i>
-							<!-- <a><img style="height: 16px;" src="/assets/img/sort.png"></a> -->
 						</th>
 						<th [appSort]="pendingDataList" data-order="desc" data-name="ageing">Ageing <i class="fas fa-sort p-0"></i>
-							<!-- <a><img style="height: 16px;" src="/assets/img/sort.png"></a> -->
 						</th>
 						<th [appSort]="pendingDataList" data-order="desc" data-name="approvedAmount">Approved Amount <i class="fas fa-sort p-0"></i>
-							<!-- <a><img style="height: 16px;" src="/assets/img/sort.png"></a> -->
 						</th>
+
+						<!--//new-->
+						
+						<!-- <th>Claim ID</th>
+						<th>Name</th>
+						<th>Ailment</th>
+						<th>Stage</th>
+						<th>Status</th>
+						<th>Admission Date</th>
+						<th>Discharge Date</th>
+						<th>Ageing</th>
+						<th>Approved Amount</th> -->
+					</tr>
+						
 					</thead>
 					<tbody>
 						<tr *ngFor="let a of pendingDataList | filter: searchText">
