@@ -33,7 +33,8 @@ import { ErrorIntercept } from './service/error.interceptor';
     DefaultModule,
     MatFormFieldModule,
     HttpClientModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+
         // MatDialogModule,
     // MatTableModule ,
     // CdkTableModule

@@ -29,30 +29,43 @@
 
                                 </div>
                             </div>
+                            <div  class="form-row  w-100">
+                                <div class="form-group col-md-6">
+                                    <label for="" class="form-label float-start">TPA*</label>
+                                    <select class="form-control form-select" id="TPA" 
+                                    (change)="tpaselect($event)"   
+                                        required>
+                                        <option value="">Choose...</option>
+                                        <option *ngFor="let t of TPADetail| orderby : 'name'" value={{t.id}}>{{t.name}}</option>
+                                    </select>
+    
+                                </div>
+                            </div>
                             <div class="form-row w-100">
+                                
 
-                                <div class="form-group col-md-3">
+                                <div class="form-group col-md-3  mt-3">
                                     <label for="" class="form-label float-start">First name*</label>
                                     <input type="text" class="form-control"  formControlName="Fname" 
                                         [class.is-invalid]="f['Fname'].invalid && (f['Fname'].dirty || f['Fname'].touched)"
                                         required>
 
                                 </div>
-                                <div class="form-group col-md-3">
+                                <div class="form-group col-md-3  mt-3">
                                     <label for="" class="form-label float-start">Middle name</label>
                                     <input type="text" class="form-control" formControlName="Mname">
 
                                 </div>
-                                <div class="form-group col-md-3">
+                                <div class="form-group col-md-3  mt-3">
                                     <label for="" class="form-label float-start">Last name*</label>
                                     <input type="text" class="form-control" formControlName="Lname"
                                         [class.is-invalid]="f['Lname'].invalid && (f['Lname'].dirty || f['Lname'].touched)"
                                         required>
 
                                 </div>
-                                <div class="form-group col-md-3">
+                                 <div class="form-group col-md-3  mt-3">
                                     <label for="" class="form-label float-start">Patient Mobile No*</label>
-                                    <input type="text" class="form-control" formControlName="MobileNo" 
+                                    <input type="number" class="form-control" formControlName="MobileNo" (keypress)="numericOnly($event)"
                                     [class.is-invalid]="f['MobileNo'].invalid && (f['MobileNo'].dirty || f['MobileNo'].touched)"
                                      required>
                                 </div>
@@ -213,7 +226,7 @@
                                     <input type="number" (keypress)="numericOnly($event)" class="form-control" formControlName="OtherCE" [attr.disabled]="false">
                                 </div>
 
-                                <div class="form-group col-md-3 mt-3">
+                                <!-- <div class="form-group col-md-3 mt-3">
                                     <label for="" class="form-label float-start">Procedure</label>
                                     <select class="form-control form-select" formControlName="Procedure" id="Procedure"
                                         (change)="onprocedureSelect($event)" required>
@@ -221,7 +234,7 @@
                                         <option *ngFor="let p of procedureDetail| orderby : 'name'" value={{p.id}}>
                                             {{p.name}}</option>
                                     </select>
-                                </div>
+                                </div> -->
 
                                 <div class="form-group col-md-3 mt-3">
                                     <label for="" class="form-label float-start">Inital cost estimate*</label>
@@ -264,7 +277,7 @@
 
                     <button type="button" (click)="redirect()" form="ngForm"  class="previous_button btn btn-sm px-5 float-start mt-3 mx-2">Exit</button>
                     <button type="button" class="next btn btn-primary btn-sm px-5 float-end mt-3 mx-2" type="submit"
-                    form="ngForm" [disabled]="!ClaimForm.valid"  >Continue</button>
+                    form="ngForm"  [disabled]="!ClaimForm.valid"  >Continue</button>
 
                     <!--[disabled]="!ClaimForm.valid"  -->
                 </fieldset>
@@ -288,12 +301,26 @@
                                     [class.is-invalid]="M['Provisionaldiagnosis'].invalid && (M['Provisionaldiagnosis'].dirty || M['Provisionaldiagnosis'].touched)"
                                     id="Provisionaldiagnosis" required>
                                     <option value="">Choose...</option>
-                                    <option *ngFor="let p of DiagnosisDetail | orderby : 'name'" value={{p.id}}>
+                                    <option *ngFor="let p of tpaDiagnosisDetail | orderby : 'name'" value={{p.id}}>
                                         {{p.name}}</option>
 
 
                                 </select>
 
+                            </div>
+                            
+                            <div class="form-group col-md-3  ">
+                                <label for="" class="form-label float-start">Speciality*</label>
+                                <select class="form-control form-select" formControlName="Speciality"
+                                [class.is-invalid]="M['Speciality'].invalid && (M['Speciality'].dirty || M['Speciality'].touched)"
+                                id="Speciality" required>
+                                
+                                <option value="">Choose...</option>
+                                <option *ngFor="let p of specialityDetail | orderby : 'name'" value={{p.id}}>
+                                    {{p.name}}</option>
+                                    
+                                </select>
+                                
                             </div>
                             <div class="form-group col-md-3">
                                 <label for="" class="form-label float-start">Treatment Type*</label>
@@ -306,28 +333,14 @@
                                 </select>
 
                             </div>
-                            
-                            <div class="form-group col-md-3  ">
-                                <label for="" class="form-label float-start">Speciality*</label>
-                                <select class="form-control form-select" formControlName="Speciality"
-                                    [class.is-invalid]="M['Speciality'].invalid && (M['Speciality'].dirty || M['Speciality'].touched)"
-                                    id="Speciality" required>
-
-                                    <option value="">Choose...</option>
-                                    <option *ngFor="let p of specialityDetail | orderby : 'name'" value={{p.id}}>
-                                        {{p.name}}</option>
-
-                                </select>
-
-                            </div>
                             <div class="form-group col-md-3">
                                 <label for="" class="form-label float-start">Procedure*</label>
                                 <!-- <input type="text" class="form-control" formControlName="Procedures" required readonly> -->
                                 <select  class="form-control form-select" formControlName="Procedures" 
                                 [class.is-invalid]="M['Procedures'].invalid && (M['Procedures'].dirty || M['Procedures'].touched)"
-                                id="Procedures"  [attr.disabled]="false" required>
+                                (change)="onprocedureSelect($event)"  id="Procedures"   required>
                                 <option value="">Choose...</option>
-                                <option *ngFor="let p of procedureDetail | orderby : 'name'" value={{p.id}}>
+                                <option *ngFor="let p of tpaprocedureDetail | orderby : 'name'" value={{p.id}}>
                                     {{p.name}}</option>
 
 
@@ -385,7 +398,13 @@
                                     formControlName="Qualificationofthetreatingdoctor" required>
 
                             </div>
-                            <div class="form-group col-md-3 mt-3">
+                            <div class="form-group col-md-9  mt-3 ">
+                                <!-- <button type="submit"   class="action-button btn-primary btn-sm px-5 float-end mt-3" form="medform">
+                                 </button> -->
+                                  <button type="button"  class="btn btn-primary btn-sm px-5 float-end mt-3 mx-2" 
+                                  form="ngForm" [disabled]="!medicalForm.valid" (click)="onMedformSubmit(medicalForm)">Save MedicalInfo</button>
+                            </div>
+                            <div class="form-group col-md-3 mt-3"  *ngIf="visible">
                                 <label for="" class="form-label float-start">Gender</label>
                                 <!--<input type="text" class="form-control" formControlName="Genders" readonly> -->
                                 <select class="form-control form-select" (change)="OnGender($event)" formControlName="Genders" id="Genders"  [attr.disabled]="false" >
@@ -395,11 +414,11 @@
 
                             </select>
                             </div>
-                            <div class="form-group col-md-3 mt-3">
+                            <div class="form-group col-md-3 mt-3" *ngIf="visible">
                                 <label for="" class="form-label float-start">Age</label>
                                 <input type="text" class="form-control" formControlName="Ages" [attr.disabled]="false">
                             </div>
-                            <div class="form-group col-md-3  mt-3">
+                            <div class="form-group col-md-3  mt-3" *ngIf="visible">
                                 <label for="" class="form-label float-start">Duration</label>
                                 <input type="text" class="form-control" formControlName="Duration" [attr.disabled]="false">
 
@@ -415,7 +434,7 @@
                             </div>
                         </div>
                         <div class="form-row w-100">
-                            <div class="form-group col-md-3  mt-3">
+                            <div class="form-group col-md-3  mt-3" *ngIf="visible">
                                 <label for="" class="form-label float-start">Claim</label>
                                 <!--(change)="OnClaimSelect()" -->
                                 <input type="text" class="form-control" formControlName="Claim" [attr.disabled]="false">
@@ -427,12 +446,10 @@
                                     <option value="<=1 Lac"><=1 Lac</option>
                                 </select> -->
                             </div>
-                            <div class="form-group col-md-9  mt-3">
-                                <!-- <button type="submit"   class="action-button btn-primary btn-sm px-5 float-end mt-3" form="medform">
-                                 </button> -->
+                            <!-- <div class="form-group col-md-9  mt-3 ">                        
                                   <button type="button"  class="btn btn-primary btn-sm px-5 float-end mt-3 mx-2" 
                                   form="ngForm" [disabled]="!medicalForm.valid" (click)="onMedformSubmit(medicalForm)">Save MedicalInfo</button>
-                            </div>
+                            </div> -->
                         </div>
                      
                     </form>
@@ -467,7 +484,7 @@
                     </div> -->
                     <button type="button" class="previous previous_button btn btn-sm px-5 float-start mt-3 mx-2">Back</button>
                     <button class="next btn btn-primary btn-sm px-5 float-end mt-3 mx-2" (click)="SaveSequentialQue()" 
-                    [disabled]="!IsSaveSequentialQue" >Continue</button>
+                     >Continue</button>
 
                       <!-- [disabled]="!medicalForm.valid" -->
                
@@ -503,15 +520,15 @@
                             <div class="form-group col-md-3">
                                 <label for="" class="form-label float-start">TPA*</label>
                                 <select class="form-control form-select" id="TPA" formControlName="TPAID"
-                                    [class.is-invalid]="I['TPAID'].invalid && (I['TPAID'].dirty || I['TPAID'].touched)"
-                                    required>
+                                [attr.disabled]=false
+                                    >
                                     <option value="">Choose...</option>
                                     <option *ngFor="let t of TPADetail| orderby : 'name'" value={{t.id}}>{{t.name}}</option>
                                 </select>
 
                             </div>
                             <div class="form-group col-md-3">
-                                <label for="" class="form-label float-start">TPA ID*</label>
+                                <label for="" class="form-label float-start"> TPA ID Card No</label>
                                 <input type="text" class="form-control" formControlName="TPAnumber"
                                     [class.is-invalid]="I['TPAnumber'].invalid && (I['TPAnumber'].dirty || I['TPAnumber'].touched)"
                                     required>
@@ -574,7 +591,7 @@
                         <button type="button" class="previous previous_button btn btn-sm px-5 float-start mt-3 mx-2">Back</button>
 
                         <button class="next btn btn-primary btn-sm px-5 float-end mt-3 mx-2" type="submit" form="insuarance"
-                        [disabled]="!InsuaranceForm.valid" >Continue</button>
+                         >Continue</button>
                 </fieldset>
 <!--InsuranceInfo End -->
 

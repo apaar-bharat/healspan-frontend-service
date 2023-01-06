@@ -53,7 +53,7 @@ export class claimService {
             "hospitalUhid" : ClaimForm.value.PHUHID,
             "hospitalId" : ClaimForm.value.Hospital,
             "roomCategoryId" : ClaimForm.value.RoomCategory,
-            "procedureId" : ClaimForm.value.Procedure,
+            // "procedureId" : ClaimForm.value.Procedure,
             "genderId" : ClaimForm.value.Gender,
             "patientAndOtherCostLink" : otherCostDetail
         }

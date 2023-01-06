@@ -20,9 +20,11 @@
     "@angular/platform-browser": "^14.0.0",
     "@angular/platform-browser-dynamic": "^14.0.0",
     "@angular/router": "^14.0.0",
+  
     "bootstrap": "^5.2.2",
     "ng-bootstrap-dropdown": "^1.0.0",
     "ng-multiselect-dropdown": "^0.3.9",
+  
     "ngx-spinner": "^14.0.0",
     "rxjs": "^7.5.7",
     "tslib": "^2.3.0",

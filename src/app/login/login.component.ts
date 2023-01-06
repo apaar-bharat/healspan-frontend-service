@@ -4,27 +4,29 @@ import { Router } from '@angular/router';
 import { ApiService } from '../service/api.service';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
-import { Observable, throwError } from 'rxjs';
+import { Observable, throwError,Subject, timer } from 'rxjs';
 import { Modal } from 'src/assets/js/bootstrap.bundle';
 import { data } from 'jquery';
 import { AuthenticationService } from '../service/authentication.service';
 import { DataService } from '../service/data.service';
 import { CommonserviceService } from '../service/commonservice.service';
 import { environment } from 'src/environments/environment';
+import { takeUntil } from 'rxjs/operators';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-
+  destroy = new Subject();
   loginForm!: UntypedFormGroup;
   usermaster: any;
   displayStyle = "none";
   loginData: any;
   public showPassword: boolean | undefined;
   public showPasswordOnPress: boolean | undefined;
-  
+  rxjsTimer = timer(1000, 1000);
+  timer: number | undefined;
   constructor(private router: Router, private fb: UntypedFormBuilder, private api: ApiService, 
     private http: HttpClient,private authservice:AuthenticationService,
     private dataservice:DataService,private commonservice:CommonserviceService) { }
@@ -35,6 +37,8 @@ export class LoginComponent implements OnInit {
       password: ['', [Validators.required]],
 
     });
+
+   
   }
 
 
@@ -78,7 +82,23 @@ export class LoginComponent implements OnInit {
       this.dataservice.updatecurrentuser_data(userdata); 
       this.commonservice.redirecttoactivedashboard();
       
+    //   this.rxjsTimer.pipe(takeUntil(this.destroy)).subscribe(val => {
+    //     this.timer = val;
+  
+       
+  
+    //   if (this.timer >= 1200) {
+    //     this.destroy.next(
+    //       localStorage.setItem('currentUser', "loggedin")
+    //     );
+    //     this.destroy.complete();
+    //     this.authservice.logout();
+       
+    //   this.router.navigate(['']); 
+    //   }
+    // })
     }
+
     else  {
         this.displayStyle = "block"; 
     }  
@@ -88,6 +108,8 @@ export class LoginComponent implements OnInit {
   closepopup() {
     this.displayStyle = "none";
   }
+
+  
 
 }
 

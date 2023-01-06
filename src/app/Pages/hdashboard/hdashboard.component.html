@@ -123,8 +123,8 @@
 							<td>{{p.ailment}}</td>
 							<td>{{p.stage}}</td>
 							<td>{{p.status}}</td>
-							<td>{{p.admissionDate | date:'short'}}</td>
-							<td>{{p.dischargeDate| date:'short'}}</td>
+							<td>{{p.admissionDate |date:'dd-MM-YYYY hh:mm a'}}</td>
+							<td>{{p.dischargeDate|date:'dd-MM-YYYY hh:mm a'}}</td>
 							<td>{{p.ageing}}</td>
 							<td>{{p.approvedAmount}}</td>
 						</tr>
@@ -168,8 +168,8 @@
 							<td>{{a.ailment}}</td>
 							<td>{{a.stage}}</td>
 							<td>{{a.status}}</td>
-							<td>{{a.admissionDate  | date:'dd-MM-YYYY hh:mm'}}</td>
-							<td>{{a.dischargeDate  | date:'short'}}</td>
+							<td>{{a.admissionDate  | date:'dd-MM-YYYY hh:mm a'}}</td>
+							<td>{{a.dischargeDate  | date:'dd-MM-YYYY hh:mm a'}}</td>
 							<td>{{a.ageing}}</td>
 							<td>{{a.approvedAmount}}</td>
 						</tr>
