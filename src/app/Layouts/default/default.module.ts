@@ -28,7 +28,6 @@ import { SortDirective } from 'src/app/Shared/Directives/sort.directive';
 import { OrderbyPipe } from 'src/app/Shared/Pipes/orderby.pipe';
 
 
-
 @NgModule({
   declarations: [
     DefaultComponent,
@@ -60,7 +59,8 @@ import { OrderbyPipe } from 'src/app/Shared/Pipes/orderby.pipe';
     MatButtonToggleModule,
     MatTableModule ,
     MatDialogModule,
-    NgMultiSelectDropDownModule.forRoot()
+    NgMultiSelectDropDownModule.forRoot(),
+
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA],
   

@@ -29,6 +29,8 @@
 	</div>
 	
 	<div class="row mb-3 mt-2 mx-3 text-center">
+		
+                                          
 		<a  class="col-md-3 text-decoration-none">
 			<div class="healboxx healshadow1" >
 				<p><strong>Initial Authorisation</strong></p>
@@ -125,8 +127,8 @@
 							<td>{{p.ailment}}</td>
 							<td>{{p.stage}}</td>
 							<td>{{p.status}}</td>
-							<td>{{p.admissionDate | date:'short'}}</td>
-							<td>{{p.dischargeDate| date:'short'}}</td>
+							<td>{{p.admissionDate |date:'dd-MM-YYYY hh:mm a'}}</td>
+							<td>{{p.dischargeDate|date:'dd-MM-YYYY hh:mm a'}}</td>
 							<td>{{p.ageing}}</td>
 							<td>{{p.approvedAmount}}</td>
 						</tr>
@@ -146,7 +148,7 @@
 							<i class="fas fa-sort p-0"></i>
 						</th>
 						<th [appSort]="pendingDataList" data-order="desc" data-name="name">Name <i class="fas fa-sort p-0"></i></th>
-						<th [appSort]="pendingDataList" data-order="desc" data-name="ailment" width="300">Ailment <i class="fas fa-sort p-0"></i></th>
+						<th [appSort]="pendingDataList" data-order="desc" data-name="ailment" width="200">Ailment <i class="fas fa-sort p-0"></i></th>
 					
 						<th [appSort]="pendingDataList" data-order="desc" data-name="stage">Stage <i class="fas fa-sort p-0"></i></th>
 						<th [appSort]="pendingDataList" data-order="desc" data-name="status">Status <i class="fas fa-sort p-0"></i>
@@ -181,8 +183,8 @@
 							<td>{{a.ailment}}</td>
 							<td>{{a.stage}}</td>
 							<td>{{a.status}}</td>
-							<td>{{a.admissionDate  | date:'dd-MM-YYYY hh:mm'}}</td>
-							<td>{{a.dischargeDate  | date:'short'}}</td>
+							<td>{{a.admissionDate  | date:'dd-MM-YYYY hh:mm a'}}</td>
+							<td>{{a.dischargeDate  | date:'dd-MM-YYYY hh:mm a'}}</td>
 							<td>{{a.ageing}}</td>
 							<td>{{a.approvedAmount}}</td>
 						</tr>

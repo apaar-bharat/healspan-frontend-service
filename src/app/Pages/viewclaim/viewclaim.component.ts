@@ -57,7 +57,7 @@ export class ViewclaimComponent implements OnInit {
   }
 
   Assignclaimdata(data:any){
-    console.log("hello",data)
+    //console.log("hello",data)
     let activeusertype =  localStorage.getItem("usertype");
    
    
@@ -98,6 +98,10 @@ export class ViewclaimComponent implements OnInit {
       if(this.claimInfo.userId == LoggedInId){
         this.IsEdit = true;
       }
+    }
+
+    if(this.claimdetailData["statusMst"].name == "Submitted"){
+      this.IsEdit = false;
     }
   }
 

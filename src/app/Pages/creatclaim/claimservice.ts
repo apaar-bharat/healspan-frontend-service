@@ -24,7 +24,6 @@ export class claimService {
     let patientbody = {
         "id": claimInfoID,
         "claimStageLinkId": claimStageLinkId,
-        "tpaClaimId" : null,
         "userId" : this.LoggedInId,
         "hospitalId" : ClaimForm.value.Hospital,
         "claimStageId" : claimStageId,
@@ -53,8 +52,9 @@ export class claimService {
             "hospitalUhid" : ClaimForm.value.PHUHID,
             "hospitalId" : ClaimForm.value.Hospital,
             "roomCategoryId" : ClaimForm.value.RoomCategory,
-            "procedureId" : ClaimForm.value.Procedure,
+            // "procedureId" : ClaimForm.value.Procedure,
             "genderId" : ClaimForm.value.Gender,
+            "tpaId" : ClaimForm.value.tpaID,
             "patientAndOtherCostLink" : otherCostDetail
         }
     }

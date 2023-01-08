@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject, map, Observable } from 'rxjs';
+import { BehaviorSubject, map, Observable, Subject } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { ApiService } from './api.service';
 import { DataService } from './data.service';
@@ -13,7 +13,9 @@ export class AuthenticationService {
   usermaster:any;
   public currentUserSubject!: BehaviorSubject<String>;
   public currentUser!: Observable<String>;
-  constructor(private api: ApiService,private http:HttpClient,private dataservice:DataService) { 
+  private userLoggedIn = new Subject<boolean>();
+
+  constructor(private api: ApiService,private http:HttpClient,private dataservice:DataService,private router: Router) { 
     this.usermaster = [
       {
         "id" : 1,
@@ -28,6 +30,9 @@ export class AuthenticationService {
         "type" : 'ruser'
       }
     ]
+
+    this.userLoggedIn.next(false);
+
   }
   
   login(username: string, password: string) {
@@ -55,11 +60,25 @@ export class AuthenticationService {
   }
   
   logout() {  
-    localStorage.removeItem('currentUser');  
+    localStorage.removeItem('currentUser'); 
+    this.userLoggedIn.next(false);
+    localStorage.clear(); 
+    this.router.navigate(['']);  
+
   }  
   
   public get loggedIn(): boolean {  
     return (localStorage.getItem('currentUser') !== null);  
   }  
+
+
+  setUserLoggedIn(userLoggedIn: boolean) {
+    this.userLoggedIn.next(userLoggedIn);
+  }
+
+  getUserLoggedIn(): Observable<boolean> {
+    return this.userLoggedIn.asObservable();
+  }
+
 
 }

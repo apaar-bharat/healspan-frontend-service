@@ -28,6 +28,7 @@ import { OrderbyPipe } from './Pipes/orderby.pipe';
     HeaderComponent,
     FooterComponent,
     SidebarComponent,
+    
   ]
 })
 export class SharedModule { }

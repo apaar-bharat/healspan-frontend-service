@@ -35,7 +35,7 @@ export class HdashboardComponent implements OnInit {
   GetData(){
     let LoggedInId = localStorage.getItem("LoggedInId");
     this.apiservice.getService("healspan/claim/retrieveallclaimsofloggedinuser/"+LoggedInId).subscribe((data:any) =>{
-    
+    console.log("usersData",data)
       if(data["loggedInUserClaimData"]!= null){
       this.statusDetail = data["claimStageCount"];
       this.aprrovalDataList = data["loggedInUserClaimData"].filter((x:any)=>x.status == "Approved");

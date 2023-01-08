@@ -15,7 +15,9 @@ import { AuthenticationService } from './service/authentication.service';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { ModalpopupService } from './Providers/modalpopup.service';
 import { ErrorIntercept } from './service/error.interceptor';
-import { MatDatepicker, MatDatepickerModule } from '@angular/material/datepicker';
+import { NgIdleKeepaliveModule } from '@ng-idle/keepalive';
+import { ModalModule } from 'ngx-bootstrap/modal';
+//import { ModalModule } from 'ngx-bootstrap/modal';
 
 
 
@@ -33,15 +35,18 @@ import { MatDatepicker, MatDatepickerModule } from '@angular/material/datepicker
     ReactiveFormsModule,
     DefaultModule,
     MatFormFieldModule,
-    MatDatepickerModule,
     HttpClientModule,
-    NgxSpinnerModule
-        // MatDialogModule,
+    NgxSpinnerModule,
+    NgIdleKeepaliveModule.forRoot(),
+    ModalModule.forRoot() 
+
+    // MatDialogModule,
     // MatTableModule ,
     // CdkTableModule
     // MatTable
   
   ],
+
   // { provide: LocationStrategy, useClass: HashLocationStrategy}
   providers: [ApiService,AuthenticationService,ModalpopupService,
     {provide: HTTP_INTERCEPTORS,useClass: ErrorIntercept,multi: true}],
