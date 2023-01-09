@@ -39,14 +39,7 @@
 				<p class="bxtt">Pending</p>
 			</div>
 		</a>
-		<a class="col-md-3 text-decoration-none">
-			<div class="healboxx healshadow1" >		
-				<p><strong>Discharge</strong></p>
-				<h2 class="bxt"><strong>{{statusDetail.dischargeCount}}</strong></h2>
-				<!-- {{statusDetail["Discharge"]}} -->
-				<p class="bxtt">Pending</p>
-			</div>
-		</a>
+		
 		<a class="col-md-3 text-decoration-none">
 			<div class="healboxx healshadow1">
 				<p><strong>Enhancement</strong></p>
@@ -55,6 +48,16 @@
 				<!-- {{statusDetail["Enhancement"]}} -->
 			</div>
 		</a>
+
+		<a class="col-md-3 text-decoration-none">
+			<div class="healboxx healshadow1" >		
+				<p><strong>Discharge</strong></p>
+				<h2 class="bxt"><strong>{{statusDetail.dischargeCount}}</strong></h2>
+				<!-- {{statusDetail["Discharge"]}} -->
+				<p class="bxtt">Pending</p>
+			</div>
+		</a>
+
 		<a class="col-md-3 text-decoration-none">
 			<div class="healboxx healshadow1">
 				<p><strong>Final Claim</strong></p>
@@ -90,11 +93,11 @@
 			</li>
 			
 		</ul>
-		<div class="tab-content pt-3 px-0" id="myTabContent">
-			<!-- <div class="search-hero w-100">
-				<input class="form-control mt-3" type="text" name="filter" [(ngModel)]="searchText" autocomplete="off"
+		<div class="tab-content pt-2 px-0" id="myTabContent">
+			<div class="search-hero w-100 p-1">
+				<input class="form-control mt-2" type="text" name="filter" [(ngModel)]="searchText" autocomplete="off"
 					placeholder="Search Here" />
-			</div> -->
+			</div>
 			<div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
 				<div class="table table-responsive fixTableHead">
 					<table class="table tstriped table-borderless healshadow1">
@@ -103,7 +106,7 @@
 								<i class="fas fa-sort p-0"></i>							</th>
 							<th [appSort]="aprrovalDataList" data-order="desc" data-name="name">Name
 								<i class="fas fa-sort p-0"></i>							</th>
-							<th [appSort]="aprrovalDataList" data-order="desc" data-name="ailment">Ailment
+							<th [appSort]="aprrovalDataList" data-order="desc" data-name="ailment" width="200">Ailment
 								<i class="fas fa-sort p-0"></i>							</th>
 							
 							<th [appSort]="aprrovalDataList" data-order="desc" data-name="stage">Stage

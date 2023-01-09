@@ -126,6 +126,11 @@ export class claimService {
   }
 
 
+  UpdateClaimStage(Param:any){
+    return this.http.post<any>(environment.baseUrl+"healspan/claim/updateclaimstatus",Param)
+
+  }
+
 
 
 }

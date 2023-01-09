@@ -26,7 +26,7 @@ export class ViewclaimComponent implements OnInit {
   IsEdit:boolean = false;
   claimStageId:any;
   claimStageLinkId:any;
- 
+  Isapproved:boolean = false;
   path:any;
   constructor(private api: ApiService,private dataservice : DataService,private router:Router) { }
   ngOnInit(): void {
@@ -102,6 +102,12 @@ export class ViewclaimComponent implements OnInit {
 
     if(this.claimdetailData["statusMst"].name == "Submitted"){
       this.IsEdit = false;
+    }
+
+    if(this.claimdetailData["statusMst"].name == "Submitted"){
+      this.Isapproved = true
+    }else{
+      this.Isapproved = false
     }
   }
 

@@ -38,8 +38,8 @@ export class HdashboardComponent implements OnInit {
     console.log("usersData",data)
       if(data["loggedInUserClaimData"]!= null){
       this.statusDetail = data["claimStageCount"];
-      this.aprrovalDataList = data["loggedInUserClaimData"].filter((x:any)=>x.status == "Approved");
-      this.pendingDataList = data["loggedInUserClaimData"].filter((x:any)=>x.status != "Approved");
+      this.aprrovalDataList = data["loggedInUserClaimData"].filter((x:any)=>x.status == "Submitted");
+      this.pendingDataList = data["loggedInUserClaimData"].filter((x:any)=>x.status != "Submitted");
       }
       
     },(err: HttpErrorResponse) => {

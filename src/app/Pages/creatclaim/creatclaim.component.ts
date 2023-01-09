@@ -113,7 +113,8 @@ export class CreatclaimComponent implements OnInit {
   //Stage wise Mandatory Documents;
   initialDoc: any = []; enhanceDoc: any = []; dischargeDoc: any = []; finalDoc: any = [];
   patientAndOtherCostLink: any = [];
-  alredyUploaddoc: any = []; selectedObjectsFromArray: any = []
+  alredyUploaddoc: any = []; selectedObjectsFromArray: any = [];
+  IfmedicalForm:boolean =false;
   constructor(private fb: UntypedFormBuilder, private api: ApiService, private http: HttpClient,
     private httpClient: HttpClient, private route: ActivatedRoute, private spinnerservice: NgxSpinnerService,
     private dataservice: DataService, private commonservice: CommonserviceService,
@@ -252,6 +253,9 @@ export class CreatclaimComponent implements OnInit {
   }
 
   AssignFormControlValues(data: any) {
+   
+    
+
     this.doclist = [];
     this.claimStageLinkId = data.id;
     this.claimInfoID = data.claimInfo.id;
@@ -446,7 +450,7 @@ export class CreatclaimComponent implements OnInit {
 
 
     }
-
+    this.IfmedicalForm = false;
   }
 
   get f() { return this.ClaimForm.controls; }
@@ -461,6 +465,8 @@ export class CreatclaimComponent implements OnInit {
       this.ClaimForm.controls["ClaimedAmount"].addValidators(Validators.required);
     }
   }
+
+
 
   openDialog() {
 
@@ -482,9 +488,12 @@ export class CreatclaimComponent implements OnInit {
       this.OtherCosts.forEach((element: any) => {
 
         const data = this.Otherclist.find((x: any) => x.id === element.id)
+        console.log("rt",data)
         if (!data) {
           this.Otherclist.push({ id: element.id, name: element.name, value: 0 });
+
         }
+     
       });
 
     }
@@ -498,7 +507,11 @@ export class CreatclaimComponent implements OnInit {
         data = res;
         data.forEach((element: any) => {
           this.Othercostlist.push({ id: element.id, amount: parseInt(element.value) });
+          if(element.value=='' || element.value==null){
+            element.value=0;
+          }
           sum = sum + parseInt(element.value)
+          console.log("trt",element.value)
         });
       });
 
@@ -508,11 +521,12 @@ export class CreatclaimComponent implements OnInit {
       let totalothercoste = this.ClaimForm.get("OtherCE")?.value;
   
       let total = Number(totalroomcost + totalothercoste)
-      this.ClaimForm.controls["InitialCE"].setValue(total);
+      this.ClaimForm.controls["InitialCE"].setValue(total)
       this.InitialCeCalculate();
 
     });
   }
+
 
   changeDate() {
     this.dateSent = new Date(this.dateSent).getFullYear() + '-' + ('0' + new Date(this.dateSent).getMonth()).slice(-2) + '-' + ('0' + new Date(this.dateSent).getDate()).slice(-2);
@@ -586,6 +600,7 @@ export class CreatclaimComponent implements OnInit {
               this.medicalInfoId = this.medicalInfoResponse.medicalInfoId;
               this.GetSequentialquestion();
               this.IsSaveSequentialQue = true;
+              this.IfmedicalForm =true;
             }
           },
           error: (err: HttpErrorResponse) => {
@@ -788,13 +803,13 @@ export class CreatclaimComponent implements OnInit {
   //---------Start Binding Values on basis of tpa
   tpaselect(event: any) {
     this.InsuaranceForm.controls['TPAID'].setValue(event.target.value)
-    //let data: [] = this.DiagnosisDetail;
-    //this.tpaDiagnosisDetail = [];
-    // data.forEach((element: any) => {
-    //   if (element["tpaMst"].id == event.target.value) {
-    //     this.tpaDiagnosisDetail.push(element)
-    //   }
-    // });
+
+    this.api.getService('healspan/claim/admin/masters').subscribe((data: any) => {
+      this.procedureDetail = data["procedure_mst"];
+      this.DiagnosisDetail = data["diagnosis_mst"];
+    })
+
+
     let res  = this.DiagnosisDetail.filter((a:any)=>a["tpaMst"].id== event.target.value)
     this.DiagnosisDetail = res;
     console.log("this.DiagnosisDetail" + JSON.stringify(this.tpaDiagnosisDetail))
@@ -1133,15 +1148,7 @@ export class CreatclaimComponent implements OnInit {
           docdata.forEach((element: any) => {
             if (element.documentPath == null) {
               this.docbutton = false;
-            }
-            else {
-              if(this.docbutton){
-                 document.getElementById("btnsubmit")?.click();
-                 
-              }else{
-                this.docbutton = false;
-              }
-
+             
             }
           })
 
@@ -1152,30 +1159,24 @@ export class CreatclaimComponent implements OnInit {
                  "stageId": this.claimStageId,
                  "statusId":3
             }
-            this.api.post('healspan/claim/updateclaimstatus',param).subscribe((res) =>{
-              console.log("updateclaimstatus response",res)
-            },(err: HttpErrorResponse) => {
+            this.claimService.UpdateClaimStage(param)
+            .subscribe({
+              next: (res) => {
+                console.log("UpdateClaimStage response", res);
+                document.getElementById("btnsubmit")?.click();
+              },
+              error: (err: HttpErrorResponse) => {
                 console.log("HttpErrorResponse" + err.status);
-                //alert("Something Went Wrong -" + err.status)       
-              })
-            }else{
-              alert("Please Upload all documents")
-            }
-
-        
+                //alert("Something Went Wrong!")
+              }
+            })
+          }else{
+            alert("Please Upload All documents")
+          }
         },
-        // error: (err: HttpErrorResponse) => {
-        //   console.log("HttpErrorResponse" + err.status);
-        //   alert("Something Went Wrong -" + err.status)
-        // },
-      }
+        }
       )
     }
-    //next 
-   
-  
-    //this.
-    //element(document.querySelector("btnsubmit")).addClass('.some-class');  
   
   }
 
@@ -1185,6 +1186,16 @@ export class CreatclaimComponent implements OnInit {
       return false;
     }
     return true;
+  }
+
+  validateNumber(event:any) {
+    const keyCode = event.keyCode;
+    const excludedKeys = [8, 37, 39, 46];
+    if (!((keyCode >= 48 && keyCode <= 57) ||
+      (keyCode >= 96 && keyCode <= 105) ||
+      (excludedKeys.includes(keyCode)))) {
+      event.preventDefault();
+    }
   }
 }
 

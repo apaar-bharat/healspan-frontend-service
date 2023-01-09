@@ -1,4 +1,4 @@
-<span>ADD OtherCost Data</span>
+<span>Add Other Costs Data</span>
 <!-- <button style="text-align: right;" tabindex="-1" mat-flat-button class="btn-margin" (click)="onClose(false)" color="primary">Cancel</button> -->
 
 
@@ -24,7 +24,7 @@
 			<mat-cell *matCellDef="let element">
 				<mat-form-field floatLabel="never" >
                     <!-- -->
-					<input matInput placeholder="" [value]="element.value" [(ngModel)]="element.value">
+					<input matInput type="number" (keypress)="numericOnly($event)" placeholder="" [value]="element.value" [(ngModel)]="element.value">
 				</mat-form-field>
 			</mat-cell>
 		</ng-container>

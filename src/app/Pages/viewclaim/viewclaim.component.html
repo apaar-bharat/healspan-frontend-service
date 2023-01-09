@@ -65,7 +65,12 @@
 					<img src="/assets/img/Group.png">
 				</div>
 				<div class="p-1 mt-1"><span>Ailment: </span>
-					<h5 *ngIf="medicalInfo['diagnosisMst'] != null" class="mt-2"><strong>{{medicalInfo["diagnosisMst"].name}}</strong></h5>
+					<ng-container *ngIf="medicalInfo != null">
+							<h5 *ngIf="medicalInfo['diagnosisMst'] != null" class="mt-2"><strong>{{medicalInfo["diagnosisMst"].name}}&nbsp;</strong></h5>
+					</ng-container>
+				
+						<h5  *ngIf="medicalInfo == null" class="mt-2 mb-4"><strong>null</strong></h5>
+				 
 				</div>
 			</div>
 		</div>
@@ -150,7 +155,9 @@
 							<div class="p-2">
 
 								<div class="p-1 mt-1"><span class="cl01">Name: </span>
-									<h5 class="mt-3 f16"><strong>{{patientinfo.firstName}}</strong></h5>
+									<ng-container *ngIf="patientinfo != null">
+										<h5 class="mt-3 f16"><strong>{{patientinfo.firstName +' '+ patientinfo.middleName +' '+ patientinfo.lastname}}</strong></h5>
+								    </ng-container>
 								</div>
 							</div>
 
@@ -160,7 +167,9 @@
 							<div class="p-2">
 
 								<div class="p-1 mt-1"><span class="cl01">Age: </span>
-									<h5 class="mt-3 f16"><strong>{{patientinfo.age}}</strong></h5>
+									<ng-container *ngIf="patientinfo != null">
+										<h5 class="mt-3 f16"><strong>{{patientinfo.age}}</strong></h5>
+								    </ng-container>
 								</div>
 							</div>
 						</div>
@@ -171,7 +180,9 @@
 							<div class="p-2">
 
 								<div class="p-1 mt-1"><span class="cl01">Gender: </span>
-									<h5 class="mt-3 f16"><strong>{{patientinfo["genderMst"].name}}</strong></h5>
+									<ng-container *ngIf="patientinfo != null">
+									   <h5 class="mt-3 f16"><strong>{{patientinfo["genderMst"].name}}</strong></h5>
+								    </ng-container>
 								</div>
 							</div>
 						</div>
@@ -182,7 +193,7 @@
 
 								<div class="p-1 mt-1">
 									<h5 class="mt-3 f16 float-end"><strong
-											style="color: #00B272;">Complete</strong>
+											style="color: #00B272;"></strong>
 											<!-- {{patientinfo.Status}} -->
 									</h5>
 								</div>
@@ -198,7 +209,9 @@
 							<div class="p-2">
 
 								<div class="p-1 mt-1"><span class="cl01">Date of Birth: </span>
-									<h5 class="mt-3 f16"><strong>{{patientinfo.dateBirth | date:'shortDate'}}</strong></h5>
+									<ng-container *ngIf="patientinfo != null">
+									 <h5 class="mt-3 f16"><strong>{{patientinfo.dateBirth | date:'shortDate'}}</strong></h5>
+								   </ng-container>
 								</div>
 							</div>
 						</div>
@@ -249,7 +262,9 @@
 							<div class="p-2">
 
 								<div class="p-1 mt-1"><span class="cl01">Procedure:</span>
-									<h5 class="mt-3 f16"><strong>{{medicalInfo["procedureMst"].name}}</strong></h5>
+									<ng-container *ngIf="medicalInfo != null">
+									  <h5 class="mt-3 f16"><strong>{{medicalInfo["procedureMst"].name}}</strong></h5>
+								    </ng-container>
 								</div>
 							</div>
 						</div>
@@ -258,7 +273,9 @@
 							<div class="p-2">
 
 								<div class="p-1 mt-1"><span class="cl01">Treatment Type </span>
-									<h5 class="mt-3 f16"><strong>{{medicalInfo["treatmentTypeMst"].name}}</strong></h5>
+									<ng-container *ngIf="medicalInfo != null">
+										<h5 class="mt-3 f16"><strong>{{medicalInfo["treatmentTypeMst"].name}}</strong></h5>
+								    </ng-container>
 								</div>
 							</div>
 						</div>
@@ -269,7 +286,9 @@
 							<div class="p-2">
 
 								<div class="p-1 mt-1"><span class="cl01">Speciality:</span>
+									<ng-container *ngIf="medicalInfo != null">
 									<h5 class="mt-3 f16"><strong>{{medicalInfo["specialityMst"].name}}</strong></h5>
+								</ng-container>
 								</div>
 							</div>
 						</div>
@@ -278,7 +297,7 @@
 
 								<div class="p-1 mt-1">
 									<h5 class="mt-3 f16 float-end"><strong
-											style="color: #00B272;">Complete</strong>
+											style="color: #00B272;"></strong>
 											<!-- {{patientinfo.Status}} -->
 									</h5>
 								</div>
@@ -290,7 +309,9 @@
 							<div class="p-2">
 
 								<div class="p-1 mt-1"><span class="cl01">DateOfFirstDiagnosis:</span>
-									<h5 class="mt-3 f16"><strong>{{medicalInfo.dateOfFirstDiagnosis | date:'shortDate'}}</strong></h5>
+									<ng-container *ngIf="medicalInfo != null">
+										<h5 class="mt-3 f16"><strong>{{medicalInfo.dateOfFirstDiagnosis | date:'shortDate'}}</strong></h5>
+									</ng-container>
 								</div>
 							</div>
 						</div>
@@ -298,21 +319,30 @@
 						<div class="col-md-3 mb-3 bg-body rounded">
 							<div class="p-2">
 								<div class="p-1 mt-1"><span class="cl01">DoctorName:</span>
+									<ng-container *ngIf="medicalInfo != null">
+
 									<h5 class="mt-3 f16"><strong>{{medicalInfo.doctorName}}</strong></h5>
+									</ng-container>
 								</div>
 							</div>
 						</div>
 						<div class="col-md-3 mb-3 bg-body rounded">
 							<div class="p-2">
 								<div class="p-1 mt-1"><span class="cl01">DoctorRegistrationNumber:</span>
+									<ng-container *ngIf="medicalInfo != null">
+
 									<h5 class="mt-3 f16"><strong>{{medicalInfo.doctorRegistrationNumber}}</strong></h5>
+									</ng-container>
 								</div>
 							</div>
 						</div>
 						<div class="col-md-3 mb-3 bg-body rounded">
 							<div class="p-2">
 								<div class="p-1 mt-1"><span class="cl01">DoctorQualification:</span>
+									<ng-container *ngIf="medicalInfo != null">
+
 									<h5 class="mt-3 f16"><strong>{{medicalInfo.doctorQualification}}</strong></h5>
+									</ng-container>
 								</div>
 							</div>
 						</div>
@@ -321,9 +351,12 @@
 						<div class="col-md-3 mb-3 bg-body rounded">
 							<div class="p-2">
 								<div class="p-1 mt-1">
+									<ng-container *ngIf="medicalInfo != null">
+
 									<h5 class="mt-3 f16 float-end"><strong
 											style="color: #00B272;">{{medicalInfo.Status}}</strong>
 									</h5>
+									</ng-container>
 								</div>
 							</div>
 						</div>
@@ -386,7 +419,9 @@
 							<div class="p-2">
 
 								<div class="p-1 mt-1"><span class="cl01">Insurance Company: </span>
-									<h5 class="mt-3 f16"><strong>{{insuranceInfo["insuranceCompanyMst"].name}}</strong></h5>
+									<ng-container *ngIf="insuranceInfo != null">
+									  <h5 class="mt-3 f16"><strong>{{insuranceInfo["insuranceCompanyMst"].name}}</strong></h5>
+									</ng-container>
 								</div>
 							</div>
 						</div>
@@ -395,7 +430,9 @@
 							<div class="p-2">
 
 								<div class="p-1 mt-1"><span class="cl01">TPA: </span>
-									<h5 class="mt-3 f16"><strong>{{insuranceInfo.tpaNumber}}</strong></h5>
+									<ng-container *ngIf="insuranceInfo != null">
+										<h5 class="mt-3 f16"><strong>{{insuranceInfo.tpaNumber}}</strong></h5>
+								    </ng-container>
 								</div>
 							</div>
 						</div>
@@ -406,7 +443,10 @@
 							<div class="p-2">
 
 								<div class="p-1 mt-1"><span class="cl01">TPA ID:</span>
+									<ng-container *ngIf="insuranceInfo != null">
+
 									<h5 class="mt-3 f16"><strong>{{insuranceInfo["tpaMst"].name}}</strong></h5>
+									</ng-container>
 								</div>
 							</div>
 						</div>
@@ -416,9 +456,12 @@
 							<div class="p-2">
 
 								<div class="p-1 mt-1">
+									<ng-container *ngIf="insuranceInfo != null">
+
 									<h5 class="mt-3 f16 float-end"><strong
 											style="color: #00B272;">{{insuranceInfo.Status}}</strong>
 									</h5>
+									</ng-container>
 								</div>
 							</div>
 						</div>
@@ -431,10 +474,11 @@
 					<div class="row mt-1 pt-3">
 						<div class="col-md-3 mb-3 bg-body rounded">
 							<div class="p-2">
-
+								<ng-container *ngIf="insuranceInfo != null">
 								<div *ngIf="insuranceInfo.isGroupPolicy" class="p-1 mt-1"><span class="cl01">Company / Corporate / Group : </span>
 									<h5 class="mt-3 f16"><strong>{{insuranceInfo.groupCompany}}</strong></h5>
 								</div>
+							   </ng-container>
 							</div>
 						</div>
 
@@ -442,7 +486,10 @@
 							<div class="p-2">
 
 								<div class="p-1 mt-1"><span class="cl01">Relation: </span>
+									<ng-container *ngIf="insuranceInfo != null">
+
 									<h5 class="mt-3 f16"><strong>{{insuranceInfo["relationshipMst"].name}}</strong></h5>
+									</ng-container>
 								</div>
 							</div>
 						</div>
@@ -453,7 +500,10 @@
 							<div class="p-2">
 
 								<div class="p-1 mt-1"><span class="cl01">Policy Holder:</span>
+									<ng-container *ngIf="insuranceInfo != null">
+
 									<h5 class="mt-3 f16"><strong>{{insuranceInfo.policyHolderName}}</strong></h5>
+									</ng-container>
 								</div>
 							</div>
 						</div>
@@ -479,86 +529,49 @@
 	<!-----------------------------------Initial-Authorization-------------------------- -->
 				<div class="tab-pane fade" id="Initial-Authorization" role="tabpanel"
 					aria-labelledby="v-pills-home-tab">
-					<div class="row mt-1 pt-3">
-						<div class="col-md-3 mb-3 bg-body rounded">
-							<div class="px-2">
-
-								<div class="p-1 mt-1">Created Date: <span
-										class="cl01"><strong></strong>
-									</span>
-									<h5 class="mt-3 f16"><strong></strong></h5>
-								</div>
-							</div>
-						</div>
-
-						<div class="col-md-3 mb-3 bg-body rounded">
-							<div class="px-2">
-
-								<div class="p-1 mt-1"><span class="cl01"></span>
-									<h5 class="mt-3 f16"><strong></strong></h5>
-								</div>
-							</div>
-						</div>
-
-
-
-						<div class="col-md-3 mb-3 bg-body rounded">
-							<div class="px-2">
-
-								<div class="p-1 mt-1"><span class="cl01"></span>
-									<h5 class="mt-3 f16"><strong></strong></h5>
-								</div>
-							</div>
-						</div>
-
-
-						<div class="col-md-3  bg-body rounded">
-							<div class="p-2">
-
-								<div class="p-1 mt-1">
-									<h5 class="mt-3 f16 float-end"><strong
-											style="color: #00B272;"></strong>
-											<!-- {{InitialData.Status}} -->
-									</h5>
-								</div>
-							</div>
-						</div>
-					</div>
-
+				
 					<div class="row mt-1">
 
 						<div class="col-md-6">
+							<ng-container *ngIf="medicalInfo != null">
+
 							<div class="row mb-3 bg-body rounded"
 								*ngFor="let h of InitialDoc ,let i = index ">
 
 								<div class="col-md-6">
 									<div class="px-3">
 										<h5 class="mt-3 f16"><strong>Document {{i+1}}:</strong></h5>
-										<h5 class="mt-3 f16"><a class="doc" (click)="docopen(h.id)">{{h.documentType}}</a></h5>
+										<h5 *ngIf="h.documentPath != null" class="mt-3 f16"><a class="doc" routerLink="[]" (click)="docopen(h.id)">{{h.documentType}}</a></h5>
+										<h5 *ngIf="h.documentPath == null" class="mt-3 f16"><a class="doc">{{h.documentType}}</a></h5>
 
 
 									</div>
 									
 								</div>
 								<div  *ngIf="h.documentPath == null" class="col-md-6">
-									<a href="" class="btn btn-primary btn-sm px-3 mt-5 healshadow"> Upload <img
-											src="/assets/img/Arrow-54w.png"> </a>
+									<a class="btn btn-primary btn-sm px-3 mt-5 healshadow"> Pending <img
+											> </a>
+											<!-- src="/assets/img/Arrow-54w.png" -->
 								</div>
 								<div  *ngIf="h.documentPath != null"  class="col-md-6">
 								
-									<a  style="background-color: #E2E5E5 !important;"  class="btn btn-primary btn-sm px-3 mt-5 healshadow"> Upload <img
-										 	src="/assets/img/Arrow-54w.png"> </a>
+									<a  style="background-color: #E2E5E5 !important;"  class="btn btn-primary btn-sm px-3 mt-5 healshadow"> Uploaded <img
+									> </a>
 						
 								</div>
 
 
 							</div>
+
+							</ng-container>
 						</div>
 						<div class="col-md-2 mb-3 bg-body rounded">
 							<div class="px-2">
 
 								<div class="p-1 mt-1"><span class="cl01">Estimated Cost: </span>
-									<h5 class="mt-3 f16"><strong>INR {{patientinfo.initialCostEstimate}}</strong></h5>
+									<ng-container *ngIf="patientinfo != null">
+										<h5 class="mt-3 f16"><strong>INR {{patientinfo.initialCostEstimate}}</strong></h5>
+									</ng-container>
 								</div>
 								<div class="p-1 mt-1"><span class="cl01">Approval Cost: </span>
 									<h5 class="mt-3 f16"><strong>INR 0</strong></h5>
@@ -574,28 +587,35 @@
 			
 					<div class="row mt-1">
 						<div class="col-md-6">
-							<div class="row mb-3 bg-body rounded"
+							<ng-container *ngIf="medicalInfo != null">
+
+							  <div class="row mb-3 bg-body rounded"
 								*ngFor="let h of EnhancmentDoc ,let i = index ">
 
 								<div class="col-md-6">
 									<div class="px-3">
 										<h5 class="mt-3 f16"><strong>Document {{i+1}}:</strong></h5>
-										<h5 class="mt-3 f16"><a class="doc" routerLink="[]" (click)="docopen(h.id)">{{h.documentType}}</a></h5>
+										<h5 *ngIf="h.documentPath != null" class="mt-3 f16"><a class="doc" routerLink="[]" (click)="docopen(h.id)">{{h.documentType}}</a></h5>
+										<h5 *ngIf="h.documentPath == null" class="mt-3 f16"><a class="doc">{{h.documentType}}</a></h5>
+
+
 									</div>
+									
 								</div>
-								<!-- {{h.documentPath}} -->
 								<div  *ngIf="h.documentPath == null" class="col-md-6">
-									<a href="" class="btn btn-primary btn-sm px-3 mt-5 healshadow"> Upload <img
-											src="/assets/img/Arrow-54w.png"> </a>
+									<a class="btn btn-primary btn-sm px-3 mt-5 healshadow"> Pending <img
+											> </a>
+											<!-- src="/assets/img/Arrow-54w.png" -->
 								</div>
 								<div  *ngIf="h.documentPath != null"  class="col-md-6">
 								
-									<a  style="background-color: #E2E5E5 !important;"  class="btn btn-primary btn-sm px-3 mt-5 healshadow"> Upload <img
-										 	src="/assets/img/Arrow-54w.png"> </a>
+									<a  style="background-color: #E2E5E5 !important;"  class="btn btn-primary btn-sm px-3 mt-5 healshadow"> Uploaded <img
+									> </a>
 						
 								</div>
 
 							</div>
+							</ng-container>
 						</div>
 
 
@@ -606,7 +626,9 @@
 							<div class="px-2">
 
 								<div class="p-1 mt-1"><span class="cl01">Estimated Cost: </span>
-									<h5 class="mt-3 f16"><strong>INR {{patientinfo.initialCostEstimate}}</strong></h5>
+									<ng-container *ngIf="patientinfo != null">
+										<h5 class="mt-3 f16"><strong>INR {{patientinfo.initialCostEstimate}}</strong></h5>
+									</ng-container>
 								</div>
 								<div class="p-1 mt-1"><span class="cl01">Approval Cost: </span>
 									<h5 class="mt-3 f16"><strong>INR 0</strong></h5>
@@ -624,38 +646,44 @@
 
 					<div class="row mt-1">
 						<div class="col-md-6">
-							<div class="row mb-3 bg-body rounded"
-							*ngFor="let h of DischargeDoc ,let i = index ">
+							<ng-container *ngIf="medicalInfo != null">
+								<div class="row mb-3 bg-body rounded"
+								*ngFor="let h of DischargeDoc ,let i = index ">
 
-							<div class="col-md-6">
-								<div class="px-3">
-									<h5 class="mt-3 f16"><strong>Document {{i+1}}:</strong></h5>
-									<h5 class="mt-3 f16"><a class="doc" (click)="docopen(h.id)">{{h.documentType}}</a></h5>
+								<div class="col-md-6">
+									<div class="px-3">
+										<h5 class="mt-3 f16"><strong>Document {{i+1}}:</strong></h5>
+										<h5 *ngIf="h.documentPath != null" class="mt-3 f16"><a class="doc" routerLink="[]" (click)="docopen(h.id)">{{h.documentType}}</a></h5>
+										<h5 *ngIf="h.documentPath == null" class="mt-3 f16"><a class="doc">{{h.documentType}}</a></h5>
+
+
+									</div>
+									
+								</div>
+								<div  *ngIf="h.documentPath == null" class="col-md-6">
+									<a class="btn btn-primary btn-sm px-3 mt-5 healshadow"> Pending <img
+											> </a>
+											<!-- src="/assets/img/Arrow-54w.png" -->
+								</div>
+								<div  *ngIf="h.documentPath != null"  class="col-md-6">
+								
+									<a  style="background-color: #E2E5E5 !important;"  class="btn btn-primary btn-sm px-3 mt-5 healshadow"> Uploaded <img
+									> </a>
+						
+								</div>
 
 
 								</div>
-
-							</div>
-
-							<div  *ngIf="h.documentPath == null" class="col-md-6">
-								<a href="" class="btn btn-primary btn-sm px-3 mt-5 healshadow"> Upload <img
-										src="/assets/img/Arrow-54w.png"> </a>
-							</div>
-							<div  *ngIf="h.documentPath != null"  class="col-md-6">
-							
-								<a  style="background-color: #E2E5E5 !important;"  class="btn btn-primary btn-sm px-3 mt-5 healshadow"> Upload <img
-										 src="/assets/img/Arrow-54w.png"> </a>
-					
-							</div>
-
-
-						</div>
+					    	</ng-container>
 						</div>
 						<div class="col-md-2 mb-3 bg-body rounded">
 							<div class="px-2">
 
 								<div class="p-1 mt-1"><span class="cl01">Estimated Cost: </span>
+									<ng-container *ngIf="patientinfo != null">
+
 									<h5 class="mt-3 f16"><strong>INR {{patientinfo.initialCostEstimate}}</strong></h5>
+									</ng-container>
 								</div>
 								<div class="p-1 mt-1"><span class="cl01">Approval Cost: </span>
 									<h5 class="mt-3 f16"><strong>INR 0</strong></h5>
@@ -670,28 +698,32 @@
 				<div class="tab-pane fade" id="Final-Claim" role="tabpanel" aria-labelledby="v-pills-messages-tab">
 					<div class="row mt-1">
 						<div class="col-md-6">
+							<ng-container *ngIf="medicalInfo != null">
 							<div class="row mb-3 bg-body rounded"
 								*ngFor="let h of FinalDoc ,let i = index ">
 								<div class="col-md-6">
 									<div class="px-3">
 										<h5 class="mt-3 f16"><strong>Document {{i+1}}:</strong></h5>
-										<h5 class="mt-3 f16"><a class="doc" (click)="docopen(h.id)">{{h.documentType}}</a></h5>
-									</div>
-								</div>
+										<h5 *ngIf="h.documentPath != null" class="mt-3 f16"><a class="doc" routerLink="[]" (click)="docopen(h.id)">{{h.documentType}}</a></h5>
+										<h5 *ngIf="h.documentPath == null" class="mt-3 f16"><a class="doc">{{h.documentType}}</a></h5>
 
+
+									</div>
+									
+								</div>
 								<div  *ngIf="h.documentPath == null" class="col-md-6">
-									<a href="" class="btn btn-primary btn-sm px-3 mt-5 healshadow"> Upload <img
-											src="/assets/img/Arrow-54w.png"> </a>
+									<a class="btn btn-primary btn-sm px-3 mt-5 healshadow"> Pending <img
+											> </a>
+											<!-- src="/assets/img/Arrow-54w.png" -->
 								</div>
 								<div  *ngIf="h.documentPath != null"  class="col-md-6">
 								
-									<a  style="background-color: #E2E5E5 !important;"  class="btn btn-primary btn-sm px-3 mt-5 healshadow"> Upload <img
-										 	src="/assets/img/Arrow-54w.png"> </a>
+									<a  style="background-color: #E2E5E5 !important;"  class="btn btn-primary btn-sm px-3 mt-5 healshadow"> Uploaded <img
+									> </a>
 						
 								</div>
-
-
 							</div>
+						</ng-container>
 						</div>
 
 
@@ -702,7 +734,10 @@
 							<div class="px-2">
 
 								<div class="p-1 mt-1"><span class="cl01">Estimated Cost: </span>
+									<ng-container *ngIf="patientinfo != null">
+
 									<h5 class="mt-3 f16"><strong>INR {{patientinfo.initialCostEstimate}}</strong></h5>
+									</ng-container>
 								</div>
 								<div class="p-1 mt-1"><span class="cl01">Approval Cost: </span>
 									<h5 class="mt-3 f16"><strong>INR 0</strong></h5>
@@ -727,7 +762,7 @@
 <div class="col-md-12 mb-2">
 	<a type="button" class="btn btn-primary btn-md px-5 float-start mt-3 mx-2" data-bs-toggle="modal" data-bs-target="#exampleModal">Query & Rejection</a>
 
-	<a class="btn btn-primary btn-md px-5 float-end mt-3 mx-2"  (click)="approveClick()"
+	<a [ngClass]="{'disabled': Isapproved == false}" class="btn btn-primary btn-md px-5 float-end mt-3 mx-2"  (click)="approveClick()"
 	  >Approve</a> 
 	</div>
 	</div>

@@ -28,7 +28,7 @@ export class AppComponent {
   constructor(private idle: Idle, private keepalive: Keepalive, 
     private router: Router, private modalService: BsModalService, private appService: AuthenticationService) {
     // sets an idle timeout of 5 seconds, for testing purposes.
-    idle.setIdle(1800);
+    idle.setIdle(180);
     // sets a timeout period of 5 seconds. after 10 seconds of inactivity, the user will be considered timed out.
     idle.setTimeout(5);
     // sets the default interrupts, in this case, things like clicks, scrolls, touches to the document
@@ -45,7 +45,7 @@ export class AppComponent {
       this.idleState = 'Timed out!';
       this.timedOut = true;
       console.log(this.idleState);
-      this.router.navigate(['/']);
+      this.router.navigate(['/login']);
     });
     
     idle.onIdleStart.subscribe(() => {
@@ -53,6 +53,7 @@ export class AppComponent {
         console.log(this.idleState);
         alert(this.idleState);
         //this.childModal.show();
+        this.router.navigate(['/login']);
         document.getElementById("openModalButton")?.click();
 
     });

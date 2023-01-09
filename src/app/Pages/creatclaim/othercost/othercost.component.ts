@@ -33,7 +33,13 @@ export class OthercostComponent implements OnInit {
     // alert(JSON.stringify(this.OtherCostData));
   }
 
-
+  numericOnly(event: any) {
+    const charCode = (event.which) ? event.which : event.keyCode;
+    if (charCode == 101 || charCode == 69 || charCode == 45 || charCode == 43) {
+      return false;
+    }
+    return true;
+  }
 
 
 

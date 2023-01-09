@@ -68,9 +68,12 @@
                                 </div>
                                  <div class="form-group col-md-3  mt-3">
                                     <label for="" class="form-label float-start">Patient Mobile No*</label>
-                                    <input type="number" class="form-control" formControlName="MobileNo" (keypress)="numericOnly($event)"
+                                    <!-- <input type="number" class="form-control" formControlName="MobileNo" (keypress)="numericOnly($event)"
                                     [class.is-invalid]="f['MobileNo'].invalid && (f['MobileNo'].dirty || f['MobileNo'].touched)"
-                                     required>
+                                     required> -->
+                                     <input type="text" maxlength="10" class="form-control" formControlName="MobileNo" (keydown)="validateNumber($event)"
+                                     [class.is-invalid]="f['MobileNo'].invalid && (f['MobileNo'].dirty || f['MobileNo'].touched)"
+                                      required>
                                 </div>
 
                             </div>
@@ -221,8 +224,11 @@
                                         <option *ngFor="let o of OtherCosts" value={{o.id}}>{{o.name}}
                                         </option>
                                     </select> -->
-                                    <button (click)="openDialog()" type="button" class="form-control btn btn-primary btn-sm px-5 float-end" 
-                                    >Add OtherCost</button>
+                                    <!-- <button (click)="openDialog()" type="button" class="btn btn-primary btn-sm px-5 mt-0 mx-2">
+                                     Add Other Costs</button> -->
+ 
+                                     <button (click)="openDialog()" type="button"  style="width: 100% !important;" class="btn btn-primary btn-sm px-5 float-end" 
+                                     >Add Other Costs</button>
                                     <!-- <mat-form-field>              
                                         <mat-select class="form-control p-0 m-0" formControlName="OtherC" (selectionChange)="costSelect($event)" multiple>
                                             <mat-option *ngFor="let o of OtherCosts" value={{o.id}}>{{o.name}}</mat-option>
@@ -494,10 +500,11 @@
                         </div>
                     </div> -->
                     <button type="button" class="previous previous_button btn btn-sm px-5 float-start mt-3 mx-2">Back</button>
-                    <button class="next btn btn-primary btn-sm px-5 float-end mt-3 mx-2" (click)="SaveSequentialQue()" 
+                    <button  class="next btn btn-primary btn-sm px-5 float-end mt-3 mx-2" (click)="SaveSequentialQue()" 
                      >Continue</button>
+                     <!-- <button *ngIf="IfmedicalForm" [disabled]="false" class=" btn btn-primary btn-sm px-5 float-end mt-3 mx-2" (click)="SaveSequentialQue()" 
+                     >Continue</button> -->
 
-                      <!-- [disabled]="!medicalForm.valid" -->
                
                 </fieldset>
 <!--MedicalInfo End -->    
