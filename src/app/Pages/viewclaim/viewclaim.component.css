@@ -60,9 +60,9 @@
 
 
 
-a.disabled {
+.disabled {
   /* color: gray; */
-  background-color: gray;
+  /* background-color: gray; */
   cursor: not-allowed;
   /* text-decoration: underline; */
 }

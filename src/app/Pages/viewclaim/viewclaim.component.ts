@@ -28,6 +28,10 @@ export class ViewclaimComponent implements OnInit {
   claimStageLinkId:any;
   Isapproved:boolean = false;
   path:any;
+  //QuestionList
+  questionList:any=[];
+  public localStorage = localStorage;
+
   constructor(private api: ApiService,private dataservice : DataService,private router:Router) { }
   ngOnInit(): void {
 
@@ -43,7 +47,9 @@ export class ViewclaimComponent implements OnInit {
 
   docopen(docid:any) {
     // window.open('https://www.africau.edu/images/default/sample.pdf');
-    window.open(environment.baseUrl+'healspan/claim/download/'+docid);
+    //window.open(environment.baseUrl+'healspan/claim/download/'+docid);
+
+    window.location.href = "environment.baseUrl+'healspan/claim/download/'+docid"
 
   }
 
@@ -73,21 +79,24 @@ export class ViewclaimComponent implements OnInit {
     let claimStageMst = data.claimStageMst;
     this.claimStageId =   claimStageMst.claimStageMstId; 
 
-    if(claimStageMst.claimStageMstName == "Initial Authorisation"){
+    this.questionList = data["questionAnswerList"];
+
+
+    if(claimStageMst.claimStageMstName == "Initial Authorization"){
       if(this.medicalInfo != null){
-      this.InitialDoc = this.medicalInfo['documentList'];}
+      this.InitialDoc = data["documentList"]}
     }else if(claimStageMst.claimStageMstName == "Enhancement"){
       if(this.medicalInfo != null){
-      this.EnhancmentDoc = this.medicalInfo['documentList'];}
+      this.EnhancmentDoc = data["documentList"]}
     }
     else if(claimStageMst.claimStageMstName == "Discharge"){
       if(this.medicalInfo != null){
-      this.DischargeDoc = this.medicalInfo['documentList'];}
+      this.DischargeDoc =data["documentList"]}
 
     }
     else if(claimStageMst.claimStageMstName == "Final Claim"){
       if(this.medicalInfo != null){
-      this.FinalDoc = this.medicalInfo['documentList'];}
+      this.FinalDoc = data["documentList"]}
     }
     
 

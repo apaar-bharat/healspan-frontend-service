@@ -4,7 +4,14 @@ import { Observable ,  throwError } from 'rxjs';
 import { catchError, timeout } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { ApiService } from 'src/app/service/api.service';
-
+const httpOptions= {
+  headers: new HttpHeaders({
+ 'Content-Type':'application/json',
+//  'Access-Control-Allow-Origin': '*',
+  // 'Authorization': `Bearer ${localStorage.getItem("jwttoken")}`
+  // 'Authorization': 'Bearer ' + localStorage.getItem("token")
+ })
+};
 @Injectable({
   providedIn: 'root'
 })
@@ -52,13 +59,11 @@ export class claimService {
             "hospitalUhid" : ClaimForm.value.PHUHID,
             "hospitalId" : ClaimForm.value.Hospital,
             "roomCategoryId" : ClaimForm.value.RoomCategory,
-            // "procedureId" : ClaimForm.value.Procedure,
             "genderId" : ClaimForm.value.Gender,
-            "tpaId" : ClaimForm.value.tpaID,
             "patientAndOtherCostLink" : otherCostDetail
         }
     }
-    return this.http.post<any>(environment.baseUrl+"healspan/claim/createorupdateclaimandpatientinfo",patientbody)
+    return this.http.post<any>(environment.baseUrl+"healspan/claim/createorupdateclaimandpatientinfo",patientbody,httpOptions)
 
   }
 
@@ -80,7 +85,7 @@ export class claimService {
         "treatmentTypeId" : parseInt(medicalForm.value.TreatmentType)
       }
 
-      return this.http.post<any>(environment.baseUrl+"healspan/claim/createorupdatemedicalinfo",medicalParam)
+      return this.http.post<any>(environment.baseUrl+"healspan/claim/createorupdatemedicalinfo",medicalParam,httpOptions)
 
 
   }
@@ -104,29 +109,32 @@ export class claimService {
         "tpaId" : InsuaranceForm.value.TPAID,
         "insuranceCompanyId" : InsuaranceForm.value.InsuranceCompany,
         "relationshipId" : InsuaranceForm.value.RelationOPH
-      }
+    }
 
 
-      return this.http.post<any>(environment.baseUrl+"healspan/claim/createorupdateinsuranceinfo",insuranceParam)
+      return this.http.post<any>(environment.baseUrl+"healspan/claim/createorupdateinsuranceinfo",insuranceParam,httpOptions)
 
 
   }
 
 
-  saveSequentialQue(medicalInfoId:any,questionlist:any,doclist:any){
+  saveSequentialQue(claimStageLinkId:any,questionlist:any,doclist:any){
 
     let ruleEngineParam = {
-        "medicalInfoId": medicalInfoId,
+        "claimStageLinkId": claimStageLinkId,
         "sequentialQuestion": questionlist,
         "documentList": doclist
       }
-    return this.http.post<any>(environment.baseUrl+"healspan/claim/savequestionnairesanddocument",ruleEngineParam)
+    return this.http.post<any>(environment.baseUrl+"healspan/claim/savequestionnairesanddocument",ruleEngineParam,httpOptions)
 
 
   }
 
 
   UpdateClaimStage(Param:any){
+    
+    //const headers = new HttpHeaders{ responseType: 'text' };
+
     return this.http.post<any>(environment.baseUrl+"healspan/claim/updateclaimstatus",Param)
 
   }

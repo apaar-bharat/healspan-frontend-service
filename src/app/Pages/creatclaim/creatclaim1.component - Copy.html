@@ -13,120 +13,13 @@
                                     </mat-form-field> -->
                 <!-- progressbar -->
                 <ul id="progressbar" style="margin-bottom: 0px !important;">
-                    <li class="active">Insurance</li>
-                    <li>Patient</li>
+                    <li class="active">Patient</li>
                     <li>Medical</li>
+                    <li>Insurance</li>
                     <li>Document</li>
                     <li>Final</li>
                 </ul>
                 <!-- fieldsets -->
-
-
-<!--InsuranceInfo Start -->
-<fieldset>
-    <!--(ngSubmit)="OnInsuarancecontinue(InsuaranceForm)" -->
-    <form [formGroup]="InsuaranceForm" class="mb-5" id="insuarance">
-        <div class="form-row w-100">
-            <div class="form-group col-md-12 mb-3">
-
-                <h2 class="float-start">Insurance Information</h2>
-
-            </div>
-        </div>
-        <div class="form-row w-100">
-            <div class="form-group col-md-6">
-                <label for="" class="form-label float-start">Insurance Company*</label>
-                <select class="form-control form-select" formControlName="InsuranceCompany"
-                    id="InsuranceCompany"
-                    [class.is-invalid]="I['InsuranceCompany'].invalid && (I['InsuranceCompany'].dirty || I['InsuranceCompany'].touched)"
-                    required>
-                    <option value="">Choose...</option>
-                    <option *ngFor="let y of insuaranceCompanyDetail | orderby : 'name'" value={{y.id}}>{{y.name}}
-                    </option>
-                </select>
-
-
-            </div>
-            <div class="form-group col-md-6">
-                <label for="" class="form-label float-start">TPA*</label>
-                <select class="form-control form-select" id="TPA" formControlName="TPAID"
-                   (change)="tpaselect($event)">
-                    <!-- [attr.disabled]=false -->
-                    <option value="">Choose...</option>
-                    <option *ngFor="let t of TPADetail| orderby : 'name'" value={{t.id}}>{{t.name}}</option>
-                </select>
-
-            </div>
-           
-        </div>
-        <div class="form-row w-100">
-            <div class="form-group col-md-3 mt-3">
-                <label for="" class="form-label float-start"> TPA ID Card No</label>
-                <input type="text" class="form-control" formControlName="TPAnumber"
-                    [class.is-invalid]="I['TPAnumber'].invalid && (I['TPAnumber'].dirty || I['TPAnumber'].touched)"
-                    required>
-
-            </div>
-            <div class="form-group col-md-3 mt-3">
-                <label for="" class="form-label float-start">Policy Holder*</label>
-                <input type="text" class="form-control" formControlName="PolicyHolder"
-                    [class.is-invalid]="I['PolicyHolder'].invalid && (I['PolicyHolder'].dirty || I['PolicyHolder'].touched)"
-                    required>
-
-            </div>
-            <div class="form-group col-md-3 mt-3">
-                <label for="" class="form-label float-start">Relation of patient with Policy
-                    Holder*</label>
-                <select class="form-control form-select" id="RelationOPH" formControlName="RelationOPH"
-                    [class.is-invalid]="I['RelationOPH'].invalid && (I['RelationOPH'].dirty || I['RelationOPH'].touched)"
-                    required>
-                    <option value="">Choose...</option>
-                    <option *ngFor="let r of RPADetail | orderby : 'name'" value={{r.id}}>{{r.name}}</option>
-                </select>
-
-            </div>
-            <div class="form-group col-md-3 mt-3">
-                <label for="" class="form-label float-start">Policy Number*</label>
-                <input type="text" class="form-control" formControlName="PolicyNumber">
-            </div>
-        </div>
-        <div class="form-row w-100">
-            <div class="form-group col-md-6 mt-3">
-                <input type="checkbox" formControlName="IsGroupPolicy"  (click)="OngrouppolicykCheck($event)"
-                    class="form-check-input float-start" id="same-address">
-                <label class="form-check-label  float-start" for="same-address">&nbsp; Group
-                    Policy</label>
-            </div>
-            <!-- <div class="form-group col-md-6 mt-3" style="visibility:hidden;">
-                <input type="checkbox" class="form-check-input float-start" id="same-address">
-                <label class="form-check-label  float-start" for="same-address">&nbsp; Group
-                    Policy</label>
-            </div> -->
-        </div>
-        <div class="form-row w-100"  [hidden]="!IsGroups">
-            <div class="form-group col-md-6 mt-3">
-                <label for="" class="form-label float-start">Company / Corporate / Group*</label>
-                <input type="text"  formControlName="Groupcompany" class="form-control">
-            </div>
-            <!-- <div class="form-group col-md-6 mt-3" style="visibility:hidden;">
-                <label for="" class="form-label float-start">Company / Corporate / Group*</label>
-                <input type="text" class="form-control">
-            </div> [attr.disabled]="isChecked"
-        -->
-        </div>
-
-    </form>
-    
-        <!--  -->
-
-        <button type="button" (click)="redirect()"   form="ngForm"  class="previous_button btn btn-sm px-5 float-start mt-3 mx-2">Exit</button>
-
-        <button class="next btn btn-primary btn-sm px-5 float-end mt-3 mx-2" type="submit" form="insuarance"
-         >Continue</button>
-</fieldset>
-<!--InsuranceInfo End -->
-
-
 
 <!--PatientInfo Start -->
                 <fieldset>
@@ -140,7 +33,7 @@
 
                                 </div>
                             </div>
-                            <!-- <div  class="form-row  w-100">
+                            <div  class="form-row  w-100">
                                 <div class="form-group col-md-9">
                                     <label for="" class="form-label float-start">TPA*</label>
                                     <select class="form-control form-select" id="TPA"  formControlName="tpaID" 
@@ -150,7 +43,7 @@
                                     </select>
     
                                 </div>
-                            </div> -->
+                            </div>
                             <div class="form-row w-100">
                                 
 
@@ -276,7 +169,7 @@
                                     <label for="" class="form-label float-start">Date Of Admission*</label>
 
                                     <input type="datetime-local" class="form-control" formControlName="DateOfAdmission"
-                                        placeholder="Choose a date"
+                                        placeholder="Choose a date" [max]="todaysDate"
                                         (input)="changeDate()" (change)="calculateDiff()" required>
                                         <!-- [(ngModel)]="dateSent" [max]="todaysdate" | date:'HH:mm' -->
                                     
@@ -325,11 +218,23 @@
                                 </div>
                                 <div class="form-group col-md-3 mt-3">
                                     <label   for="" class="form-label float-start">Other Costs</label>
-                                    
+                                    <!-- <select multiple class="form-control form-select" formControlName="OtherC" id="OtherC"
+                                        required>
+                                        <option value="">Choose...</option>
+                                        <option *ngFor="let o of OtherCosts" value={{o.id}}>{{o.name}}
+                                        </option>
+                                    </select> -->
+                                    <!-- <button (click)="openDialog()" type="button" class="btn btn-primary btn-sm px-5 mt-0 mx-2">
+                                     Add Other Costs</button> -->
  
                                      <button (click)="openDialog()" type="button"  style="width: 100% !important;" class="btn btn-primary btn-sm px-5 float-end" 
                                      >Add Other Costs</button>
-                                    
+                                    <!-- <mat-form-field>              
+                                        <mat-select class="form-control p-0 m-0" formControlName="OtherC" (selectionChange)="costSelect($event)" multiple>
+                                            <mat-option *ngFor="let o of OtherCosts" value={{o.id}}>{{o.name}}</mat-option>
+                                          </mat-select>
+                                    </mat-form-field> -->
+
                                 </div>
                             </div>
                             <div class="form-row w-100">
@@ -350,7 +255,7 @@
 
                                 <div class="form-group col-md-3 mt-3">
                                     <label for="" class="form-label float-start">Inital cost estimate*</label>
-                                    <input type="number" (keypress)="numericOnly($event)" class="form-control" [attr.disabled]="false"  (change)="InitialCeCalculate()" formControlName="InitialCE" required>
+                                    <input type="number" (keypress)="numericOnly($event)" class="form-control"  (change)="InitialCeCalculate()" formControlName="InitialCE" required>
 
                                 </div>
                                 <div *ngIf="ActiveStage == 'Enhancement' || ActiveStage == 'Discharge' || ActiveStage == 'Final Claim'" class="form-group col-md-3 mt-3">
@@ -386,8 +291,8 @@
                         </div>
 
                     </form>
-                    <button type="button" class="previous previous_button btn btn-sm px-5 float-start mt-3 mx-2">Back</button>
 
+                    <button type="button" (click)="redirect()" form="ngForm"  class="previous_button btn btn-sm px-5 float-start mt-3 mx-2">Exit</button>
                     <button type="button" class="next btn btn-primary btn-sm px-5 float-end mt-3 mx-2" type="submit"
                     form="ngForm"  [disabled]="!ClaimForm.valid"  >Continue</button>
 
@@ -605,6 +510,108 @@
 <!--MedicalInfo End -->    
 
 
+<!--InsuranceInfo Start -->
+                <fieldset>
+                    <form [formGroup]="InsuaranceForm" class="mb-5" id="insuarance"
+                        (ngSubmit)="OnInsuarancecontinue(InsuaranceForm)">
+                        <div class="form-row w-100">
+                            <div class="form-group col-md-12 mb-3">
+
+                                <h2 class="float-start">Insurance Information</h2>
+
+                            </div>
+                        </div>
+                        <div class="form-row w-100">
+                            <div class="form-group col-md-6">
+                                <label for="" class="form-label float-start">Insurance Company*</label>
+                                <select class="form-control form-select" formControlName="InsuranceCompany"
+                                    id="InsuranceCompany"
+                                    [class.is-invalid]="I['InsuranceCompany'].invalid && (I['InsuranceCompany'].dirty || I['InsuranceCompany'].touched)"
+                                    required>
+                                    <option value="">Choose...</option>
+                                    <option *ngFor="let y of insuaranceCompanyDetail | orderby : 'name'" value={{y.id}}>{{y.name}}
+                                    </option>
+                                </select>
+
+
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label for="" class="form-label float-start">TPA*</label>
+                                <select class="form-control form-select" id="TPA" formControlName="TPAID"
+                                [attr.disabled]=false
+                                    >
+                                    <option value="">Choose...</option>
+                                    <option *ngFor="let t of TPADetail| orderby : 'name'" value={{t.id}}>{{t.name}}</option>
+                                </select>
+
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label for="" class="form-label float-start"> TPA ID Card No</label>
+                                <input type="text" class="form-control" formControlName="TPAnumber"
+                                    [class.is-invalid]="I['TPAnumber'].invalid && (I['TPAnumber'].dirty || I['TPAnumber'].touched)"
+                                    required>
+
+                            </div>
+                        </div>
+                        <div class="form-row w-100">
+                            <div class="form-group col-md-3 mt-3">
+                                <label for="" class="form-label float-start">Policy Holder*</label>
+                                <input type="text" class="form-control" formControlName="PolicyHolder"
+                                    [class.is-invalid]="I['PolicyHolder'].invalid && (I['PolicyHolder'].dirty || I['PolicyHolder'].touched)"
+                                    required>
+
+                            </div>
+                            <div class="form-group col-md-6 mt-3">
+                                <label for="" class="form-label float-start">Relation of patient with Policy
+                                    Holder*</label>
+                                <select class="form-control form-select" id="RelationOPH" formControlName="RelationOPH"
+                                    [class.is-invalid]="I['RelationOPH'].invalid && (I['RelationOPH'].dirty || I['RelationOPH'].touched)"
+                                    required>
+                                    <option value="">Choose...</option>
+                                    <option *ngFor="let r of RPADetail | orderby : 'name'" value={{r.id}}>{{r.name}}</option>
+                                </select>
+
+                            </div>
+                            <div class="form-group col-md-3 mt-3">
+                                <label for="" class="form-label float-start">Policy Number*</label>
+                                <input type="text" class="form-control" formControlName="PolicyNumber">
+                            </div>
+                        </div>
+                        <div class="form-row w-100">
+                            <div class="form-group col-md-6 mt-3">
+                                <input type="checkbox" formControlName="IsGroupPolicy"  (click)="OngrouppolicykCheck($event)"
+                                    class="form-check-input float-start" id="same-address">
+                                <label class="form-check-label  float-start" for="same-address">&nbsp; Group
+                                    Policy</label>
+                            </div>
+                            <!-- <div class="form-group col-md-6 mt-3" style="visibility:hidden;">
+                                <input type="checkbox" class="form-check-input float-start" id="same-address">
+                                <label class="form-check-label  float-start" for="same-address">&nbsp; Group
+                                    Policy</label>
+                            </div> -->
+                        </div>
+                        <div class="form-row w-100"  [hidden]="!IsGroups">
+                            <div class="form-group col-md-6 mt-3">
+                                <label for="" class="form-label float-start">Company / Corporate / Group*</label>
+                                <input type="text"  formControlName="Groupcompany" class="form-control">
+                            </div>
+                            <!-- <div class="form-group col-md-6 mt-3" style="visibility:hidden;">
+                                <label for="" class="form-label float-start">Company / Corporate / Group*</label>
+                                <input type="text" class="form-control">
+                            </div> [attr.disabled]="isChecked"
+                        -->
+                        </div>
+
+                    </form>
+                    
+                        <!--  -->
+
+                        <button type="button" class="previous previous_button btn btn-sm px-5 float-start mt-3 mx-2">Back</button>
+
+                        <button class="next btn btn-primary btn-sm px-5 float-end mt-3 mx-2" type="submit" form="insuarance"
+                         >Continue</button>
+                </fieldset>
+<!--InsuranceInfo End -->
 
 
 <!--DocumentInfo Start -->
@@ -668,10 +675,11 @@
                       >gotofinal</button> 
 
                     <!-- <button id="btnsubmit" class="btn btn-primary btn-sm px-5 float-end mt-3 mx-2" (click)="FinalSubmit()"
-                      >Submit</button>  -->
-                      <!-- form="DocumentsForm" -->
+                    >Submit</button>  -->
+                    <!-- form="DocumentsForm" -->
                 </fieldset>
-<!--DocumentInfo End -->
+                
+                <!--DocumentInfo End -->
 
 
                 <fieldset>

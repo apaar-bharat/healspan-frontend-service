@@ -26,6 +26,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { FilterPipe } from 'src/app/Shared/Pipes/filter.pipe';
 import { SortDirective } from 'src/app/Shared/Directives/sort.directive';
 import { OrderbyPipe } from 'src/app/Shared/Pipes/orderby.pipe';
+import { AlphabetOnlyDirective } from 'src/app/Shared/Directives/alphabet-only.directive';
 
 
 @NgModule({
@@ -40,7 +41,8 @@ import { OrderbyPipe } from 'src/app/Shared/Pipes/orderby.pipe';
     OthercostComponent,
     FilterPipe,
     OrderbyPipe,
-    SortDirective
+    SortDirective,
+    AlphabetOnlyDirective
     
   ],
   imports: [

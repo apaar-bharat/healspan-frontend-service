@@ -59,7 +59,7 @@
 	</div>
 
 	<div class="row">
-		<div class="col-md-4 bg-body rounded">
+		<div class="col-md-4 mb-5 bg-body rounded">
 			<div class="healshadow p-2">
 				<div class="float-start p-2 m-1">
 					<img src="/assets/img/Group.png">
@@ -68,12 +68,29 @@
 					<ng-container *ngIf="medicalInfo != null">
 							<h5 *ngIf="medicalInfo['diagnosisMst'] != null" class="mt-2"><strong>{{medicalInfo["diagnosisMst"].name}}&nbsp;</strong></h5>
 					</ng-container>
-				
-						<h5  *ngIf="medicalInfo == null" class="mt-2 mb-4"><strong>null</strong></h5>
-				 
+					<ng-container *ngIf="medicalInfo == null">
+						<h5 class="mt-2"><strong>null</strong></h5>
+				 </ng-container>
 				</div>
 			</div>
 		</div>
+
+		<!-- <div class="col-md-4 mb-5 bg-body rounded">
+			<div class="healshadow p-2">
+				<div class="float-start p-2 m-1">
+					<img src="/assets/img/calendar_x.png">
+				</div>
+				<div class="p-1 mt-1"><span>Ailment: </span>
+					<ng-container *ngIf="medicalInfo != null">
+						<h5 *ngIf="medicalInfo['diagnosisMst'] != null" class="mt-2"><strong>{{medicalInfo["diagnosisMst"].name}}&nbsp;</strong></h5>
+					</ng-container>
+					<ng-container *ngIf="medicalInfo == null">
+						<h5 class="mt-2 mb-4"><strong>null</strong></h5>
+			 		</ng-container>
+				</div>
+			</div>
+		</div> -->
+
 
 		<div class="col-md-4 mb-5 bg-body rounded">
 			<div class="healshadow p-2">
@@ -106,6 +123,12 @@
 		<div class="d-flex align-items-start vtabborder p-0">
 			<div class="nav flex-column me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical"
 				style="border-right: 1px solid #E2E5E5;">
+				<li class="nav-item " role="presentation">
+					<button class="nav-link healspantabv" id="contact-tab" data-bs-toggle="tab"
+						data-bs-target="#Insurance-Information" type="button" role="tab"
+						aria-controls="contact-tab-pane" aria-selected="false">Insurance Information</button>
+				</li>
+				
 				<li class="nav-item" role="presentation">
 					<button class="nav-link healspantabv vb1 active" id="home-tab" data-bs-toggle="tab"
 						data-bs-target="#Patient-Information" type="button" role="tab" aria-controls="home-tab-pane"
@@ -116,11 +139,7 @@
 						data-bs-target="#Medical-Information" type="button" role="tab" aria-controls="profile-tab-pane"
 						aria-selected="false">Medical Information</button>
 				</li>
-				<li class="nav-item " role="presentation">
-					<button class="nav-link healspantabv" id="contact-tab" data-bs-toggle="tab"
-						data-bs-target="#Insurance-Information" type="button" role="tab"
-						aria-controls="contact-tab-pane" aria-selected="false">Insurance Information</button>
-				</li>
+			
 				<li class="nav-item" role="presentation">
 					<button class="nav-link healspantabv" id="profile-tab" data-bs-toggle="tab"
 						data-bs-target="#Initial-Authorization" type="button" role="tab"
@@ -365,11 +384,11 @@
 
 					</div>
 
-					<div class="row mt-1 pt-3">
+					<div *ngIf="questionList.length>0" class="row mt-1 pt-3">
 						<div class="col-md-3 mb-3 bg-body rounded">
 							<div class="p-2">
 
-								<div class="p-1 mt-1"><span class="cl01">questionAnswersList</span>
+								<div class="p-1 mt-1"><span class="cl01">Questionnaire</span>
 									<!-- <h5 class="mt-3 f16"><strong>{{medicalInfo.Typeofvehicle}}</strong></h5> -->
 								</div>
 							</div>
@@ -431,7 +450,7 @@
 
 								<div class="p-1 mt-1"><span class="cl01">TPA: </span>
 									<ng-container *ngIf="insuranceInfo != null">
-										<h5 class="mt-3 f16"><strong>{{insuranceInfo.tpaNumber}}</strong></h5>
+										<h5 class="mt-3 f16"><strong>{{insuranceInfo["tpaMst"].name}}</strong></h5>
 								    </ng-container>
 								</div>
 							</div>
@@ -442,10 +461,10 @@
 						<div class="col-md-3 mb-3 bg-body rounded">
 							<div class="p-2">
 
-								<div class="p-1 mt-1"><span class="cl01">TPA ID:</span>
+								<div class="p-1 mt-1"><span class="cl01">TPA ID Card No:</span>
 									<ng-container *ngIf="insuranceInfo != null">
 
-									<h5 class="mt-3 f16"><strong>{{insuranceInfo["tpaMst"].name}}</strong></h5>
+									<h5 class="mt-3 f16"><strong>{{insuranceInfo.tpaNumber}}</strong></h5>
 									</ng-container>
 								</div>
 							</div>
@@ -549,13 +568,13 @@
 									
 								</div>
 								<div  *ngIf="h.documentPath == null" class="col-md-6">
-									<a class="btn btn-primary btn-sm px-3 mt-5 healshadow"> Pending <img
-											> </a>
+									<a class="disabled btn btn-primary btn-sm px-3 mt-5 healshadow"> Pending <img
+									 > </a>
 											<!-- src="/assets/img/Arrow-54w.png" -->
 								</div>
 								<div  *ngIf="h.documentPath != null"  class="col-md-6">
 								
-									<a  style="background-color: #E2E5E5 !important;"  class="btn btn-primary btn-sm px-3 mt-5 healshadow"> Uploaded <img
+									<a  class="btn btn-primary btn-sm px-3 mt-5 healshadow"> Uploaded <img
 									> </a>
 						
 								</div>
@@ -760,9 +779,9 @@
 	</div>
 <div class="row">
 <div class="col-md-12 mb-2">
-	<a type="button" class="btn btn-primary btn-md px-5 float-start mt-3 mx-2" data-bs-toggle="modal" data-bs-target="#exampleModal">Query & Rejection</a>
+	<a type="button" *ngIf="localStorage.getItem('usertype') == '3'" class="btn btn-primary btn-md px-5 float-start mt-3 mx-2" data-bs-toggle="modal" data-bs-target="#exampleModal">Query & Rejection</a>
 
-	<a [ngClass]="{'disabled': Isapproved == false}" class="btn btn-primary btn-md px-5 float-end mt-3 mx-2"  (click)="approveClick()"
+	<a *ngIf="localStorage.getItem('usertype') == '3'" [ngClass]="{'disabled': Isapproved == false}" class="btn btn-primary btn-md px-5 float-end mt-3 mx-2"  (click)="approveClick()"
 	  >Approve</a> 
 	</div>
 	</div>
@@ -774,21 +793,21 @@
 		
 		<div class="modal-body">
 		 <div class="mb-3">
-	<label for="exampleFormControlTextarea1" class="form-label">Reviwe Note</label>
+	<label for="exampleFormControlTextarea1" class="form-label">Review Note*</label>
 	<textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae"></textarea>
   </div>
-  <label for="exampleFormControlTextarea1" class="form-label">Required Documents</label>
+  <label for="exampleFormControlTextarea1" class="form-label">Required Documents*</label>
   <select class="form-select" aria-label="Default select example">
 	<option selected>Open this select menu</option>
 	<option value="1">One</option>
 	<option value="2">Two</option>
 	<option value="3">Three</option>
   </select>
-  <span class="float-end w-100">*All mandatory fields must be filled to send a querry</span>
+  <span class="float-end w-100">*All mandatory fields must be filled to send a query</span>
   
   <div class="row">
   <div class="col-md-12 mt-3">
-  <a href="" class="btn btn-primary btn-lg float-front" data-bs-toggle="modal" data-bs-target="#exampleModal">	Cancel
+ 	<a href="" class="btn btn-primary btn-lg float-front" data-bs-toggle="modal" data-bs-target="#exampleModal">	Cancel
 	  </a>
 	  
 	  <a href="" class="btn btn-primary btn-lg float-end" data-bs-toggle="modal" data-bs-target="#exampleModal">	Send

@@ -11,7 +11,7 @@ export class ModalpopupService {
     return this.dialog.open(component, {
       width: '550px',
       data: data,
-      disableClose: true
+      //disableClose: false
     });
   }
 

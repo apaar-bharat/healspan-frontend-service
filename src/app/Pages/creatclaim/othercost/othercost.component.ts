@@ -31,6 +31,15 @@ export class OthercostComponent implements OnInit {
     this.dataSource =  new MatTableDataSource(this.ELEMENT_DATA);
     // this.OtherCostData = this.dataSource;
     // alert(JSON.stringify(this.OtherCostData));
+
+    this.dialogRef.keydownEvents().subscribe(event => {
+      console.log(event)
+      if (event.key === "Escape") {
+        this.OtherCostData = this.dataSource.data;
+        console.log("OtherCostData",this.OtherCostData);
+        this.dataservice.updateothercostd_data(this.OtherCostData);
+      }
+    });
   }
 
   numericOnly(event: any) {

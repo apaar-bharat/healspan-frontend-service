@@ -1,21 +1,66 @@
+html,
+body {
+    height: 100%;
+}
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
 
-.mat-step-icon {height: 30px !important; width: 30px !important;}
-.mat-horizontal-stepper-header {width: 21px !important; padding: 10px !important;
-    padding-left: 0px !important;}
-    .mat-step-header .mat-step-icon-selected, .mat-step-header .mat-step-icon-state-done, .mat-step-header .mat-step-icon-state-edit { background-color: #4c9eaa !important;
-        color: #fff !important;}
-        .mat-form-field-infix {padding: 0px !important; border-top:none !important;}
-        .mat-form-field-appearance-legacy .mat-form-field-underline {height: 0px !important;}
-        .mat-primary .mat-pseudo-checkbox-checked, .mat-primary .mat-pseudo-checkbox-indeterminate {background: #4c9eaa !important;}
-        .mat-primary .mat-option.mat-selected:not(.mat-option-disabled) {color:rgba(0,0,0,.87) !important}
+.mat-step-icon {
+    height: 30px !important;
+    width: 30px !important;
+}
+
+.mat-horizontal-stepper-header {
+    width: 21px !important;
+    padding: 10px !important;
+    padding-left: 0px !important;
+}
+
+.mat-step-header .mat-step-icon-selected,
+.mat-step-header .mat-step-icon-state-done,
+.mat-step-header .mat-step-icon-state-edit {
+    background-color: #4c9eaa !important;
+    color: #fff !important;
+}
+
+.mat-form-field-infix {
+    padding: 0px !important;
+    border-top: none !important;
+}
+
+.mat-form-field-appearance-legacy .mat-form-field-underline {
+    height: 0px !important;
+}
+
+.mat-primary .mat-pseudo-checkbox-checked,
+.mat-primary .mat-pseudo-checkbox-indeterminate {
+    background: #4c9eaa !important;
+}
+
+.mat-primary .mat-option.mat-selected:not(.mat-option-disabled) {
+    color: rgba(0, 0, 0, .87) !important
+}
 
 
-        .mat-dialog-container{
-            height: 400px !important;
-        }
+.mat-dialog-container {
+    height: 400px !important;
+}
 
-        .mat-select-panel {min-width: 112px !important;}
-        .mat-select-panel-wrap {margin-left: 40px !important;}
+.mat-select-panel {
+    min-width: 112px !important;
+}
+
+.mat-select-panel-wrap {
+    margin-left: 40px !important;
+}
+
+
+.mat-select-value-text {
+    margin-left: 15px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

@@ -20,7 +20,7 @@ export class AppComponent {
   timedOut = false;
   lastPing ?: Date ;
   title = 'angular-idle-timeout';
-
+  message:boolean = false;
   public modalRef: BsModalRef;
   childModal:any;
   // @ViewChild('childModal', { static: false }) childModal: ModalDirective;
@@ -51,7 +51,8 @@ export class AppComponent {
     idle.onIdleStart.subscribe(() => {
         this.idleState = 'You\'ve gone idle!'
         console.log(this.idleState);
-        alert(this.idleState);
+        //this.message = true;
+        alert("Session TimeOut");
         //this.childModal.show();
         this.router.navigate(['/login']);
         document.getElementById("openModalButton")?.click();
